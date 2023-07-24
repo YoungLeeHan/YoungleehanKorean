@@ -9,9 +9,9 @@ dotenv.config();
 const app = express();
 
 mongoose
-    .connect(process.env.MONGO_URI)
-    .then(() => console.log("DB connected"))
-    .catch((err) => console.log("DB ERROR => ", err));
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("DB connected"))
+  .catch((err) => console.log("DB ERROR => ", err));
 
 // middlewares
 app.use(cors());
@@ -22,5 +22,5 @@ app.use("/api", authRoutes);
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
-    console.log(`Node server is running on port ${port}`);
+  console.log(`Node server is running on port ${port}`);
 });
