@@ -34,8 +34,24 @@
     @content;
 }
 
+@mixin mobile-center {
+    @include mobile {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        @content;
+    }
+}
+
 .landing-view {
     padding: 150px 0 100px 0;
+
+    @include mobile-center;
+    .col-md-7 {
+        @include mobile-center;
+    }
 
     h1 {
         font-size: 48px;
@@ -43,6 +59,7 @@
         margin-bottom: 38px;
         line-height: 130%;
         max-width: 562px;
+        line-height: 130%;
     }
 
     p {
@@ -50,12 +67,30 @@
         margin-bottom: 33px;
         color: $color-gray;
         max-width: 552px;
+        line-height: 160%;
     }
     h5 {
         font-size: $desktop-font-medium;
         color: $color-purple;
         font-weight: 600;
         margin-bottom: 33px;
+        line-height: 160%;
+    }
+
+    img {
+        width: 450px;
+        height: 450px;
+        border-radius: 50%;
+        object-fit: cover;
+        transition: ease-in-out 0.5s;
+        @include tablet {
+            width: 350px;
+            height: 350px;
+        }
+        @include mobile {
+            width: 300px;
+            height: 300px;
+        }
     }
 }
 
@@ -131,6 +166,7 @@
         margin-top: 40px;
         background-color: $background-color-beige;
         padding: 45px 0;
+
         img {
             width: 250px;
             height: 250px;
@@ -142,10 +178,15 @@
             font-weight: 600;
             font-size: 22px;
             line-height: 160%;
+            @include mobile-center;
         }
         p {
             @include section-subtitle;
             max-width: 670px;
+            @include mobile-center;
+        }
+        .link-button {
+            @include mobile-center;
         }
     }
 }
