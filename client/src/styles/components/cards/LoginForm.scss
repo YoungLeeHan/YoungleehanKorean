@@ -1,0 +1,86 @@
+// 👻 Developed by DanBi Choi on July 24th, 2023.
+// -----------------------------------------------------
+
+@import "../../App.scss";
+
+.loginForm,
+.registerForm {
+    li {
+        position: relative;
+
+        label {
+            margin: 30px 0 15px 0;
+            font-weight: 500;
+
+            span {
+                color: $color-purple;
+            }
+        }
+
+        img {
+            position: absolute;
+            z-index: 5;
+            top: 92px;
+            left: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding-left: 50px;
+        }
+
+        h3 {
+            margin: 15px 0 32px 0;
+            color: #7b1fa2;
+            font-weight: 500;
+            font-size: 14px;
+            &:hover {
+                text-decoration: underline;
+                text-decoration-color: $color-purple;
+            }
+        }
+
+        button {
+            padding: 18px;
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        h6 {
+            color: $color-gray;
+            font-size: $desktop-font-small;
+            background-color: $color-white;
+            text-align: center;
+            margin: 30px 0;
+
+            span {
+                color: #e2e2e2;
+            }
+        }
+
+        h4 {
+            color: $color-gray;
+            font-size: $desktop-font-medium;
+            text-align: center;
+            margin-top: 28px;
+
+            span:hover {
+                text-decoration: underline;
+                text-decoration-color: $color-purple;
+            }
+        }
+    }
+
+    .pw-list {
+        padding-left: 20px;
+        margin: 8px 0 20px 0;
+
+        li {
+            list-style-type: disc;
+            list-style-position: outside;
+            color: $color-gray;
+            font-size: $desktop-font-small;
+            font-weight: 400;
+        }
+    }
+}

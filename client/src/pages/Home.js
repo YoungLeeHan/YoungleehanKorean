@@ -43,14 +43,8 @@ export default function Home() {
                                 Explore Products
                             </button>
                         </div>
-                        <div className="col-md-5 d-flex justify-content-center">
+                        <div className="col-md-5 d-flex justify-content-center align-items-center">
                             <img
-                                style={{
-                                    width: "450px",
-                                    height: "450px",
-                                    borderRadius: "50%",
-                                    objectFit: "cover",
-                                }}
                                 src="https://hips.hearstapps.com/hmg-prod/images/cute-cat-photos-1593441022.jpg?crop=1.00xw:0.753xh;0,0.153xh&resize=1200:*"
                                 alt="cat"
                             />
@@ -108,7 +102,7 @@ export default function Home() {
                             master a grammar point. However, that was still not
                             enough, so I decided to create on my own.
                         </p>
-                        <Link to={"/"}>
+                        <Link to={"/"} className="link-button">
                             <button className="btn btn-primary">
                                 About Creator
                             </button>

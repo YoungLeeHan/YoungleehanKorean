@@ -3,8 +3,11 @@
 import Jumbotron from "../components/cards/Jumbotron";
 import ErrorImage from "../assets/images/Else/404.svg";
 import { Link } from "react-router-dom";
+import ScrollToTop from "../components/nav/ScrollToTop";
 
 export default function PageNotFound() {
+    ScrollToTop();
+
     return (
         <>
             <Jumbotron title={"Page Not Found"} />
