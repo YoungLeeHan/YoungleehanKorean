@@ -159,5 +159,4 @@ export default function RegisterForm() {
           </li>
         </ul>
       </form>
-    </>
-  );
+    </>);}

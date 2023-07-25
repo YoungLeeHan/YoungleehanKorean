@@ -7,7 +7,8 @@ import Home from "./pages/Home";
 import Login from "./pages/Account/Login";
 import Register from "./pages/Account/Register";
 import PageNotFound from "./pages/PageNotFound";
-import BlogList from "./pages/BlogList";
+import List from "./pages/Blog/List";
+import Upload from "./pages/Blog/Upload";
 import ForgotPassword from "./pages/Account/ForgotPassword";
 import Verification from "./pages/Account/Verification";
 import NewPassword from "./pages/Account/NewPassword";
@@ -25,7 +26,8 @@ export default function App() {
                 <Route path="/forgotpassword" element={<ForgotPassword />} />
                 <Route path="/verification" element={<Verification />} />
                 <Route path="/newpassword" element={<NewPassword />} />
-                <Route path="/blog" element={<BlogList />} />
+                <Route path="/blog" element={<List />} />
+                {/*<Route path="/blog/upload" element={<Upload />} />*/}
                 <Route path="/contact" element={<Contact />} />
                 <Route path="*" element={<PageNotFound />} />
             </Routes>

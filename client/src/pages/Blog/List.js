@@ -1,13 +1,13 @@
 import React from "react";
-import "../styles/pages/BlogList.scss";
-import Jumbotron from "../components/cards/Jumbotron";
+import "../../styles/pages/BlogList.scss";
+import Jumbotron from "../../components/cards/Jumbotron";
 
-export default function BlogList() {
+export default function List() {
     // ✨ 자바스크립트 코드를 여기에 넣으세요.
 
     return (
         <>
-            <Jumbotron title={"BlogList"} directory={"BlogList"} />
+            <Jumbotron title={"List"} directory={"List"} />
             <div
                 style={{ maxWidth: "1170px" }}
                 className="container-fluid d-flex flex-column align-items-center"
