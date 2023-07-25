@@ -27,7 +27,7 @@ export default function App() {
                 <Route path="/verification" element={<Verification />} />
                 <Route path="/newpassword" element={<NewPassword />} />
                 <Route path="/blog" element={<List />} />
-                {/*<Route path="/blog/upload" element={<Upload />} />*/}
+                <Route path="/blog/upload" element={<Upload />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
