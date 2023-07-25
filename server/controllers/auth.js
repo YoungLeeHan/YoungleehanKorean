@@ -10,10 +10,10 @@ export const register = async (req, res) => {
     const { firstName, lastName, email, password } = req.body;
 
     if (!firstName.trim()) {
-      return res.json({ error: "Name is required" });
+      return res.json({ error: "First name is required" });
     }
     if (!lastName.trim()) {
-      return res.json({ error: "Name is required" });
+      return res.json({ error: "Last name is required" });
     }
     if (!email) {
       return res.json({ error: "Email is taken" });
@@ -31,16 +31,16 @@ export const register = async (req, res) => {
 
     const hashedPassword = await hashPassword(password);
 
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "7d",
-    });
-
     const user = await new User({
       firstName,
       lastName,
       email,
       password: hashedPassword,
     }).save();
+
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
 
     res.json({
       user: {
@@ -54,7 +54,7 @@ export const register = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ error: "YH: Internal Server Error" });
   }
 };
 
@@ -93,6 +93,7 @@ export const login = async (req, res) => {
         role: user.role,
         address: user.address,
       },
+      token,
     });
   } catch (err) {
     console.log(err);
