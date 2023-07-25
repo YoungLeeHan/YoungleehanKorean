@@ -34,21 +34,10 @@
     @content;
 }
 
-@mixin mobile-center {
-    @include mobile {
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        @content;
-    }
-}
-
 .landing-view {
     padding: 150px 0 100px 0;
-
     @include mobile-center;
+
     .col-md-7 {
         @include mobile-center;
     }

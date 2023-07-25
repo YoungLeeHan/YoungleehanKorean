@@ -30,7 +30,7 @@ export default function LoginForm() {
                 toast.error(data.error);
             } else {
                 console.log("logged in");
-                toast.success(`Welcome back! ${data?.user?.firstName}`);
+                toast.success(`Welcome back! ${data?.user?.firstName} 👋`);
                 navigate(
                     location.state ||
                         `/dashboard/${
@@ -39,7 +39,7 @@ export default function LoginForm() {
                 );
             }
         } catch (err) {
-            toast.error("Login failed. Please try again.");
+            toast.error("Login failed. \nPlease try again.");
             console.log(err);
         }
     };
@@ -80,7 +80,6 @@ export default function LoginForm() {
                             placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            autoFocus
                         />
                     </li>
                     <li>
@@ -122,7 +121,7 @@ export default function LoginForm() {
                     </li>
                     <li>
                         <h4>
-                            Don't have an account?{" "}
+                            Don't have an account?
                             <span>
                                 <Link
                                     to="/register"

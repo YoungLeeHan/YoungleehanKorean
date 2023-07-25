@@ -1,4 +1,4 @@
-// 👻 Developed by DanBi Choi on July 24th, 2023.
+// 👻 Developed by DanBi Choi on July 25th, 2023.
 // -----------------------------------------------------
 
 import Jumbotron from "../../components/cards/Jumbotron";
@@ -20,7 +20,9 @@ export default function ForgotPassword() {
             >
                 <AccountControlBox
                     title={"Forgot Password"}
-                    subtitle={"Don’t worry! We will help you to login again."}
+                    subtitle={
+                        "Don’t worry! We will help you to find your account."
+                    }
                     formtype={ForgotPasswordForm}
                 />
             </div>

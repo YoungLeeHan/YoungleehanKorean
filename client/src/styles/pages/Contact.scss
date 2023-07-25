@@ -1,0 +1,50 @@
+// 👻 Developed by DanBi Choi on July 24th, 2023.
+// -----------------------------------------------------
+
+@import "../App.scss";
+
+.contact-box {
+    margin: 80px 0 88px 0;
+    padding: 40px;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0px 4px 20px 0px rgba(219, 219, 219, 0.2);
+
+    h3 {
+        font-weight: 600;
+        line-height: 130%;
+        font-size: $desktop-font-large;
+    }
+
+    label {
+        margin: 30px 0 15px 0;
+        font-size: $desktop-font-medium;
+        font-weight: 500;
+        line-height: 130%;
+    }
+
+    button {
+        margin-top: 25px;
+        padding: 17px 59px;
+        border-radius: 10px;
+    }
+}
+
+input {
+    width: 100%;
+}
+
+textarea {
+    width: 100%;
+    height: 140px;
+    border: none;
+    background-color: $background-color-gray;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: $desktop-font-small;
+
+    &:focus {
+        outline: none;
+        caret-color: $color-purple;
+    }
+}
