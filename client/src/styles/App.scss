@@ -48,6 +48,17 @@ $desktop-font-xlarge: 32px;
     }
 }
 
+@mixin mobile-center {
+    @include mobile {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        @content;
+    }
+}
+
 // --------------------------------------------------------
 // 👉 Begin common css styles
 * {
@@ -113,6 +124,7 @@ $desktop-font-xlarge: 32px;
 input {
     border: none;
     background-color: $background-color-gray;
+    color: $color-black;
     border-radius: 10px;
     padding: 20px;
     font-size: $desktop-font-small;

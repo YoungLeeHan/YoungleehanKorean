@@ -11,6 +11,7 @@ import BlogList from "./pages/BlogList";
 import ForgotPassword from "./pages/Account/ForgotPassword";
 import Verification from "./pages/Account/Verification";
 import NewPassword from "./pages/Account/NewPassword";
+import Contact from "./pages/Contact";
 
 export default function App() {
     return (
@@ -25,6 +26,7 @@ export default function App() {
                 <Route path="/verification" element={<Verification />} />
                 <Route path="/newpassword" element={<NewPassword />} />
                 <Route path="/blog" element={<BlogList />} />
+                <Route path="/contact" element={<Contact />} />
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
             <Footer />
