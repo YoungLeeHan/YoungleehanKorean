@@ -1,4 +1,4 @@
-// 👻 Developed by DanBi Choi on July 24th, 2023.
+// 👻 Developed by DanBi Choi on July 25th, 2023.
 // -----------------------------------------------------
 import Jumbotron from "../../components/cards/Jumbotron";
 import AccountControlBox from "../../components/cards/AccountControlBox";

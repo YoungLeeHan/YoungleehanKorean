@@ -4,7 +4,10 @@
 @import "../../App.scss";
 
 .loginForm,
-.registerForm {
+.registerForm,
+.forgotPasswordForm,
+.verificationForm,
+.newPasswordForm {
     li {
         position: relative;
 
