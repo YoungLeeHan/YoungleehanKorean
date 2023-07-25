@@ -8,6 +8,8 @@ dotenv.config();
 export const register = async (req, res) => {
   try {
     const { firstName, lastName, email, password } = req.body;
+    const pwReg =
+      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/;
 
     if (!firstName.trim()) {
       return res.json({ error: "First name is required" });
@@ -18,9 +20,9 @@ export const register = async (req, res) => {
     if (!email) {
       return res.json({ error: "Email is taken" });
     }
-    if (!password || password.length < 6) {
+    if (!password || !pwReg.test(password)) {
       return res.json({
-        error: "Password must be at least 6 characters long",
+        error: "Invalid Password",
       });
     }
 
@@ -54,7 +56,7 @@ export const register = async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "YH: Internal Server Error" });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
