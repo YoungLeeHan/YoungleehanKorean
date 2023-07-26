@@ -27,7 +27,7 @@ export default function RegisterForm() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-          `${process.env.REACT_APP_API}/register`,
+          `/register`,
           { firstName, lastName, email, password }
       );
       if (data?.error) {

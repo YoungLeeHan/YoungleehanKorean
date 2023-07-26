@@ -25,7 +25,7 @@ export default function LoginForm() {
         e.preventDefault();
         try {
             const { data } = await axios.post(
-                `${process.env.REACT_APP_API}/login`,
+                `/login`,
                 { email, password }
             );
             if (data?.error) {
