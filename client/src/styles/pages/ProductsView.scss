@@ -23,7 +23,6 @@
             font-size: $desktop-font-small;
             color: $color-gray;
             font-weight: 300;
-            line-height: 130%;
             padding-left: 45px;
         }
 
@@ -40,24 +39,74 @@
 
             h2 {
                 font-weight: 600;
-                line-height: 130%;
                 margin-bottom: 20px;
                 font-size: $desktop-font-large;
             }
+
+            h5 {
+                font-weight: 500;
+                color: $color-gray;
+                margin-bottom: 0;
+            }
+
             .checkbox {
-                font-size: $desktop-font-small;
                 background-color: $background-color-gray;
                 padding: 7px 10px;
                 border-radius: 5px;
                 margin-bottom: 5px;
             }
+
+            .checkbox2 {
+                background-color: transparent;
+                padding: 0;
+                margin-bottom: 5px;
+            }
+
+            .custom-slider .ant-slider-mark-text {
+                margin-top: 10px;
+            }
+
+            .ui.rating .icon.active {
+                color: $color-yellow;
+            }
         }
     }
 
     .col-md-9 {
-        img {
-            width: 300px;
-            object-fit: cover;
+        .sortBy-box {
+            padding: 20px 20px;
+            margin-bottom: 30px;
+            background-color: $color-white;
+            border-radius: 10px;
+            box-shadow: 0px 5px 30px 0px rgba(219, 219, 219, 0.3);
+
+            h5 {
+                font-size: $desktop-font-medium;
+            }
+
+            .dropdown {
+                padding: 7px 20px 7px 0;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+            }
+
+            .dropdown-toggle {
+                cursor: pointer;
+            }
+
+            button {
+                border: none;
+                font-size: "15px";
+                background-color: transparent;
+                color: $color-gray;
+                padding: 5px;
+                margin: 5px;
+
+                &:hover {
+                    background-color: $background-color-gray;
+                    border-radius: 3px;
+                }
+            }
         }
     }
 }

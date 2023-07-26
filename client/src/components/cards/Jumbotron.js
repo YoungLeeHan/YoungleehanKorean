@@ -6,8 +6,16 @@ export default function Jumbotron({
     directory = null,
     subDirectory = null,
 }) {
-    const highlightedStyle = { color: "#ffbf35", fontSize: "16px" };
-    const defaultStyle = { color: "#706866", fontSize: "16px" };
+    const highlightedStyle = {
+        color: "#ffbf35",
+        fontSize: "16px",
+        fontWeight: "400",
+    };
+    const defaultStyle = {
+        color: "#706866",
+        fontSize: "16px",
+        fontWeight: "400",
+    };
 
     return (
         <>

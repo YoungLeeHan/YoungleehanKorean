@@ -68,7 +68,9 @@ $desktop-font-xlarge: 32px;
     font-family: $font-text;
     color: $color-black;
     list-style: none;
-    $desktop-font-small: 14px;
+    font-size: $desktop-font-small;
+    font-weight: 400;
+    line-height: 130%;
 }
 
 .btn-primary {
@@ -121,6 +123,23 @@ $desktop-font-xlarge: 32px;
     }
 }
 
+.btn-outline-secondary {
+    border: 1px solid $color-gray;
+    border-radius: 5px;
+    background-color: transparent;
+    color: $color-gray;
+    font-size: $desktop-font-medium;
+    font-weight: 600;
+    padding: 12px 30px;
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+        color: $color-black !important;
+        background-color: $color-white !important;
+    }
+}
+
 input {
     border: none;
     background-color: $background-color-gray;
@@ -158,6 +177,15 @@ body {
 ::selection {
     background-color: $color-yellow;
     color: $color-black;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-weight: 400;
+    margin: 0;
 }
 
 // End common css styles : added by Danbi on July 18th, 2023

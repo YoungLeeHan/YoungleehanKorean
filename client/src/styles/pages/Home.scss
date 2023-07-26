@@ -18,11 +18,13 @@
     font-size: $desktop-font-xlarge;
     font-weight: 600;
     margin-bottom: 10px;
-    line-height: 130%;
     @content;
 
     span {
         color: $color-purple;
+        font-size: $desktop-font-xlarge;
+        font-weight: 600;
+        margin-bottom: 10px;
     }
 }
 
@@ -46,9 +48,7 @@
         font-size: 48px;
         font-weight: 700;
         margin-bottom: 38px;
-        line-height: 130%;
         max-width: 562px;
-        line-height: 130%;
     }
 
     p {
@@ -115,11 +115,10 @@
             color: $color-white;
             font-size: 22px;
             font-weight: 600;
-            line-height: 130%;
         }
 
         p {
-            margin: 14px 0 23px 0;
+            margin: 14px 0 20px 0;
 
             color: $color-white;
             font-size: $desktop-font-medium;
