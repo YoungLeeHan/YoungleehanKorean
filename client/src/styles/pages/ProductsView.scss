@@ -1,0 +1,63 @@
+// 👻 Developed by DanBi Choi on July 25th, 2023.
+// -----------------------------------------------------
+@import "../App.scss";
+
+.shop-productsView-box {
+    margin: 100px 0;
+
+    .col-md-3 {
+        padding: 20px;
+        background-color: $color-white;
+        border-radius: 10px;
+        box-shadow: 0px 5px 30px 0px rgba(219, 219, 219, 0.3);
+
+        form {
+            position: relative;
+        }
+
+        input {
+            padding: 14px 17px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            background-color: transparent;
+            font-size: $desktop-font-small;
+            color: $color-gray;
+            font-weight: 300;
+            line-height: 130%;
+            padding-left: 45px;
+        }
+
+        button {
+            background-color: transparent;
+            border: none;
+            position: absolute;
+            top: 13px;
+            left: 17px;
+        }
+
+        .filter-box {
+            margin: 35px 0;
+
+            h2 {
+                font-weight: 600;
+                line-height: 130%;
+                margin-bottom: 20px;
+                font-size: $desktop-font-large;
+            }
+            .checkbox {
+                font-size: $desktop-font-small;
+                background-color: $background-color-gray;
+                padding: 7px 10px;
+                border-radius: 5px;
+                margin-bottom: 5px;
+            }
+        }
+    }
+
+    .col-md-9 {
+        img {
+            width: 300px;
+            object-fit: cover;
+        }
+    }
+}

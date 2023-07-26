@@ -12,6 +12,7 @@ import ForgotPassword from "./pages/Account/ForgotPassword";
 import Verification from "./pages/Account/Verification";
 import NewPassword from "./pages/Account/NewPassword";
 import Contact from "./pages/Contact";
+import ProductsView from "./pages/Shop/ProductsView";
 
 export default function App() {
     return (
@@ -25,6 +26,7 @@ export default function App() {
                 <Route path="/forgotpassword" element={<ForgotPassword />} />
                 <Route path="/verification" element={<Verification />} />
                 <Route path="/newpassword" element={<NewPassword />} />
+                <Route path="/shop" element={<ProductsView />} />
                 <Route path="/blog" element={<BlogList />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="*" element={<PageNotFound />} />
