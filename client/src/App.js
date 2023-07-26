@@ -13,6 +13,9 @@ import ForgotPassword from "./pages/Account/ForgotPassword";
 import Verification from "./pages/Account/Verification";
 import NewPassword from "./pages/Account/NewPassword";
 import Contact from "./pages/Contact";
+import Dashboard from "./pages/User/Dashboard";
+import PrivateRoute from "./components/routes/PrivateRoute"
+
 
 export default function App() {
     return (
@@ -20,16 +23,27 @@ export default function App() {
             <Header />
             <Toaster />
             <Routes>
+                {/*single page*/}
                 <Route path="/" element={<Home />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="*" element={<PageNotFound />} />
+
+                {/*login*/}
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/forgotpassword" element={<ForgotPassword />} />
                 <Route path="/verification" element={<Verification />} />
                 <Route path="/newpassword" element={<NewPassword />} />
+
+                {/*blog*/}
                 <Route path="/blog" element={<List />} />
                 <Route path="/blog/upload" element={<Upload />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="*" element={<PageNotFound />} />
+
+                {/*dashboard*/}
+                <Route path="/dashboard" element={<PrivateRoute />}>
+                    <Route path="" element={<Dashboard />} />
+                </Route>
+
             </Routes>
             <Footer />
         </BrowserRouter>

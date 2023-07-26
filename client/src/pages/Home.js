@@ -5,13 +5,17 @@ import "../styles/pages/Home.scss";
 import { customerTypesData } from "../assets/data/customerTypesData";
 import yellowLinesSVG from "../assets/images/Home/yellowLines.svg";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/auth";
 
 export default function Home() {
+    const [auth, setAuth] = useAuth();
+
     return (
         <div
             style={{ maxWidth: "1170px" }}
             className="container-fluid d-flex flex-column align-items-center"
         >
+            <pre>{JSON.stringify(auth, null, 4)}</pre>
             <section
                 className="landing-view"
                 style={{

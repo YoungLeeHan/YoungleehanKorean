@@ -1,5 +1,13 @@
 @import "../../App.scss";
 
+.nav {
+    background-color: $background-color-beige;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 30px;
+};
+
 .menu-ber {
     background-color: #ffffff;
     border-radius: 10px;

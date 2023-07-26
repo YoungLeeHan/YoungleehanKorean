@@ -9,6 +9,7 @@ import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { useAuth } from "../../context/auth"
 
 export default function LoginForm() {
     // state
@@ -18,6 +19,7 @@ export default function LoginForm() {
     // hook
     const navigate = useNavigate();
     const location = useLocation();
+    const [auth, setAuth] = useAuth();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -29,13 +31,15 @@ export default function LoginForm() {
             if (data?.error) {
                 toast.error(data.error);
             } else {
+                localStorage.setItem("auth", JSON.stringify(data));
+                setAuth({...auth, token: data.token, user: data.user});
                 console.log("logged in");
                 toast.success(`Welcome back! ${data?.user?.firstName} 👋`);
                 navigate(
                     location.state ||
-                        `/dashboard/${
-                            data?.user?.role === 1 ? "admin" : "user"
-                        }`
+                    `/dashboard/${
+                        data?.user?.role === 1 ? "admin" : "user"
+                    }`
                 );
             }
         } catch (err) {
