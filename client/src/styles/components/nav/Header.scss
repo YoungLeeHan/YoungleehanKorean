@@ -1,13 +1,174 @@
 @import "../../App.scss";
 
-.nav {
-    background-color: $background-color-beige;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    padding: 30px;
-
-    li {
-        margin: 0 20px;
-    }
+.menu-ber {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px #9e9e9e1a;
+    height: 76px;
+    position: relative;
+    width: 1170px;
 }
+
+.menu-ber .registar {
+    height: 45px;
+    left: 1039px;
+    position: absolute;
+    top: 15px;
+    width: 117px;
+}
+
+.menu-ber .overlap-group {
+    background-color: #7b1fa2;
+    border-radius: 5px;
+    height: 45px;
+    position: relative;
+    width: 115px;
+}
+
+.menu-ber .register {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    left: 25px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 13px;
+    white-space: nowrap;
+    width: 65px;
+}
+
+.menu-ber .cart-lon-in {
+    height: 38px;
+    left: 859px;
+    position: absolute;
+    top: 18px;
+    width: 164px;
+}
+
+.menu-ber .overlap {
+    height: 33px;
+    left: 56px;
+    position: absolute;
+    top: 0;
+    width: 32px;
+}
+
+.menu-ber .vector {
+    height: 21px;
+    left: 0;
+    position: absolute;
+    top: 12px;
+    width: 24px;
+}
+
+.menu-ber .ellipse {
+    background-color: #7b1fa2;
+    border-radius: 8.99px;
+    height: 18px;
+    left: 14px;
+    position: absolute;
+    top: 0;
+    width: 18px;
+}
+
+.menu-ber .element {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 500;
+    left: 19px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 1px;
+}
+
+.menu-ber .line {
+    height: 37px;
+    left: 36px;
+    object-fit: cover;
+    position: absolute;
+    top: 1px;
+    width: 1px;
+}
+
+.menu-ber .search {
+    height: 15px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 10px;
+    width: 15px;
+}
+
+.menu-ber .log-in {
+    color: #221714;
+    font-size: 16px;
+    font-weight: 500;
+    left: 108px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 10px;
+    white-space: nowrap;
+    width: 52px;
+}
+
+.menu-ber .home-about-course {
+    color: transparent;
+    font-size: 16px;
+    font-weight: 500;
+    left: 303px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 27px;
+    white-space: nowrap;
+    width: 500px;
+}
+
+.menu-ber .text-wrapper {
+    color: #7b1fa2ab;
+}
+
+.menu-ber .span {
+    color: #221714;
+}
+
+.menu-ber .JOY {
+    height: 43px;
+    left: 17px;
+    position: absolute;
+    top: 16px;
+    width: 241px;
+}
+
+.menu-ber .logo {
+    height: 43px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 43px;
+}
+
+.menu-ber .img {
+    height: 43px;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 43px;
+}
+
+.menu-ber .youngleehan-korean {
+    color: #221714;
+    font-size: 18px;
+    font-weight: 600;
+    left: 52px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 10px;
+}
+
