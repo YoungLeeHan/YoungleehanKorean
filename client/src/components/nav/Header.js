@@ -43,11 +43,28 @@ export default function MenuBer() {
                             </li>
                         </>
                     ) : (
-                        <li className="nav-item">
-                            <a onClick={logout} className="nav-link">
-                                LOGOUT
-                            </a>
-                        </li>
+                        <div className="dropdown">
+                            <li>
+                                <a className="dropdown-toggle" data-bs-toggle="dropdown">
+                                    {auth?.user?.firstName}</a>
+                                <ul className="dropdown-menu">
+                                    <li>
+                                        <li className="nav-item">
+                                            <NavLink className="nav-link"
+                                                     to={`/dashboard/${auth?.user?.role === 1 ? 'admin' : 'user'}`}>
+                                                Dashboard
+                                            </NavLink>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a onClick={logout} className="nav-link">
+                                                LOGOUT
+                                            </a>
+                                        </li>
+                                    </li>
+                                </ul>
+                            </li>
+                        </div>
+
                     )}
                 </ul>
             </>
