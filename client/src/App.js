@@ -4,13 +4,13 @@ import { Toaster } from "react-hot-toast";
 import Header from "../src/components/nav/Header";
 import Footer from "../src/components/nav/Footer";
 import Home from "./pages/Home";
-import Login from "./pages/Account/Login";
-import Register from "./pages/Account/Register";
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
 import PageNotFound from "./pages/PageNotFound";
 import BlogList from "./pages/BlogList";
-import ForgotPassword from "./pages/Account/ForgotPassword";
-import Verification from "./pages/Account/Verification";
-import NewPassword from "./pages/Account/NewPassword";
+import ForgotPassword from "./pages/Auth/ForgotPassword";
+import Verification from "./pages/Auth/Verification";
+import NewPassword from "./pages/Auth/NewPassword";
 import Contact from "./pages/Contact";
 import ProductsView from "./pages/Shop/ProductsView";
 
