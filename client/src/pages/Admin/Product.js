@@ -12,7 +12,9 @@ export default function AdminProduct(){
                 title={`Hello ${auth?.user?.firstName}`}
                 subTitle="Admin Dashboard"
             />
-            <div className="container-fluid">
+            <div style={{ maxWidth: "1170px", height: "500px"}}
+                 className="container-fluid"
+            >
                 <div className="row">
                     <div className="col-md-3">
                         <AdminMenu/>

@@ -15,7 +15,6 @@ export default function Home() {
             style={{ maxWidth: "1170px" }}
             className="container-fluid d-flex flex-column align-items-center"
         >
-            <pre>{JSON.stringify(auth, null, 4)}</pre>
             <section
                 className="landing-view"
                 style={{
@@ -43,9 +42,11 @@ export default function Home() {
                                 Youngleehan:영리한 means smart; clever; bright;
                                 intelligent in Korean.
                             </h5>
-                            <button className="btn btn-primary mb-3">
-                                Explore Products
-                            </button>
+                            <Link to="/shop">
+                                <button className="btn btn-primary mb-3">
+                                    Explore Products
+                                </button>
+                            </Link>
                         </div>
                         <div className="col-md-5 d-flex justify-content-center align-items-center">
                             <img
