@@ -13,6 +13,7 @@ import ForgotPassword from "./pages/Auth/ForgotPassword";
 import Verification from "./pages/Auth/Verification";
 import NewPassword from "./pages/Auth/NewPassword";
 import Contact from "./pages/Contact";
+import Shop from './pages/Shop/ProductsView'
 import Dashboard from "./pages/User/Dashboard";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import AdminDashboard from "./pages/Admin/Dashboard";
@@ -21,6 +22,7 @@ import AdminBlog from "./pages/Admin/Blog";
 import AdminProduct from "./pages/Admin/Product";
 import UserOrders from "./pages/User/Orders";
 import UserProfile from "./pages/User/Profile";
+import ProductsView from "./pages/Shop/ProductsView";
 
 export default function App() {
     return (
@@ -40,8 +42,17 @@ export default function App() {
                 <Route path="/verification" element={<Verification />} />
                 <Route path="/newpassword" element={<NewPassword />} />
 
+                {/*shop*/}
+                <Route path="/shop" element={<ProductsView />} />
+                <Route path="/shop/:slug" /> 
+
+                {/*Cart & Payment*/}
+                <Route path="/cart" element={<Cart />}/>
+                <Route path="/cart/payment" /> 
+
                 {/*blog*/}
                 <Route path="/blog" element={<List />} />
+                <Route path="/blog/:_id" element={<BlogPostView />} />
                 <Route path="/blog/upload" element={<Upload />} />
 
                 {/*user dashboard*/}
