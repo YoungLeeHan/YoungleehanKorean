@@ -1,0 +1,140 @@
+// 👻 Developed by DanBi Choi on July 25th, 2023.
+// -----------------------------------------------------
+@import "../App.scss";
+
+.shop-productsView-box {
+    margin: 80px 0 88px 0;
+    @include mobile {
+        margin: 10px 0;
+    }
+
+    .col-md-3 {
+        padding: 20px;
+        background-color: $color-white;
+        border-radius: 10px;
+        box-shadow: 0px 5px 30px 0px rgba(219, 219, 219, 0.3);
+
+        form {
+            position: relative;
+        }
+
+        input {
+            padding: 14px 17px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            background-color: transparent;
+            font-size: $desktop-font-small;
+            color: $color-gray;
+            font-weight: 300;
+            padding-left: 45px;
+        }
+
+        .search-btn {
+            background-color: transparent;
+            border: none;
+            position: absolute;
+            top: 13px;
+            left: 17px;
+        }
+
+        .show-filter-btn {
+            background-color: transparent;
+            border: none;
+            margin-top: 20px;
+            padding: 5px 0;
+            color: $color-gray;
+
+            &:hover {
+                text-decoration: underline;
+                color: $color-purple;
+            }
+        }
+
+        .filter-box {
+            margin: 35px 0;
+
+            h2 {
+                font-weight: 600;
+                margin-bottom: 20px;
+                font-size: $desktop-font-large;
+            }
+
+            h5 {
+                font-weight: 500;
+                color: $color-gray;
+                margin-bottom: 0;
+            }
+
+            .checkbox {
+                background-color: $background-color-gray;
+                padding: 7px 10px;
+                border-radius: 5px;
+                margin-bottom: 5px;
+            }
+
+            .checkbox2 {
+                background-color: transparent;
+                padding: 0;
+                margin-bottom: 5px;
+            }
+
+            .custom-slider .ant-slider-mark-text {
+                margin-top: 10px;
+            }
+
+            .ui.rating .icon.active {
+                color: $color-yellow;
+            }
+        }
+    }
+
+    .col-md-9 {
+        padding-left: 30px;
+        padding-right: 0;
+
+        @include mobile {
+            padding-right: 0;
+            padding-left: 0;
+        }
+
+        .sortBy-box {
+            padding: 20px 20px;
+            margin-bottom: 30px;
+            background-color: $color-white;
+            border-radius: 10px;
+            box-shadow: 0px 5px 30px 0px rgba(219, 219, 219, 0.3);
+
+            @include mobile {
+                margin-top: 30px;
+            }
+
+            h5 {
+                font-size: $desktop-font-medium;
+            }
+
+            .dropdown {
+                padding: 7px 20px 7px 0;
+                border: 1px solid #ddd;
+                border-radius: 6px;
+            }
+
+            .dropdown-toggle {
+                cursor: pointer;
+            }
+
+            button {
+                border: none;
+                font-size: "15px";
+                background-color: transparent;
+                color: $color-gray;
+                padding: 5px;
+                margin: 5px;
+
+                &:hover {
+                    background-color: $background-color-gray;
+                    border-radius: 3px;
+                }
+            }
+        }
+    }
+}

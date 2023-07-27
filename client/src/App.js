@@ -4,17 +4,17 @@ import { Toaster } from "react-hot-toast";
 import Header from "../src/components/nav/Header";
 import Footer from "../src/components/nav/Footer";
 import Home from "./pages/Home";
-import Login from "./pages/Account/Login";
-import Register from "./pages/Account/Register";
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
 import PageNotFound from "./pages/PageNotFound";
 import List from "./pages/Blog/List";
 import Upload from "./pages/Blog/Upload";
-import ForgotPassword from "./pages/Account/ForgotPassword";
-import Verification from "./pages/Account/Verification";
-import NewPassword from "./pages/Account/NewPassword";
+import ForgotPassword from "./pages/Auth/ForgotPassword";
+import Verification from "./pages/Auth/Verification";
+import NewPassword from "./pages/Auth/NewPassword";
 import Contact from "./pages/Contact";
 import Dashboard from "./pages/User/Dashboard";
-import PrivateRoute from "./components/routes/PrivateRoute"
+import PrivateRoute from "./components/routes/PrivateRoute";
 import AdminDashboard from "./pages/Admin/Dashboard";
 import AdminRoute from "./components/routes/AdminRoute";
 import AdminBlog from "./pages/Admin/Blog";
@@ -48,7 +48,7 @@ export default function App() {
                 <Route path="/dashboard" element={<PrivateRoute />}>
                     <Route path="user" element={<Dashboard />} />
                     <Route path="user/profile" element={<UserProfile />} />
-                    <Route path="user/orders" element={<UserOrders/>} />
+                    <Route path="user/orders" element={<UserOrders />} />
                 </Route>
 
                 {/*admin dashboard*/}
@@ -57,8 +57,6 @@ export default function App() {
                     <Route path="admin/blog" element={<AdminBlog />} />
                     <Route path="admin/product" element={<AdminProduct />} />
                 </Route>
-
-
             </Routes>
             <Footer />
         </BrowserRouter>

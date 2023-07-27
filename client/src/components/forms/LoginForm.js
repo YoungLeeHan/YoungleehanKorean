@@ -125,7 +125,7 @@ export default function LoginForm() {
                     </li>
                     <li>
                         <h4>
-                            Don't have an account?
+                            Don't have an account?{" "}
                             <span>
                                 <Link
                                     to="/register"
