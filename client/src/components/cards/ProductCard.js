@@ -1,3 +1,6 @@
+// 👻 Developed by DanBi Choi on July 26th, 2023.
+// -----------------------------------------------------
+
 import { Link } from "react-router-dom";
 import "../../styles/components/cards/ProductCard.scss";
 import { AiFillStar } from "react-icons/ai";

@@ -7,13 +7,12 @@ import Home from "./pages/Home";
 import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import PageNotFound from "./pages/PageNotFound";
-import List from "./pages/Blog/List";
+import BlogView from "./pages/Blog/BlogView";
 import Upload from "./pages/Blog/Upload";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import Verification from "./pages/Auth/Verification";
 import NewPassword from "./pages/Auth/NewPassword";
 import Contact from "./pages/Contact";
-import Shop from './pages/Shop/ProductsView'
 import Dashboard from "./pages/User/Dashboard";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import AdminDashboard from "./pages/Admin/Dashboard";
@@ -44,15 +43,15 @@ export default function App() {
 
                 {/*shop*/}
                 <Route path="/shop" element={<ProductsView />} />
-                <Route path="/shop/:slug" /> 
+                <Route path="/shop/:slug" />
 
                 {/*Cart & Payment*/}
-                <Route path="/cart"/>
-                <Route path="/cart/payment" /> 
+                <Route path="/cart" />
+                <Route path="/cart/payment" />
 
                 {/*blog*/}
-                <Route path="/blog" element={<List />} />
-                <Route path="/blog/:_id"/>
+                <Route path="/blog" element={<BlogView />} />
+                <Route path="/blog/:_id" />
                 <Route path="/blog/upload" element={<Upload />} />
 
                 {/*user dashboard*/}

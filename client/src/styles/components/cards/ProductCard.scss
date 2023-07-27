@@ -92,4 +92,25 @@
             padding: 8px 13px;
         }
     }
+
+    .blog-text {
+        .text-bottom {
+            border-top: 1px solid rgba(157, 155, 155, 0.2);
+            padding-top: 15px;
+        }
+        h4 {
+            margin-top: 0;
+            font-weight: 500;
+            font-size: 15px;
+            color: $color-gray;
+        }
+
+        p {
+            font-size: $desktop-font-small;
+            color: $color-gray;
+            font-weight: 400;
+            line-height: 100%;
+            margin: 0;
+        }
+    }
 }
