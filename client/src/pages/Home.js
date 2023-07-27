@@ -15,7 +15,6 @@ export default function Home() {
             style={{ maxWidth: "1170px" }}
             className="container-fluid d-flex flex-column align-items-center"
         >
-            <pre>{JSON.stringify(auth, null, 4)}</pre>
             <section
                 className="landing-view"
                 style={{
