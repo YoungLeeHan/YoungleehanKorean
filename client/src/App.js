@@ -17,7 +17,10 @@ import Dashboard from "./pages/User/Dashboard";
 import PrivateRoute from "./components/routes/PrivateRoute"
 import AdminDashboard from "./pages/Admin/Dashboard";
 import AdminRoute from "./components/routes/AdminRoute";
-
+import AdminBlog from "./pages/Admin/Blog";
+import AdminProduct from "./pages/Admin/Product";
+import UserOrders from "./pages/User/Orders";
+import UserProfile from "./pages/User/Profile";
 
 export default function App() {
     return (
@@ -44,11 +47,15 @@ export default function App() {
                 {/*user dashboard*/}
                 <Route path="/dashboard" element={<PrivateRoute />}>
                     <Route path="user" element={<Dashboard />} />
+                    <Route path="user/profile" element={<UserProfile />} />
+                    <Route path="user/orders" element={<UserOrders/>} />
                 </Route>
 
                 {/*admin dashboard*/}
                 <Route path="/dashboard" element={<AdminRoute />}>
                     <Route path="admin" element={<AdminDashboard />} />
+                    <Route path="admin/blog" element={<AdminBlog />} />
+                    <Route path="admin/product" element={<AdminProduct />} />
                 </Route>
 
 
