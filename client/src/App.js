@@ -47,12 +47,12 @@ export default function App() {
                 <Route path="/shop/:slug" /> 
 
                 {/*Cart & Payment*/}
-                <Route path="/cart" element={<Cart />}/>
+                <Route path="/cart"/>
                 <Route path="/cart/payment" /> 
 
                 {/*blog*/}
                 <Route path="/blog" element={<List />} />
-                <Route path="/blog/:_id" element={<BlogPostView />} />
+                <Route path="/blog/:_id"/>
                 <Route path="/blog/upload" element={<Upload />} />
 
                 {/*user dashboard*/}
