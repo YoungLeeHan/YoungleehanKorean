@@ -8,10 +8,10 @@ import "../../styles/pages/ProductsView.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { BsSearch } from "react-icons/bs";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { Col, Row, Checkbox, ConfigProvider, Slider } from "antd";
 import { Rating } from "semantic-ui-react";
 import ProductCard from "../../components/cards/ProductCard";
+import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
 
 export default function ProductsView() {
     ScrollToTop();
@@ -229,32 +229,10 @@ export default function ProductsView() {
                             {/* Filter #1: Product Search ends here*/}
                             {/* 👉 Mobile responsive show/hide filter button starts here */}
                             {windowWidth < 767 && (
-                                <button
-                                    className="show-filter-btn"
-                                    onClick={handleShowFilter}
-                                >
-                                    {showFilter ? (
-                                        <>
-                                            <IoIosArrowUp
-                                                style={{
-                                                    paddingBottom: "2px",
-                                                    marginRight: "10px",
-                                                }}
-                                            />
-                                            Hide Filter
-                                        </>
-                                    ) : (
-                                        <>
-                                            <IoIosArrowDown
-                                                style={{
-                                                    paddingBottom: "2px",
-                                                    marginRight: "10px",
-                                                }}
-                                            />
-                                            Show Filter
-                                        </>
-                                    )}
-                                </button>
+                                <ResponsiveShowFilter
+                                    handleShowFilter={handleShowFilter}
+                                    showFilter={showFilter}
+                                />
                             )}
                             {/* Mobile responsive show/hide filter button ends here */}
 
