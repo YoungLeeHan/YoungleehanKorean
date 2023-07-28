@@ -12,16 +12,20 @@ export default function AdminRoute() {
 
   useEffect(() => {
     const adminCheck = async () => {
-      const { data } = await axios.get(`/admin-check`);
-      if (data.ok) {
-        setOk(true);
-      } else {
-        setOk(false);
+      try {
+        const { data } = await axios.get(`/admin-check`);
+        if (data.ok) {
+          setOk(true);
+        } else {
+          setOk(false);
+        }
+      } catch (err) {
+        console.log(err);
       }
     };
 
     if (auth?.token) adminCheck();
   }, [auth?.token]);
 
-  return ok ? <Outlet /> : <Loading path="" />;
+  return ok ? <Outlet /> : <Loading path="dashboard/user" />;
 }
