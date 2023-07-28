@@ -1,4 +1,5 @@
-// 👻 Developed by DanBi Choi on July 27th, 2023.
+// 👻 Developed by DanBi Choi on July 27th, 2023. (UI)
+// 👻 Developed by DanBi Choi on July 28th, 2023. (Filter Feature)
 // -----------------------------------------------------
 import Jumbotron from "../../components/cards/Jumbotron";
 import ScrollToTop from "../../components/nav/ScrollToTop";
@@ -7,31 +8,32 @@ import { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 import { Col, Row, Checkbox, ConfigProvider } from "antd";
 import BlogPostCard from "../../components/cards/BlogPostCard";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import useWindowWidth from "../../hooks/useWindowWidth";
+import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
 
 export default function BlogView() {
     ScrollToTop();
 
     // states
-    const [isFilterOn, setIsFilterOn] = useState(true);
+    const [showFilter, setShowFilter] = useState(true);
     const [searchKeyword, setSearchKeyword] = useState("");
     const [blogList, setBlogList] = useState([]);
+    const [categoryFilter, setCategoryFilter] = useState();
 
     // hooks
     const windowWidth = useWindowWidth();
 
     useEffect(() => {
         if (windowWidth < 767) {
-            setIsFilterOn(false);
+            setShowFilter(false);
         } else {
-            setIsFilterOn(true);
+            setShowFilter(true);
         }
     }, [windowWidth]);
 
     const handleShowFilter = (e) => {
         e.preventDefault();
-        setIsFilterOn((curr) => !curr);
+        setShowFilter((curr) => !curr);
     };
 
     const handleSearchBlog = (e) => {
@@ -41,13 +43,15 @@ export default function BlogView() {
 
     // Blog Category filter
     const handleCategoryFilterChange = (checkedValues) => {
-        console.log(checkedValues);
+        setCategoryFilter(checkedValues);
     };
 
     // fetch blog list from DB
     useEffect(() => {
-        loadBlogPosts();
-        setBlogList(dummyData);
+        if (!categoryFilter) {
+            loadBlogPosts();
+            setBlogList(dummyData);
+        }
     }, []);
 
     const loadBlogPosts = async () => {
@@ -56,6 +60,27 @@ export default function BlogView() {
         // 	setBlogList(data);
         // } catch (err) {
         // 	console.log(err);
+        // }
+    };
+
+    // Load filtered posts only when filter is activated
+    useEffect(() => {
+        if (categoryFilter) {
+            loadFilteredPosts();
+        }
+    }, [categoryFilter]);
+
+    const loadFilteredPosts = async () => {
+        console.log({
+            categoryFilter,
+        });
+        // try {
+        //     const { data } = await axios.post(`/filtered-bloglist`, {
+        //         categoryFilter
+        //     });
+        //     setBlogList(data);
+        // } catch (err) {
+        //     console.log(err);
         // }
     };
 
@@ -113,36 +138,14 @@ export default function BlogView() {
                             {/* Filter #1: Product Search ends here*/}
                             {/* 👉 Mobile responsive show/hide filter button starts here */}
                             {windowWidth < 767 && (
-                                <button
-                                    className="show-filter-btn"
-                                    onClick={handleShowFilter}
-                                >
-                                    {isFilterOn ? (
-                                        <>
-                                            <IoIosArrowUp
-                                                style={{
-                                                    paddingBottom: "2px",
-                                                    marginRight: "10px",
-                                                }}
-                                            />
-                                            Hide Filter
-                                        </>
-                                    ) : (
-                                        <>
-                                            <IoIosArrowDown
-                                                style={{
-                                                    paddingBottom: "2px",
-                                                    marginRight: "10px",
-                                                }}
-                                            />
-                                            Show Filter
-                                        </>
-                                    )}
-                                </button>
+                                <ResponsiveShowFilter
+                                    handleShowFilter={handleShowFilter}
+                                    showFilter={showFilter}
+                                />
                             )}
                             {/* Mobile responsive show/hide filter button ends here */}
 
-                            {isFilterOn && (
+                            {showFilter && (
                                 <>
                                     {/* 👉 Ant Design UI style setting change starts here*/}
                                     <ConfigProvider
