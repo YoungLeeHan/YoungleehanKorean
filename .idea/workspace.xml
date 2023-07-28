@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="218818dd-db65-4352-82a7-2712dfbeeecf" name="Changes" comment="Add logout function,&#10;private access to dashboard.">
-      <change afterPath="$PROJECT_DIR$/server/controllers/blog.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/models/blog.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/routes/blog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Admin/Blog.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Admin/Blog.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Admin/Product.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Admin/Product.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Blog/List.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Blog/List.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/Home.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/Home.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/User/Orders.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/User/Orders.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/User/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/User/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +62,11 @@
       <workItem from="1690385835621" duration="699000" />
       <workItem from="1690398202169" duration="10813000" />
       <workItem from="1690430280855" duration="12150000" />
+      <workItem from="1690498030364" duration="176000" />
+      <workItem from="1690515557244" duration="1237000" />
+      <workItem from="1690517935533" duration="136000" />
+      <workItem from="1690518077220" duration="2832000" />
+      <workItem from="1690523880390" duration="846000" />
     </task>
     <task id="LOCAL-00001" summary="Component alignment issue solved">
       <created>1690220511580</created>
