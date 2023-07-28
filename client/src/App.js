@@ -1,6 +1,6 @@
 import "./styles/App.scss";
-import {BrowserRouter, Routes, Route} from "react-router-dom";
-import {Toaster} from "react-hot-toast";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import Header from "../src/components/nav/Header";
 import Footer from "../src/components/nav/Footer";
 import Home from "./pages/Home";
@@ -8,7 +8,9 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import PageNotFound from "./pages/PageNotFound";
 import BlogView from "./pages/Blog/BlogView";
-import Upload from "./pages/Blog/Upload";
+import Upload from "./pages/Reple/Upload";
+import PostArea from "./pages/Reple/PostArea";
+import Edit from "./pages/Reple/Edit";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import Verification from "./pages/Auth/Verification";
 import NewPassword from "./pages/Auth/NewPassword";
@@ -25,54 +27,56 @@ import Cart from "./pages/Cart";
 import ProductsView from "./pages/Shop/ProductsView";
 
 export default function App() {
-    return (
-        <BrowserRouter>
-            <Header/>
-            <Toaster/>
-            <Routes>
-                {/*single page*/}
-                <Route path="/" element={<Home/>}/>
-                <Route path="/contact" element={<Contact/>}/>
-                <Route path="*" element={<PageNotFound/>}/>
+  return (
+    <BrowserRouter>
+      <Header />
+      <Toaster />
+      <Routes>
+        {/*single page*/}
+        <Route path="/" element={<Home />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="*" element={<PageNotFound />} />
 
-                {/*login*/}
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/register" element={<Register/>}/>
-                <Route path="/forgotpassword" element={<ForgotPassword/>}/>
-                <Route path="/verification" element={<Verification/>}/>
-                <Route path="/newpassword" element={<NewPassword/>}/>
+        {/*login*/}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/verification" element={<Verification />} />
+        <Route path="/newpassword" element={<NewPassword />} />
 
-                {/*shop*/}
-                <Route path="/shop" element={<ProductsView/>}/>
-                <Route path="/shop/:slug"/>
+        {/*shop*/}
+        <Route path="/shop" element={<ProductsView />} />
+        <Route path="/shop/:slug" />
 
-                {/*blog*/}
-                <Route path="/blog" element={<BlogView/>}/>
-                <Route path="/blog/:_id"/>
-                <Route path="/blog/upload" element={<Upload/>}/>
+        {/*blog*/}
+        <Route path="/blog" element={<BlogView />} />
+        <Route path="/blog/:_id" />
+        {/* <Route path="/blog/upload" element={<Upload />} /> */}
 
-                {/*Cart & Payment*/}
-                <Route path="/cart" element={<Cart/>}/>
-                <Route path="/cart/payment"/>
+        {/*Reple*/}
+        <Route path="/upload" element={<Upload />} />
+        <Route path="/post/:postNum" element={<PostArea />} />
+        <Route path="/edit/:postNum" element={<Edit />} />
 
-                {/*user dashboard*/}
-                <Route path="/dashboard" element={<PrivateRoute/>}>
-                    <Route path="user" element={<Dashboard/>}/>
-                    <Route path="user/profile" element={<UserProfile/>}/>
-                    <Route path="user/orders" element={<UserOrders/>}/>
-                </Route>
+        {/*Cart & Payment*/}
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart/payment" />
 
-                {/*admin dashboard*/}
-                <Route path="/dashboard" element={<AdminRoute/>}>
-                    <Route path="admin" element={<AdminDashboard/>}/>
-                    <Route path="admin/blog" element={<AdminBlog/>}/>
-                    <Route path="admin/product" element={<AdminProduct/>}/>
-                </Route>
+        {/*user dashboard*/}
+        <Route path="/dashboard" element={<PrivateRoute />}>
+          <Route path="user" element={<Dashboard />} />
+          <Route path="user/profile" element={<UserProfile />} />
+          <Route path="user/orders" element={<UserOrders />} />
+        </Route>
 
-
-            </Routes>
-            <Footer/>
-        </BrowserRouter>
-    );
-
+        {/*admin dashboard*/}
+        <Route path="/dashboard" element={<AdminRoute />}>
+          <Route path="admin" element={<AdminDashboard />} />
+          <Route path="admin/blog" element={<AdminBlog />} />
+          <Route path="admin/product" element={<AdminProduct />} />
+        </Route>
+      </Routes>
+      <Footer />
+    </BrowserRouter>
+  );
 }

@@ -4,16 +4,22 @@ import "semantic-ui-css/semantic.min.css";
 import "./styles/index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import {AuthProvider} from "./context/auth"
-
+import { AuthProvider } from "./context/auth";
+import { BrowserRouter } from "react-router-dom";
+import store from "./Reducer/store";
+import { Provider } from "react-redux";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <React.StrictMode>
-        <AuthProvider>
-            <App />
-        </AuthProvider>
-    </React.StrictMode>
+  <React.StrictMode>
+    <AuthProvider>
+      {/* <BrowserRouter> */}
+      <Provider store={store}>
+        <App />
+      </Provider>
+      {/* </BrowserRouter> */}
+    </AuthProvider>
+  </React.StrictMode>
 );
 
 reportWebVitals();
