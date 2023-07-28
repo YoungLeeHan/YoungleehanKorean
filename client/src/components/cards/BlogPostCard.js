@@ -7,6 +7,8 @@ import { MdOutlineDateRange } from "react-icons/md";
 import moment from "moment";
 
 export default function BlogPostCard({ post }) {
+    moment.locale("en");
+
     return (
         <Link to={`${post._id}`}>
             <div className="card-container">
