@@ -53,7 +53,7 @@ export default function App() {
                 <Route path="/blog/:_id" />
                 {/* <Route path="/blog/upload" element={<Upload />} /> */}
 
-                {/*Reple*/}
+                {/*comment*/}
                 <Route path="/upload" element={<Upload />} />
                 <Route path="/post/:postNum" element={<PostArea />} />
                 <Route path="/edit/:postNum" element={<Edit />} />
