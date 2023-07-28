@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAuth } from "../../context/auth";
 import axios from "axios";
+import DropIn from "braintree-web-drop-in-react";
 
 export default function UserCartSidebar() {
   const [auth, setAuth] = useAuth();
@@ -26,7 +27,17 @@ export default function UserCartSidebar() {
   return (
     <>
       <h3>Hi</h3>
-      <h4>{JSON.stringify(clientToken)}</h4>
+      <p>{JSON.stringify(clientToken, null, 4)}</p>
+      <div>
+        <DropIn
+          options={{
+            authorization: clientToken,
+            paypal: {
+              flow: "vault",
+            },
+          }}
+        />
+      </div>
     </>
   );
 }

@@ -11,19 +11,25 @@ const gateway = new braintree.BraintreeGateway({
   privateKey: process.env.BRAINTREE_PRIVATE_KEY,
 });
 
-export const getToken = async (req, res) => {
-  try {
-    gateway.clientToken.generate({}, function (err, response) {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.send(response); // token to show the drop-in UI
-      }
-    });
-  } catch (err) {
-    console.log(err);
-  }
-};
+// export const getToken = async (req, res) => {
+//   try {
+//     gateway.clientToken.generate({}, function (err, response) {
+//       if (err) {
+//         res.status(500).send(err);
+//       } else {
+//         res.send(response); // token to show the drop-in UI
+//       }
+//     });
+//   } catch (err) {
+//     console.log(err);
+//   }
+// };
+
+export const getToken = await gateway.clientToken
+  .generate({})
+  .then((err, response) => {
+    res.send(response);
+  });
 
 export const processPayment = async (req, res) => {
   try {
