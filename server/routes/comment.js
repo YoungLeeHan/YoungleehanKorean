@@ -1,12 +1,12 @@
 var express = require("express");
 var router = express.Router();
 const { Post } = require("../Model/Post.js");
-const { Reple } = require("../Model/Reple.js");
+const { Comment } = require("../Model/Comment.js");
 const { User } = require("../Model/User.js");
 
 router.post("/submit", (req, res) => {
   let temp = {
-    reple: req.body.reple,
+    comment: req.body.comment,
     postId: req.body.postId,
   };
 
@@ -14,13 +14,13 @@ router.post("/submit", (req, res) => {
     .exec()
     .then((userInfo) => {
       temp.author = userInfo._id;
-      const NewReple = new Reple(temp);
-      NewReple.save(() => {
+      const NewComment = new Comment(temp);
+        NewComment.save(() => {
         Post.findOneAndUpdate(
           {
             _id: req.body.postId,
           },
-          { $inc: { repleNum: 1 } }
+          { $inc: { commentNum: 1 } }
         )
           .exec()
           .then(() => {
@@ -33,14 +33,14 @@ router.post("/submit", (req, res) => {
     });
 });
 
-router.post("/getReple", (req, res) => {
-  Reple.find({ postId: req.body.postId })
+router.post("/getComment", (req, res) => {
+    Comment.find({ postId: req.body.postId })
     .populate("author")
     .exec()
-    .then((repleInfo) => {
+    .then((commentInfo) => {
       return res.status(200).json({
         success: true,
-        repleList: repleInfo,
+        commentList: commentInfo,
       });
     })
     .catch((err) => {
@@ -53,10 +53,10 @@ router.post("/getReple", (req, res) => {
 router.post("/edit", (req, res) => {
   let temp = {
     postId: req.body.postId,
-    reple: req.body.reple,
+    comment: req.body.comment,
     uid: req.body.uid,
   };
-  Reple.findOneAndUpdate({ _id: req.body.repleId }, { $set: temp })
+  Comment.findOneAndUpdate({ _id: req.body.commentId }, { $set: temp })
     .exec()
     .then(() => {
       return res.status(200).json({
@@ -71,14 +71,14 @@ router.post("/edit", (req, res) => {
 });
 
 router.post("/delete", (req, res) => {
-  Reple.deleteOne({ _id: req.body.repleId })
+  Comment.deleteOne({ _id: req.body.commentId })
     .exec()
     .then(() => {
       Post.findOneAndUpdate(
         {
           _id: req.body.postId,
         },
-        { $inc: { repleNum: -1 } }
+        { $inc: { commentNum: -1 } }
       )
         .exec()
         .then(() => {
