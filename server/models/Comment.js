@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
-const repleSchema = new mongoose.Schema(
+const commentSchema = new mongoose.Schema(
   {
-    reple: String,
+      comment: String,
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
@@ -11,9 +11,9 @@ const repleSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
     },
   },
-  { collection: "reples", timestamps: true }
+  { collection: "comments", timestamps: true }
 );
 
-const Reple = mongoose.model("Reple", repleSchema);
+const Comment = mongoose.model("Comment", commentSchema);
 
-module.exports = { Reple };
+module.exports = { Comment };
