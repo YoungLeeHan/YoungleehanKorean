@@ -8,6 +8,7 @@ import { AuthProvider } from "./context/auth";
 import { BrowserRouter } from "react-router-dom";
 import store from "./Reducer/store";
 import { Provider } from "react-redux";
+import "antd/dist/reset.css";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));

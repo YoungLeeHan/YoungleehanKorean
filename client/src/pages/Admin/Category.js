@@ -51,12 +51,12 @@ export default function AdminCategory() {
     e.preventDefault();
     try {
       const { data } = await axios.put(`/category/${selected._id}`, {
-        title: updatingName,
+        name: updatingName,
       });
       if (data?.error) {
         toast.error(data.error);
       } else {
-        toast.success(`"${data.title}" is updated`);
+        toast.success(`"${data.name}" is updated`);
         setSelected(null);
         setUpdatingName("");
         loadCategories();
@@ -89,7 +89,7 @@ export default function AdminCategory() {
   return (
     <>
       <Jumbotron
-        title={`Hello ${auth?.user?.name}`}
+        title={`Hello ${auth?.user?.firstName}`}
         subTitle="Admin Dashboard"
       />
 
@@ -110,17 +110,17 @@ export default function AdminCategory() {
             <hr />
 
             <div className="col">
-              {categories?.map((category) => (
+              {categories?.map((c) => (
                 <button
-                  key={category._id}
+                  key={c._id}
                   className="btn btn-outline-primary m-3"
                   onClick={() => {
                     setVisible(true);
-                    setSelected(category);
-                    setUpdatingName(category.name);
+                    setSelected(c);
+                    setUpdatingName(c.name);
                   }}
                 >
-                  {category.name}
+                  {c.name}
                 </button>
               ))}
             </div>
