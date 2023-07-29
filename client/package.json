@@ -19,6 +19,7 @@
     "braintree-web": "^3.96.1",
     "braintree-web-drop-in-react": "^1.2.1",
     "dotenv": "^16.3.1",
+    "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",
     "qs": "^6.11.2",
     "react": "^18.2.0",

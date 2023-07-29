@@ -59,6 +59,7 @@ export const processPayment = async (req, res) => {
 
 export const create = async (req, res) => {
   try {
+    console.log(req.body);
     console.log(req.fields);
     // console.log(req.files);
     const {
