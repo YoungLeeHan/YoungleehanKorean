@@ -22,5 +22,8 @@ router.post("/post", requireSignin, (req, res) => {
 router.post("/reple", requireSignin, (req, res) => {
   res.json({ ok: true });
 });
+// router.post("/category", requireSignin, isAdmin, (req, res) => {
+//   res.json({ ok: true });
+// });
 
 export default router;
