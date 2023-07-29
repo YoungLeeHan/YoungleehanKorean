@@ -35,6 +35,7 @@ export default function App() {
     <BrowserRouter>
       <Header />
       <Toaster />
+
       <Routes>
         {/*single page*/}
         <Route path="/" element={<Home />} />

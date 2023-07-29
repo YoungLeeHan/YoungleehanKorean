@@ -43,9 +43,26 @@ export default function LoginForm() {
     }
   };
 
-  const handleGoogleLogin = (e) => {
+  const handleGoogleLogin = async (e) => {
     e.preventDefault();
     console.log("google log in button clicked");
+    // try {
+    //   const { data } = await axios.post(`/login`, {
+    //     email,
+    //     password,
+    //   });
+    //   // console.log(data);
+    //   if (data?.error) {
+    //     toast.error(data.error);
+    //   } else {
+    //     localStorage.setItem("auth", JSON.stringify(data));
+    //     setAuth({ ...auth, token: data.token, user: data.user });
+    //     toast.success("Login successful");
+    //     navigate(
+    //       location.state ||
+    //         `/dashboard/${data?.user?.role === 1 ? "admin" : "user"}`
+    //     );
+    //   }
   };
 
   return (

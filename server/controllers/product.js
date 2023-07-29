@@ -16,6 +16,7 @@ const gateway = new braintree.BraintreeGateway({
 
 export const create = async (req, res) => {
   try {
+    console.log(req.body);
     console.log(req.fields);
     // console.log(req.files);
     const { title, category, age, description, price } = req.fields;
