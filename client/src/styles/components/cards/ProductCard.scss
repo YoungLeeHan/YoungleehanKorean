@@ -18,6 +18,11 @@
         height: 400px;
     }
 
+    &:hover {
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px,
+            rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    }
+
     .img {
         width: 35%;
         max-width: 270px;
@@ -63,7 +68,7 @@
         }
 
         h4 {
-            margin-top: 4px;
+            margin: 4px 0 0 0;
             font-weight: 600;
             line-height: 130%;
             font-size: $desktop-font-large;
@@ -74,7 +79,7 @@
             font-size: 13px;
             font-weight: 500;
             line-height: 130%;
-            margin-right: 5px;
+            margin: 0 5px 0 0;
 
             &:nth-child(2) {
                 margin-bottom: 2px;

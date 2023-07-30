@@ -5,27 +5,27 @@ import Loading from "../routes/Loading";
 import axios from "axios";
 
 export default function AdminRoute() {
-  // context
-  const [auth, setAuth] = useAuth();
-  // state
-  const [ok, setOk] = useState(false);
+    // context
+    const [auth, setAuth] = useAuth();
+    // state
+    const [ok, setOk] = useState(false);
 
-  useEffect(() => {
-    const adminCheck = async () => {
-      try {
-        const { data } = await axios.get(`/admin-check`);
-        if (data.ok) {
-          setOk(true);
-        } else {
-          setOk(false);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
+    useEffect(() => {
+        const adminCheck = async () => {
+            try {
+                const { data } = await axios.get(`/admin-check`);
+                if (data.ok) {
+                    setOk(true);
+                } else {
+                    setOk(false);
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        };
 
-    if (auth?.token) adminCheck();
-  }, [auth?.token]);
+        if (auth?.token) adminCheck();
+    }, [auth?.token]);
 
-  return ok ? <Outlet /> : <Loading path="dashboard/user" />;
+    return ok ? <Outlet /> : <Loading path="dashboard/user" />;
 }

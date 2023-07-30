@@ -11,22 +11,26 @@ import { Provider } from "react-redux";
 import "antd/dist/reset.css";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { SearchProvider } from "./context/search";
+import { CartProvider } from "./context/cart";
+import { CartQuantityProvider } from "./context/cartQuantity";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <GoogleOAuthProvider>
-      <AuthProvider>
-        <SearchProvider>
-          {/* <BrowserRouter> */}
-          <Provider store={store}>
-            <App />
-          </Provider>
-          {/* </BrowserRouter> */}
-        </SearchProvider>
-      </AuthProvider>
-    </GoogleOAuthProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <GoogleOAuthProvider>
+            <AuthProvider>
+                <SearchProvider>
+                    <CartProvider>
+                        <CartQuantityProvider>
+                            <Provider store={store}>
+                                <App />
+                            </Provider>
+                        </CartQuantityProvider>
+                    </CartProvider>
+                </SearchProvider>
+            </AuthProvider>
+        </GoogleOAuthProvider>
+    </React.StrictMode>
 );
 
 reportWebVitals();
