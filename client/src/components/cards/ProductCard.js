@@ -10,7 +10,13 @@ export default function ProductCard({ product }) {
     <div className="card-container">
       <div className="img">
         <Link to={`product/${product?.slug}`}>
-          <img src={product?.image} alt={product?.title} />{" "}
+          {/* <img src={product?.images} alt={product?.title} />{" "} */}
+          <img
+            className="card-img-top"
+            src={`${process.env.REACT_APP_API}/product/images/${product._id}`}
+            alt={product.title}
+            style={{ height: "300px", objectFit: "cover" }}
+          />
         </Link>
       </div>
       <div className="text d-flex flex-column justify-content-between align-items-between">
@@ -29,7 +35,7 @@ export default function ProductCard({ product }) {
             <div className="product-rate-box d-flex flex-row justify-content-between align-items-center">
               <h6>{product?.reviewRate}</h6>
               <h6>
-                <AiFillStar style={{ fill: "#ffbf35" }} />
+                <AiFillStar style={{ fill: "#ffbf95" }} />
               </h6>
               <h6>({product?.reviewNumber})</h6>
             </div>
