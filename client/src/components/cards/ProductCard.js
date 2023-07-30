@@ -1,11 +1,34 @@
 // 👻 Developed by DanBi Choi on July 26th, 2023.
+// 👻 Developed by DanBi Choi on July 29th, 2023. (Add To Cart Button)
 // -----------------------------------------------------
 
 import { Link } from "react-router-dom";
 import "../../styles/components/cards/ProductCard.scss";
 import { AiFillStar } from "react-icons/ai";
+import { useCart } from "../../context/cart";
+import { useCartQuantity } from "../../context/cartQuantity";
+import { toast } from "react-hot-toast";
 
 export default function ProductCard({ product }) {
+    //hooks
+    const [cart, setCart] = useCart();
+    const [cartQuantity, setCartQuantity] = useCartQuantity();
+
+    const handleAddToCart = (e) => {
+        e.preventDefault();
+        try {
+            const productInCart = cart.some((item) => item._id === product._id); // returns true if product is found
+            if (!productInCart) setCart([...cart, product]);
+            setCartQuantity((prev) => ({
+                ...prev,
+                [product._id]: prev[product._id] + 1 || 1,
+            }));
+            toast.success("Item added to cart!");
+        } catch (err) {
+            toast.error("Failed. Please try again.");
+        }
+    };
+
     return (
         <div className="card-container">
             <div className="img">
@@ -35,9 +58,7 @@ export default function ProductCard({ product }) {
                         </div>
                         <button
                             className="btn btn-primary"
-                            onClick={(e) => {
-                                console.log("Add to Cart button clicked");
-                            }}
+                            onClick={handleAddToCart}
                         >
                             Add to Cart
                         </button>

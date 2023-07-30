@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useAuth } from "../../context/auth";
-import Loading from '../routes/Loading'
+import Loading from "../routes/Loading";
 import axios from "axios";
 
 export default function AdminRoute() {
@@ -12,17 +12,20 @@ export default function AdminRoute() {
 
     useEffect(() => {
         const adminCheck = async () => {
-            const { data } = await axios.get(`/admin-check`);
-            if (data.ok) {
-                setOk(true);
-            } else {
-                setOk(false);
+            try {
+                const { data } = await axios.get(`/admin-check`);
+                if (data.ok) {
+                    setOk(true);
+                } else {
+                    setOk(false);
+                }
+            } catch (err) {
+                console.log(err);
             }
         };
 
         if (auth?.token) adminCheck();
     }, [auth?.token]);
 
-
-    return ok ? <Outlet /> : <Loading path="" />;
+    return ok ? <Outlet /> : <Loading path="dashboard/user" />;
 }

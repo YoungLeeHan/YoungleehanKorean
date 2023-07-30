@@ -30,14 +30,16 @@ export default function UserCartSidebar() {
             <h3>Hi</h3>
             <p>{JSON.stringify(clientToken, null, 4)}</p>
             <div>
-                <DropIn
-                    options={{
-                        authorization: clientToken,
-                        paypal: {
-                            flow: "vault",
-                        },
-                    }}
-                />
+                {clientToken && (
+                    <DropIn
+                        options={{
+                            authorization: clientToken,
+                            paypal: {
+                                flow: "vault",
+                            },
+                        }}
+                    />
+                )}
             </div>
         </>
     );
