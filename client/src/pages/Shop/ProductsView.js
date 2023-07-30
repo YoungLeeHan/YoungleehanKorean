@@ -12,6 +12,8 @@ import { Col, Row, Checkbox, ConfigProvider, Slider } from "antd";
 import { Rating } from "semantic-ui-react";
 import ProductCard from "../../components/cards/ProductCard";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
+import { useSearch } from "../../context/search";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductsView() {
     ScrollToTop();
@@ -25,7 +27,7 @@ export default function ProductsView() {
     const [priceRange, setPriceRange] = useState();
     const [reviewRate, setReviewRate] = useState();
     const [sortBy, setSortBy] = useState("");
-    // const [checked, setChecked] = useState([]); // categories
+    const [checked, setChecked] = useState([]); // categories
 
     // hooks
     const windowWidth = useWindowWidth();
@@ -85,22 +87,22 @@ export default function ProductsView() {
         // }
     };
 
-    // const [values, setValues] = useSearch();
-    // const navigate = useNavigate();
+    const [values, setValues] = useSearch();
+    const navigate = useNavigate();
 
     const handleSearchProduct = async (e) => {
         e.preventDefault();
         console.log(`searching for ${searchKeyword}`);
-        // try {
-        //     const { data } = await axios.get(
-        //         `/products/search/${values?.keyword}`
-        //     );
-        //     // console.log(data);
-        //     setValues({ ...values, results: data });
-        //     navigate("/search");
-        // } catch (err) {
-        //     console.log(err);
-        // }
+        try {
+            const { data } = await axios.get(
+                `/products/search/${values?.keyword}`
+            );
+            // console.log(data);
+            setValues({ ...values, results: data });
+            navigate("/search");
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     // Student level filter

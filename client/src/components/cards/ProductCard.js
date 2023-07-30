@@ -33,7 +33,10 @@ export default function ProductCard({ product }) {
         <div className="card-container">
             <div className="img">
                 <Link to={`product/${product?.slug}`}>
-                    <img src={product?.image} alt={product?.title} />{" "}
+                    <img
+                        src={`${process.env.REACT_APP_API}/product/images/${product._id}`}
+                        alt={product.title}
+                    />
                 </Link>
             </div>
             <div className="text d-flex flex-column justify-content-between align-items-between">
@@ -50,11 +53,21 @@ export default function ProductCard({ product }) {
                     <h4>${product?.price}</h4>
                     <div className="d-flex flex-row justify-content-between">
                         <div className="product-rate-box d-flex flex-row justify-content-between align-items-center">
-                            <h6>{product?.reviewRate}</h6>
+                            <h6>
+                                {product?.reviewRate
+                                    ? product?.reviewRate
+                                    : "No Rating"}
+                            </h6>
                             <h6>
                                 <AiFillStar style={{ fill: "#ffbf35" }} />
                             </h6>
-                            <h6>({product?.reviewNumber})</h6>
+                            <h6>
+                                (
+                                {product?.reviewNumber
+                                    ? product?.reviewNumber
+                                    : "0"}
+                                )
+                            </h6>
                         </div>
                         <button
                             className="btn btn-primary"

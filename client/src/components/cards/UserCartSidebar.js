@@ -27,9 +27,8 @@ export default function UserCartSidebar() {
 
     return (
         <>
-            <h3>Hi</h3>
-            <p>{JSON.stringify(clientToken, null, 4)}</p>
-            <div>
+            <p>{JSON.stringify(clientToken)}</p>
+            <div className="p-3 mt-2 mb-2">
                 {clientToken && (
                     <DropIn
                         options={{

@@ -11,9 +11,11 @@ import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 
-export default function AdminProduct() {
+export default function AdminProducts() {
+  // context
   const [auth, setAuth] = useAuth();
   // state
+  const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [images, setImages] = useState("");
   const [title, setTitle] = useState("");
@@ -22,28 +24,26 @@ export default function AdminProduct() {
   const [category, setCategory] = useState("");
   const [age, setAge] = useState("");
   const [quantity, setQuantity] = useState("");
-
   const navigate = useNavigate();
 
   useEffect(() => {
-    loadCategories();
+    loadProducts();
   }, []);
 
-  const loadCategories = async () => {
+  const loadProducts = async () => {
     try {
-      const { data } = await axios.get("/categories");
-      setCategories(data);
+      const { data } = await axios.get("/products");
+      setProducts(data);
     } catch (err) {
       console.log(err);
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const productData = new FormData();
       productData.append("images", images);
-      productData.append("title", title);
+      productData.append("name", title);
       productData.append("description", description);
       productData.append("price", price);
       productData.append("category", category);
@@ -62,17 +62,59 @@ export default function AdminProduct() {
       toast.error("Product create failed. Try again.");
     }
   };
-
   return (
     <>
       <Jumbotron
-        title={`Hello ${auth?.user?.firstName}`}
+        title={`Hello ${auth?.user?.title}`}
         subTitle="Admin Dashboard"
       />
-      <div
-        style={{ maxWidth: "1170px", height: "500px" }}
-        className="container-fluid"
-      >
+
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-3">
+            <AdminMenu />
+          </div>
+          <div className="col-md-9">
+            <div className="p-3 mt-2 mb-2 h4 bg-light">Products</div>
+
+            {products?.map((product) => (
+              <Link
+                key={product._id}
+                to={`/dashboard/admin/product/update/${product.slug}`}
+              >
+                <div className="card mb-3">
+                  <div className="row g-0">
+                    <div className="col-md-4">
+                      <img
+                        src={`${process.env.REACT_APP_API}/product/images/${product._id}`}
+                        alt={product.title}
+                        className="img img-fluid rounded-start"
+                      />
+                    </div>
+
+                    <div className="col-md-8">
+                      <div className="card-body">
+                        <h5 className="card-title">{product?.title}</h5>
+                        <p className="card-text">
+                          {product?.description?.substring(0, 160)}...
+                        </p>
+                        <p className="card-text">
+                          <small className="text-muted">
+                            {moment(product.createdAt).format(
+                              "MMMM Do YYYY, h:mm:ss a"
+                            )}
+                          </small>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div className="container-fluid">
         <div className="row">
           <div className="col-md-3">
             <AdminMenu />
@@ -93,7 +135,7 @@ export default function AdminProduct() {
 
             <div className="pt-2">
               <label className="btn btn-outline-secondary col-12 mb-3">
-                {images ? images.name : "Upload images"}
+                {images ? images.title : "Upload images"}
                 <input
                   type="file"
                   name="images"
@@ -107,7 +149,7 @@ export default function AdminProduct() {
             <input
               type="text"
               className="form-control p-2 mb-3"
-              placeholder="Write a title"
+              placeholder="Write title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
@@ -136,11 +178,13 @@ export default function AdminProduct() {
               placeholder="Choose category"
               onChange={(value) => setCategory(value)}
             >
-              {categories?.map((category) => (
+              <Option value="0">No</Option>
+              <Option value="1">Yes</Option>
+              {/* {categories?.map((category) => (
                 <Option key={category._id} value={category._id}>
                   {category.name}
                 </Option>
-              ))}
+              ))} */}
             </Select>
 
             <Select
@@ -150,8 +194,8 @@ export default function AdminProduct() {
               placeholder="Choose age"
               onChange={(value) => setAge(value)}
             >
-              <Option value="0">kids</Option>
-              <Option value="1">adults</Option>
+              <Option value="0">No</Option>
+              <Option value="1">Yes</Option>
             </Select>
 
             <input
@@ -162,11 +206,11 @@ export default function AdminProduct() {
               value={quantity}
               onChange={(e) => setQuantity(e.target.value)}
             />
-          </div>
 
-          <button onClick={handleSubmit} className="btn btn-primary mb-5">
-            Submit
-          </button>
+            <button onClick={handleSubmit} className="btn btn-primary mb-5">
+              Submit
+            </button>
+          </div>
         </div>
       </div>
     </>

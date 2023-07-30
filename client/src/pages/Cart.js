@@ -4,7 +4,6 @@ import "../styles/pages/Cart.scss";
 import Jumbotron from "../components/cards/Jumbotron";
 import ScrollToTop from "../components/nav/ScrollToTop";
 import { useCart } from "../context/cart";
-import { useState } from "react";
 import { useCartQuantity } from "../context/cartQuantity";
 import { TiDelete } from "react-icons/ti";
 import { Link } from "react-router-dom";
@@ -62,7 +61,7 @@ export default function Cart() {
                                             <Link to={`/shop/${item?.slug}`}>
                                                 <div className="img">
                                                     <img
-                                                        src={item?.image}
+                                                        src={`${process.env.REACT_APP_API}/product/images/${item._id}`}
                                                         alt={item?.title}
                                                     />
                                                 </div>
