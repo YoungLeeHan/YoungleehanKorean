@@ -128,7 +128,7 @@ passport.use(
                     done(null, user);
                 } else {
                     // if user is not present in our database, save user data to the database.
-                    user = await models.User.create(newUser);
+                    user = await User.create(newUser);
                     done(null, user);
                 }
             } catch (err) {
