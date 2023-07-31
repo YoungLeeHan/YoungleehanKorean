@@ -20,13 +20,11 @@ root.render(
         <GoogleOAuthProvider>
             <AuthProvider>
                 <SearchProvider>
-                    <CartProvider>
-                        <CartQuantityProvider>
-                            <Provider store={store}>
-                                <App />
-                            </Provider>
-                        </CartQuantityProvider>
-                    </CartProvider>
+                    {/* <BrowserRouter> */}
+                    <Provider store={store}>
+                        <App />
+                    </Provider>
+                    {/* </BrowserRouter> */}
                 </SearchProvider>
             </AuthProvider>
         </GoogleOAuthProvider>

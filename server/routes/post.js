@@ -8,100 +8,100 @@ const { User } = require("../Model/User.js");
 const setUpload = require("../Util/upload.js");
 
 router.post("/submit", (req, res) => {
-  let temp = {
-    title: req.body.title,
-    content: req.body.content,
-    image: req.body.image,
-  };
-  Counter.findOne({ name: "counter" })
-    .exec()
-    .then((counter) => {
-      temp.postNum = counter.postNum;
-      User.findOne({ uid: req.body.uid })
+    let temp = {
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+    };
+    Counter.findOne({ name: "counter" })
         .exec()
-        .then((userInfo) => {
-          temp.author = userInfo._id;
-          const CommunityPost = new Post(temp);
-          CommunityPost.save().then((doc) => {
-            Counter.updateOne(
-              { name: "counter" },
-              { $inc: { postNum: 1 } }
-            ).then(() => {
-              res.status(200).json({ success: true });
-            });
-          });
+        .then((counter) => {
+            temp.postNum = counter.postNum;
+            User.findOne({ uid: req.body.uid })
+                .exec()
+                .then((userInfo) => {
+                    temp.author = userInfo._id;
+                    const CommunityPost = new Post(temp);
+                    CommunityPost.save().then((doc) => {
+                        Counter.updateOne(
+                            { name: "counter" },
+                            { $inc: { postNum: 1 } }
+                        ).then(() => {
+                            res.status(200).json({ success: true });
+                        });
+                    });
+                });
+        })
+        .catch((err) => {
+            res.status(400).json({ success: false });
         });
-    })
-    .catch((err) => {
-      res.status(400).json({ success: false });
-    });
 });
 
 router.post("/list", (req, res) => {
-  let sort = {};
+    let sort = {};
 
-  if (req.body.sort === "최신순") {
-    sort.createdAt = -1;
-  } else {
-    //인기순
-    sort.repleNum = -1;
-  }
-  Post.find({
-    $or: [
-      { title: { $regex: req.body.searchTerm } },
-      { content: { $regex: req.body.searchTerm } },
-    ],
-  })
-    .populate("author")
-    .sort(sort)
-    .skip(req.body.skip) // 0, 5
-    .limit(5) //한번에 찾을 doc 숫자
-    .exec()
-    .then((doc) => {
-      res.status(200).json({ success: true, postList: doc });
+    if (req.body.sort === "최신순") {
+        sort.createdAt = -1;
+    } else {
+        //인기순
+        sort.repleNum = -1;
+    }
+    Post.find({
+        $or: [
+            { title: { $regex: req.body.searchTerm } },
+            { content: { $regex: req.body.searchTerm } },
+        ],
     })
-    .catch((err) => {
-      res.status(400).json({ success: false });
-    });
+        .populate("author")
+        .sort(sort)
+        .skip(req.body.skip) // 0, 5
+        .limit(5) //한번에 찾을 doc 숫자
+        .exec()
+        .then((doc) => {
+            res.status(200).json({ success: true, postList: doc });
+        })
+        .catch((err) => {
+            res.status(400).json({ success: false });
+        });
 });
 
 router.post("/detail", (req, res) => {
-  Post.findOne({ postNum: Number(req.body.postNum) })
-    .populate("author")
-    .exec()
-    .then((doc) => {
-      res.status(200).json({ success: true, post: doc });
-    })
-    .catch((err) => {
-      res.status(400).json({ success: false });
-    });
+    Post.findOne({ postNum: Number(req.body.postNum) })
+        .populate("author")
+        .exec()
+        .then((doc) => {
+            res.status(200).json({ success: true, post: doc });
+        })
+        .catch((err) => {
+            res.status(400).json({ success: false });
+        });
 });
 
 router.post("/edit", (req, res) => {
-  let temp = {
-    title: req.body.title,
-    content: req.body.content,
-    image: req.body.image,
-  };
-  Post.updateOne({ postNum: Number(req.body.postNum) }, { $set: temp })
-    .exec()
-    .then(() => {
-      res.status(200).json({ success: true });
-    })
-    .catch((err) => {
-      res.status(400).json({ success: false });
-    });
+    let temp = {
+        title: req.body.title,
+        content: req.body.content,
+        image: req.body.image,
+    };
+    Post.updateOne({ postNum: Number(req.body.postNum) }, { $set: temp })
+        .exec()
+        .then(() => {
+            res.status(200).json({ success: true });
+        })
+        .catch((err) => {
+            res.status(400).json({ success: false });
+        });
 });
 
 router.post("/delete", (req, res) => {
-  Post.deleteOne({ postNum: Number(req.body.postNum) })
-    .exec()
-    .then(() => {
-      res.status(200).json({ success: true });
-    })
-    .catch((err) => {
-      res.status(400).json({ success: false });
-    });
+    Post.deleteOne({ postNum: Number(req.body.postNum) })
+        .exec()
+        .then(() => {
+            res.status(200).json({ success: true });
+        })
+        .catch((err) => {
+            res.status(400).json({ success: false });
+        });
 });
 
 /*
@@ -128,11 +128,14 @@ router.post("/image/upload", (req, res) => {
 */
 
 router.post(
-  "/image/upload",
-  setUpload("react-community/post"),
-  (req, res, next) => {
-    res.status(200).json({ success: true, filePath: res.req.file.location });
-  }
+    "/image/upload",
+    setUpload("react-community/post"),
+    (req, res, next) => {
+        res.status(200).json({
+            success: true,
+            filePath: res.req.file.location,
+        });
+    }
 );
 
 module.exports = router;
