@@ -6,6 +6,11 @@ const postSchema = new mongoose.Schema({
         trim: true,
         required: true,
     },
+    slug: {
+        type: String,
+        unique: true,
+        lowercase: true,
+    },
 });
 
 export default mongoose.model("Post", postSchema);

@@ -12,11 +12,11 @@ export default function AdminBlog() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post("/blog", { title });
+            const { data } = await axios.post("/dashboard/admin/post", { title });
             if (data?.error) {
                 toast.error(data.error);
             } else {
-                toast.success(`"${data.name}" is created`);
+                toast.success(`"${data.title}" is created`);
             }
         } catch (err) {
             console.log(err);

@@ -16,12 +16,6 @@ router.get("/admin-check", requireSignin, isAdmin, (req, res) => {
   res.json({ ok: true });
 });
 router.get("/secret", requireSignin, isAdmin, secret);
-router.post("/post", requireSignin, (req, res) => {
-  res.json({ ok: true });
-});
-router.post("/reple", requireSignin, (req, res) => {
-  res.json({ ok: true });
-});
 // router.post("/category", requireSignin, isAdmin, (req, res) => {
 //   res.json({ ok: true });
 // });
