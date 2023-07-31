@@ -8,9 +8,6 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import PageNotFound from "./pages/PageNotFound";
 import BlogView from "./pages/Blog/BlogView";
-import Upload from "./pages/Reple/Upload";
-import PostArea from "./pages/Reple/PostArea";
-import Edit from "./pages/Reple/Edit";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import Verification from "./pages/Auth/Verification";
 import NewPassword from "./pages/Auth/NewPassword";
@@ -61,10 +58,6 @@ export default function App() {
         <Route path="/blog/:_id" />
         {/* <Route path="/blog/upload" element={<Upload />} /> */}
 
-        {/*Reple*/}
-        <Route path="/upload" element={<Upload />} />
-        <Route path="/post/:postNum" element={<PostArea />} />
-        <Route path="/edit/:postNum" element={<Edit />} />
 
         {/*Cart & Payment*/}
         <Route path="/cart" element={<Cart />} />
