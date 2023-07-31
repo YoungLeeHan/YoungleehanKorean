@@ -14,19 +14,19 @@ import { SearchProvider } from "./context/search";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <GoogleOAuthProvider>
-      <AuthProvider>
-        <SearchProvider>
-          {/* <BrowserRouter> */}
-          <Provider store={store}>
-            <App />
-          </Provider>
-          {/* </BrowserRouter> */}
-        </SearchProvider>
-      </AuthProvider>
-    </GoogleOAuthProvider>
-  </React.StrictMode>
+    <React.StrictMode>
+        <GoogleOAuthProvider>
+            <AuthProvider>
+                <SearchProvider>
+                    {/* <BrowserRouter> */}
+                    <Provider store={store}>
+                        <App />
+                    </Provider>
+                    {/* </BrowserRouter> */}
+                </SearchProvider>
+            </AuthProvider>
+        </GoogleOAuthProvider>
+    </React.StrictMode>
 );
 
 reportWebVitals();

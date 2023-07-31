@@ -8,31 +8,31 @@ import { requireSignin, isAdmin } from "../middlewares/auth.js";
 
 //controllers
 import {
-  create,
-  list,
-  read,
-  images,
-  remove,
-  update,
-  // filteredProducts,
-  // productsCount,
-  // listProducts,
-  productsSearch,
-  // relatedProducts,
-  getToken,
-  processPayment,
+    create,
+    list,
+    read,
+    images,
+    remove,
+    update,
+    // filteredProducts,
+    // productsCount,
+    // listProducts,
+    productsSearch,
+    // relatedProducts,
+    getToken,
+    processPayment,
 } from "../controllers/product.js";
 
 // admin product
 router.post(
-  "/product",
-  requireSignin,
-  isAdmin,
-  formidable(),
-  create,
-  (req, res) => {
-    res.json({ ok: true, age: ["kids"] });
-  }
+    "/product",
+    requireSignin,
+    isAdmin,
+    formidable(),
+    create,
+    (req, res) => {
+        res.json({ ok: true, age: ["kids"] });
+    }
 );
 router.post("/product", requireSignin, isAdmin, formidable(), create);
 router.get("/products", list);
