@@ -22,6 +22,7 @@ export default function AdminMenu() {
             Create blog
           </NavLink>
         </li>
+
       </ul>
     </>
   );
