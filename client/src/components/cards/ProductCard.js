@@ -1,9 +1,13 @@
 // 👻 Developed by DanBi Choi on July 26th, 2023.
+// 👻 Developed by DanBi Choi on July 29th, 2023. (Add To Cart Button)
 // -----------------------------------------------------
 
 import { Link } from "react-router-dom";
 import "../../styles/components/cards/ProductCard.scss";
 import { AiFillStar } from "react-icons/ai";
+import { useCart } from "../../context/cart";
+import { useCartQuantity } from "../../context/cartQuantity";
+import { toast } from "react-hot-toast";
 
 export default function ProductCard({ product }) {
     return (

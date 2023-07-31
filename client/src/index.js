@@ -11,6 +11,8 @@ import { Provider } from "react-redux";
 import "antd/dist/reset.css";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { SearchProvider } from "./context/search";
+import { CartProvider } from "./context/cart";
+import { CartQuantityProvider } from "./context/cartQuantity";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

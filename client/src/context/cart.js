@@ -1,4 +1,6 @@
-import { useState, createContext, useContext, useEffect } from "react";
+// 👻 Developed by DanBi Choi on July 29th, 2023.
+// -----------------------------------------------------
+import { useState, createContext, useContext } from "react";
 
 const CartContext = createContext();
 

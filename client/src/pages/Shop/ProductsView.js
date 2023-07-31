@@ -14,6 +14,7 @@ import ProductCard from "../../components/cards/ProductCard";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
 import { useSearch } from "../../context/search";
 import { useNavigate } from "react-router-dom";
+
 export default function ProductsView() {
     ScrollToTop();
 

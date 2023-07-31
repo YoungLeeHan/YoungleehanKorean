@@ -1,6 +1,8 @@
 import "../../styles/components/nav/Header.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/auth";
+import { Badge } from "antd";
+import { useCartQuantity } from "../../context/cartQuantity";
 
 export default function MenuBer() {
     //hooks
