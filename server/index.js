@@ -4,7 +4,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import authRoutes from "./routes/auth.js";
 import categoryRoutes from "./routes/category.js";
-import product from "./routes/product.js";
+import productRoutes from "./routes/product.js";
+import postRoutes from "./routes/post.js";
 
 dotenv.config();
 
@@ -34,7 +35,8 @@ app.use("/image", express.static("./image"));
 
 app.use("/api", authRoutes);
 app.use("/api", categoryRoutes);
-app.use("/api", product);
+app.use("/api", productRoutes);
+app.use("/api", postRoutes);
 
 const GOOGLE_CLIENT_ID =
   "648107269067-pkuskdnjnvp1sek3rab03uknj8h8dndj.apps.googleusercontent.com";
