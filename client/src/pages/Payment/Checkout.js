@@ -1,12 +1,19 @@
-import Jumbotron from "../components/cards/Jumbotron";
-import UserCartSidebar from "../components/cards/UserCartSidebar";
+import UserCartSidebar from "../../components/cards/UserCartSidebar";
+import Jumbotron from "../../components/cards/Jumbotron";
 
-export default function Cart() {
+export default function Checkout() {
     return (
         <>
-            <div>
-                <h1>Cart</h1>
-                <UserCartSidebar />
+            <Jumbotron
+                title={"Checkout"}
+                directory={"Cart"}
+                subDirectory={"Checkout"}
+            />
+            <div style={{ maxWidth: "1170px" }} className="container-fluid">
+                <div>
+                    <h1>Cart</h1>
+                    <UserCartSidebar />
+                </div>
             </div>
         </>
     );
