@@ -18,7 +18,7 @@ import AdminDashboard from "./pages/Admin/Dashboard";
 import AdminRoute from "./components/routes/AdminRoute";
 import AdminBlog from "./pages/Admin/Blog";
 import AdminProduct from "./pages/Admin/Product";
-// import AdminProducts from "./pages/admin/Products";
+import AdminProducts from "./pages/Admin/Products";
 import AdminCategory from "./pages/Admin/Category";
 import UserOrders from "./pages/User/Orders";
 import UserProfile from "./pages/User/Profile";
@@ -74,7 +74,7 @@ export default function App() {
                     <Route path="admin/blog" element={<AdminBlog />} />
                     <Route path="admin/category" element={<AdminCategory />} />
                     <Route path="admin/product" element={<AdminProduct />} />
-                    {/* <Route path="admin/products" element={<AdminProducts />} /> */}
+                    <Route path="admin/products" element={<AdminProducts />} />
                     <Route
                         path="admin/product/update/:slug"
                         element={<AdminProductUpdate />}
