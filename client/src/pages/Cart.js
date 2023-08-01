@@ -87,13 +87,19 @@ export default function Cart() {
                                 <th>Total</th>
                                 <th> </th>
                             </tr>
+
                             {cart?.map((item) => {
-                                <CartProductCard
-                                    item={item}
-                                    cartQuantity={cartQuantity}
-                                    handleDelete={handleDelete}
-                                    handleQuantityChange={handleQuantityChange}
-                                />;
+                                return (
+                                    <CartProductCard
+                                        key={item._id}
+                                        item={item}
+                                        cartQuantity={cartQuantity}
+                                        handleDelete={handleDelete}
+                                        handleQuantityChange={
+                                            handleQuantityChange
+                                        }
+                                    />
+                                );
                             })}
                         </table>
                     )}
