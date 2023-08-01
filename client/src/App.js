@@ -74,10 +74,10 @@ export default function App() {
                 {/*admin dashboard*/}
                 <Route path="/dashboard" element={<AdminRoute />}>
                     <Route path="admin" element={<AdminDashboard />} />
-                    <Route path="admin/blog" element={<AdminBlog />} />
+                    <Route path="admin/post" element={<AdminBlog />} />
                     <Route path="admin/category" element={<AdminCategory />} />
                     <Route path="admin/product" element={<AdminProduct />} />
-                    <Route path="admin/products" element={<AdminProducts />} />
+                    {/* <Route path="admin/products" element={<AdminProducts />} /> */}
                     <Route
                         path="admin/product/update/:slug"
                         element={<AdminProductUpdate />}

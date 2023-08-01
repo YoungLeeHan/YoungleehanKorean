@@ -4,18 +4,8 @@ import mongoose from "mongoose";
 import cors from "cors";
 import authRoutes from "./routes/auth.js";
 import categoryRoutes from "./routes/category.js";
-import product from "./routes/product.js";
-import passport from "passport";
-import session from "express-session";
-import MongoStore from "connect-mongo";
-import authGoo from "./routes/authGoo.js";
-import indexGoo from "./routes/index.js";
-import path from "path";
-import { Strategy as GoogleStrategy } from "passport-google-oauth20";
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
-import User from "./models/User.js";
-
-// let monStore = MongoStore(session);
+import productRoutes from "./routes/product.js";
+import postRoutes from "./routes/post.js";
 
 dotenv.config();
 
@@ -52,7 +42,8 @@ mongoose
 
 app.use("/api", authRoutes);
 app.use("/api", categoryRoutes);
-app.use("/api", product);
+app.use("/api", productRoutes);
+app.use("/api", postRoutes);
 
 // Express 세션 미들웨어 설정
 const sessionRoom = MongoStore.create({
