@@ -27,7 +27,6 @@ import Checkout from "./pages/Payment/Checkout";
 import ProductsView from "./pages/Shop/ProductsView";
 import AdminProductUpdate from "./pages/Admin/ProductUpdate";
 import CategoriesList from "./pages/CategoriesList";
-import Search from "./pages/Search";
 
 export default function App() {
     return (
@@ -41,7 +40,6 @@ export default function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="*" element={<PageNotFound />} />
                 <Route path="/categories" element={<CategoriesList />} />
-                <Route path="/search" element={<Search />} />
 
                 {/*login*/}
                 <Route path="/login" element={<Login />} />

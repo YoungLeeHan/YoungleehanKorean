@@ -8,19 +8,18 @@ import { useCartQuantity } from "../context/cartQuantity";
 import { TiDelete } from "react-icons/ti";
 import { Link, useNavigate } from "react-router-dom";
 import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useAuth } from "../context/auth";
 import { toast } from "react-hot-toast";
+import { useCartTotal } from "../context/cartTotal";
 
 export default function Cart() {
     ScrollToTop();
 
-    // states
-    const [totalPrice, setTotalPrice] = useState(0);
-
     //hooks
     const [cart, setCart] = useCart();
     const [cartQuantity, setCartQuantity] = useCartQuantity();
+    const [cartTotal, setCartTotal] = useCartTotal();
     const [auth, setAuth] = useAuth();
     const navigate = useNavigate();
 
@@ -48,7 +47,7 @@ export default function Cart() {
         for (let i = 0; i < cart.length; i++) {
             total += cart[i].price * cartQuantity[cart[i]._id];
         }
-        setTotalPrice(total.toFixed(2));
+        setCartTotal(total.toFixed(2));
     }, [cart, cartQuantity]);
 
     // Checkout Button
@@ -188,7 +187,7 @@ export default function Cart() {
                                 </li>
                                 <li>
                                     <h4>Subtotal</h4>
-                                    <h5>${totalPrice}</h5>
+                                    <h5>${cartTotal}</h5>
                                 </li>
                                 <li>
                                     <h4>Shipping</h4>
@@ -196,7 +195,7 @@ export default function Cart() {
                                 </li>
                                 <li>
                                     <h4>Total</h4>
-                                    <h5>${totalPrice}</h5>
+                                    <h5>${cartTotal}</h5>
                                 </li>
                                 <button
                                     className="btn btn-primary"
