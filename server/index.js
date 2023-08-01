@@ -11,27 +11,31 @@ dotenv.config();
 
 const app = express();
 
-app.use(express.json());
+dotenv.config({ path: "./config/config.env" });
+
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
+
+// Middleware
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
+app.set("view engine", "ejs");
+
+app.use(express.json());
 app.use(cors());
 
 const applyCOOP = (req, res, next) => {
-    res.setHeader("Cross-Origin-Opener-Policy", "cross-origin"); // 또는 다른 COOP 정책 값을 사용할 수 있습니다.
+    res.setHeader("Cross-Origin-Opener-Policy", "cross-origin"); // 또는 다른 COOP 정책 값을 사용할 수 있음
     next();
 };
-
-// COOP 미들웨어를 애플리케이션에 적용합니다.
+// COOP 미들웨어를 애플리케이션에 적용
 app.use(applyCOOP);
 
+//db
 mongoose
     .connect(process.env.MONGO_URI)
     .then(() => console.log("DB connected"))
     .catch((err) => console.log("DB ERROR => ", err));
-
-// middlewares
-app.use(cors());
-app.use(express.json());
-app.use("/image", express.static("./image"));
 
 app.use("/api", authRoutes);
 app.use("/api", categoryRoutes);

@@ -8,18 +8,10 @@ import { requireSignin, isAdmin } from "../middlewares/auth.js";
 // controllers
 import { register, login, secret } from "../controllers/auth.js";
 
-router.post("/register", register);
-router.post("/login", login);
-router.get("/auth-check", requireSignin, (req, res) => {
-    res.json({ ok: true });
+router.get("/", (req, res) => {
+    res.render("login");
+    console.log(`여기는 "/auth"입니다!`);
 });
-router.get("/admin-check", requireSignin, isAdmin, (req, res) => {
-    res.json({ ok: true });
-});
-router.get("/secret", requireSignin, isAdmin, secret);
-// router.post("/category", requireSignin, isAdmin, (req, res) => {
-//   res.json({ ok: true });
-// });
 
 router.get(
     "/google",

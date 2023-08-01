@@ -45,20 +45,31 @@ export default function ProductsView() {
         setShowFilter((curr) => !curr);
     };
 
-    useEffect(() => {
-        if (!level && !age && !priceRange && !reviewRate) {
-            loadProducts();
-        }
-    }, []);
-
     const loadProducts = async () => {
         try {
-            const { data } = await axios.get(`/products`);
+            const { data } = await axios.get("/products");
             setProducts(data);
         } catch (err) {
             console.log(err);
         }
     };
+
+    useEffect((data) => {
+        if (!level && !age && !priceRange && !reviewRate) {
+            loadProducts();
+            setProducts(data);
+            console.log(data);
+        }
+    }, []);
+    // mockProductData
+    // const loadProducts = async () => {
+    //     try {
+    //         const { data } = await axios.get(`/products`);
+    //         setProducts(data);
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    // };
 
     // Load filtered products when any filter is activated
     useEffect(() => {
@@ -86,7 +97,6 @@ export default function ProductsView() {
         //     console.log(err);
         // }
     };
-
     const [values, setValues] = useSearch();
     const navigate = useNavigate();
 
@@ -219,17 +229,16 @@ export default function ProductsView() {
     //     createdAt: new Date(),
     //   },
     // ];
-
-    // const handleCheck = (value, id) => {
-    //     console.log(value, id);
-    //     let all = [...checked];
-    //     if (value) {
-    //         all.push(id);
-    //     } else {
-    //         all = all.filter((c) => c !== id);
-    //     }
-    //     setChecked(all);
-    // };
+    const handleCheck = (value, id) => {
+        console.log(value, id);
+        let all = [...checked];
+        if (value) {
+            all.push(id);
+        } else {
+            all = all.filter((c) => c !== id);
+        }
+        setChecked(all);
+    };
 
     return (
         <>

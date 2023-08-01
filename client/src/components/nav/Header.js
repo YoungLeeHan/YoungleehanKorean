@@ -8,54 +8,33 @@ export default function MenuBer() {
     //hooks
     const [auth, setAuth] = useAuth();
     const navigate = useNavigate();
-    const [cartQuantity, setCartQuantity] = useCartQuantity();
-
-    let cartTotal = 0;
-    for (const key in cartQuantity) {
-        cartTotal += cartQuantity[key];
-    }
 
     const logout = () => {
         setAuth({ ...auth, user: null, token: "" });
         localStorage.removeItem("auth");
-        navigate("/");
+        navigate("/login");
     };
 
     return (
         <>
-            <ul className="nav sticky-top">
+            <ul className="nav">
                 <li className="nav-item">
                     <NavLink className="nav-link" aria-current="page" to="/">
                         HOME
                     </NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="/shop">
-                        SHOP
-                    </NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link" to="/blog">
-                        BLOG
-                    </NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link" to="/cart">
-                        <Badge
-                            count={cartTotal}
-                            size="small"
-                            color="#ffbf35"
-                            showZero="true"
-                            offset={[8, 3]}
-                            styles={{ indicator: { colorText: "#52c41a" } }}
-                        >
-                            CART
-                        </Badge>
-                    </NavLink>
-                </li>
-                <li className="nav-item">
                     <NavLink className="nav-link" to="/contact">
                         CONTACT
+                    </NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink
+                        className="nav-link"
+                        aria-current="page"
+                        to="/shop"
+                    >
+                        SHOP
                     </NavLink>
                 </li>
 
