@@ -26,7 +26,7 @@ export default function UserCartSidebar() {
     };
 
     return (
-        <>
+        <div style={{ width: "30vw" }}>
             <p>{JSON.stringify(clientToken)}</p>
             <div className="p-3 mt-2 mb-2">
                 {clientToken && (
@@ -40,6 +40,6 @@ export default function UserCartSidebar() {
                     />
                 )}
             </div>
-        </>
+        </div>
     );
 }
