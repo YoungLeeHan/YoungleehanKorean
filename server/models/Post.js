@@ -1,23 +1,15 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
-const postSchema = new mongoose.Schema(
-  {
-    title: String,
-    content: String,
-    postNum: Number,
-    image: String,
-    author: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
+const postSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        trim: true,
+        required: true,
     },
-    repleNum: {
-      type: Number,
-      default: 0,
+    slug: {
+        type: String,
+        unique: true,
+        lowercase: true,
     },
-  },
-  { collection: "posts", timestamps: true }
-);
-
-const Post = mongoose.model("Post", postSchema);
-
-module.exports = { Post };
+});
+export default mongoose.model("Post", postSchema);
