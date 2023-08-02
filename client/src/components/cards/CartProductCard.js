@@ -14,6 +14,7 @@ export default function CartProductCard({
     return (
         <tr>
             <td className="product-info">
+
                 <Link to={`/shop/product/${item?.slug}`}>
                     <div className="img">
                         <img
