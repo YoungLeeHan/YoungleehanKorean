@@ -5,6 +5,8 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Select } from "antd";
+import { useNavigate } from "react-router-dom";
+
 
 const { Option } = Select;
 
@@ -19,8 +21,10 @@ export default function AdminBlog() {
     const [description, setDescription] = useState("");
     const [user, setUser] = useState("");
     const [photo, setPhoto] = useState("");
+    //hook
+    const navigate = useNavigate();
 
-    const { Option } = Select;
+
 
 
     useEffect(() => {
@@ -39,15 +43,24 @@ export default function AdminBlog() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post("/dashboard/admin/post", { title });
-            if (data?.error) {
-                toast.error(data.error);
+            const postData = new FormData();
+            postData.append("title", title);
+            postData.append("photo", photo);
+            postData.append("description", description);
+            postData.append("category", category);
+
+            console.log([...postData]);
+
+            const { data } = await axios.post('/dashboard/admin/post', postData);
+            if(data?.error) {
+                toast.error(data.error)
             } else {
-                toast.success(`"${data.title}" is created`);
+                toast.success(`${data.title} is created`);
+                navigate("/dashboard/admin/posts");
             }
         } catch (err) {
             console.log(err);
-            toast.error("Blog post failed. Try again.");
+            toast.error("Post create failed. Try again.");
         }
     };
 
@@ -111,13 +124,18 @@ export default function AdminBlog() {
                                 />
 
                                 <Select
+                                    // showSearch
                                     bordered={false}
                                     size="large"
                                     className="form-select mb-3"
                                     placeholder="Choose category"
-                                    onChange={(value) => console.log(value)}
+                                    onChange={(value) => setCategory(value)}
                                 >
-                                    {categories?.map((c)=> <Option key={c._id} value={c.name}></Option>)}
+                                    {categories?.map((category) => (
+                                        <Option key={category._id} value={category._id}>
+                                            {category.name}
+                                        </Option>
+                                    ))}
                                 </Select>
 
                                 <button className="btn btn-primary">

@@ -1,13 +1,14 @@
 import Post from "../models/Post.js";
 import slugify from "slugify";
 import fs from "fs";
-import Product from "../models/product.js";
+
 
 export const create = async (req, res) => {
     try {
         console.log(req.body);
         console.log(req.fields);
-        // console.log(req.files);
+        console.log(req.files);
+
         const { title, category, description } = req.fields;
         const { images } = req.files;
 
@@ -21,12 +22,12 @@ export const create = async (req, res) => {
             case !description.trim():
                 return res.json({ error: "Description is required" });
         }
-        // create product
+        // create post
         const post = new Post({ ...req.fields, slug: slugify(title) });
 
         if (images) {
-            product.images.data = fs.readFileSync(images.path);
-            product.images.contentType = images.type;
+            post.images.data = fs.readFileSync(images.path);
+            post.images.contentType = images.type;
         }
         await post.save();
         res.json(post);
@@ -39,7 +40,7 @@ export const create = async (req, res) => {
 
 export const list = async (req, res) => {
     try {
-        const posts = await Product.find({})
+        const posts = await Post.find({})
             .populate("category")
             .select("-images")
             .limit(12)
@@ -107,7 +108,7 @@ export const update = async (req, res) => {
                 res.json({ error: "Image should be less than 1mb in size" });
         }
 
-        // update product
+        // update post
         const post = await Post.findByIdAndUpdate(
             req.params.postId,
             {
