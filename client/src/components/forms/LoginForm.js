@@ -47,6 +47,7 @@ export default function LoginForm() {
 
     const handleGoogleLogin = async (e) => {
         e.preventDefault();
+        toast.error("Google login under construction.");
         console.log("google log in button clicked");
         // try {
         //   const { data } = await axios.post(`/login`, {
