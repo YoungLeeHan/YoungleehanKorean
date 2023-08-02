@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import CategoryForm from "../../components/forms/CategoryForm";
 import { Modal } from "antd";
 
-export default function AdminCategory() {
+export default function BlogCategory() {
     // context
     const [auth, setAuth] = useAuth();
     // state
@@ -23,7 +23,7 @@ export default function AdminCategory() {
 
     const loadCategories = async () => {
         try {
-            const { data } = await axios.get("/categories");
+            const { data } = await axios.get("/blog/categories");
             setCategories(data);
         } catch (err) {
             console.log(err);
@@ -33,7 +33,7 @@ export default function AdminCategory() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post("/category", { name });
+            const { data } = await axios.post("/blog/category", { name });
             if (data?.error) {
                 toast.error(data.error);
             } else {
@@ -50,7 +50,7 @@ export default function AdminCategory() {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.put(`/category/${selected._id}`, {
+            const { data } = await axios.put(`/blog/category/${selected._id}`, {
                 name: updatingName,
             });
             if (data?.error) {
@@ -71,7 +71,9 @@ export default function AdminCategory() {
     const handleDelete = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.delete(`/category/${selected._id}`);
+            const { data } = await axios.delete(
+                `/blog/category/${selected._id}`
+            );
             if (data?.error) {
                 toast.error(data.error);
             } else {
@@ -91,7 +93,7 @@ export default function AdminCategory() {
             <Jumbotron
                 title={`Hello ${auth?.user?.firstName}`}
                 directory={"Admin Dashboard"}
-                subDirectory={"Product Category Management"}
+                subDirectory={"Blog Category Management"}
             />
             <div style={{ maxWidth: "1170px" }} className="container-fluid">
                 <div className="row">
@@ -100,7 +102,7 @@ export default function AdminCategory() {
                     </div>
                     <div className="col-md-9">
                         <div className="p-3 mt-2 mb-2 h4 bg-light">
-                            Manage Product Categories
+                            Manage Blog Categories
                         </div>
                         <div>
                             <CategoryForm
