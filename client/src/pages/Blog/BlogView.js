@@ -1,9 +1,11 @@
 // 👻 Developed by DanBi Choi on July 27th, 2023. (UI)
-// 👻 Developed by DanBi Choi on July 28th, 2023. (Filter Feature)
+// 👻 Developed by DanBi Choi on July 28th, 2023. (Filter feature added)
+// 👻 Developed by DanBi Choi on Aug 1st, 2023. (Search feature added)
 // -----------------------------------------------------
 import Jumbotron from "../../components/cards/Jumbotron";
 import ScrollToTop from "../../components/nav/ScrollToTop";
 import "../../styles/pages/ProductsView.scss";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 import { Col, Row, Checkbox, ConfigProvider } from "antd";
@@ -36,31 +38,26 @@ export default function BlogView() {
         setShowFilter((curr) => !curr);
     };
 
-    const handleSearchBlog = (e) => {
-        e.preventDefault();
-        console.log(`searching for ${searchKeyword}`);
-    };
-
-    // Blog Category filter
-    const handleCategoryFilterChange = (checkedValues) => {
-        setCategoryFilter(checkedValues);
-    };
-
-    // fetch blog list from DB
+    // fetch blog list from DB on first page loading
     useEffect(() => {
         if (!categoryFilter) {
             loadBlogPosts();
-            setBlogList(dummyData);
         }
     }, []);
 
     const loadBlogPosts = async () => {
+        setBlogList(dummyData);
         // try {
         // 	const {data} = await axios.get(`/bloglist`);
         // 	setBlogList(data);
         // } catch (err) {
         // 	console.log(err);
         // }
+    };
+
+    // Blog Category filter
+    const handleCategoryFilterChange = (checkedValues) => {
+        setCategoryFilter(checkedValues);
     };
 
     // Load filtered posts only when filter is activated
@@ -82,6 +79,29 @@ export default function BlogView() {
         // } catch (err) {
         //     console.log(err);
         // }
+    };
+
+    // Blog Post Search
+    useEffect(() => {
+        handleSearchBlog();
+    }, [searchKeyword]);
+
+    const handleSearchBlog = async () => {
+        // if there is a search keyword, search database with that keyword
+        if (searchKeyword) {
+            console.log(`searching for ${searchKeyword}`);
+            // try {
+            //     const { data } = await axios.get(
+            //         `/blog/search/${searchKeyword}`
+            //     );
+            //     setBlogList(data);
+            // } catch (err) {
+            //     console.log(err);
+            // }
+        } else {
+            // if keyword is/became empty, fetch all posts from database
+            loadBlogPosts();
+        }
     };
 
     const dummyData = [
@@ -122,7 +142,12 @@ export default function BlogView() {
                     <div className="row">
                         <div className="col-md-3">
                             {/* 👉 Filter #1: Product Search starts here*/}
-                            <form onSubmit={handleSearchBlog}>
+                            <form
+                                onSubmit={(e) => {
+                                    e.preventDefault();
+                                    handleSearchBlog();
+                                }}
+                            >
                                 <button type="submit" className="search-btn">
                                     <BsSearch />
                                 </button>
