@@ -13,6 +13,7 @@ import { Col, Row, Checkbox, ConfigProvider, Slider } from "antd";
 import { Rating } from "semantic-ui-react";
 import ProductCard from "../../components/cards/ProductCard";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
+import { toast } from "react-hot-toast";
 
 export default function ProductsView() {
     ScrollToTop();
@@ -66,6 +67,7 @@ export default function ProductsView() {
     }, [level, age, priceRange, reviewRate]);
 
     const loadFilteredProducts = async () => {
+        toast.error("Filter endpoints are under construction.");
         console.log({
             level,
             age,

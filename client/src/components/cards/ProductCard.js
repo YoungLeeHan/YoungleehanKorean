@@ -71,7 +71,7 @@ export default function ProductCard({ product }) {
                         <div className="product-rate-box d-flex flex-row justify-content-between align-items-center">
                             <h6>
                                 {product?.reviewRate
-                                    ? product?.reviewRate
+                                    ? product?.reviewRate.toFixed(2)
                                     : "No Rating"}
                             </h6>
                             <h6>

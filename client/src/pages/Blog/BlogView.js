@@ -12,6 +12,7 @@ import { Col, Row, Checkbox, ConfigProvider } from "antd";
 import BlogPostCard from "../../components/cards/BlogPostCard";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
+import { toast } from "react-hot-toast";
 
 export default function BlogView() {
     ScrollToTop();
@@ -42,11 +43,15 @@ export default function BlogView() {
     useEffect(() => {
         if (!categoryFilter) {
             loadBlogPosts();
+            toast.error(
+                "Blog page is under construction. These are dummy data."
+            );
         }
     }, []);
 
     const loadBlogPosts = async () => {
         setBlogList(dummyData);
+
         // try {
         // 	const {data} = await axios.get(`/bloglist`);
         // 	setBlogList(data);
@@ -68,6 +73,7 @@ export default function BlogView() {
     }, [categoryFilter]);
 
     const loadFilteredPosts = async () => {
+        toast.error("Filter endpoints are under construction.");
         console.log({
             categoryFilter,
         });

@@ -51,6 +51,7 @@ export default function RegisterForm() {
     const handleGoogleLogin = (e) => {
         e.preventDefault();
         console.log("google log in button clicked");
+        toast.error("Google login under construction.");
     };
 
     return (

@@ -8,6 +8,7 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import PageNotFound from "./pages/PageNotFound";
 import BlogView from "./pages/Blog/BlogView";
+import SingleBlogView from "./pages/Blog/SingleBlogView";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import Verification from "./pages/Auth/Verification";
 import NewPassword from "./pages/Auth/NewPassword";
@@ -25,6 +26,7 @@ import UserProfile from "./pages/User/Profile";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Payment/Checkout";
 import ProductsView from "./pages/Shop/ProductsView";
+import SingleProductView from "./pages/Shop/SingleProductView";
 import AdminProductUpdate from "./pages/Admin/ProductUpdate";
 import CategoriesList from "./pages/CategoriesList";
 
@@ -50,11 +52,14 @@ export default function App() {
 
                 {/*shop*/}
                 <Route path="/shop" element={<ProductsView />} />
-                <Route path="/shop/:slug" />
+                <Route
+                    path="/shop/product/:slug"
+                    element={<SingleProductView />}
+                />
 
                 {/*blog*/}
                 <Route path="/blog" element={<BlogView />} />
-                <Route path="/blog/:_id" />
+                <Route path="/blog/:_id" element={<SingleBlogView />} />
                 {/* <Route path="/blog/upload" element={<Upload />} /> */}
 
                 {/*Cart & Payment*/}

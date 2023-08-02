@@ -55,7 +55,7 @@ export default function Cart() {
         if (auth?.token) {
             navigate("/cart/checkout");
         } else {
-            toast.error("You need to login first to check out!");
+            toast.error("You need to be logged in to check out!");
             navigate("/login");
         }
     };
