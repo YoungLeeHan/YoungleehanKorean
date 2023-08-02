@@ -22,13 +22,16 @@ import AdminProduct from "./pages/Admin/Product";
 import AdminProducts from "./pages/Admin/Products";
 import AdminCategory from "./pages/Admin/Category";
 import UserOrders from "./pages/User/Orders";
+import CategoriesList from "./pages/CategoriesList";
 import UserProfile from "./pages/User/Profile";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Payment/Checkout";
 import ProductsView from "./pages/Shop/ProductsView";
 import SingleProductView from "./pages/Shop/SingleProductView";
 import AdminProductUpdate from "./pages/Admin/ProductUpdate";
-import CategoriesList from "./pages/CategoriesList";
+import AdminCreatePost from "./pages/Admin/CreatePost";
+import AdminBlogCategory from "./pages/Admin/BlogCategory";
+import AdminBlogPostList from "./pages/Admin/BlogList";
 
 export default function App() {
     return (
@@ -77,12 +80,25 @@ export default function App() {
                 <Route path="/dashboard" element={<AdminRoute />}>
                     <Route path="admin" element={<AdminDashboard />} />
                     <Route path="admin/blog" element={<AdminBlog />} />
+
                     <Route path="admin/category" element={<AdminCategory />} />
                     <Route path="admin/product" element={<AdminProduct />} />
                     <Route path="admin/products" element={<AdminProducts />} />
                     <Route
                         path="admin/product/update/:slug"
                         element={<AdminProductUpdate />}
+                    />
+                    <Route
+                        path="admin/blog/category"
+                        element={<AdminBlogCategory />}
+                    />
+                    <Route
+                        path="admin/blog/createpost"
+                        element={<AdminCreatePost />}
+                    />
+                    <Route
+                        path="admin/blog/list"
+                        element={<AdminBlogPostList />}
                     />
                 </Route>
             </Routes>

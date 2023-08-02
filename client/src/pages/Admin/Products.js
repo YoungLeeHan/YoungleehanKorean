@@ -34,9 +34,10 @@ export default function AdminProducts() {
         <>
             <Jumbotron
                 title={`Hello ${auth?.user?.firstName}`}
-                subTitle="Admin Dashboard"
+                directory={"Admin Dashboard"}
+                subDirectory={"View Products"}
             />
-            <div className="container-fluid">
+            <div style={{ maxWidth: "1170px" }} className="container-fluid">
                 <div className="row">
                     <div className="col-md-3">
                         <AdminMenu />
