@@ -13,6 +13,7 @@ import BlogPostCard from "../../components/cards/BlogPostCard";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
 import { toast } from "react-hot-toast";
+import loadingGIF from "../../assets/images/Common/loading.gif";
 
 export default function BlogView() {
     ScrollToTop();
@@ -22,6 +23,7 @@ export default function BlogView() {
     const [searchKeyword, setSearchKeyword] = useState("");
     const [blogList, setBlogList] = useState([]);
     const [categoryFilter, setCategoryFilter] = useState();
+    const [isLoading, setIsLoading] = useState(true);
 
     // hooks
     const windowWidth = useWindowWidth();
@@ -51,7 +53,7 @@ export default function BlogView() {
 
     const loadBlogPosts = async () => {
         setBlogList(dummyData);
-
+        setIsLoading(false);
         // try {
         // 	const {data} = await axios.get(`/bloglist`);
         // 	setBlogList(data);
@@ -232,11 +234,39 @@ export default function BlogView() {
                             )}
                         </div>
                         <div className="col-md-9">
-                            {blogList?.map((post) => (
-                                <div key={post._id}>
-                                    <BlogPostCard post={post} />
+                            {isLoading && (
+                                <div
+                                    className="d-flex justify-content-center"
+                                    style={{ margin: "200px 0" }}
+                                >
+                                    <img
+                                        src={loadingGIF}
+                                        alt="Loading"
+                                        style={{
+                                            width: "50px",
+                                            height: "50px",
+                                        }}
+                                    />
                                 </div>
-                            ))}
+                            )}
+                            {blogList?.length > 0 &&
+                                !isLoading &&
+                                blogList?.map((post) => (
+                                    <div key={post._id}>
+                                        <BlogPostCard post={post} />
+                                    </div>
+                                ))}
+
+                            {blogList?.length === 0 && !isLoading && (
+                                <div
+                                    style={{
+                                        textAlign: "center",
+                                        margin: "200px 0",
+                                    }}
+                                >
+                                    No matching post found.
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
