@@ -17,7 +17,7 @@ import Dashboard from "./pages/User/Dashboard";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import AdminDashboard from "./pages/Admin/Dashboard";
 import AdminRoute from "./components/routes/AdminRoute";
-import AdminBlog from "./pages/Admin/Blog";
+import AdminBlog from "./pages/Admin/Post";
 import AdminProduct from "./pages/Admin/Product";
 import AdminProducts from "./pages/Admin/Products";
 import AdminCategory from "./pages/Admin/Category";
@@ -76,7 +76,7 @@ export default function App() {
                 {/*admin dashboard*/}
                 <Route path="/dashboard" element={<AdminRoute />}>
                     <Route path="admin" element={<AdminDashboard />} />
-                    <Route path="admin/blog" element={<AdminBlog />} />
+                    <Route path="admin/post" element={<AdminBlog />} />
                     <Route path="admin/category" element={<AdminCategory />} />
                     <Route path="admin/product" element={<AdminProduct />} />
                     <Route path="admin/products" element={<AdminProducts />} />
