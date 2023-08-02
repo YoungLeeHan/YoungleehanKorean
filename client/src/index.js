@@ -13,6 +13,7 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { SearchProvider } from "./context/search";
 import { CartProvider } from "./context/cart";
 import { CartQuantityProvider } from "./context/cartQuantity";
+import { CartTotalProvider } from "./context/cartTotal";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -22,9 +23,11 @@ root.render(
                 <SearchProvider>
                     <CartProvider>
                         <CartQuantityProvider>
-                            <Provider store={store}>
-                                <App />
-                            </Provider>
+                            <CartTotalProvider>
+                                <Provider store={store}>
+                                    <App />
+                                </Provider>
+                            </CartTotalProvider>
                         </CartQuantityProvider>
                     </CartProvider>
                 </SearchProvider>

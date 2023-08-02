@@ -14,7 +14,8 @@ export default function CartProductCard({
     return (
         <tr>
             <td className="product-info">
-                <Link to={`/shop/${item?.slug}`}>
+
+                <Link to={`/shop/product/${item?.slug}`}>
                     <div className="img">
                         <img
                             src={`${process.env.REACT_APP_API}/product/images/${item._id}`}

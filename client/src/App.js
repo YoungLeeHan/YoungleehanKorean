@@ -8,6 +8,7 @@ import Login from "./pages/Auth/Login";
 import Register from "./pages/Auth/Register";
 import PageNotFound from "./pages/PageNotFound";
 import BlogView from "./pages/Blog/BlogView";
+import SingleBlogView from "./pages/Blog/SingleBlogView";
 import ForgotPassword from "./pages/Auth/ForgotPassword";
 import Verification from "./pages/Auth/Verification";
 import NewPassword from "./pages/Auth/NewPassword";
@@ -18,72 +19,74 @@ import AdminDashboard from "./pages/Admin/Dashboard";
 import AdminRoute from "./components/routes/AdminRoute";
 import AdminBlog from "./pages/Admin/Blog";
 import AdminProduct from "./pages/Admin/Product";
-// import AdminProducts from "./pages/admin/Products";
+import AdminProducts from "./pages/Admin/Products";
 import AdminCategory from "./pages/Admin/Category";
 import UserOrders from "./pages/User/Orders";
 import UserProfile from "./pages/User/Profile";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Payment/Checkout";
 import ProductsView from "./pages/Shop/ProductsView";
+import SingleProductView from "./pages/Shop/SingleProductView";
 import AdminProductUpdate from "./pages/Admin/ProductUpdate";
 import CategoriesList from "./pages/CategoriesList";
-import Search from "./pages/Search";
 
 export default function App() {
-  return (
-    <BrowserRouter>
-      <Header />
-      <Toaster />
+    return (
+        <BrowserRouter>
+            <Header />
+            <Toaster position="top-right" reverseOrder={false} />
 
-      <Routes>
-        {/*single page*/}
-        <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<PageNotFound />} />
-        <Route path="/categories" element={<CategoriesList />} />
-        <Route path="/search" element={<Search />} />
+            <Routes>
+                {/*single page*/}
+                <Route path="/" element={<Home />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="*" element={<PageNotFound />} />
+                <Route path="/categories" element={<CategoriesList />} />
 
-        {/*login*/}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path="/verification" element={<Verification />} />
-        <Route path="/newpassword" element={<NewPassword />} />
+                {/*login*/}
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/forgotpassword" element={<ForgotPassword />} />
+                <Route path="/verification" element={<Verification />} />
+                <Route path="/newpassword" element={<NewPassword />} />
 
-        {/*shop*/}
-        <Route path="/shop" element={<ProductsView />} />
-        <Route path="/shop/:slug" />
+                {/*shop*/}
+                <Route path="/shop" element={<ProductsView />} />
+                <Route
+                    path="/shop/product/:slug"
+                    element={<SingleProductView />}
+                />
 
-        {/*blog*/}
-        <Route path="/blog" element={<BlogView />} />
-        <Route path="/blog/:_id" />
-        {/* <Route path="/blog/upload" element={<Upload />} /> */}
+                {/*blog*/}
+                <Route path="/blog" element={<BlogView />} />
+                <Route path="/blog/:_id" element={<SingleBlogView />} />
+                {/* <Route path="/blog/upload" element={<Upload />} /> */}
 
-        {/*Cart & Payment*/}
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/cart/payment" />
+                {/*Cart & Payment*/}
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/cart/checkout" element={<Checkout />} />
 
-        {/*user dashboard*/}
-        <Route path="/dashboard" element={<PrivateRoute />}>
-          <Route path="user" element={<Dashboard />} />
-          <Route path="user/profile" element={<UserProfile />} />
-          <Route path="user/orders" element={<UserOrders />} />
+                {/*user dashboard*/}
+                <Route path="/dashboard" element={<PrivateRoute />}>
+                    <Route path="user" element={<Dashboard />} />
+                    <Route path="user/profile" element={<UserProfile />} />
+                    <Route path="user/orders" element={<UserOrders />} />
+                </Route>
 
-        </Route>
-
-        {/*admin dashboard*/}
-        <Route path="/dashboard" element={<AdminRoute />}>
-          <Route path="admin" element={<AdminDashboard />} />
-          <Route path="admin/post" element={<AdminBlog />} />
-          <Route path="admin/category" element={<AdminCategory />} />
-          <Route path="admin/product" element={<AdminProduct />} />
-          {/* <Route path="admin/products" element={<AdminProducts />} /> */}
-          <Route
-            path="admin/product/update/:slug"
-            element={<AdminProductUpdate />}
-          />
-        </Route>
-      </Routes>
-      <Footer />
-    </BrowserRouter>
-  );
+                {/*admin dashboard*/}
+                <Route path="/dashboard" element={<AdminRoute />}>
+                    <Route path="admin" element={<AdminDashboard />} />
+                    <Route path="admin/blog" element={<AdminBlog />} />
+                    <Route path="admin/category" element={<AdminCategory />} />
+                    <Route path="admin/product" element={<AdminProduct />} />
+                    <Route path="admin/products" element={<AdminProducts />} />
+                    <Route
+                        path="admin/product/update/:slug"
+                        element={<AdminProductUpdate />}
+                    />
+                </Route>
+            </Routes>
+            <Footer />
+        </BrowserRouter>
+    );
 }

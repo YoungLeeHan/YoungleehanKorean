@@ -8,9 +8,11 @@ import { AiFillStar } from "react-icons/ai";
 import { useCart } from "../../context/cart";
 import { useCartQuantity } from "../../context/cartQuantity";
 import { toast } from "react-hot-toast";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
 export default function ProductCard({ product }) {
-    //hooks
+    // hooks
+    const windowWidth = useWindowWidth();
     const [cart, setCart] = useCart();
     const [cartQuantity, setCartQuantity] = useCartQuantity();
 
@@ -41,11 +43,25 @@ export default function ProductCard({ product }) {
             </div>
             <div className="text d-flex flex-column justify-content-between align-items-between">
                 <Link to={`product/${product?.slug}`}>
-                    <h3>{product?.title}</h3>
+                    <h3>
+                        {windowWidth > 450 &&
+                            (product?.title?.length > 35
+                                ? product?.title?.substring(0, 35) + "..."
+                                : product?.title)}
+                        {windowWidth < 450 &&
+                            (product?.title?.length > 25
+                                ? product?.title?.substring(0, 25) + "..."
+                                : product?.title)}
+                    </h3>
                     <h5>
-                        {product?.description?.length > 100
-                            ? product?.description.substring(0, 100) + "..."
-                            : product?.description}
+                        {windowWidth > 1200 &&
+                            (product?.description?.length > 140
+                                ? product?.description.substring(0, 140) + "..."
+                                : product?.description)}
+                        {windowWidth < 1200 &&
+                            (product?.description?.length > 70
+                                ? product?.description.substring(0, 70) + "..."
+                                : product?.description)}
                     </h5>
                 </Link>
 
@@ -55,7 +71,7 @@ export default function ProductCard({ product }) {
                         <div className="product-rate-box d-flex flex-row justify-content-between align-items-center">
                             <h6>
                                 {product?.reviewRate
-                                    ? product?.reviewRate
+                                    ? product?.reviewRate.toFixed(2)
                                     : "No Rating"}
                             </h6>
                             <h6>

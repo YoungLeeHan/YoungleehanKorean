@@ -1,5 +1,6 @@
 // 👻 Developed by DanBi Choi on July 25th, 2023. (UI)
-// 👻 Developed by DanBi Choi on July 28th, 2023. (Filter & Sorting Feature)
+// 👻 Developed by DanBi Choi on July 28th, 2023. (Filter & Sorting Feature added)
+// 👻 Developed by DanBi Choi on Aug 1st, 2023. (Search Feature added)
 // -----------------------------------------------------
 import Jumbotron from "../../components/cards/Jumbotron";
 import ScrollToTop from "../../components/nav/ScrollToTop";
@@ -12,8 +13,7 @@ import { Col, Row, Checkbox, ConfigProvider, Slider } from "antd";
 import { Rating } from "semantic-ui-react";
 import ProductCard from "../../components/cards/ProductCard";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
-import { useSearch } from "../../context/search";
-import { useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast";
 
 export default function ProductsView() {
     ScrollToTop();
@@ -27,7 +27,6 @@ export default function ProductsView() {
     const [priceRange, setPriceRange] = useState();
     const [reviewRate, setReviewRate] = useState();
     const [sortBy, setSortBy] = useState("");
-    const [checked, setChecked] = useState([]); // categories
 
     // hooks
     const windowWidth = useWindowWidth();
@@ -68,6 +67,7 @@ export default function ProductsView() {
     }, [level, age, priceRange, reviewRate]);
 
     const loadFilteredProducts = async () => {
+        toast.error("Filter endpoints are under construction.");
         console.log({
             level,
             age,
@@ -87,21 +87,25 @@ export default function ProductsView() {
         // }
     };
 
-    const [values, setValues] = useSearch();
-    const navigate = useNavigate();
+    // Product Search
+    useEffect(() => {
+        handleSearchProduct();
+    }, [searchKeyword]);
 
-    const handleSearchProduct = async (e) => {
-        e.preventDefault();
-        console.log(`searching for ${searchKeyword}`);
-        try {
-            const { data } = await axios.get(
-                `/products/search/${values?.keyword}`
-            );
-            // console.log(data);
-            setValues({ ...values, results: data });
-            navigate("/search");
-        } catch (err) {
-            console.log(err);
+    const handleSearchProduct = async () => {
+        // if there is a search keyword, search database with that keyword
+        if (searchKeyword) {
+            try {
+                const { data } = await axios.get(
+                    `/products/search/${searchKeyword}`
+                );
+                setProducts(data);
+            } catch (err) {
+                console.log(err);
+            }
+        } else {
+            // if keyword is/became empty, fetch all products from database
+            loadProducts();
         }
     };
 
@@ -169,68 +173,6 @@ export default function ProductsView() {
         setProducts(sortedProducts);
     };
 
-    // const mockProductData = [
-    //   {
-    //     _id: 1,
-    //     title: "Korean Alphabet Book111",
-    //     slug: "korean-alphabet-book",
-    //     image:
-    //       "https://images.perthnow.com.au/publication/C-7312600/47e615abf005f1882ddb12a2bf86ab8c7a696670-16x9-x0y456w7360h4140.jpg?imwidth=668&impolicy=pn_v3",
-    //     category: "beginner",
-    //     age: "kids",
-    //     description:
-    //       "Adipisicing aliquip quis consectetur nulla reprehenderit tempor ex enim nisi id quis in. Quis enim incididunt non elit excepteur et id laborum culpa enim velit cillum eu aliquip. Minim est minim non in excepteur sint occaecat magna labore. Officia sit et cupidatat fugiat eu ut aute dolor sint ipsum id ut. Laborum velit elit officia quis dolor laborum pariatur velit ad. Nisi amet nostrud quis occaecat non est in duis. Duis irure do ex mollit voluptate culpa ullamco anim incididunt incididunt quis velit.",
-    //     price: 7.99,
-    //     reviewRate: 4.7,
-    //     reviewNumber: 27,
-    //     numberSold: 10,
-    //     createdAt: new Date(),
-    //   },
-    //   {
-    //     _id: 2,
-    //     title: "Korean Alphabet Book222",
-    //     slug: "korean-alphabet-book222",
-    //     image:
-    //       "https://images.perthnow.com.au/publication/C-7312600/47e615abf005f1882ddb12a2bf86ab8c7a696670-16x9-x0y456w7360h4140.jpg?imwidth=668&impolicy=pn_v3",
-    //     category: "advanced",
-    //     age: "kids",
-    //     description:
-    //       "Dolor id culpa labore qui. Ut occaecat exercitation incididunt do. Aute consectetur nostrud Lorem ut in proident veniam proident aliqua aute proident irure magna. Ullamco duis excepteur dolor do excepteur commodo exercitation adipisicing non aliquip. Consequat veniam sit mollit esse est. Magna est occaecat culpa aliquip reprehenderit aliquip non nostrud proident quis officia ut aliquip. Laborum eu consectetur commodo quis elit duis pariatur excepteur velit.",
-    //     price: 4.99,
-    //     reviewRate: 3.9,
-    //     reviewNumber: 52,
-    //     numberSold: 15,
-    //     createdAt: new Date(),
-    //   },
-    //   {
-    //     _id: 3,
-    //     title: "Korean Alphabet Book333",
-    //     slug: "korean-alphabet-book333",
-    //     image:
-    //       "https://images.perthnow.com.au/publication/C-7312600/47e615abf005f1882ddb12a2bf86ab8c7a696670-16x9-x0y456w7360h4140.jpg?imwidth=668&impolicy=pn_v3",
-    //     category: "hangul",
-    //     age: "adults",
-    //     description:
-    //       "Reprehenderit reprehenderit anim et officia incididunt occaecat do esse amet. Ipsum occaecat nisi culpa elit ad anim et est veniam nulla. Laborum in ex ullamco laborum Lorem deserunt. Incididunt exercitation et reprehenderit incididunt amet enim elit aute enim nulla quis. Aliquip enim mollit culpa sit cupidatat. Dolor nulla et occaecat ut voluptate esse ut. Culpa voluptate quis sit occaecat.",
-    //     price: 12.99,
-    //     reviewRate: 4.5,
-    //     reviewNumber: 29,
-    //     numberSold: 20,
-    //     createdAt: new Date(),
-    //   },
-    // ];
-
-    // const handleCheck = (value, id) => {
-    //     console.log(value, id);
-    //     let all = [...checked];
-    //     if (value) {
-    //         all.push(id);
-    //     } else {
-    //         all = all.filter((c) => c !== id);
-    //     }
-    //     setChecked(all);
-    // };
-
     return (
         <>
             <Jumbotron title={"Korean Learning Materials"} directory={"Shop"} />
@@ -242,7 +184,12 @@ export default function ProductsView() {
                     <div className="row">
                         <div className="col-md-3">
                             {/* 👉 Filter #1: Product Search starts here*/}
-                            <form onSubmit={handleSearchProduct}>
+                            <form
+                                onSubmit={(e) => {
+                                    e.preventDefault();
+                                    handleSearchProduct();
+                                }}
+                            >
                                 <button type="submit" className="search-btn">
                                     <BsSearch />
                                 </button>
