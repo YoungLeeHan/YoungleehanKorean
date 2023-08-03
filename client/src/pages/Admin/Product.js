@@ -14,13 +14,16 @@ const { Option } = Select;
 export default function AdminProduct() {
     const [auth, setAuth] = useAuth();
     // state
+    const [category, setCategory] = useState("");
     const [categories, setCategories] = useState([]);
+    const [ageCategory, setAgeCategory] = useState("");
+    const [ageCategories, setAgeCategories] = useState([]);
     const [images, setImages] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
-    const [category, setCategory] = useState("");
-    const [age, setAge] = useState("");
+
+    // const [age, setAge] = useState("");
     const [quantity, setQuantity] = useState("");
 
     const navigate = useNavigate();
@@ -38,6 +41,19 @@ export default function AdminProduct() {
         }
     };
 
+    useEffect(() => {
+        loadAgeCategories();
+    }, []);
+
+    const loadAgeCategories = async () => {
+        try {
+            const { data } = await axios.get("/ageCategories");
+            setAgeCategories(data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -47,7 +63,7 @@ export default function AdminProduct() {
             productData.append("description", description);
             productData.append("price", price);
             productData.append("category", category);
-            productData.append("age", age);
+            productData.append("ageCategory", ageCategory);
             productData.append("quantity", quantity);
 
             const { data } = await axios.post("/product", productData);
@@ -149,14 +165,21 @@ export default function AdminProduct() {
                             </Select>
 
                             <Select
+                                // showSearch
                                 bordered={false}
                                 size="large"
                                 className="form-select mb-3"
-                                placeholder="Choose age"
-                                onChange={(value) => setAge(value)}
+                                placeholder="Choose ageCategory"
+                                onChange={(value) => setAgeCategory(value)}
                             >
-                                <Option value="0">kids</Option>
-                                <Option value="1">adults</Option>
+                                {ageCategories?.map((ageCategory) => (
+                                    <Option
+                                        key={ageCategory._id}
+                                        value={ageCategory._id}
+                                    >
+                                        {ageCategory.name}
+                                    </Option>
+                                ))}
                             </Select>
 
                             <input
