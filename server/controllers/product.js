@@ -152,6 +152,78 @@ export const update = async (req, res) => {
     }
 };
 
+export const filteredProducts = async (req, res) => {
+    try {
+        const { level, age, priceRange, reviewRate } = req.body;
+
+        let args = {};
+
+        if (level && level.length > 0) args.category = level;
+
+        if (age.length > 0) args.category = age;
+
+        if (priceRange && priceRange.length) {
+            args.price = { $gte: priceRange[0], $lte: priceRange[1] };
+        }
+
+        if (reviewRate && reviewRate.length > 0) {
+            args.reviewRate = reviewRate[0];
+        }
+        console.log("args => ", args);
+
+        console.log(req.body);
+
+        const products = await Product.find(args);
+        console.log("filtered products query => ", products.length);
+        res.json(products);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+export const productsCount = async (req, res) => {
+    try {
+        const total = await Product.find({}).estimatedDocumentCount();
+        res.json(total);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+export const listProducts = async (req, res) => {
+    try {
+        const perPage = 6;
+        const page = req.params.page ? req.params.page : 1;
+
+        const products = await Product.find({})
+            .select("-images")
+            .skip((page - 1) * perPage)
+            .limit(perPage)
+            .sort({ createdAt: -1 });
+
+        res.json(products);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+export const relatedProducts = async (req, res) => {
+    try {
+        const { productId, categoryId } = req.params;
+        const related = await Product.find({
+            category: categoryId,
+            _id: { $ne: productId },
+        })
+            .select("-photo")
+            .populate("category")
+            .limit(3);
+
+        res.json(related);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
 export const getToken = async (req, res) => {
     try {
         await gateway.clientToken.generate({}, function (err, response) {
