@@ -5,13 +5,13 @@ import { useState, createContext, useContext } from "react";
 const CartTotalContext = createContext();
 
 const CartTotalProvider = ({ children }) => {
-    const [cartTotal, setCartTotal] = useState(0);
+  const [cartTotal, setCartTotal] = useState(0);
 
-    return (
-        <CartTotalContext.Provider value={[cartTotal, setCartTotal]}>
-            {children}
-        </CartTotalContext.Provider>
-    );
+  return (
+    <CartTotalContext.Provider value={[cartTotal, setCartTotal]}>
+      {children}
+    </CartTotalContext.Provider>
+  );
 };
 
 const useCartTotal = () => useContext(CartTotalContext);

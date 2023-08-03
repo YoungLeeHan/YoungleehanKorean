@@ -183,7 +183,7 @@ export default function AdminProductUpdate() {
             >
               {categories?.map((category) => (
                 <Option key={category._id} value={category._id}>
-                  {category.title}
+                  {category.name}
                 </Option>
               ))}
             </Select>
@@ -196,8 +196,8 @@ export default function AdminProductUpdate() {
               onChange={(value) => setAge(value)}
               value={age ? "kids" : "adults"}
             >
-              <Option value="0">kids</Option>
-              <Option value="1">adults</Option>
+              <Option value="0">Kids</Option>
+              <Option value="1">Adults</Option>
               {/* <Option value="2">Yes</Option> */}
             </Select>
 

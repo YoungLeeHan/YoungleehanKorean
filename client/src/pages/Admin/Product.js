@@ -150,8 +150,8 @@ export default function AdminProduct() {
               placeholder="Choose age"
               onChange={(value) => setAge(value)}
             >
-              <Option value="0">kids</Option>
-              <Option value="1">adults</Option>
+              <Option value="0">Kids</Option>
+              <Option value="1">Adults</Option>
             </Select>
 
             <input
@@ -164,7 +164,7 @@ export default function AdminProduct() {
             />
           </div>
 
-          <button onClick={handleSubmit} className="btn btn-primary mb-5">
+          <button onClick={handleSubmit} className="btn btn-primary mt-3">
             Submit
           </button>
         </div>
