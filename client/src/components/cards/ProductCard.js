@@ -25,6 +25,7 @@ export default function ProductCard({ product }) {
                 ...prev,
                 [product._id]: prev[product._id] + 1 || 1,
             }));
+            // localStorage.setItem("cart", JSON.stringify([...cart, product]));
             toast.success("Item added to cart!");
         } catch (err) {
             toast.error("Failed. Please try again.");

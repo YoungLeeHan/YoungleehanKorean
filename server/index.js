@@ -24,11 +24,11 @@ const app = express();
 
 //이 세션이 아래 passport middleware보다 전에 위치해야함! 주의!!
 app.use(
-    session({
-        secret: "keyboard-siba",
-        resave: false,
-        saveUninitialized: false,
-    })
+  session({
+    secret: "keyboard-siba",
+    resave: false,
+    saveUninitialized: false,
+  })
 );
 
 // Passport middleware
@@ -36,8 +36,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const applyCOOP = (req, res, next) => {
-    res.setHeader("Cross-Origin-Opener-Policy", "cross-origin");
-    next();
+  res.setHeader("Cross-Origin-Opener-Policy", "cross-origin");
+  next();
 };
 
 app.use(applyCOOP);
@@ -54,30 +54,32 @@ app.use("/api", authRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", ageCategoryRoutes);
 app.use("/api", productRoutes);
+app.use("/api", blogCategoryRoutes);
+app.use("/api", blogPostRoutes);
 app.use("/api", postRoutes);
 app.use("/auth", authGoogle);
 app.use("/index", indexGoogle);
 
 mongoose
-    .connect(process.env.MONGO_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => console.log("MongoDB Connected..."))
-    .catch((err) => console.log(err));
+  .connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB Connected..."))
+  .catch((err) => console.log(err));
 
 // Passport 설정을 configurePassport 함수로 이동
 configurePassport(passport);
 
 app.get("/", (req, res) => {
-    res.render("login");
-    console.log(`여기는 "localhost ${port}/"입니다!`);
+  res.render("login");
+  console.log(`여기는 "localhost ${port}/"입니다!`);
 });
 
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
-    console.log(`Node server is running on port ${port}`);
+  console.log(`Node server is running on port ${port}`);
 });
 
 //may9에 푸쉬하고 시퍼ㅓㅓㅓ~~

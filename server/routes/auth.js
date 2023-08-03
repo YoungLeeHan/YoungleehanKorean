@@ -16,8 +16,5 @@ router.get("/admin-check", requireSignin, isAdmin, (req, res) => {
   res.json({ ok: true });
 });
 router.get("/secret", requireSignin, isAdmin, secret);
-// router.post("/category", requireSignin, isAdmin, (req, res) => {
-//   res.json({ ok: true });
-// });
 
 export default router;
