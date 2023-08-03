@@ -105,6 +105,7 @@ export default function AdminProductUpdate() {
                 directory={"Admin Dashboard"}
                 subDirectory={"Modify Product Details"}
             />
+            
             <div style={{ maxWidth: "1170px" }} className="container-fluid">
                 <div className="row">
                     <div className="col-md-3">
