@@ -29,7 +29,8 @@ export default function ProductsView() {
     const [reviewRate, setReviewRate] = useState();
     const [sortBy, setSortBy] = useState("");
     const [isLoading, setIsLoading] = useState(true);
-    const [categories, setCategories] = useState([]);
+    const [levelCategories, setLevelCategories] = useState([]);
+    const [ageCategories, setAgeCategories] = useState([]);
 
     // hooks
     const windowWidth = useWindowWidth();
@@ -48,15 +49,29 @@ export default function ProductsView() {
         setShowFilter((curr) => !curr);
     };
 
-    // On page load, fetch categories list from DB
+    // On page load, fetch level categories list from DB
     useEffect(() => {
-        loadCategories();
+        loadLevelCategories();
     }, []);
 
-    const loadCategories = async () => {
+    const loadLevelCategories = async () => {
         try {
             const { data } = await axios.get("/categories");
-            setCategories(data);
+            setLevelCategories(data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+    // On page load, fetch age categories list from DB
+    useEffect(() => {
+        loadAgeCategories();
+    }, []);
+
+    const loadAgeCategories = async () => {
+        try {
+            const { data } = await axios.get("/ageCategories");
+            setAgeCategories(data);
         } catch (err) {
             console.log(err);
         }
@@ -94,17 +109,17 @@ export default function ProductsView() {
             priceRange,
             reviewRate,
         });
-        // try {
-        //     const { data } = await axios.post(`/filtered-products`, {
-        //         level,
-        //         age,
-        //         priceRange,
-        //         reviewRate,
-        //     });
-        //     setProducts(data);
-        // } catch (err) {
-        //     console.log(err);
-        // }
+        try {
+            const { data } = await axios.post(`/filtered-products`, {
+                level,
+                age,
+                priceRange,
+                reviewRate,
+            });
+            setProducts(data);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     // Product Search
@@ -253,39 +268,38 @@ export default function ProductsView() {
                                                     width: "100%",
                                                 }}
                                                 defaultValue={[
-                                                    "hangul 한글",
-                                                    "beginner",
-                                                    "intermediate",
-                                                    "advanced",
+                                                    ...levelCategories,
                                                 ]}
                                                 onChange={
                                                     handleLevelFilterChange
                                                 }
                                             >
                                                 <Row>
-                                                    {categories?.map((item) => (
-                                                        <Col
-                                                            span={24}
-                                                            key={item._id}
-                                                        >
-                                                            <div className="checkbox">
-                                                                <Checkbox
-                                                                    value={
-                                                                        item._id
-                                                                    }
-                                                                >
-                                                                    {item.name
-                                                                        .charAt(
-                                                                            0
-                                                                        )
-                                                                        .toUpperCase() +
-                                                                        item.name.slice(
-                                                                            1
-                                                                        )}
-                                                                </Checkbox>
-                                                            </div>
-                                                        </Col>
-                                                    ))}
+                                                    {levelCategories?.map(
+                                                        (item) => (
+                                                            <Col
+                                                                span={24}
+                                                                key={item._id}
+                                                            >
+                                                                <div className="checkbox">
+                                                                    <Checkbox
+                                                                        value={
+                                                                            item._id
+                                                                        }
+                                                                    >
+                                                                        {item.name
+                                                                            .charAt(
+                                                                                0
+                                                                            )
+                                                                            .toUpperCase() +
+                                                                            item.name.slice(
+                                                                                1
+                                                                            )}
+                                                                    </Checkbox>
+                                                                </div>
+                                                            </Col>
+                                                        )
+                                                    )}
                                                 </Row>
                                             </Checkbox.Group>
                                         </div>
@@ -298,30 +312,29 @@ export default function ProductsView() {
                                                     width: "100%",
                                                 }}
                                                 defaultValue={[
-                                                    "kids",
-                                                    "adults",
+                                                    ...ageCategories,
                                                 ]}
                                                 onChange={handleAgeFilterChange}
                                             >
                                                 <Row>
-                                                    {["kids", "adults"].map(
-                                                        (group, i) => (
+                                                    {ageCategories?.map(
+                                                        (group) => (
                                                             <Col
                                                                 span={24}
-                                                                key={i}
+                                                                key={group._id}
                                                             >
                                                                 <div className="checkbox">
                                                                     <Checkbox
                                                                         value={
-                                                                            group
+                                                                            group.name
                                                                         }
                                                                     >
-                                                                        {group
+                                                                        {group.name
                                                                             .charAt(
                                                                                 0
                                                                             )
                                                                             .toUpperCase() +
-                                                                            group.slice(
+                                                                            group.name.slice(
                                                                                 1
                                                                             )}
                                                                     </Checkbox>
