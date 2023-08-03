@@ -3,6 +3,7 @@ import fs from "fs";
 import slugify from "slugify";
 import braintree from "braintree";
 import dotenv from "dotenv";
+import ageCategory from "../models/ageCategory.js";
 
 dotenv.config();
 
@@ -16,9 +17,10 @@ const gateway = new braintree.BraintreeGateway({
 
 export const create = async (req, res) => {
     try {
-        const { title, category, age, description, price } = req.fields;
+        const { title, category, ageCategory, description, price } = req.fields;
         const { images } = req.files;
-
+        console.log("ageCategory=>", ageCategory);
+        console.log("req.fields=>", req.fields);
         // validation
         switch (true) {
             case !title.trim():
@@ -29,7 +31,7 @@ export const create = async (req, res) => {
                 });
             case !category.trim():
                 return res.json({ error: "Category is required" });
-            case !age.trim():
+            case !ageCategory.trim():
                 return res.json({ error: "age is required" });
             case !description.trim():
                 return res.json({ error: "Description is required" });
@@ -155,12 +157,12 @@ export const update = async (req, res) => {
 export const filteredProducts = async (req, res) => {
     try {
         const { level, age, priceRange, reviewRate } = req.body;
-
+        console.log(req.body);
         let args = {};
 
         if (level && level.length > 0) args.category = level;
 
-        if (age.length > 0) args.category = age;
+        if (age.length > 0) args.ageCategory = age;
 
         if (priceRange && priceRange.length) {
             args.price = { $gte: priceRange[0], $lte: priceRange[1] };
