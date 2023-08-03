@@ -11,26 +11,26 @@ import { toast } from "react-hot-toast";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 export default function ProductCard({ product }) {
-  // hooks
-  const windowWidth = useWindowWidth();
-  const [cart, setCart] = useCart();
-  const [cartQuantity, setCartQuantity] = useCartQuantity();
+    // hooks
+    const windowWidth = useWindowWidth();
+    const [cart, setCart] = useCart();
+    const [cartQuantity, setCartQuantity] = useCartQuantity();
 
-  const handleAddToCart = (e) => {
-    e.preventDefault();
-    try {
-      const productInCart = cart.some((item) => item._id === product._id); // returns true if product is found
-      if (!productInCart) setCart([...cart, product]);
-      setCartQuantity((prev) => ({
-        ...prev,
-        [product._id]: prev[product._id] + 1 || 1,
-      }));
-      // localStorage.setItem("cart", JSON.stringify([...cart, product]));
-      toast.success("Item added to cart!");
-    } catch (err) {
-      toast.error("Failed. Please try again.");
-    }
-  };
+    const handleAddToCart = (e) => {
+        e.preventDefault();
+        try {
+            const productInCart = cart.some((item) => item._id === product._id); // returns true if product is found
+            if (!productInCart) setCart([...cart, product]);
+            setCartQuantity((prev) => ({
+                ...prev,
+                [product._id]: prev[product._id] + 1 || 1,
+            }));
+            // localStorage.setItem("cart", JSON.stringify([...cart, product]));
+            toast.success("Item added to cart!");
+        } catch (err) {
+            toast.error("Failed. Please try again.");
+        }
+    };
 
     return (
         <div className="card-container">
@@ -95,12 +95,6 @@ export default function ProductCard({ product }) {
                     </div>
                 </div>
             </div>
-            <button className="btn btn-primary" onClick={handleAddToCart}>
-              Add to Cart
-            </button>
-          </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
