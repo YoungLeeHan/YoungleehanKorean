@@ -53,7 +53,7 @@ export default function BlogList() {
                   <h3>{post.title}</h3>
                   <p>{post.value}</p>
                   <p>{post.createdAt}</p>
-                  <p>{post?.category.name}</p>
+                  <p>{post.category?.name}</p>
                 </div>
               ))}
             </div>
