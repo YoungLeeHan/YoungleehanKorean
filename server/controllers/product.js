@@ -15,44 +15,41 @@ const gateway = new braintree.BraintreeGateway({
 });
 
 export const create = async (req, res) => {
-  try {
-    console.log(req.body);
-    console.log(req.fields);
-    // console.log(req.files);
-    const { title, category, age, description, price } = req.fields;
-    const { images } = req.files;
+    try {
+        const { title, category, age, description, price } = req.fields;
+        const { images } = req.files;
 
-    // validation
-    switch (true) {
-      case !title.trim():
-        return res.json({ error: "title is required" });
-      case images && images.size > 1000000:
-        return res.json({
-          error: "Image should be less than 1mb in size",
-        });
-      case !category.trim():
-        return res.json({ error: "Category is required" });
-      case !age.trim():
-        return res.json({ error: "age is required" });
-      case !description.trim():
-        return res.json({ error: "Description is required" });
-      case !price.trim():
-        return res.json({ error: "Price is required" });
+        // validation
+        switch (true) {
+            case !title.trim():
+                return res.json({ error: "title is required" });
+            case images && images.size > 1000000:
+                return res.json({
+                    error: "Image should be less than 1mb in size",
+                });
+            case !category.trim():
+                return res.json({ error: "Category is required" });
+            case !age.trim():
+                return res.json({ error: "age is required" });
+            case !description.trim():
+                return res.json({ error: "Description is required" });
+            case !price.trim():
+                return res.json({ error: "Price is required" });
+        }
+        // create product
+        const product = new Product({ ...req.fields, slug: slugify(title) });
+
+        if (images) {
+            product.images.data = fs.readFileSync(images.path);
+            product.images.contentType = images.type;
+        }
+
+        await product.save();
+        res.json(product);
+    } catch (err) {
+        console.log(err);
+        return res.status(400).json(err.message);
     }
-    // create product
-    const product = new Product({ ...req.fields, slug: slugify(title) });
-
-    if (images) {
-      product.images.data = fs.readFileSync(images.path);
-      product.images.contentType = images.type;
-    }
-
-    await product.save();
-    res.json(product);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).json(err.message);
-  }
 };
 
 export const list = async (req, res) => {

@@ -1,10 +1,22 @@
 import UserCartSidebar from "../../components/cards/UserCartSidebar";
 import Jumbotron from "../../components/cards/Jumbotron";
 import { useCartTotal } from "../../context/cartTotal";
+import { useAuth } from "../../context/auth";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Checkout() {
-  // hooks
-  const [cartTotal, setCartTotal] = useCartTotal();
+    // hooks
+    const [cartTotal, setCartTotal] = useCartTotal();
+    const [auth, setAuth] = useAuth();
+    const navigate = useNavigate();
+
+    // redirect anonymous user
+    useEffect(() => {
+        if (!auth?.token) {
+            navigate("/login");
+        }
+    }, []);
 
   return (
     <>

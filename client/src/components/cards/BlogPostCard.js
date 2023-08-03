@@ -5,9 +5,13 @@ import { Link } from "react-router-dom";
 import "../../styles/components/cards/ProductCard.scss";
 import { MdOutlineDateRange } from "react-icons/md";
 import moment from "moment";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
 export default function BlogPostCard({ post }) {
     moment.locale("en");
+
+    // hooks
+    const windowWidth = useWindowWidth();
 
     return (
         <Link to={`${post._id}`}>
@@ -19,11 +23,26 @@ export default function BlogPostCard({ post }) {
                     />{" "}
                 </div>
                 <div className="text blog-text d-flex flex-column justify-content-between align-items-between">
-                    <h3>{post?.title}</h3>
+                    <h3>
+                        {" "}
+                        {windowWidth > 450 &&
+                            (post?.title?.length > 35
+                                ? post?.title?.substring(0, 35) + "..."
+                                : post?.title)}
+                        {windowWidth < 450 &&
+                            (post?.title?.length > 25
+                                ? post?.title?.substring(0, 25) + "..."
+                                : post?.title)}
+                    </h3>
                     <h5>
-                        {post?.content?.length > 100
-                            ? post?.content?.substring(0, 100) + "..."
-                            : post?.content}
+                        {windowWidth > 1200 &&
+                            (post?.content?.length > 140
+                                ? post?.content.substring(0, 140) + "..."
+                                : post?.content)}
+                        {windowWidth < 1200 &&
+                            (post?.content?.length > 70
+                                ? post?.content.substring(0, 70) + "..."
+                                : post?.content)}
                     </h5>
 
                     <div className="text-bottom d-flex flex-row justify-content-between align-items-center">
