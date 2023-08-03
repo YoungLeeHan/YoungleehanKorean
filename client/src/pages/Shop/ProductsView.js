@@ -29,6 +29,7 @@ export default function ProductsView() {
     const [reviewRate, setReviewRate] = useState();
     const [sortBy, setSortBy] = useState("");
     const [isLoading, setIsLoading] = useState(true);
+    const [categories, setCategories] = useState([]);
 
     // hooks
     const windowWidth = useWindowWidth();
@@ -45,6 +46,20 @@ export default function ProductsView() {
     const handleShowFilter = (e) => {
         e.preventDefault();
         setShowFilter((curr) => !curr);
+    };
+
+    // On page load, fetch categories list from DB
+    useEffect(() => {
+        loadCategories();
+    }, []);
+
+    const loadCategories = async () => {
+        try {
+            const { data } = await axios.get("/categories");
+            setCategories(data);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     // On page load, fetch products list from DB
@@ -248,23 +263,23 @@ export default function ProductsView() {
                                                 }
                                             >
                                                 <Row>
-                                                    {[
-                                                        "hangul 한글",
-                                                        "beginner",
-                                                        "intermediate",
-                                                        "advanced",
-                                                    ].map((item, i) => (
-                                                        <Col span={24} key={i}>
+                                                    {categories?.map((item) => (
+                                                        <Col
+                                                            span={24}
+                                                            key={item._id}
+                                                        >
                                                             <div className="checkbox">
                                                                 <Checkbox
-                                                                    value={item}
+                                                                    value={
+                                                                        item._id
+                                                                    }
                                                                 >
-                                                                    {item
+                                                                    {item.name
                                                                         .charAt(
                                                                             0
                                                                         )
                                                                         .toUpperCase() +
-                                                                        item.slice(
+                                                                        item.name.slice(
                                                                             1
                                                                         )}
                                                                 </Checkbox>
