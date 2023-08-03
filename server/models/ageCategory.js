@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const categorySchema = new mongoose.Schema({
+const ageCategorySchema = new mongoose.Schema({
     name: {
         type: String,
         trim: true,
@@ -15,4 +15,4 @@ const categorySchema = new mongoose.Schema({
     },
 });
 
-export default mongoose.model("Category", categorySchema);
+export default mongoose.model("ageCategory", ageCategorySchema);

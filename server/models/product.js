@@ -7,7 +7,7 @@ const productSchema = new mongoose.Schema(
         slug: { type: String, lowercase: true },
         images: { data: Buffer, contentType: String },
         category: { type: ObjectId, ref: "Category", required: true },
-        age: { type: String, trim: true, required: true, maxlength: 160 },
+        ageCategory: { type: ObjectId, ref: "ageCategory", required: true },
         description: { type: {}, required: true, maxlength: 2000 },
         price: { type: Number, required: true, default: 0 },
         reviewRate: {
