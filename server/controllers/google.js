@@ -1,7 +1,7 @@
 import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 import User from "../models/User.js";
 
-//구글 인증 로직
+// 구글 인증 로직
 export default function configurePassport(passport) {
     passport.use(
         new GoogleStrategy(
@@ -11,7 +11,7 @@ export default function configurePassport(passport) {
                 callbackURL: "/auth/google/callback",
             },
             async (accessToken, refreshToken, profile, done) => {
-                //get the user data from google
+                // get the user data from google
                 const newUser = {
                     googleId: profile.id,
                     displayName: profile.displayName,
@@ -21,15 +21,17 @@ export default function configurePassport(passport) {
                     email: (profile && profile.emails[0].value) || "",
                     password: (profile && profile.password) || "Aa123123!",
                 };
+                console.log("새유저있냐?", newUser);
+                console.log(profile);
 
                 try {
                     // find the user in our database
-                    let user = await User.findOne({
+                    const user = await User.findOne({
                         googleId: profile.id,
                     });
 
                     if (user) {
-                        // If user present in our database.
+                        // If user is present in our database.
                         done(null, user);
                     } else {
                         // if user is not present in our database, save user data to the database.
