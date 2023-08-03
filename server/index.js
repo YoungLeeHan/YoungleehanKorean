@@ -14,6 +14,8 @@ import indexGoogle from "./routes/indexGoogle.js";
 import path from "path";
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 import configurePassport from "./controllers/google.js";
+import blogCategoryRoutes from "./routes/blogCategory.js";
+import blogPostRoutes from "./routes/blogPost.js";
 
 dotenv.config();
 
@@ -39,6 +41,8 @@ const applyCOOP = (req, res, next) => {
 
 app.use(applyCOOP);
 
+// middlewares
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());

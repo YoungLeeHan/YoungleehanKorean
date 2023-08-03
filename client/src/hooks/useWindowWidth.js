@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function useWindowWidth() {
-    const [windowWidth, setWindowWidth] = useState();
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
     useEffect(() => {
         window.addEventListener("reset", () => {

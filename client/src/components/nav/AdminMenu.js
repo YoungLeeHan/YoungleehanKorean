@@ -10,7 +10,7 @@ export default function AdminMenu() {
                         className="list-group-item"
                         to="/dashboard/admin/category"
                     >
-                        Create category
+                        Product Category Management
                     </NavLink>
                 </li>
 
@@ -19,7 +19,7 @@ export default function AdminMenu() {
                         className="list-group-item"
                         to="/dashboard/admin/product"
                     >
-                        Create product
+                        Create a new product
                     </NavLink>
                 </li>
                 <li>
@@ -27,16 +27,33 @@ export default function AdminMenu() {
                         className="list-group-item"
                         to="/dashboard/admin/products"
                     >
-                        Products
+                        View products
                     </NavLink>
                 </li>
 
                 <li>
                     <NavLink
                         className="list-group-item"
-                        to="/dashboard/admin/post"
+                        to="/dashboard/admin/blog/category"
                     >
-                        Create blog
+                        Blog Category Management
+                    </NavLink>
+                </li>
+
+                <li>
+                    <NavLink
+                        className="list-group-item"
+                        to="/dashboard/admin/blog/createpost"
+                    >
+                        Create a blog post
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink
+                        className="list-group-item"
+                        to="/dashboard/admin/blog/list"
+                    >
+                        View blog posts
                     </NavLink>
                 </li>
             </ul>

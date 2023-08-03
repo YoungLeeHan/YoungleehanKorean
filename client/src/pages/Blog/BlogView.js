@@ -1,15 +1,19 @@
 // 👻 Developed by DanBi Choi on July 27th, 2023. (UI)
-// 👻 Developed by DanBi Choi on July 28th, 2023. (Filter Feature)
+// 👻 Developed by DanBi Choi on July 28th, 2023. (Filter feature added)
+// 👻 Developed by DanBi Choi on Aug 1st, 2023. (Search feature added)
 // -----------------------------------------------------
 import Jumbotron from "../../components/cards/Jumbotron";
 import ScrollToTop from "../../components/nav/ScrollToTop";
 import "../../styles/pages/ProductsView.scss";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 import { Col, Row, Checkbox, ConfigProvider } from "antd";
 import BlogPostCard from "../../components/cards/BlogPostCard";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
+import { toast } from "react-hot-toast";
+import loadingGIF from "../../assets/images/Common/loading.gif";
 
 export default function BlogView() {
     ScrollToTop();
@@ -19,6 +23,7 @@ export default function BlogView() {
     const [searchKeyword, setSearchKeyword] = useState("");
     const [blogList, setBlogList] = useState([]);
     const [categoryFilter, setCategoryFilter] = useState();
+    const [isLoading, setIsLoading] = useState(true);
 
     // hooks
     const windowWidth = useWindowWidth();
@@ -36,31 +41,30 @@ export default function BlogView() {
         setShowFilter((curr) => !curr);
     };
 
-    const handleSearchBlog = (e) => {
-        e.preventDefault();
-        console.log(`searching for ${searchKeyword}`);
-    };
-
-    // Blog Category filter
-    const handleCategoryFilterChange = (checkedValues) => {
-        setCategoryFilter(checkedValues);
-    };
-
-    // fetch blog list from DB
+    // fetch blog list from DB on first page loading
     useEffect(() => {
         if (!categoryFilter) {
             loadBlogPosts();
-            setBlogList(dummyData);
+            toast.error(
+                "Blog page is under construction. These are dummy data."
+            );
         }
     }, []);
 
     const loadBlogPosts = async () => {
+        setBlogList(dummyData);
+        setIsLoading(false);
         // try {
         // 	const {data} = await axios.get(`/bloglist`);
         // 	setBlogList(data);
         // } catch (err) {
         // 	console.log(err);
         // }
+    };
+
+    // Blog Category filter
+    const handleCategoryFilterChange = (checkedValues) => {
+        setCategoryFilter(checkedValues);
     };
 
     // Load filtered posts only when filter is activated
@@ -71,6 +75,7 @@ export default function BlogView() {
     }, [categoryFilter]);
 
     const loadFilteredPosts = async () => {
+        toast.error("Filter endpoints are under construction.");
         console.log({
             categoryFilter,
         });
@@ -82,6 +87,29 @@ export default function BlogView() {
         // } catch (err) {
         //     console.log(err);
         // }
+    };
+
+    // Blog Post Search
+    useEffect(() => {
+        handleSearchBlog();
+    }, [searchKeyword]);
+
+    const handleSearchBlog = async () => {
+        // if there is a search keyword, search database with that keyword
+        if (searchKeyword) {
+            console.log(`searching for ${searchKeyword}`);
+            // try {
+            //     const { data } = await axios.get(
+            //         `/blog/search/${searchKeyword}`
+            //     );
+            //     setBlogList(data);
+            // } catch (err) {
+            //     console.log(err);
+            // }
+        } else {
+            // if keyword is/became empty, fetch all posts from database
+            loadBlogPosts();
+        }
     };
 
     const dummyData = [
@@ -122,7 +150,12 @@ export default function BlogView() {
                     <div className="row">
                         <div className="col-md-3">
                             {/* 👉 Filter #1: Product Search starts here*/}
-                            <form onSubmit={handleSearchBlog}>
+                            <form
+                                onSubmit={(e) => {
+                                    e.preventDefault();
+                                    handleSearchBlog();
+                                }}
+                            >
                                 <button type="submit" className="search-btn">
                                     <BsSearch />
                                 </button>
@@ -201,11 +234,39 @@ export default function BlogView() {
                             )}
                         </div>
                         <div className="col-md-9">
-                            {blogList?.map((post) => (
-                                <div key={post._id}>
-                                    <BlogPostCard post={post} />
+                            {isLoading && (
+                                <div
+                                    className="d-flex justify-content-center"
+                                    style={{ margin: "200px 0" }}
+                                >
+                                    <img
+                                        src={loadingGIF}
+                                        alt="Loading"
+                                        style={{
+                                            width: "50px",
+                                            height: "50px",
+                                        }}
+                                    />
                                 </div>
-                            ))}
+                            )}
+                            {blogList?.length > 0 &&
+                                !isLoading &&
+                                blogList?.map((post) => (
+                                    <div key={post._id}>
+                                        <BlogPostCard post={post} />
+                                    </div>
+                                ))}
+
+                            {blogList?.length === 0 && !isLoading && (
+                                <div
+                                    style={{
+                                        textAlign: "center",
+                                        margin: "200px 0",
+                                    }}
+                                >
+                                    No matching post found.
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

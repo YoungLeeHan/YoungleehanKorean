@@ -13,6 +13,8 @@ import { Col, Row, Checkbox, ConfigProvider, Slider } from "antd";
 import { Rating } from "semantic-ui-react";
 import ProductCard from "../../components/cards/ProductCard";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
+import { toast } from "react-hot-toast";
+import loadingGIF from "../../assets/images/Common/loading.gif";
 
 export default function ProductsView() {
     ScrollToTop();
@@ -26,10 +28,12 @@ export default function ProductsView() {
     const [priceRange, setPriceRange] = useState();
     const [reviewRate, setReviewRate] = useState();
     const [sortBy, setSortBy] = useState("");
+    const [isLoading, setIsLoading] = useState(true);
 
     // hooks
     const windowWidth = useWindowWidth();
 
+    // Show or hide 'show filter' button depending on screen size
     useEffect(() => {
         if (windowWidth < 767) {
             setShowFilter(false);
@@ -43,6 +47,7 @@ export default function ProductsView() {
         setShowFilter((curr) => !curr);
     };
 
+    // On page load, fetch products list from DB
     useEffect(() => {
         if (!level && !age && !priceRange && !reviewRate) {
             loadProducts();
@@ -53,6 +58,7 @@ export default function ProductsView() {
         try {
             const { data } = await axios.get(`/products`);
             setProducts(data);
+            setIsLoading(false);
         } catch (err) {
             console.log(err);
         }
@@ -66,6 +72,7 @@ export default function ProductsView() {
     }, [level, age, priceRange, reviewRate]);
 
     const loadFilteredProducts = async () => {
+        toast.error("Filter endpoints are under construction.");
         console.log({
             level,
             age,
@@ -138,8 +145,8 @@ export default function ProductsView() {
         let sortedProducts;
         switch (sortBy) {
             case "Newest":
-                sortedProducts = [...products]?.sort((a, b) => {
-                    return b.createdAt - a.createdAt;
+                sortedProducts = [...products].sort((a, b) => {
+                    return new Date(b.createdAt) - new Date(a.createdAt);
                 });
                 break;
             case "Best Selling":
@@ -432,13 +439,29 @@ export default function ProductsView() {
                                     </li>
                                 </div>
                             </div>
+                            {isLoading && (
+                                <div
+                                    className="d-flex justify-content-center"
+                                    style={{ margin: "200px 0" }}
+                                >
+                                    <img
+                                        src={loadingGIF}
+                                        alt="Loading"
+                                        style={{
+                                            width: "50px",
+                                            height: "50px",
+                                        }}
+                                    />
+                                </div>
+                            )}
                             {products?.length > 0 &&
+                                !isLoading &&
                                 products?.map((product) => (
                                     <div key={product._id}>
                                         <ProductCard product={product} />
                                     </div>
                                 ))}
-                            {products?.length === 0 && (
+                            {products?.length === 0 && !isLoading && (
                                 <div
                                     style={{
                                         textAlign: "center",

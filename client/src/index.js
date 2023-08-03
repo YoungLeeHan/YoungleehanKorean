@@ -10,7 +10,6 @@ import store from "./Reducer/store";
 import { Provider } from "react-redux";
 import "antd/dist/reset.css";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { SearchProvider } from "./context/search";
 import { CartProvider } from "./context/cart";
 import { CartQuantityProvider } from "./context/cartQuantity";
 import { CartTotalProvider } from "./context/cartTotal";
@@ -20,17 +19,15 @@ root.render(
     <React.StrictMode>
         <GoogleOAuthProvider>
             <AuthProvider>
-                <SearchProvider>
-                    <CartProvider>
-                        <CartQuantityProvider>
-                            <CartTotalProvider>
-                                <Provider store={store}>
-                                    <App />
-                                </Provider>
-                            </CartTotalProvider>
-                        </CartQuantityProvider>
-                    </CartProvider>
-                </SearchProvider>
+                <CartProvider>
+                    <CartQuantityProvider>
+                        <CartTotalProvider>
+                            <Provider store={store}>
+                                <App />
+                            </Provider>
+                        </CartTotalProvider>
+                    </CartQuantityProvider>
+                </CartProvider>
             </AuthProvider>
         </GoogleOAuthProvider>
     </React.StrictMode>

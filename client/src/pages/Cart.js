@@ -6,16 +6,19 @@ import ScrollToTop from "../components/nav/ScrollToTop";
 import { useCart } from "../context/cart";
 import { useCartQuantity } from "../context/cartQuantity";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../context/auth";
-import { toast } from "react-hot-toast";
 import { useCartTotal } from "../context/cartTotal";
 import CartProductCard from "./../components/cards/CartProductCard";
+import ModalInfo from "../components/common/ModalInfo";
 
 export default function Cart() {
     ScrollToTop();
 
-    //hooks
+    // states
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // hooks
     const [cart, setCart] = useCart();
     const [cartQuantity, setCartQuantity] = useCartQuantity();
     const [cartTotal, setCartTotal] = useCartTotal();
@@ -49,16 +52,22 @@ export default function Cart() {
         setCartTotal(total.toFixed(2));
     }, [cart, cartQuantity]);
 
-    // Checkout Button
+    // Checkout Button (check for anonymous user, if true, show modal to redirect to login page)
     const handleCheckout = (e) => {
         e.preventDefault();
         if (auth?.token) {
             navigate("/cart/checkout");
         } else {
-            toast.error("You need to login first to check out!");
-            navigate("/login");
+            setIsModalOpen(true);
         }
     };
+
+    // Modal Handlers
+    const handleOk = () => {
+        setIsModalOpen(false);
+        navigate("/login");
+    };
+    const handleCancel = () => setIsModalOpen(false);
 
     return (
         <>
@@ -131,6 +140,13 @@ export default function Cart() {
                         </div>
                     )}
                 </div>
+                <ModalInfo
+                    isModalOpen={isModalOpen}
+                    handleOk={handleOk}
+                    handleCancel={handleCancel}
+                    okBtnText={"Login"}
+                    text={"You need to be logged in to check out!"}
+                />
             </div>
         </>
     );
