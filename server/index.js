@@ -5,7 +5,6 @@ import cors from "cors";
 import authRoutes from "./routes/auth.js";
 import categoryRoutes from "./routes/category.js";
 import productRoutes from "./routes/product.js";
-import postRoutes from "./routes/post.js";
 import passport from "passport";
 import session from "express-session";
 import MongoStore from "connect-mongo";
@@ -52,7 +51,12 @@ app.use("/image", express.static("./image"));
 app.use("/api", authRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
+<<<<<<< Updated upstream
 app.use("/api", postRoutes);
+=======
+app.use("/api", blogCategoryRoutes);
+app.use("/api", blogPostRoutes);
+>>>>>>> Stashed changes
 app.use("/auth", authGoogle);
 app.use("/index", indexGoogle);
 
