@@ -35,42 +35,6 @@ export default function BlogList() {
         }
     };
 
-<<<<<<< Updated upstream
-    return (
-        <>
-            <Jumbotron
-                title={`Hello ${auth?.user?.firstName}`}
-                directory={"Admin Dashboard"}
-                subDirectory={"Blog Posts"}
-            />
-            <div style={{ maxWidth: "1170px" }} className="container-fluid">
-                <div className="row">
-                    <div className="col-md-3">
-                        <AdminMenu />
-                    </div>
-                    <div className="col-md-9">
-                        <div className="p-3 mt-2 mb-2 h4 bg-light">
-                            Blog Posts
-                        </div>
-                        <div className="blog-list-box">
-                            {list?.map((post) => (
-                                <div
-                                    key={post._id}
-                                    style={{ border: "1px solid gray" }}
-                                >
-                                    <h3>{post.title}</h3>
-                                    <p>{post.value}</p>
-                                    <p>{post.createdAt}</p>
-                                    <p>{post.category.name}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
-    );
-=======
   return (
       <>
         <Jumbotron
@@ -123,5 +87,4 @@ export default function BlogList() {
         </div>
       </>
   );
->>>>>>> Stashed changes
 }
