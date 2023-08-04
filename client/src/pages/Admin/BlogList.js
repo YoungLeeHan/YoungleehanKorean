@@ -11,29 +11,29 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 
 export default function BlogList() {
-    // context
-    const [auth, setAuth] = useAuth();
+  // context
+  const [auth, setAuth] = useAuth();
 
-    //states
-    const [list, setList] = useState([]);
+  //states
+  const [list, setList] = useState([]);
 
-    // fetch blog list from DB
-    useEffect(() => {
-        loadBlogList();
-    }, []);
+  // fetch blog list from DB
+  useEffect(() => {
+    loadBlogList();
+  }, []);
 
-    const loadBlogList = async () => {
-        try {
-            const { data } = await axios.get("/blog/list");
-            if (data.error) {
-                toast.error(data.error);
-            } else {
-                setList(data);
-            }
-        } catch (err) {
-            console.log(err);
-        }
-    };
+  const loadBlogList = async () => {
+    try {
+      const { data } = await axios.get("/blog/list");
+      if (data.error) {
+        toast.error(data.error);
+      } else {
+        setList(data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
       <>
