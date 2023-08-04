@@ -1,35 +1,27 @@
 import BlogPost from "../models/BlogPost.js";
 import slugify from "slugify";
 import fs from "fs";
-import Product from "../models/product.js";
+
 
 export const create = async (req, res) => {
     try {
-        const { title, category, value } = req.fields;
-        const { images } = req.files;
+        const {title, category, value} = req.fields;
+        const {images} = req.files;
 
         // validation
         switch (true) {
             case !title.trim():
-                return res.json({ error: "title is required" });
+                return res.json({error: "title is required"});
             case !category.trim():
-                return res.json({ error: "Category is required" });
+                return res.json({error: "Category is required"});
             case !value.trim():
-                return res.json({ error: "Content is required" });
+                return res.json({error: "Content is required"});
             case images && images.size > 10000000:
                 return res.json({
                     error: "Image should be less than 1mb in size",
                 });
         }
-//         // create post
-//         const post = await new BlogPost({ ...req.fields }).save();
-//         res.json(post);
-//     } catch (err) {
-//         console.log(err);
-//         return res.status(400).json(err.message);
-//     }
-// };
-        const post =  await new BlogPost({ ...req.fields })
+        const post = await new BlogPost({...req.fields, slug: slugify(title)})
 
         if (images) {
             post.images.data = fs.readFileSync(images.path);
@@ -59,15 +51,69 @@ export const images = async (req, res) => {
 };
 
 
-
 export const list = async (req, res) => {
     try {
         const posts = await BlogPost.find({})
             .populate("category")
             .limit(12)
-            .sort({ createdAt: -1 });
+            .sort({createdAt: -1});
         res.json(posts);
     } catch (err) {
         console.log(err);
+    }
+};
+
+export const read = async (req, res) => {
+    try {
+        const post = await BlogPost.findOne({ slug: req.params.slug })
+            .select("-images")
+            .populate("category");
+
+        res.json(post);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+
+export const update = async (req, res) => {
+    try {
+        const {title, category, value} = req.fields;
+        const {images} = req.files;
+
+        // validation
+        switch (true) {
+            case !title.trim():
+                return res.json({error: "title is required"});
+            case !category.trim():
+                return res.json({error: "Category is required"});
+            case !value.trim():
+                return res.json({error: "Content is required"});
+            case images && images.size > 10000000:
+                return res.json({
+                    error: "Image should be less than 1mb in size",
+                });
+        }
+
+        // update product
+        const post = await BlogPost.findByIdAndUpdate(
+            req.params.postId,
+            {
+                ...req.fields,
+                slug: slugify(title),
+            },
+            { new: true }
+        );
+
+        if (images) {
+            post.images.data = fs.readFileSync(images.path);
+            post.images.contentType = images.type;
+        }
+
+        await post.save();
+        res.json(post);
+    } catch (err) {
+        console.log(err);
+        return res.status(400).json(err.message);
     }
 };

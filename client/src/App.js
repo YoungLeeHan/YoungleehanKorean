@@ -29,9 +29,10 @@ import Checkout from "./pages/Payment/Checkout";
 import ProductsView from "./pages/Shop/ProductsView";
 import SingleProductView from "./pages/Shop/SingleProductView";
 import AdminProductUpdate from "./pages/Admin/ProductUpdate";
-import AdminCreatePost from "./pages/Admin/CreatePost";
+import AdminCreatePost from "./pages/Admin/Blog";
 import AdminBlogCategory from "./pages/Admin/BlogCategory";
 import AdminBlogPostList from "./pages/Admin/BlogList";
+import AdminBlogUpdate from "./pages/Admin/BlogUpdate";
 
 export default function App() {
   return (
@@ -88,6 +89,7 @@ export default function App() {
           <Route path="admin/blog/category" element={<AdminBlogCategory />} />
           <Route path="admin/blog/createpost" element={<AdminCreatePost />} />
           <Route path="admin/blog/list" element={<AdminBlogPostList />} />
+          <Route path="admin/blog/update/:slug" element={<AdminBlogUpdate />} />
         </Route>
       </Routes>
       <Footer />

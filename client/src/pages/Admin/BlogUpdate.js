@@ -1,5 +1,3 @@
-// 👻 Developed by DanBi Choi on Aug 2nd, 2023.
-// -----------------------------------------------------
 import "../../styles/pages/Admin/CreatePost.scss";
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
@@ -9,15 +7,15 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Select } from "antd";
 
 const { Option } = Select;
 
-export default function CreatePost() {
-    // hook
+
+export default function AdminBlogUpdate() {
+    // context
     const [auth, setAuth] = useAuth();
-    const navigate = useNavigate();
 
     // state
     const [categories, setCategories] = useState([]);
@@ -25,6 +23,12 @@ export default function CreatePost() {
     const [value, setValue] = useState("");
     const [category, setCategory] = useState("");
     const [images, setImages] = useState("");
+    const [id, setId] = useState("");
+
+    //hook
+    const navigate = useNavigate();
+    const params = useParams();
+
 
     // Quill Editor Settings
     const editorModules = {
@@ -61,21 +65,38 @@ export default function CreatePost() {
         loadBlogCategories();
     }, []);
 
+    // fetch blog  list from DB
+    useEffect(() => {
+        loadBlog();
+    }, []);
+
+
     const loadBlogCategories = async () => {
         try {
             const { data } = await axios.get("/blog/categories");
-            if (data.error) {
-                toast.error(data.error);
-            } else {
-                setCategories(data);
-            }
+            setCategories(data);
         } catch (err) {
             console.log(err);
         }
     };
 
-    // create Post when user clicks Submit Button
-    const handleCreatePost = async (e) => {
+
+    const loadBlog = async () => {
+        try {
+            const { data } = await axios.get(`/blog/${params.slug}`);
+            setTitle(data.title);
+            setValue(data.value);
+            setCategory(data.category._id);
+            setId(data._id);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
+
+
+    // Update Post when user clicks Submit Button
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (!title) {
             toast.error("You forgot to write a title!");
@@ -84,21 +105,22 @@ export default function CreatePost() {
         } else if (title && value) {
             try {
                 const blogPostData = new FormData();
+                images && blogPostData.append("images", images);
                 blogPostData.append("title", title);
                 blogPostData.append("category", category);
                 blogPostData.append("value", value);
-                blogPostData.append("images", images);
 
 
-                const { data } = await axios.post(
-                    `/blog/post-create`,
+                const { data } = await axios.put(
+                    `/blog/${id}`,
                     blogPostData
                 );
                 if (data?.error) {
                     toast.error(data.error);
                 } else {
-                    toast.success(`"${data.title}" is created`);
+                    toast.success(`"${data.title}" is update`);
                     navigate("/dashboard/admin/blog/list");
+                    window.location.reload()
                 }
             } catch (err) {
                 toast.error("Something went wrong. Try again.");
@@ -106,6 +128,17 @@ export default function CreatePost() {
             }
         }
     };
+
+    const handleDelete = async (req, res) => {
+        try {
+            //
+        } catch (err) {
+            console.log(err)
+            toast.error("Delete failed. Try again.")
+        }
+    }
+
+
 
     return (
         <>
@@ -121,18 +154,26 @@ export default function CreatePost() {
                     </div>
                     <div className="col-md-9">
                         <div className="p-3 mt-2 mb-2 h4 bg-light">
-                            Create a blog post
+                            Update a blog post
                         </div>
 
-                        {images && (
+                        {images ? (
                             <div className="text-center">
                                 <img
                                     src={URL.createObjectURL(images)}
-                                    alt="product images"
+                                    alt="blog images"
                                     className="img img-responsive"
                                     height="200px"
                                 />
                             </div>
+                        ) : (<div className="text-center">
+                                <img
+                                    src={`${process.env.REACT_APP_API}/blog/images/${id}?${new Date().getTime()}`}
+                                    alt="blog images"
+                                    className="img img-responsive"
+                                    height="200px"
+                                />
+                        </div>
                         )}
 
                         <div className="pt-2">
@@ -152,7 +193,6 @@ export default function CreatePost() {
 
 
                         <div className="text-editor-box">
-                            <form onSubmit={handleCreatePost}>
                                 <input
                                     type="text"
                                     className="form-control p-2 mb-3"
@@ -166,6 +206,7 @@ export default function CreatePost() {
                                     className="form-select mb-3"
                                     placeholder="Choose category"
                                     onChange={(value) => setCategory(value)}
+                                    value={category}
                                 >
                                     {categories?.map((category) => (
                                         <Option
@@ -184,13 +225,21 @@ export default function CreatePost() {
                                     formats={editorFormats}
                                     placeholder="Enter your contents here..."
                                 ></ReactQuill>
-                                <button
-                                    className="btn btn-primary mt-3 mb-5"
-                                    type="submit"
-                                >
-                                    Create Post
-                                </button>
-                            </form>
+
+                                <div className="d-flex justify-content-between">
+                                    <button
+                                        className="btn btn-primary mt-3 mb-5"
+                                        onClick= {handleSubmit}
+                                    >
+                                        Update
+                                    </button>
+                                    <button
+                                        className="btn btn-danger mt-3 mb-5"
+                                        onClick= {handleDelete}
+                                    >
+                                        Delete
+                                    </button>
+                                </div>
                         </div>
                     </div>
                 </div>

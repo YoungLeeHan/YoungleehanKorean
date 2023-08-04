@@ -89,6 +89,23 @@ $desktop-font-xlarge: 32px;
     }
 }
 
+.btn-danger {
+    border: none;
+    border-radius: 5px;
+    background-color: #ce374a;
+    color: $color-white;
+    font-size: $desktop-font-medium;
+    font-weight: 600;
+    padding: 12px 30px;
+    cursor: pointer;
+
+    &:hover,
+    &:active {
+        background-color: #aa2c44 !important;
+    }
+}
+
+
 .btn-outline-primary {
     border: $color-purple;
     border-radius: 5px;
