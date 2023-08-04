@@ -5,7 +5,6 @@ import cors from "cors";
 import authRoutes from "./routes/auth.js";
 import categoryRoutes from "./routes/category.js";
 import productRoutes from "./routes/product.js";
-import postRoutes from "./routes/post.js";
 import passport from "passport";
 import session from "express-session";
 import MongoStore from "connect-mongo";
@@ -56,7 +55,6 @@ app.use("/api", ageCategoryRoutes);
 app.use("/api", productRoutes);
 app.use("/api", blogCategoryRoutes);
 app.use("/api", blogPostRoutes);
-app.use("/api", postRoutes);
 app.use("/auth", authGoogle);
 app.use("/index", indexGoogle);
 

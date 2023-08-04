@@ -7,6 +7,7 @@ const blogPostSchema = new mongoose.Schema(
         category: { type: ObjectId, ref: "BlogCategory", required: true },
         value: { type: String, required: true, maxlength: 5000 },
         createdAt: { type: Date, default: Date.now, required: true },
+        images: { data: Buffer, contentType: String },
     },
     { timestamps: true }
 );

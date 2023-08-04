@@ -24,6 +24,7 @@ export default function CreatePost() {
     const [title, setTitle] = useState("");
     const [value, setValue] = useState("");
     const [category, setCategory] = useState("");
+    const [images, setImages] = useState("");
 
     // Quill Editor Settings
     const editorModules = {
@@ -86,6 +87,8 @@ export default function CreatePost() {
                 blogPostData.append("title", title);
                 blogPostData.append("category", category);
                 blogPostData.append("value", value);
+                blogPostData.append("images", images);
+
 
                 const { data } = await axios.post(
                     `/blog/post-create`,
@@ -120,6 +123,34 @@ export default function CreatePost() {
                         <div className="p-3 mt-2 mb-2 h4 bg-light">
                             Create a blog post
                         </div>
+
+                        {images && (
+                            <div className="text-center">
+                                <img
+                                    src={URL.createObjectURL(images)}
+                                    alt="product images"
+                                    className="img img-responsive"
+                                    height="200px"
+                                />
+                            </div>
+                        )}
+
+                        <div className="pt-2">
+                            <label className="btn btn-outline-secondary col-12 mb-3">
+                                {images ? images.name : "Upload images"}
+                                <input
+                                    type="file"
+                                    name="images"
+                                    accept="image/*"
+                                    onChange={(e) =>
+                                        setImages(e.target.files[0])
+                                    }
+                                    hidden
+                                />
+                            </label>
+                        </div>
+
+
                         <div className="text-editor-box">
                             <form onSubmit={handleCreatePost}>
                                 <input
