@@ -51,12 +51,8 @@ app.use("/image", express.static("./image"));
 app.use("/api", authRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", productRoutes);
-<<<<<<< Updated upstream
-app.use("/api", postRoutes);
-=======
 app.use("/api", blogCategoryRoutes);
 app.use("/api", blogPostRoutes);
->>>>>>> Stashed changes
 app.use("/auth", authGoogle);
 app.use("/index", indexGoogle);
 
