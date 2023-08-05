@@ -31,6 +31,8 @@ export default function ProductsView() {
     const [isLoading, setIsLoading] = useState(true);
     const [levelCategories, setLevelCategories] = useState([]);
     const [ageCategories, setAgeCategories] = useState([]);
+    const [defaultLevelCategories, setDefaultLevelCategories] = useState([]);
+    const [defaultAgeCategories, setDefaultAgeCategories] = useState([]);
 
     // hooks
     const windowWidth = useWindowWidth();
@@ -63,6 +65,14 @@ export default function ProductsView() {
         }
     };
 
+    useEffect(() => {
+        let arr = [];
+        levelCategories.map((c) => {
+            arr.push(c._id);
+        });
+        setDefaultLevelCategories(arr);
+    }, [levelCategories]);
+
     // On page load, fetch age categories list from DB
     useEffect(() => {
         loadAgeCategories();
@@ -76,6 +86,14 @@ export default function ProductsView() {
             console.log(err);
         }
     };
+
+    useEffect(() => {
+        let arr = [];
+        ageCategories.map((c) => {
+            arr.push(c._id);
+        });
+        setDefaultAgeCategories(arr);
+    }, [ageCategories]);
 
     // On page load, fetch products list from DB
     useEffect(() => {
@@ -109,6 +127,7 @@ export default function ProductsView() {
             priceRange,
             reviewRate,
         });
+        setIsLoading(true);
         try {
             const { data } = await axios.post(`/filtered-products`, {
                 level,
@@ -120,6 +139,7 @@ export default function ProductsView() {
         } catch (err) {
             console.log(err);
         }
+        setIsLoading(false);
     };
 
     // Product Search
@@ -238,6 +258,7 @@ export default function ProductsView() {
                                 ></input>
                             </form>
                             {/* Filter #1: Product Search ends here*/}
+
                             {/* 👉 Mobile responsive show/hide filter button starts here */}
                             {windowWidth < 767 && (
                                 <ResponsiveShowFilter
@@ -260,6 +281,7 @@ export default function ProductsView() {
                                         }}
                                     >
                                         {/* Ant Design UI style setting change ends here*/}
+
                                         {/* 👉 Filter #2: filter by level starts here*/}
                                         <div className="filter-box">
                                             <h2>Levels</h2>
@@ -268,7 +290,10 @@ export default function ProductsView() {
                                                     width: "100%",
                                                 }}
                                                 defaultValue={[
-                                                    ...levelCategories,
+                                                    "64c5666b5c021ca51dd4c012",
+                                                    "64c566705c021ca51dd4c017",
+                                                    "64c566775c021ca51dd4c01c",
+                                                    "64c9689e0be1a57c65be953e",
                                                 ]}
                                                 onChange={
                                                     handleLevelFilterChange
@@ -304,6 +329,7 @@ export default function ProductsView() {
                                             </Checkbox.Group>
                                         </div>
                                         {/* Filter #2: filter by level ends here*/}
+
                                         {/* 👉 Filter #3: filter by age starts here*/}
                                         <div className="filter-box">
                                             <h2>Age</h2>
@@ -312,7 +338,8 @@ export default function ProductsView() {
                                                     width: "100%",
                                                 }}
                                                 defaultValue={[
-                                                    ...ageCategories,
+                                                    "64cbfbc5f161f2aac95313e5",
+                                                    "64cbfc0df161f2aac95313e6",
                                                 ]}
                                                 onChange={handleAgeFilterChange}
                                             >
@@ -326,7 +353,7 @@ export default function ProductsView() {
                                                                 <div className="checkbox">
                                                                     <Checkbox
                                                                         value={
-                                                                            group.name
+                                                                            group._id
                                                                         }
                                                                     >
                                                                         {group.name
@@ -346,6 +373,7 @@ export default function ProductsView() {
                                             </Checkbox.Group>
                                         </div>
                                         {/* Filter #3: filter by age ends here*/}
+
                                         {/* 👉 Filter #4: filter by price starts here*/}
                                         <div
                                             className="filter-box"
@@ -376,6 +404,7 @@ export default function ProductsView() {
                                             </h5>
                                         </div>
                                         {/* Filter #4: filter by price ends here*/}
+
                                         {/* 👉 Filter #5: filter by rating starts here*/}
                                         <div className="filter-box">
                                             <h2>Ratings</h2>
