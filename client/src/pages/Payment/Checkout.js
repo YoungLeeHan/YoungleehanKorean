@@ -18,25 +18,25 @@ export default function Checkout() {
         }
     }, []);
 
-  return (
-    <>
-      <Jumbotron
-        title={"Checkout"}
-        directory={"Cart"}
-        subDirectory={"Checkout"}
-      />
-      <div style={{ maxWidth: "1170px" }} className="container-fluid">
-        <div>
-          <div className="mt-3">
-            <h1>CART SUMMARY</h1>
-            <p>Subtotal: ${cartTotal}</p>
-            <p>Sales Tax: 0%</p>
-            <p>Total: ${cartTotal}</p>
-          </div>
+    return (
+        <>
+            <Jumbotron
+                title={"Checkout"}
+                directory={"Cart"}
+                subDirectory={"Checkout"}
+            />
+            <div style={{ maxWidth: "1170px" }} className="container-fluid">
+                <div>
+                    <div className="mt-3">
+                        <h1>CART SUMMARY</h1>
+                        <p>Subtotal: ${cartTotal}</p>
+                        <p>Sales Tax: 0%</p>
+                        <p>Total: ${cartTotal}</p>
+                    </div>
 
-          <UserCartSidebar />
-        </div>
-      </div>
-    </>
-  );
+                    <UserCartSidebar />
+                </div>
+            </div>
+        </>
+    );
 }

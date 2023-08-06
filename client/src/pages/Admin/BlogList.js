@@ -11,29 +11,29 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 
 export default function BlogList() {
-  // context
-  const [auth, setAuth] = useAuth();
+    // context
+    const [auth, setAuth] = useAuth();
 
-  //states
-  const [list, setList] = useState([]);
+    //states
+    const [list, setList] = useState([]);
 
-  // fetch blog list from DB
-  useEffect(() => {
-    loadBlogList();
-  }, []);
+    // fetch blog list from DB
+    useEffect(() => {
+        loadBlogList();
+    }, []);
 
-  const loadBlogList = async () => {
-    try {
-      const { data } = await axios.get("/blog/list");
-      if (data.error) {
-        toast.error(data.error);
-      } else {
-        setList(data);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    const loadBlogList = async () => {
+        try {
+            const { data } = await axios.get("/blog/list");
+            if (data.error) {
+                toast.error(data.error);
+            } else {
+                setList(data);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return (
         <>
@@ -48,10 +48,15 @@ export default function BlogList() {
                         <AdminMenu />
                     </div>
                     <div className="col-md-9">
-                        <div className="p-3 mt-2 mb-2 h4 bg-light">Blog Posts</div>
+                        <div className="p-3 mt-2 mb-2 h4 bg-light">
+                            Blog Posts
+                        </div>
                         <div className="blog-list-box">
                             {list?.map((p) => (
-                                <Link key={p._id} to={`/dashboard/admin/blog/update/${p.slug}`}>
+                                <Link
+                                    key={p._id}
+                                    to={`/dashboard/admin/blog/update/${p.slug}`}
+                                >
                                     <div className="card mb-3">
                                         <div className="row g-0">
                                             <div className="col-md-4">
@@ -63,8 +68,12 @@ export default function BlogList() {
                                             </div>
                                             <div className="col-md-8">
                                                 <div className="card-body">
-                                                    <h5 className="card-title">{p.title}</h5>
-                                                    <p className="card-text">{p.value}</p>
+                                                    <h5 className="card-title">
+                                                        {p.title}
+                                                    </h5>
+                                                    <p className="card-text">
+                                                        {p.value}
+                                                    </p>
                                                     <p className="card-text">
                                                         <small className="text-muted">
                                                             {moment(
@@ -74,7 +83,9 @@ export default function BlogList() {
                                                             )}
                                                         </small>
                                                     </p>
-                                                    <p className="card-text">{p.category?.name}</p>
+                                                    <p className="card-text">
+                                                        {p.category?.name}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
