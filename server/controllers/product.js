@@ -156,13 +156,12 @@ export const update = async (req, res) => {
 
 export const filteredProducts = async (req, res) => {
     try {
-        const { level, age, priceRange, reviewRate } = req.body;
-        console.log(req.body);
-        let args = {};
+        const { level, ageCategory: age, priceRange, reviewRate } = req.body;
 
+        const args = {};
         if (level && level.length > 0) args.category = level;
 
-        if (age && age.length > 0) args.ageCategory = age;
+        if (age && age.length > 0) args.category = age;
 
         if (priceRange && priceRange.length) {
             args.price = { $gte: priceRange[0], $lte: priceRange[1] };
@@ -171,12 +170,11 @@ export const filteredProducts = async (req, res) => {
         if (reviewRate && reviewRate.length > 0) {
             args.reviewRate = reviewRate[0];
         }
-        console.log("args => ", args);
 
-        console.log(req.body);
+        console.log("body=> ", req.body);
 
         const products = await Product.find(args);
-        console.log("filtered products query => ", products.length);
+        console.log("filtered products query => ", products);
         res.json(products);
     } catch (err) {
         console.log(err);
