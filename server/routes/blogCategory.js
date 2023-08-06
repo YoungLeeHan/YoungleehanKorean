@@ -6,12 +6,12 @@ const router = express.Router();
 import { requireSignin, isAdmin } from "../middlewares/auth.js";
 // controllers
 import {
-  create,
-  update,
-  remove,
-  list,
-  read,
-  // productsByCategory,
+    create,
+    update,
+    remove,
+    list,
+    read,
+    // productsByCategory,
 } from "../controllers/blogCategory.js";
 
 router.post("/blog/category", requireSignin, isAdmin, create);
