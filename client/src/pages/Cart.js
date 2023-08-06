@@ -2,7 +2,7 @@
 // -----------------------------------------------------
 import "../styles/pages/Cart.scss";
 import Jumbotron from "../components/cards/Jumbotron";
-import ScrollToTop from "../components/nav/ScrollToTop";
+import useScrollToTop from "../hooks/useScrollToTop";
 import { useCart } from "../context/cart";
 import { useCartQuantity } from "../context/cartQuantity";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,7 +13,7 @@ import CartProductCard from "./../components/cards/CartProductCard";
 import ModalInfo from "../components/common/ModalInfo";
 
 export default function Cart() {
-    ScrollToTop();
+    useScrollToTop();
 
     // states
     const [isModalOpen, setIsModalOpen] = useState(false);

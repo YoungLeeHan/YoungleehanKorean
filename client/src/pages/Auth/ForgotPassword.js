@@ -4,10 +4,10 @@
 import Jumbotron from "../../components/cards/Jumbotron";
 import AccountControlBox from "../../components/cards/AccountControlBox";
 import ForgotPasswordForm from "../../components/forms/ForgotPasswordForm";
-import ScrollToTop from "../../components/nav/ScrollToTop";
+import useScrollToTop from "../../hooks/useScrollToTop";
 
 export default function ForgotPassword() {
-    ScrollToTop();
+    useScrollToTop();
     return (
         <>
             <Jumbotron
