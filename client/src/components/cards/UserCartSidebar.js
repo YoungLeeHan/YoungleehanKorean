@@ -32,6 +32,7 @@ export default function UserCartSidebar() {
             console.log(err);
         }
     };
+  
 
     const handleBuy = async () => {
         try {
@@ -55,31 +56,29 @@ export default function UserCartSidebar() {
         }
     };
 
-    return (
-        <div className="col-md-6 mt-5 mb-5">
-            <h3>
-                Your order will be sent to: {JSON.stringify(auth?.user?.email)}
-            </h3>
-            <div className="mt-3 mb-3">
-                {clientToken && (
-                    <DropIn
-                        options={{
-                            authorization: clientToken,
-                            paypal: {
-                                flow: "vault",
-                            },
-                        }}
-                        onInstance={(instance) => setInstance(instance)}
-                    />
-                )}
-            </div>
-            <button
-                onClick={handleBuy}
-                className="btn btn-primary col-12 mt-2"
-                disabled={!cart?.length || !auth?.user?.email || !instance}
-            >
-                Buy
-            </button>
-        </div>
-    );
+  return (
+    <div className="col-md-6 mt-5 mb-5">
+      <h3>Your order will be sent to: {JSON.stringify(auth?.user?.email)}</h3>
+      <div className="mt-3 mb-3">
+        {clientToken && (
+          <DropIn
+            options={{
+              authorization: clientToken,
+              paypal: {
+                flow: "vault",
+              },
+            }}
+            onInstance={(instance) => setInstance(instance)}
+          />
+        )}
+      </div>
+      <button
+        onClick={handleBuy}
+        className="btn btn-primary col-12 mt-2"
+        disabled={!cart?.length || !auth?.user?.email || !instance}
+      >
+        Buy
+      </button>
+    </div>
+  );
 }
