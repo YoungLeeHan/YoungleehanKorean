@@ -33,6 +33,8 @@ import AdminCreatePost from "./pages/Admin/Blog";
 import AdminBlogCategory from "./pages/Admin/BlogCategory";
 import AdminBlogPostList from "./pages/Admin/BlogList";
 import AdminBlogUpdate from "./pages/Admin/BlogUpdate";
+import PaymentSuccess from "./pages/Payment/PaymentSuccess";
+import PaymentFail from "./pages/Payment/PaymentFail";
 
 export default function App() {
     return (
@@ -69,6 +71,11 @@ export default function App() {
                 {/*Cart & Payment*/}
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/cart/checkout" element={<Checkout />} />
+                <Route
+                    path="/cart/checkout/success"
+                    element={<PaymentSuccess />}
+                />
+                <Route path="/cart/checkout/fail" element={<PaymentFail />} />
 
                 {/*user dashboard*/}
                 <Route path="/dashboard" element={<PrivateRoute />}>
