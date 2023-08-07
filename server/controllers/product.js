@@ -238,12 +238,18 @@ export const getToken = async (req, res) => {
 
 export const processPayment = async (req, res) => {
     try {
-        // console.log(req.body);
-        const { nonce, cartTotal } = req.body;
+        const { nonce, cart, cartQuantity } = req.body;
+        console.log("cart => ", cart);
+        console.log("cartQuantity => ", cartQuantity);
+
+        // TODO: get total by calculating cart and cartQuantity data
+        // const total;
+
+        // // console.log("total => ", total);
 
         let newTransaction = gateway.transaction.sale(
             {
-                amount: cartTotal,
+                amount: total,
                 paymentMethodNonce: nonce,
                 options: {
                     submitForSettlement: true, //immediate settlement

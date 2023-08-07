@@ -105,9 +105,8 @@ $desktop-font-xlarge: 32px;
     }
 }
 
-
 .btn-outline-primary {
-    border: $color-purple;
+    border: 1px solid $color-purple;
     border-radius: 5px;
     background-color: transparent;
     color: $color-purple;
@@ -118,7 +117,8 @@ $desktop-font-xlarge: 32px;
 
     &:hover,
     &:active {
-        color: $color-black !important;
+        border: 1px solid $color-purple !important;
+        color: $color-purple !important;
         background-color: $color-white !important;
     }
 }
