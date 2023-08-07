@@ -10,10 +10,8 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { BsSearch } from "react-icons/bs";
 import { Col, Row, Checkbox, ConfigProvider, Slider } from "antd";
-import { Rating } from "semantic-ui-react";
 import ProductCard from "../../components/cards/ProductCard";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
-import { toast } from "react-hot-toast";
 import loadingGIF from "../../assets/images/Common/loading.gif";
 
 export default function ProductsView() {
@@ -26,13 +24,10 @@ export default function ProductsView() {
     const [level, setLevel] = useState();
     const [age, setAge] = useState();
     const [priceRange, setPriceRange] = useState();
-    const [reviewRate, setReviewRate] = useState();
     const [sortBy, setSortBy] = useState("");
     const [isLoading, setIsLoading] = useState(true);
     const [levelCategories, setLevelCategories] = useState([]);
     const [ageCategories, setAgeCategories] = useState([]);
-    const [defaultLevelCategories, setDefaultLevelCategories] = useState([]);
-    const [defaultAgeCategories, setDefaultAgeCategories] = useState([]);
 
     // hooks
     const windowWidth = useWindowWidth();
@@ -65,14 +60,6 @@ export default function ProductsView() {
         }
     };
 
-    useEffect(() => {
-        let arr = [];
-        levelCategories.map((c) => {
-            arr.push(c._id);
-        });
-        setDefaultLevelCategories(arr);
-    }, [levelCategories]);
-
     // On page load, fetch age categories list from DB
     useEffect(() => {
         loadAgeCategories();
@@ -87,22 +74,15 @@ export default function ProductsView() {
         }
     };
 
-    useEffect(() => {
-        let arr = [];
-        ageCategories.map((c) => {
-            arr.push(c._id);
-        });
-        setDefaultAgeCategories(arr);
-    }, [ageCategories]);
-
     // On page load, fetch products list from DB
     useEffect(() => {
-        if (!level && !age && !priceRange && !reviewRate) {
+        if (!level && !age && !priceRange) {
             loadProducts();
         }
     }, []);
 
     const loadProducts = async () => {
+        setIsLoading(true);
         try {
             const { data } = await axios.get(`/products`);
             setProducts(data);
@@ -114,18 +94,16 @@ export default function ProductsView() {
 
     // Load filtered products when any filter is activated
     useEffect(() => {
-        if (level || age || priceRange || reviewRate) {
+        if (level || age || priceRange) {
             loadFilteredProducts();
         }
-    }, [level, age, priceRange, reviewRate]);
+    }, [level, age, priceRange]);
 
     const loadFilteredProducts = async () => {
-        toast.error("Filter endpoints are under construction.");
         console.log({
             level,
             age,
             priceRange,
-            reviewRate,
         });
         setIsLoading(true);
         try {
@@ -133,7 +111,6 @@ export default function ProductsView() {
                 level,
                 age,
                 priceRange,
-                reviewRate,
             });
             setProducts(data);
         } catch (err) {
@@ -144,7 +121,7 @@ export default function ProductsView() {
 
     // Product Search
     useEffect(() => {
-        handleSearchProduct();
+        if (searchKeyword) handleSearchProduct();
     }, [searchKeyword]);
 
     const handleSearchProduct = async () => {
@@ -177,11 +154,6 @@ export default function ProductsView() {
     // Price range filter
     const handlePriceRangeChange = (checked) => {
         setPriceRange(checked);
-    };
-
-    // Rating filter
-    const handleRatingFilterChange = (checkedValues) => {
-        setReviewRate(checkedValues);
     };
 
     // Sorting
@@ -289,12 +261,6 @@ export default function ProductsView() {
                                                 style={{
                                                     width: "100%",
                                                 }}
-                                                defaultValue={[
-                                                    "64c5666b5c021ca51dd4c012",
-                                                    "64c566705c021ca51dd4c017",
-                                                    "64c566775c021ca51dd4c01c",
-                                                    "64c9689e0be1a57c65be953e",
-                                                ]}
                                                 onChange={
                                                     handleLevelFilterChange
                                                 }
@@ -337,10 +303,6 @@ export default function ProductsView() {
                                                 style={{
                                                     width: "100%",
                                                 }}
-                                                defaultValue={[
-                                                    "64cbfbc5f161f2aac95313e5",
-                                                    "64cbfc0df161f2aac95313e6",
-                                                ]}
                                                 onChange={handleAgeFilterChange}
                                             >
                                                 <Row>
@@ -404,50 +366,6 @@ export default function ProductsView() {
                                             </h5>
                                         </div>
                                         {/* Filter #4: filter by price ends here*/}
-
-                                        {/* 👉 Filter #5: filter by rating starts here*/}
-                                        <div className="filter-box">
-                                            <h2>Ratings</h2>
-                                            <Checkbox.Group
-                                                style={{
-                                                    width: "100%",
-                                                }}
-                                                defaultValue={[5, 4, 3, 2, 1]}
-                                                onChange={
-                                                    handleRatingFilterChange
-                                                }
-                                            >
-                                                <Row>
-                                                    {[5, 4, 3, 2, 1].map(
-                                                        (rate, i) => (
-                                                            <Col
-                                                                span={24}
-                                                                key={i}
-                                                            >
-                                                                <div className="checkbox2">
-                                                                    <Checkbox
-                                                                        value={
-                                                                            rate
-                                                                        }
-                                                                    >
-                                                                        <Rating
-                                                                            defaultRating={
-                                                                                rate
-                                                                            }
-                                                                            maxRating={
-                                                                                5
-                                                                            }
-                                                                            disabled
-                                                                        />
-                                                                    </Checkbox>
-                                                                </div>
-                                                            </Col>
-                                                        )
-                                                    )}
-                                                </Row>
-                                            </Checkbox.Group>
-                                        </div>
-                                        {/* Filter #5: filter by rating ends here*/}
                                     </ConfigProvider>
                                 </>
                             )}
