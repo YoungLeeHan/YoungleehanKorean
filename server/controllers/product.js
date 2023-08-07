@@ -109,9 +109,7 @@ export const update = async (req, res) => {
     try {
         // console.log(req.fields);
         // console.log(req.files);
-        const { title, description, price, category, age, createAt } =
-            req.fields;
-        const { images } = req.files;
+        const { title, description, price, category, age, images } = req.fields;
 
         // validation
         switch (true) {

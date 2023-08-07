@@ -63,12 +63,12 @@ export default function AdminProductUpdate() {
         try {
             const productData = new FormData();
             images && productData.append("images", images);
-            productData.append("name", title);
+            productData.append("title", title);
             productData.append("description", description);
             productData.append("price", price);
             productData.append("category", category);
-            productData.append("shipping", age);
-            productData.append("quantity", quantity);
+            productData.append("age", age);
+            // productData.append("quantity", quantity);
 
             const { data } = await axios.put(`/product/${id}`, productData);
             if (data?.error) {
@@ -105,7 +105,7 @@ export default function AdminProductUpdate() {
                 directory={"Admin Dashboard"}
                 subDirectory={"Modify Product Details"}
             />
-            
+
             <div style={{ maxWidth: "1170px" }} className="container-fluid">
                 <div className="row">
                     <div className="col-md-3">
