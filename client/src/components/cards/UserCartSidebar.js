@@ -2,52 +2,59 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../context/auth";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../../context/cart";
+import { useCartQuantity } from "../../context/cartQuantity";
 import axios from "axios";
 import DropIn from "braintree-web-drop-in-react";
 import toast from "react-hot-toast";
 
 export default function UserCartSidebar() {
-  const [auth, setAuth] = useAuth();
-  const [cart, setCart] = useCart();
+    //hooks
+    const [auth, setAuth] = useAuth();
+    const [cart, setCart] = useCart();
+    const [cartQuantity, setCartQuantity] = useCartQuantity();
+    const navigate = useNavigate();
 
-  const [clientToken, setClientToken] = useState("");
-  const [instance, setInstance] = useState("");
+    //states
+    const [clientToken, setClientToken] = useState("");
+    const [instance, setInstance] = useState("");
 
-  const navigate = useNavigate();
+    useEffect(() => {
+        if (auth?.token) {
+            getClientToken();
+        }
+    }, [auth?.token]);
 
-  useEffect(() => {
-    if (auth?.token) {
-      getClientToken();
-    }
-  }, [auth?.token]);
+    const getClientToken = async () => {
+        try {
+            const { data } = await axios.get("/braintree/token");
+            setClientToken(data.clientToken);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+  
 
-  const getClientToken = async () => {
-    try {
-      const { data } = await axios.get("/braintree/token");
-      // {data} is from the response we get from getToken function
-      setClientToken(data.clientToken);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handleBuy = async () => {
-    try {
-      const { nonce } = await instance.requestPaymentMethod();
-      console.log("nonce => ", nonce);
-      const { data } = await axios.post("/braintree/payment", {
-        nonce,
-        cart,
-      });
-      console.log("handle buy response => ", data.cart);
-      localStorage.removeItem("cart");
-      setCart([]);
-      navigate("/dashboard/user/orders");
-      toast.success("Payment successful");
-    } catch (err) {
-      console.log(err);
-    }
-  };
+    const handleBuy = async () => {
+        try {
+            const { nonce } = await instance.requestPaymentMethod();
+            const { data } = await axios.post("/braintree/payment", {
+                nonce,
+                cart,
+                cartQuantity,
+            });
+            console.log("buy response => ", data);
+            //localStorage.removeItem("cart");
+            setCart([]);
+            setCartQuantity({});
+            setInstance("");
+            navigate("/cart/checkout/success");
+            toast.success("Payment successful");
+        } catch (err) {
+            navigate("/cart/checkout/fail");
+            toast.error(err.message);
+            console.log(err);
+        }
+    };
 
   return (
     <div className="col-md-6 mt-5 mb-5">
