@@ -3,10 +3,10 @@
 import Jumbotron from "../../components/cards/Jumbotron";
 import AccountControlBox from "../../components/cards/AccountControlBox";
 import NewPasswordForm from "../../components/forms/NewPasswordForm";
-import ScrollToTop from "../../components/nav/ScrollToTop";
+import useScrollToTop from "../../hooks/useScrollToTop";
 
 export default function NewPassword() {
-    ScrollToTop();
+    useScrollToTop();
     return (
         <>
             <Jumbotron title={"New Password"} directory={"New Password"} />

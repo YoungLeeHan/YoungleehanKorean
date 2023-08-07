@@ -3,7 +3,7 @@
 // 👻 Developed by DanBi Choi on Aug 1st, 2023. (Search Feature added)
 // -----------------------------------------------------
 import Jumbotron from "../../components/cards/Jumbotron";
-import ScrollToTop from "../../components/nav/ScrollToTop";
+import useScrollToTop from "../../hooks/useScrollToTop";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import "../../styles/pages/ProductsView.scss";
 import { useState, useEffect } from "react";
@@ -17,7 +17,7 @@ import { toast } from "react-hot-toast";
 import loadingGIF from "../../assets/images/Common/loading.gif";
 
 export default function ProductsView() {
-    ScrollToTop();
+    useScrollToTop();
 
     // states
     const [products, setProducts] = useState([]);

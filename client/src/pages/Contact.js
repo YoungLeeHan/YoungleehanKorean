@@ -1,13 +1,13 @@
 // 👻 Developed by DanBi Choi on July 25th, 2023.
 // -----------------------------------------------------
 import Jumbotron from "../components/cards/Jumbotron";
-import ScrollToTop from "../components/nav/ScrollToTop";
+import useScrollToTop from "../hooks/useScrollToTop";
 import { useForm, ValidationError } from "@formspree/react";
 import { Link } from "react-router-dom";
 import "../styles/pages/Contact.scss";
 
 export default function Contact() {
-    ScrollToTop();
+    useScrollToTop();
 
     // Formspree state
     const [state, handleSubmit] = useForm("myyqzdbq");

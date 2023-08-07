@@ -1,9 +1,9 @@
 import Jumbotron from "../../components/cards/Jumbotron";
-import ScrollToTop from "../../components/nav/ScrollToTop";
+import useScrollToTop from "../../hooks/useScrollToTop";
 import { useParams } from "react-router-dom";
 
 export default function SingleBlogView() {
-    ScrollToTop();
+    useScrollToTop();
 
     // hooks
     const params = useParams();

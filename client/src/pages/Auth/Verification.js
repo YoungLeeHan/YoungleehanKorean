@@ -3,10 +3,10 @@
 import Jumbotron from "../../components/cards/Jumbotron";
 import AccountControlBox from "../../components/cards/AccountControlBox";
 import VerificationForm from "../../components/forms/VerificationForm";
-import ScrollToTop from "../../components/nav/ScrollToTop";
+import useScrollToTop from "../../hooks/useScrollToTop";
 
 export default function Verification() {
-    ScrollToTop();
+    useScrollToTop();
     return (
         <>
             <Jumbotron title={"Verification"} directory={"Verification"} />
