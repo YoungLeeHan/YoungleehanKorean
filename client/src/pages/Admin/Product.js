@@ -169,7 +169,7 @@ export default function AdminProduct() {
                                 bordered={false}
                                 size="large"
                                 className="form-select mb-3"
-                                placeholder="Choose ageCategory"
+                                placeholder="Choose age category"
                                 onChange={(value) => setAgeCategory(value)}
                             >
                                 {ageCategories?.map((ageCategory) => (

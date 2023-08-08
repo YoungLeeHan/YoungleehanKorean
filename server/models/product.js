@@ -9,7 +9,7 @@ const productSchema = new mongoose.Schema(
         category: { type: ObjectId, ref: "Category", required: true },
         ageCategory: { type: ObjectId, ref: "ageCategory", required: true },
         description: { type: {}, required: true, maxlength: 2000 },
-        price: { type: Number, required: true, default: 0 },
+        price: { type: Number, required: true },
         reviewRate: {
             type: Number,
             required: false,
@@ -29,5 +29,3 @@ const productSchema = new mongoose.Schema(
 );
 
 export default mongoose.model("Product", productSchema);
-
-// price: { type: Number, trim: true, required: true },

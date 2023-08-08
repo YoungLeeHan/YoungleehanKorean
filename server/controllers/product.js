@@ -3,7 +3,6 @@ import fs from "fs";
 import slugify from "slugify";
 import braintree from "braintree";
 import dotenv from "dotenv";
-import ageCategory from "../models/ageCategory.js";
 
 dotenv.config();
 
@@ -19,8 +18,7 @@ export const create = async (req, res) => {
     try {
         const { title, category, ageCategory, description, price } = req.fields;
         const { images } = req.files;
-        console.log("ageCategory=>", ageCategory);
-        console.log("req.fields=>", req.fields);
+
         // validation
         switch (true) {
             case !title.trim():
@@ -32,7 +30,7 @@ export const create = async (req, res) => {
             case !category.trim():
                 return res.json({ error: "Category is required" });
             case !ageCategory.trim():
-                return res.json({ error: "age is required" });
+                return res.json({ error: "Age category is required" });
             case !description.trim():
                 return res.json({ error: "Description is required" });
             case !price.trim():
@@ -72,8 +70,8 @@ export const read = async (req, res) => {
     try {
         const product = await Product.findOne({ slug: req.params.slug })
             .select("-images")
-            .populate("category");
-
+            .populate("category")
+            .populate("ageCategory");
         res.json(product);
     } catch (err) {
         console.log(err);
@@ -107,28 +105,25 @@ export const remove = async (req, res) => {
 
 export const update = async (req, res) => {
     try {
-        // console.log(req.fields);
-        // console.log(req.files);
-        const { title, description, price, category, age, createAt } =
-            req.fields;
+        const { title, description, price, category, ageCategory } = req.fields;
         const { images } = req.files;
 
         // validation
         switch (true) {
             case !title.trim():
-                res.json({ error: "Title is required" });
+                return res.json({ error: "Title is required" });
             case !description.trim():
-                res.json({ error: "Description is required" });
+                return res.json({ error: "Description is required" });
             case !price.trim():
-                res.json({ error: "Price is required" });
+                return res.json({ error: "Price is required" });
             case !category.trim():
-                res.json({ error: "Category is required" });
-            case !age.trim():
-                res.json({ error: "age is required" });
-            // case !createAt.trim():
-            //   res.json({ error: "createAt is required" });
+                return res.json({ error: "Category is required" });
+            case !ageCategory.trim():
+                return res.json({ error: "Age Category is required" });
             case images && images.size > 1000000:
-                res.json({ error: "Image should be less than 1mb in size" });
+                return res.json({
+                    error: "Image should be less than 1MB in size",
+                });
         }
 
         // update product
@@ -156,25 +151,18 @@ export const update = async (req, res) => {
 
 export const filteredProducts = async (req, res) => {
     try {
-        const { level, ageCategory: age, priceRange, reviewRate } = req.body;
+        const { level, age, priceRange } = req.body;
 
         const args = {};
         if (level && level.length > 0) args.category = level;
 
-        if (age && age.length > 0) args.category = age;
+        if (age && age.length > 0) args.ageCategory = age;
 
         if (priceRange && priceRange.length) {
             args.price = { $gte: priceRange[0], $lte: priceRange[1] };
         }
 
-        if (reviewRate && reviewRate.length > 0) {
-            args.reviewRate = reviewRate[0];
-        }
-
-        console.log("body=> ", req.body);
-
         const products = await Product.find(args);
-        console.log("filtered products query => ", products);
         res.json(products);
     } catch (err) {
         console.log(err);
@@ -240,12 +228,17 @@ export const getToken = async (req, res) => {
 
 export const processPayment = async (req, res) => {
     try {
-        // console.log(req.body);
-        const { nonce, cartTotal } = req.body;
+        const { nonce, cart, cartQuantity } = req.body;
+
+        let total = 0;
+        for (let i = 0; i < cart.length; i++) {
+            total += cart[i].price * cartQuantity[cart[i]._id];
+        }
+        total = total.toFixed(2);
 
         let newTransaction = gateway.transaction.sale(
             {
-                amount: cartTotal,
+                amount: total,
                 paymentMethodNonce: nonce,
                 options: {
                     submitForSettlement: true, //immediate settlement
@@ -253,7 +246,12 @@ export const processPayment = async (req, res) => {
             },
             function (error, result) {
                 if (result) {
-                    res.send(result);
+                    const order = new Order({
+                        products: cart,
+                        payment: result,
+                        buyer: req.user._id,
+                    }).save();
+                    res.json({ ok: true });
                 } else {
                     res.status(500).send(error);
                 }

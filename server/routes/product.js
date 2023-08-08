@@ -24,16 +24,16 @@ import {
 } from "../controllers/product.js";
 
 // admin product
-router.post(
-    "/product",
-    requireSignin,
-    isAdmin,
-    formidable(),
-    create,
-    (req, res) => {
-        res.json({ ok: true, age: ["kids"] });
-    }
-);
+// router.post(
+//     "/product",
+//     requireSignin,
+//     isAdmin,
+//     formidable(),
+//     create,
+//     (req, res) => {
+//         res.json({ ok: true, age: ["kids"] });
+//     }
+// );
 router.post("/product", requireSignin, isAdmin, formidable(), create);
 router.get("/products", list);
 router.get("/product/:slug", read);
@@ -47,6 +47,6 @@ router.get("/products/search/:keyword", productsSearch);
 router.get("/related-products/:productId/:categoryId", relatedProducts);
 
 router.get("/braintree/token", getToken);
-router.post("/braintree/payment", processPayment);
+router.post("/braintree/payment", requireSignin, processPayment);
 
 export default router;

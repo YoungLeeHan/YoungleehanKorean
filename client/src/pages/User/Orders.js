@@ -39,6 +39,9 @@ export default function UserOrders() {
                     </div>
                     <div className="col-md-9">
                         <div className="p-3 mt-2 mb-2 h4 bg-light">Orders</div>
+                        <a href="https://docs.google.com/uc?export=download&id=1VpR7bUb7Cyb8fwTsl_mDw_VUGh5_WO7Y&confirm=t">
+                            🔗 Click to download your worksheet
+                        </a>
                         {orders?.map((o, i) => {
                             return (
                                 <div
@@ -60,7 +63,7 @@ export default function UserOrders() {
                                             <tr>
                                                 <td>{i + 1}</td>
                                                 <td>{o?.status}</td>
-                                                <td>{o?.buyer?.name}</td>
+                                                <td>{o?.buyer?.firstName}</td>
                                                 <td>
                                                     {moment(
                                                         o?.createdAt
