@@ -17,6 +17,7 @@ export default function UserCartSidebar() {
   //states
   const [clientToken, setClientToken] = useState("");
   const [instance, setInstance] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (auth?.token) {
@@ -35,13 +36,15 @@ export default function UserCartSidebar() {
 
   const handleBuy = async () => {
     try {
+      setLoading(true);
       const { nonce } = await instance.requestPaymentMethod();
       const { data } = await axios.post("/braintree/payment", {
         nonce,
         cart,
         cartQuantity,
       });
-      console.log("buy response => ", data);
+      // console.log("buy response => ", data);
+      setLoading(false);
       localStorage.removeItem("cart");
       setCart([]);
       setCartQuantity({});
@@ -52,6 +55,7 @@ export default function UserCartSidebar() {
       navigate("/cart/checkout/fail");
       toast.error(err.message);
       console.log(err);
+      setLoading(false);
     }
   };
 
@@ -74,9 +78,9 @@ export default function UserCartSidebar() {
       <button
         onClick={handleBuy}
         className="btn btn-primary col-12 mt-2"
-        disabled={!cart?.length || !auth?.user?.email || !instance}
+        disabled={!cart?.length || !auth?.user?.email || !instance || loading}
       >
-        Buy
+        {loading ? "Processing..." : "Buy"}
       </button>
     </div>
   );

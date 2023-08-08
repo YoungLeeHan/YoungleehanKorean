@@ -63,7 +63,7 @@ export default function UserOrders() {
                       <tr>
                         <td>{i + 1}</td>
                         <td>{o?.status}</td>
-                        <td>{o?.buyer?.name}</td>
+                        <td>{o?.buyer?.firstName}</td>
                         <td>{moment(o?.createdAt).fromNow()}</td>
                         <td>{o?.payment?.success ? "Success" : "Failed"}</td>
                         <td>{o?.products?.length} products</td>
