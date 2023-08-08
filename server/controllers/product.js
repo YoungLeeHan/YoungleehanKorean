@@ -105,28 +105,28 @@ export const remove = async (req, res) => {
 };
 
 export const update = async (req, res) => {
-    try {
-        // console.log(req.fields);
-        // console.log(req.files);
-        const { title, description, price, category, age, images } = req.fields;
+  try {
+    // console.log(req.fields);
+    // console.log(req.files);
+    const { title, description, price, category, age, images } = req.fields;
 
-        // validation
-        switch (true) {
-            case !title.trim():
-                res.json({ error: "Title is required" });
-            case !description.trim():
-                res.json({ error: "Description is required" });
-            case !price.trim():
-                res.json({ error: "Price is required" });
-            case !category.trim():
-                res.json({ error: "Category is required" });
-            case !age.trim():
-                res.json({ error: "age is required" });
-            // case !createAt.trim():
-            //   res.json({ error: "createAt is required" });
-            case images && images.size > 1000000:
-                res.json({ error: "Image should be less than 1mb in size" });
-        }
+    // validation
+    switch (true) {
+      case !title.trim():
+        res.json({ error: "Title is required" });
+      case !description.trim():
+        res.json({ error: "Description is required" });
+      case !price.trim():
+        res.json({ error: "Price is required" });
+      case !category.trim():
+        res.json({ error: "Category is required" });
+      case !age.trim():
+        res.json({ error: "age is required" });
+      // case !createAt.trim():
+      //   res.json({ error: "createAt is required" });
+      case images && images.size > 1000000:
+        res.json({ error: "Image should be less than 1mb in size" });
+    }
 
     // update product
     const product = await Product.findByIdAndUpdate(
@@ -236,35 +236,37 @@ export const getToken = async (req, res) => {
 };
 
 export const processPayment = async (req, res) => {
-    try {
-        const { nonce, cart, cartQuantity } = req.body;
-        console.log("cart => ", cart);
-        console.log("cartQuantity => ", cartQuantity);
+  try {
+    const { nonce, cart, cartQuantity } = req.body;
+    // console.log("cart => ", cart);
+    // console.log("cartQuantity => ", cartQuantity);
 
-        // TODO: get total by calculating cart and cartQuantity data
-        // const total;
-
-        // // console.log("total => ", total);
-
-        let newTransaction = gateway.transaction.sale(
-            {
-                amount: total,
-                paymentMethodNonce: nonce,
-                options: {
-                    submitForSettlement: true, //immediate settlement
-                },
-            },
-            function (error, result) {
-                if (result) {
-                    res.send(result);
-                } else {
-                    res.status(500).send(error);
-                }
-            }
-        );
-    } catch (err) {
-        console.log(err);
+    let total = 0;
+    for (let i = 0; i < cart.length; i++) {
+      total += cart[i].price * cartQuantity[cart[i]._id];
     }
+
+    // console.log("total => ", total);
+
+    let newTransaction = gateway.transaction.sale(
+      {
+        amount: total,
+        paymentMethodNonce: nonce,
+        options: {
+          submitForSettlement: true, //immediate settlement
+        },
+      },
+      function (error, result) {
+        if (result) {
+          res.send(result);
+        } else {
+          res.status(500).send(error);
+        }
+      }
+    );
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const productsSearch = async (req, res) => {
