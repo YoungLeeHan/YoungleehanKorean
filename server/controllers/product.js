@@ -19,8 +19,7 @@ export const create = async (req, res) => {
     try {
         const { title, category, ageCategory, description, price } = req.fields;
         const { images } = req.files;
-        console.log("ageCategory=>", ageCategory);
-        console.log("req.fields=>", req.fields);
+
         // validation
         switch (true) {
             case !title.trim():
@@ -32,7 +31,7 @@ export const create = async (req, res) => {
             case !category.trim():
                 return res.json({ error: "Category is required" });
             case !ageCategory.trim():
-                return res.json({ error: "age is required" });
+                return res.json({ error: "Age category is required" });
             case !description.trim():
                 return res.json({ error: "Description is required" });
             case !price.trim():
@@ -72,8 +71,8 @@ export const read = async (req, res) => {
     try {
         const product = await Product.findOne({ slug: req.params.slug })
             .select("-images")
-            .populate("category");
-
+            .populate("category")
+            .populate("ageCategory");
         res.json(product);
     } catch (err) {
         console.log(err);
@@ -107,28 +106,31 @@ export const remove = async (req, res) => {
 
 export const update = async (req, res) => {
     try {
-        // console.log(req.fields);
-        // console.log(req.files);
-        const { title, description, price, category, age, createAt } =
-            req.fields;
+        const { title, description, price, category, ageCategory } = req.fields;
         const { images } = req.files;
 
         // validation
         switch (true) {
             case !title.trim():
-                res.json({ error: "Title is required" });
+                return res.json({ error: "Title is required" });
+                break;
             case !description.trim():
-                res.json({ error: "Description is required" });
+                return res.json({ error: "Description is required" });
+                break;
             case !price.trim():
-                res.json({ error: "Price is required" });
+                return res.json({ error: "Price is required" });
+                break;
             case !category.trim():
-                res.json({ error: "Category is required" });
-            case !age.trim():
-                res.json({ error: "age is required" });
-            // case !createAt.trim():
-            //   res.json({ error: "createAt is required" });
+                return res.json({ error: "Category is required" });
+                break;
+            case !ageCategory.trim():
+                return res.json({ error: "Age Category is required" });
+                break;
             case images && images.size > 1000000:
-                res.json({ error: "Image should be less than 1mb in size" });
+                return res.json({
+                    error: "Image should be less than 1mb in size",
+                });
+                break;
         }
 
         // update product

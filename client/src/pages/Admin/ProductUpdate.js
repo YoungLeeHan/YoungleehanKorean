@@ -12,6 +12,7 @@ const { Option } = Select;
 export default function AdminProductUpdate() {
     // context
     const [auth, setAuth] = useAuth();
+
     // state
     const [images, setimages] = useState("");
     const [title, setTitle] = useState("");
@@ -19,9 +20,10 @@ export default function AdminProductUpdate() {
     const [price, setPrice] = useState("");
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState("");
-    const [age, setAge] = useState("");
-    const [quantity, setQuantity] = useState("");
+    const [ageCategory, setAgeCategory] = useState("");
+    const [ageCategories, setAgeCategories] = useState([]);
     const [id, setId] = useState("");
+
     // hook
     const navigate = useNavigate();
     const params = useParams();
@@ -29,6 +31,21 @@ export default function AdminProductUpdate() {
     useEffect(() => {
         loadProduct();
     }, []);
+
+    const loadProduct = async () => {
+        try {
+            const { data } = await axios.get(`/product/${params.slug}`);
+            setTitle(data.title);
+            setDescription(data.description);
+            setPrice(data.price);
+            setCategory(data.category);
+            setAgeCategory(data.ageCategory);
+
+            setId(data._id);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     useEffect(() => {
         loadCategories();
@@ -43,16 +60,14 @@ export default function AdminProductUpdate() {
         }
     };
 
-    const loadProduct = async () => {
+    useEffect(() => {
+        loadAgeCategories();
+    }, []);
+
+    const loadAgeCategories = async () => {
         try {
-            const { data } = await axios.get(`/product/${params.slug}`);
-            setTitle(data.title);
-            setDescription(data.description);
-            setPrice(data.price);
-            setCategory(data.category._id);
-            setAge(data.age);
-            setQuantity(data.quantity);
-            setId(data._id);
+            const { data } = await axios.get("/ageCategories");
+            setAgeCategories(data);
         } catch (err) {
             console.log(err);
         }
@@ -62,13 +77,12 @@ export default function AdminProductUpdate() {
         e.preventDefault();
         try {
             const productData = new FormData();
-            images && productData.append("images", images);
-            productData.append("name", title);
+            if (images) productData.append("images", images);
+            productData.append("title", title);
             productData.append("description", description);
             productData.append("price", price);
             productData.append("category", category);
-            productData.append("shipping", age);
-            productData.append("quantity", quantity);
+            productData.append("ageCategory", ageCategory);
 
             const { data } = await axios.put(`/product/${id}`, productData);
             if (data?.error) {
@@ -79,7 +93,7 @@ export default function AdminProductUpdate() {
             }
         } catch (err) {
             console.log(err);
-            toast.error("Product create failed. Try again.");
+            toast.error("Product update failed. Try again.");
         }
     };
 
@@ -105,7 +119,7 @@ export default function AdminProductUpdate() {
                 directory={"Admin Dashboard"}
                 subDirectory={"Modify Product Details"}
             />
-            
+
             <div style={{ maxWidth: "1170px" }} className="container-fluid">
                 <div className="row">
                     <div className="col-md-3">
@@ -178,17 +192,17 @@ export default function AdminProductUpdate() {
                         />
 
                         <Select
-                            // showSearch
                             bordered={false}
                             size="large"
                             className="form-select mb-3"
-                            placeholder="Choose category"
-                            onChange={(value) => setCategory(value)}
-                            value={category}
+                            onChange={(value) => {
+                                setCategory(value);
+                            }}
+                            value={category.name}
                         >
                             {categories?.map((category) => (
                                 <Option key={category._id} value={category._id}>
-                                    {category.title}
+                                    {category.name}
                                 </Option>
                             ))}
                         </Select>
@@ -197,23 +211,20 @@ export default function AdminProductUpdate() {
                             bordered={false}
                             size="large"
                             className="form-select mb-3"
-                            placeholder="Choose age"
-                            onChange={(value) => setAge(value)}
-                            value={age ? "kids" : "adults"}
+                            onChange={(value) => {
+                                setAgeCategory(value);
+                            }}
+                            value={ageCategory.name}
                         >
-                            <Option value="0">kids</Option>
-                            <Option value="1">adults</Option>
-                            {/* <Option value="2">Yes</Option> */}
+                            {ageCategories?.map((ageCategory) => (
+                                <Option
+                                    key={ageCategory._id}
+                                    value={ageCategory._id}
+                                >
+                                    {ageCategory.name}
+                                </Option>
+                            ))}
                         </Select>
-
-                        <input
-                            type="number"
-                            min="1"
-                            className="form-control p-2 mb-3"
-                            placeholder="Enter quantity"
-                            value={quantity}
-                            onChange={(e) => setQuantity(e.target.value)}
-                        />
 
                         <div className="d-flex justify-content-between">
                             <button
