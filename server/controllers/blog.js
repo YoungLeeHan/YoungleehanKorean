@@ -117,3 +117,14 @@ export const update = async (req, res) => {
         return res.status(400).json(err.message);
     }
 };
+
+export const remove = async (req, res) => {
+    try {
+        const post = await BlogPost.findByIdAndDelete(
+            req.params.postId
+        ).select("-images");
+        res.json(post);
+    } catch (err) {
+        console.log(err);
+    }
+};
