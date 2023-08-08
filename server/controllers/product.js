@@ -3,7 +3,6 @@ import fs from "fs";
 import slugify from "slugify";
 import braintree from "braintree";
 import dotenv from "dotenv";
-import ageCategory from "../models/ageCategory.js";
 
 dotenv.config();
 
@@ -242,12 +241,20 @@ export const getToken = async (req, res) => {
 
 export const processPayment = async (req, res) => {
     try {
-        // console.log(req.body);
-        const { nonce, cartTotal } = req.body;
+        const { nonce, cart, cartQuantity } = req.body;
+        // console.log("cart => ", cart);
+        // console.log("cartQuantity => ", cartQuantity);
+
+        let total = 0;
+        for (let i = 0; i < cart.length; i++) {
+            total += cart[i].price * cartQuantity[cart[i]._id];
+        }
+
+        // console.log("total => ", total);
 
         let newTransaction = gateway.transaction.sale(
             {
-                amount: cartTotal,
+                amount: total,
                 paymentMethodNonce: nonce,
                 options: {
                     submitForSettlement: true, //immediate settlement

@@ -24,16 +24,16 @@ import {
 } from "../controllers/product.js";
 
 // admin product
-router.post(
-    "/product",
-    requireSignin,
-    isAdmin,
-    formidable(),
-    create,
-    (req, res) => {
-        res.json({ ok: true, age: ["kids"] });
-    }
-);
+// router.post(
+//     "/product",
+//     requireSignin,
+//     isAdmin,
+//     formidable(),
+//     create,
+//     (req, res) => {
+//         res.json({ ok: true, age: ["kids"] });
+//     }
+// );
 router.post("/product", requireSignin, isAdmin, formidable(), create);
 router.get("/products", list);
 router.get("/product/:slug", read);
