@@ -112,24 +112,18 @@ export const update = async (req, res) => {
         switch (true) {
             case !title.trim():
                 return res.json({ error: "Title is required" });
-                break;
             case !description.trim():
                 return res.json({ error: "Description is required" });
-                break;
             case !price.trim():
                 return res.json({ error: "Price is required" });
-                break;
             case !category.trim():
                 return res.json({ error: "Category is required" });
-                break;
             case !ageCategory.trim():
                 return res.json({ error: "Age Category is required" });
-                break;
             case images && images.size > 1000000:
                 return res.json({
-                    error: "Image should be less than 1mb in size",
+                    error: "Image should be less than 1MB in size",
                 });
-                break;
         }
 
         // update product

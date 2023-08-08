@@ -19,9 +19,9 @@ export default function AdminProductUpdate() {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [categories, setCategories] = useState([]);
-    const [category, setCategory] = useState("");
-    const [ageCategory, setAgeCategory] = useState("");
+    const [category, setCategory] = useState({});
     const [ageCategories, setAgeCategories] = useState([]);
+    const [ageCategory, setAgeCategory] = useState({});
     const [id, setId] = useState("");
 
     // hook
@@ -39,6 +39,7 @@ export default function AdminProductUpdate() {
             setDescription(data.description);
             setPrice(data.price);
             setCategory(data.category);
+
             setAgeCategory(data.ageCategory);
 
             setId(data._id);
@@ -74,6 +75,7 @@ export default function AdminProductUpdate() {
     };
 
     const handleSubmit = async (e) => {
+        console.log(typeof category);
         e.preventDefault();
         try {
             const productData = new FormData();
@@ -81,8 +83,16 @@ export default function AdminProductUpdate() {
             productData.append("title", title);
             productData.append("description", description);
             productData.append("price", price);
-            productData.append("category", category);
-            productData.append("ageCategory", ageCategory);
+            if (typeof category === "string") {
+                productData.append("category", category);
+            } else if (typeof category === "object") {
+                productData.append("category", category._id);
+            }
+            if (typeof ageCategory === "string") {
+                productData.append("ageCategory", ageCategory);
+            } else if (typeof ageCategory === "object") {
+                productData.append("ageCategory", ageCategory._id);
+            }
 
             const { data } = await axios.put(`/product/${id}`, productData);
             if (data?.error) {
@@ -197,6 +207,7 @@ export default function AdminProductUpdate() {
                             className="form-select mb-3"
                             onChange={(value) => {
                                 setCategory(value);
+                                console.log(value);
                             }}
                             value={category.name}
                         >
@@ -213,6 +224,7 @@ export default function AdminProductUpdate() {
                             className="form-select mb-3"
                             onChange={(value) => {
                                 setAgeCategory(value);
+                                console.log(value);
                             }}
                             value={ageCategory.name}
                         >
