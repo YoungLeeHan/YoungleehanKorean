@@ -79,3 +79,7 @@ const port = process.env.PORT || 8000;
 app.listen(port, () => {
     console.log(`Node server is running on port ${port}`);
 });
+
+//인덴트4로모두바꾸고
+//리드미 빌드셋업
+//인덴트4로 푸시한거 에러나서 client에 패키지파일 2로 바꿈

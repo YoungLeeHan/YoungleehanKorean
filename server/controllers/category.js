@@ -2,6 +2,7 @@ import Category from "../models/category.js";
 import slugify from "slugify";
 
 export const create = async (req, res) => {
+    console.log(req.body);
     try {
         const { name } = req.body;
         if (!name.trim()) {
@@ -51,6 +52,7 @@ export const remove = async (req, res) => {
 };
 
 export const list = async (req, res) => {
+    console.log(req);
     try {
         const all = await Category.find({});
         res.json(all);
