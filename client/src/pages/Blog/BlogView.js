@@ -24,6 +24,7 @@ export default function BlogView() {
     const [blogList, setBlogList] = useState([]);
     const [categoryFilter, setCategoryFilter] = useState();
     const [isLoading, setIsLoading] = useState(true);
+    const [blogCategories, setBlogCategories] = useState([]);
 
     // hooks
     const windowWidth = useWindowWidth();
@@ -39,6 +40,20 @@ export default function BlogView() {
     const handleShowFilter = (e) => {
         e.preventDefault();
         setShowFilter((curr) => !curr);
+    };
+
+    // fetch blog categories list from DB on first page loading
+    useEffect(() => {
+        loadBlogCategories();
+    }, []);
+
+    const loadBlogCategories = async () => {
+        try {
+            const { data } = await axios.get("/blog/categories");
+            setBlogCategories(data);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     // fetch blog list from DB on first page loading
@@ -91,7 +106,7 @@ export default function BlogView() {
 
     // Blog Post Search
     useEffect(() => {
-        handleSearchBlog();
+        if (searchKeyword) handleSearchBlog();
     }, [searchKeyword]);
 
     const handleSearchBlog = async () => {
@@ -191,40 +206,45 @@ export default function BlogView() {
                                         }}
                                     >
                                         {/* Ant Design UI style setting change ends here*/}
-                                        {/* 👉 Filter #2: filter by category starts here*/}
+                                        {/* 👉 Filter #2: filter by blog category starts here*/}
                                         <div className="filter-box">
                                             <h2>Category</h2>
                                             <Checkbox.Group
                                                 style={{
                                                     width: "100%",
                                                 }}
-                                                defaultValue={[
-                                                    "Grammar",
-                                                    "Speaking",
-                                                    "Pronunciation",
-                                                    "Writing",
-                                                ]}
                                                 onChange={
                                                     handleCategoryFilterChange
                                                 }
                                             >
                                                 <Row>
-                                                    {[
-                                                        "Grammar",
-                                                        "Speaking",
-                                                        "Pronunciation",
-                                                        "Writing",
-                                                    ].map((item, i) => (
-                                                        <Col span={24} key={i}>
-                                                            <div className="checkbox">
-                                                                <Checkbox
-                                                                    value={item}
-                                                                >
-                                                                    {item}
-                                                                </Checkbox>
-                                                            </div>
-                                                        </Col>
-                                                    ))}
+                                                    {blogCategories?.map(
+                                                        (category) => (
+                                                            <Col
+                                                                span={24}
+                                                                key={
+                                                                    category._id
+                                                                }
+                                                            >
+                                                                <div className="checkbox">
+                                                                    <Checkbox
+                                                                        value={
+                                                                            category._id
+                                                                        }
+                                                                    >
+                                                                        {category.name
+                                                                            .charAt(
+                                                                                0
+                                                                            )
+                                                                            .toUpperCase() +
+                                                                            category.name.slice(
+                                                                                1
+                                                                            )}
+                                                                    </Checkbox>
+                                                                </div>
+                                                            </Col>
+                                                        )
+                                                    )}
                                                 </Row>
                                             </Checkbox.Group>
                                         </div>
