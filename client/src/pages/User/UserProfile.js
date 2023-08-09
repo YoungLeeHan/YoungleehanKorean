@@ -8,15 +8,17 @@ import toast from "react-hot-toast";
 export default function UserProfile() {
     const [auth, setAuth] = useAuth();
 
-    const [name, setName] = useState("");
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [address, setAddress] = useState("");
 
     useEffect(() => {
         if (auth?.user) {
-            const { name, email, address } = auth.user;
-            setName(name);
+            const { firstName, LastName, email, address } = auth.user;
+            setFirstName(firstName);
+            setLastName(LastName);
             setEmail(email);
             setAddress(address);
         }
@@ -26,7 +28,8 @@ export default function UserProfile() {
         e.preventDefault();
         try {
             const { data } = await axios.put("/profile", {
-                name,
+                firstName,
+                lastName,
                 password,
                 address,
             });
@@ -68,9 +71,18 @@ export default function UserProfile() {
                             <input
                                 type="text"
                                 className="form-control m-2 p-2"
-                                placeholder="Enter your name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
+                                placeholder="Enter your first name"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                                autoFocus={true}
+                            />
+
+                            <input
+                                type="text"
+                                className="form-control m-2 p-2"
+                                placeholder="Enter your last name"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
                                 autoFocus={true}
                             />
 

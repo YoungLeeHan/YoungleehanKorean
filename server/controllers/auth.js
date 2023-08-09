@@ -2,6 +2,7 @@ import User from "../models/User.js";
 import { hashPassword, comparePassword } from "../helpers/auth.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import Order from "../models/order.js";
 
 dotenv.config();
 
@@ -104,7 +105,7 @@ export const login = async (req, res) => {
 
 export const updateProfile = async (req, res) => {
     try {
-        const { name, password, address } = req.body;
+        const { firstName, LastName, password, address } = req.body;
         const user = await User.findById(req.user._id);
         // check password length
         if (password && password.length < 6) {
@@ -120,7 +121,8 @@ export const updateProfile = async (req, res) => {
         const updated = await User.findByIdAndUpdate(
             req.user._id,
             {
-                name: name || user.name,
+                name: firstName || user.firstName,
+                name: LastName || user.LastName,
                 password: hashedPassword || user.password,
                 address: address || user.address,
             },
