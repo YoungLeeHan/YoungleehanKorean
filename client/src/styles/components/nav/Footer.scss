@@ -1,125 +1,225 @@
 @import "../../App.scss";
-
 .nav {
-background-color: $background-color-beige;
-display: flex;
-flex-direction: row;
-justify-content: center;
-padding: 30px;
-};
-
+    background-color: $background-color-beige;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 30px;
+}
 .footer {
-display: flex;
-align-items: center;
-justify-content: center;
-background-color: #481160;
-color: $color-white;
-min-height: 441px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #481160;
+    color: $color-white;
+    min-height: 441px;
 
-@include mobile-center;
+    @include mobile-center;
 
-.content-wrapper {
-display: flex;
-flex-direction: column;
-justify-content: space-between;
-align-items: center;
-max-width: 1173px;
-height: 100%;
-width: 100%;
-padding: 60px;
-height: 100%;
-flex-grow: 1;
+    .content-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1173px;
+        height: 100%;
+        width: 100%;
+        padding: 60px;
+        height: 100%;
+        flex-grow: 1;
+    
+        .main-content {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: top;
+            height: 100%;
+            width: 100%;
 
-.main-content {
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
-height: 100%;
-width: 100%;
+            @include mobile {
+                flex-direction: column;
+            }
 
-@include mobile {
-flex-direction: column;
+            //very left youngleehan
+            .youngleehan-korean {
+                color: #ffffff;
+                font-family: "Inter-Medium", Helvetica;
+                font-size: 15px;
+                font-weight: 500;
+                left: 0;
+                letter-spacing: 0;
+                line-height: normal;
+                top: 0;
+                white-space: nowrap;
+            }
+
+            .links {
+                height: 100px;
+                left: 646px;
+                top: 0px;
+                width: 441px;
+                padding: 0 60px;
+                .LINKS-2 {
+                    color: #ffcd61;
+                    font-family: "Inter-Medium", Helvetica;
+                    font-size: 15px;
+                    font-weight: 500;
+                    left: 0;
+                    letter-spacing: 0;
+                    line-height: normal;
+                    top: 0;
+                    width: 58px;
+                    white-space: nowrap;
+                }
+                .nav-link {
+                    color: #ffffff;
+                }
+                .nav-item {
+                    margin-right: 10px;}
+                .home-about {
+                    font-family: "Inter-Regular", Helvetica;
+                    font-size: 12px;
+                    font-weight: 400;
+                    left: 0;
+                    letter-spacing: 0;
+                    line-height: 35.2px;
+                    top: 45px;
+                    width: 437px;
+
+                    li {
+                        display: inline-block;
+                        margin-right: 6px;
+                        margin-left: 0px;
+                        border-right: 1px solid #ffffff;
+                        padding-right: 10px;
+
+                        @include mobile {
+                            display: block;
+                            border-right: none;
+                        }
+                    }
+                    li-in {
+                        display: inline-block;
+                        margin-right: 6px;
+                        margin-left: 6px;
+                        border-right: 1px solid #ffffff;
+                        padding-right: 10px;
+
+                        @include mobile {
+                            display: block;
+                            border-right: none;
+                        }
+                    }
+                }               
+            }
+            .newletter {
+                height: 100px;
+                left: 646px;
+                top: 0px;
+                width: 441px;
+                padding: 0 20px;
+                .NEWSLETTER-2 {
+                    color: #ffcd61;
+                    font-family: "Inter-Medium", Helvetica;
+                    font-size: 15px;
+                    font-weight: 500;
+                    left: 0;
+                    letter-spacing: 0;
+                    line-height: normal;
+                    top: 0;
+                    width: 58px;
+                    white-space: nowrap;
+                }
+                .let-s-learn-with {
+                        color: #ffffff;
+                        font-family: "Inter-Regular", Helvetica;
+                        font-size: 14px;
+                        font-weight: 400;
+                        left: 0;
+                        letter-spacing: 0;
+                        line-height: 35.2px;
+                        top: 45px;
+                        width: 437px;
+                    }
+                    
+            }
+        }
+    }
+    
 }
 
-.youngleehan-korean {
-color: #ffffff;
-font-family: "Inter-SemiBold", Helvetica;
-font-size: 20px;
-font-weight: 600;
-left: 0;
-letter-spacing: 0;
-line-height: normal;
-top: 0;
-white-space: nowrap;
-}
 
-.links {
-height: 110px;
-left: 646px;
-top: 55px;
-width: 441px;
-padding: 0 20px;
+// .newsletter {
+//     height: 100px;
+//     left: 646px;
+//     top: 0px;
+//     width: 441px;
+//     padding: 0 20px;
+//     .NEWSLETTER-2 {
+//         color: #ffcd61;
+//         font-family: "Inter-Medium", Helvetica;
+//         font-size: 15px;
+//         font-weight: 500;
+//         left: 0px;
+//         letter-spacing: 0;
+//         line-height: 40px;
+//         top: 0;
+//         width: 58px;
+//     }
+// }
 
-.home-about {
-font-family: "Inter-Regular", Helvetica;
-font-size: 16px;
-font-weight: 400;
-left: 0;
-letter-spacing: 0;
-line-height: 35.2px;
-top: 45px;
-width: 437px;
+//         .sub-content {
+//             display: flex;
+//             flex-direction: row;
+//             justify-content: space-between;
+//             align-items: center;
+//             border-top: 1px solid #ffffff;
+//             height: 100%;
+//             width: 100%;
+//             //background-color: blue;
+//         }
+//     }
+// }
 
-li {
-display: inline-block;
-margin-right: 20px;
-border-right: 1px solid #ffffff;
-padding-right: 20px;
+// .footer .youngleehan-korean {
+//     color: #ffffff;
+//     font-family: "Inter-Medium", Helvetica;
+//     font-size: 20px;
+//     font-weight: 600;
+//     left: 0;
+//     letter-spacing: 0;
+//     line-height: normal;
+//     position: absolute;
+//     top: 0;
+//     white-space: nowrap;
+// }
 
-@include mobile {
-display: block;
-border-right: none;
-}
-}
 
-a {
-color: #ffffff;
-}
-}
 
-.LINKS-2 {
-color: #ffcd61;
-font-family: "Inter-Medium", Helvetica;
-font-size: 20px;
-font-weight: 500;
-left: 0;
-letter-spacing: 0;
-line-height: 40px;
-top: 0;
-width: 58px;
-}
-}
 
-.newsletter {
-height: 152px;
-left: 1141px;
-top: 55px;
-width: 409px;
-}
-}
 
-.sub-content {
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-align-items: center;
-height: 100%;
-width: 100%;
-background-color: blue;
-}
-}
-}
+// input {
+//     border: none;
+//     background-color: #f4f5f6;
+//     color: #221714;
+//     border-radius: 10px;
+//     padding: 20px;
+//     font-size: 14px;
+//     width: 404.45px;
+// }
+// .footer .let-s-learn-with {
+//     color: #ffffff;
+//     //     font-family: "Inter-Regular", Helvetica;
+//     //     font-size: 16px;
+//     //     font-weight: 400;
+//     //     left: 0;
+//     //     letter-spacing: 0;
+//     //     line-height: 32px;
+//     //     position: absolute;
+//     //     top: 45px;
+//     //     width: 357px;
+// }
+
 // .footer .overlap {
 // background-image: url(./futter-bg.svg);
 // background-size: 100% 100%;
@@ -190,37 +290,7 @@ background-color: blue;
 // width: 409px;
 // }
 
-// .footer .NEWSLETTER-2 {
-// color: #ffcd61;
-// font-family: "Inter-Medium", Helvetica;
-// font-size: 20px;
-// font-weight: 500;
-// left: 2px;
-// letter-spacing: 0;
-// line-height: 40px;
-// width: 134px;
-// }
 
-// .footer .let-s-learn-with {
-// color: #ffffff;
-// font-family: "Inter-Regular", Helvetica;
-// font-size: 16px;
-// font-weight: 400;
-// left: 0;
-// letter-spacing: 0;
-// line-height: 32px;
-// position: absolute;
-// top: 45px;
-// width: 357px;
-// }
-
-// .footer .SUBSCRIBE {
-// height: 56px;
-// left: 0;
-// position: absolute;
-// top: 96px;
-// width: 408px;
-// }
 
 // .footer .overlap-group {
 // background-color: #ffffff;
@@ -300,38 +370,8 @@ background-color: blue;
 // width: 210px;
 // }
 
-// .footer .youngleehan-korean {
-// color: #ffffff;
-// font-family: "Inter-SemiBold", Helvetica;
-// font-size: 20px;
-// font-weight: 600;
-// left: 0;
-// letter-spacing: 0;
-// line-height: normal;
-// position: absolute;
-// top: 0;
-// white-space: nowrap;
-// }
+
 // .home-about {
 
 // display: flex;
 // align-items: center;
-
-// .nav-item {
-// margin-right: 10px;
-
-
-// .nav-link {
-// color: #ffffff;
-// }
-// }
-// }
-// input {
-// border: none;
-// background-color: #f4f5f6;
-// color: #221714;
-// border-radius: 10px;
-// padding: 20px;
-// font-size: 14px;
-// width: 404.45px;
-// }
