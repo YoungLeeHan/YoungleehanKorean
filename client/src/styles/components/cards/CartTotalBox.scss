@@ -1,0 +1,53 @@
+// 👻 Developed by DanBi Choi on Aug 9th, 2023.
+// -----------------------------------------------------
+@import "../../App.scss";
+
+.cart-total-box {
+    padding: 30px;
+    background-color: $background-color-gray;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 470px;
+
+    ul {
+        li {
+            padding: 15px 0;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+
+            &:nth-child(1) {
+                border-bottom: none;
+                padding: 0 0 30px 0;
+            }
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            h3 {
+                font-size: $desktop-font-large;
+                font-weight: 600;
+                margin-bottom: 0;
+            }
+
+            h4 {
+                color: $color-gray;
+                font-size: $desktop-font-medium;
+                margin-bottom: 0;
+            }
+            h5 {
+                font-weight: 600;
+                font-size: $desktop-font-medium;
+                margin-bottom: 0;
+            }
+        }
+        button {
+            width: 100%;
+            margin-top: 15px;
+            border-radius: 10px;
+            font-weight: 500;
+        }
+    }
+}

@@ -11,6 +11,7 @@ import { useAuth } from "../context/auth";
 import { useCartTotal } from "../context/cartTotal";
 import CartProductCard from "./../components/cards/CartProductCard";
 import ModalInfo from "../components/common/ModalInfo";
+import CartTotalBox from "../components/cards/CartTotalBox";
 
 export default function Cart() {
     useScrollToTop();
@@ -113,31 +114,7 @@ export default function Cart() {
                         </table>
                     )}
                     {cart?.length > 0 && (
-                        <div className="total-box">
-                            <ul>
-                                <li>
-                                    <h3>Cart Total</h3>
-                                </li>
-                                <li>
-                                    <h4>Subtotal</h4>
-                                    <h5>${cartTotal}</h5>
-                                </li>
-                                <li>
-                                    <h4>Shipping</h4>
-                                    <h5>Free</h5>
-                                </li>
-                                <li>
-                                    <h4>Total</h4>
-                                    <h5>${cartTotal}</h5>
-                                </li>
-                                <button
-                                    className="btn btn-primary"
-                                    onClick={handleCheckout}
-                                >
-                                    Proceed to Checkout
-                                </button>
-                            </ul>
-                        </div>
+                        <CartTotalBox handleCheckout={handleCheckout} />
                     )}
                 </div>
                 <ModalInfo
