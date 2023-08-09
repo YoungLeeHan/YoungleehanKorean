@@ -105,7 +105,7 @@ export const login = async (req, res) => {
 
 export const updateProfile = async (req, res) => {
     try {
-        const { name, password, address } = req.body;
+        const { firstName, LastName, password, address } = req.body;
         const user = await User.findById(req.user._id);
         // check password length
         if (password && password.length < 6) {
@@ -121,7 +121,8 @@ export const updateProfile = async (req, res) => {
         const updated = await User.findByIdAndUpdate(
             req.user._id,
             {
-                name: name || user.name,
+                name: firstName || user.firstName,
+                name: LastName || user.LastName,
                 password: hashedPassword || user.password,
                 address: address || user.address,
             },
@@ -136,11 +137,11 @@ export const updateProfile = async (req, res) => {
 };
 
 export const getOrders = async (req, res) => {
+    console.log(req.body);
     try {
         const orders = await Order.find({ buyer: req.user._id })
             .populate("products", "-photo")
-            .populate("buyer", "firstName");
-        console.log(orders);
+            .populate("buyer", "name");
         res.json(orders);
     } catch (err) {
         console.log(err);

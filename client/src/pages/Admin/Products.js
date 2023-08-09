@@ -1,3 +1,4 @@
+"use strict";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";

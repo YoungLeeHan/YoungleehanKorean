@@ -2,6 +2,9 @@ import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 
 export const requireSignin = (req, res, next) => {
+    // console.log("Request received:", req.method, req.originalUrl);
+    // console.log("Request:", req.body);
+
     try {
         const decoded = jwt.verify(
             req.headers.authorization,
@@ -10,7 +13,7 @@ export const requireSignin = (req, res, next) => {
         req.user = decoded;
         next();
     } catch (err) {
-        return res.status(401).json(err);
+        res.status(401).json({ message: "Unauthorized" });
     }
 };
 
