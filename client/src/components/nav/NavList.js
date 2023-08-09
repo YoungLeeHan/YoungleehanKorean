@@ -25,7 +25,9 @@ export default function NavList() {
                 windowWidth > 1023 ? "flex-row" : "flex-column"
             } justify-content-between align-items-center`}
             style={
-                windowWidth > 1023 ? { margin: "0 90px" } : { margin: "15vh 0" }
+                windowWidth > 1023
+                    ? { margin: "0 5.2vw" }
+                    : { margin: "15vh 0" }
             }
         >
             {linkData.map((data, i) => (

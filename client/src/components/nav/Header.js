@@ -9,7 +9,7 @@ import NavList from "./NavList";
 import NavOverlay from "./NavOverlay";
 import useWindowWidth from "./../../hooks/useWindowWidth";
 import CartIconOnHeader from "./CartIconOnHeader";
-import AnonUserBtns from "./UserBtns";
+import UserBtns from "./UserBtns";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useNavOverlay } from "../../context/navOverlay";
 import { toast } from "react-hot-toast";
@@ -55,7 +55,7 @@ export default function Header() {
                     {windowWidth > 1023 && !auth?.user && (
                         <>
                             <CartIconOnHeader />
-                            <AnonUserBtns />
+                            <UserBtns userType="anonymous" />
                         </>
                     )}
 
