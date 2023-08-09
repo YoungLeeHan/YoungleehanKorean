@@ -6,6 +6,7 @@ import { useCartQuantity } from "../../context/cartQuantity";
 import axios from "axios";
 import DropIn from "braintree-web-drop-in-react";
 import toast from "react-hot-toast";
+import useWindowWidth from "./../../hooks/useWindowWidth";
 
 export default function UserCartSidebar() {
     //hooks
@@ -13,6 +14,7 @@ export default function UserCartSidebar() {
     const [cart, setCart] = useCart();
     const [cartQuantity, setCartQuantity] = useCartQuantity();
     const navigate = useNavigate();
+    const windowWidth = useWindowWidth();
 
     //states
     const [clientToken, setClientToken] = useState("");
@@ -60,8 +62,8 @@ export default function UserCartSidebar() {
     };
 
     return (
-        <div className="col-md-6 mt-5 mb-5">
-            <h3>
+        <>
+            <h3 style={windowWidth < 767 ? { margin: "70px 0" } : null}>
                 Your order will be sent to: {JSON.stringify(auth?.user?.email)}
             </h3>
             <div className="mt-3 mb-3">
@@ -77,6 +79,7 @@ export default function UserCartSidebar() {
                     />
                 )}
             </div>
+            {/* TODO: Inactivate Buy Button when no purchase method is selected / no purchase info is entered */}
             <button
                 onClick={handleBuy}
                 className="btn btn-primary col-12 mt-2"
@@ -86,6 +89,6 @@ export default function UserCartSidebar() {
             >
                 {loading ? "Processing..." : "Buy"}
             </button>
-        </div>
+        </>
     );
 }

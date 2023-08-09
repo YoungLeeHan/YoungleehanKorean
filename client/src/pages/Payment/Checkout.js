@@ -4,6 +4,7 @@ import { useCartTotal } from "../../context/cartTotal";
 import { useAuth } from "../../context/auth";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import CartTotalBox from "../../components/cards/CartTotalBox";
 
 export default function Checkout() {
     // hooks
@@ -27,14 +28,14 @@ export default function Checkout() {
             />
             <div style={{ maxWidth: "1170px" }} className="container-fluid">
                 <div>
-                    <div className="mt-3">
-                        <h1>CART SUMMARY</h1>
-                        <p>Subtotal: ${cartTotal}</p>
-                        <p>Sales Tax: 0%</p>
-                        <p>Total: ${cartTotal}</p>
+                    <div className="row" style={{ margin: "75px 0" }}>
+                        <div className="col-md-6">
+                            <CartTotalBox />
+                        </div>
+                        <div className="col-md-6">
+                            <UserCartSidebar />
+                        </div>
                     </div>
-
-                    <UserCartSidebar />
                 </div>
             </div>
         </>
