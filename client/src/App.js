@@ -35,6 +35,7 @@ import AdminBlogPostList from "./pages/Admin/BlogList";
 import AdminBlogUpdate from "./pages/Admin/BlogUpdate";
 import PaymentSuccess from "./pages/Payment/PaymentSuccess";
 import PaymentFail from "./pages/Payment/PaymentFail";
+import AboutCreator from "./pages/AboutCreator";
 
 export default function App() {
     return (
@@ -45,6 +46,7 @@ export default function App() {
             <Routes>
                 {/*single page*/}
                 <Route path="/" element={<Home />} />
+                <Route path="/about" element={<AboutCreator />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="*" element={<PageNotFound />} />
                 <Route path="/categories" element={<CategoriesList />} />
