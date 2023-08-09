@@ -13,23 +13,26 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { CartProvider } from "./context/cart";
 import { CartQuantityProvider } from "./context/cartQuantity";
 import { CartTotalProvider } from "./context/cartTotal";
+import { NavOverlayProvider } from "./context/navOverlay";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
     <React.StrictMode>
-        <GoogleOAuthProvider>
-            <AuthProvider>
-                <CartProvider>
-                    <CartQuantityProvider>
-                        <CartTotalProvider>
-                            <Provider store={store}>
-                                <App />
-                            </Provider>
-                        </CartTotalProvider>
-                    </CartQuantityProvider>
-                </CartProvider>
-            </AuthProvider>
-        </GoogleOAuthProvider>
+        <NavOverlayProvider>
+            <GoogleOAuthProvider>
+                <AuthProvider>
+                    <CartProvider>
+                        <CartQuantityProvider>
+                            <CartTotalProvider>
+                                <Provider store={store}>
+                                    <App />
+                                </Provider>
+                            </CartTotalProvider>
+                        </CartQuantityProvider>
+                    </CartProvider>
+                </AuthProvider>
+            </GoogleOAuthProvider>
+        </NavOverlayProvider>
     </React.StrictMode>
 );
 

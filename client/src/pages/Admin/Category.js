@@ -82,7 +82,7 @@ export default function AdminCategory() {
             }
         } catch (err) {
             console.log(err);
-            toast.error("Category may already exist. Try again.");
+            toast.error("Unable to delete. Try again.");
         }
     };
 

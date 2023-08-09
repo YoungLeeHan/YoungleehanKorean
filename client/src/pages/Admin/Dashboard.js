@@ -12,7 +12,7 @@ export default function AdminDashboard() {
                 directory={"Admin Dashboard"}
             />
             <div
-                style={{ maxWidth: "1170px", height: "500px" }}
+                style={{ maxWidth: "1170px", minHeight: "500px" }}
                 className="container-fluid"
             >
                 <div className="row">

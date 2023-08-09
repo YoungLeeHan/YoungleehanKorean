@@ -27,6 +27,7 @@ export const update = async (req, res) => {
     try {
         const { name } = req.body;
         const { categoryId } = req.params;
+        console.log(name, categoryId);
         const category = await BlogCategory.findByIdAndUpdate(
             categoryId,
             {
