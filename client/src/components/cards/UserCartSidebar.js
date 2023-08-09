@@ -63,10 +63,7 @@ export default function UserCartSidebar() {
 
     return (
         <>
-            <h3 style={windowWidth < 767 ? { margin: "70px 0" } : null}>
-                Your order will be sent to: {JSON.stringify(auth?.user?.email)}
-            </h3>
-            <div className="mt-3 mb-3">
+            <div style={windowWidth < 767 ? { margin: "70px 0" } : null}>
                 {clientToken && (
                     <DropIn
                         options={{
