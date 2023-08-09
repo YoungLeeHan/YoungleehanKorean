@@ -10,6 +10,7 @@ import { Modal } from "antd";
 export default function BlogCategory() {
     // context
     const [auth, setAuth] = useAuth();
+
     // state
     const [name, setName] = useState("");
     const [categories, setCategories] = useState([]);
@@ -84,7 +85,7 @@ export default function BlogCategory() {
             }
         } catch (err) {
             console.log(err);
-            toast.error("Category may already exist. Try again.");
+            toast.error("Unable to delete. Try again.");
         }
     };
 
@@ -130,7 +131,7 @@ export default function BlogCategory() {
                             </div>
 
                             <Modal
-                                visible={visible}
+                                open={visible}
                                 onOk={() => setVisible(false)}
                                 onCancel={() => setVisible(false)}
                                 footer={null}
