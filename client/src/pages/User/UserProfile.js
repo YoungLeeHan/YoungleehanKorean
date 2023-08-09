@@ -18,7 +18,7 @@ export default function UserProfile() {
         if (auth?.user) {
             const { firstName, LastName, email, address } = auth.user;
             setFirstName(firstName);
-            setLastName(LastName);
+            setLastName(lastName);
             setEmail(email);
             setAddress(address);
         }
