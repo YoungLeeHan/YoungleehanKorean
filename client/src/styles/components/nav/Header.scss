@@ -1,3 +1,6 @@
+// 👻 Developed by DanBi Choi on Aug 8th, 2023.
+// -----------------------------------------------------
+
 @import "../../App.scss";
 
 .nav-box {
@@ -11,7 +14,7 @@
         background: #fff;
         box-shadow: 0px 4px 20px 0px rgba(158, 158, 158, 0.1);
 
-        .logo-box {
+        .header-logo-box {
             img {
                 margin-right: 9px;
             }
@@ -25,13 +28,78 @@
             margin: 0;
             li {
                 padding: 5px 10px;
-                margin: 0 10px;
+                margin: 0 8px;
                 font-weight: 500;
                 font-size: $desktop-font-medium;
+                cursor: pointer;
+
                 &:hover {
                     color: $color-purple;
+                }
+
+                @include mobile {
+                    margin: 10px 0;
+                    padding: 8px 10px;
+                    font-size: $desktop-font-large;
+                }
+
+                @include tablet {
+                    margin: 10px 0;
+                    padding: 8px 10px;
+                    font-size: $desktop-font-large;
+                }
+            }
+        }
+
+        .cartIcon-box {
+            .ant-badge,
+            .ant-badge-count,
+            .ant-scroll-number-only,
+            .ant-scroll-number-only-unit,
+            .current {
+                font-size: 12px;
+                color: $color-white;
+                line-height: 16px;
+            }
+        }
+
+        .header-btn-box {
+            button {
+                height: 45px;
+                border-radius: 5px;
+                font-size: $desktop-font-medium;
+                font-weight: 600;
+            }
+
+            .white-btn {
+                width: 80px;
+                padding: 13px 5px;
+                background-color: transparent;
+                color: $color-black;
+                border: 1px solid transparent;
+                margin-right: 5px;
+            }
+            .purple-btn {
+                width: 115px;
+                padding: 13px;
+                background-color: $color-purple;
+                color: $color-white;
+                border: 1px solid $color-purple;
+
+                &:hover {
+                    background-color: #481160;
                 }
             }
         }
     }
+}
+
+.NavOverlay-box {
+    width: 100vw;
+    height: 100vh;
+    background-color: $background-color-beige;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
