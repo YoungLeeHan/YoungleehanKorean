@@ -5,11 +5,8 @@ import "../styles/pages/Home.scss";
 import { customerTypesData } from "../assets/data/customerTypesData";
 import yellowLinesSVG from "../assets/images/Home/yellowLines.svg";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/auth";
 
 export default function Home() {
-    const [auth, setAuth] = useAuth();
-
     return (
         <div
             style={{ maxWidth: "1170px" }}
@@ -107,7 +104,7 @@ export default function Home() {
                             master a grammar point. However, that was still not
                             enough, so I decided to create on my own.
                         </p>
-                        <Link to={"/"} className="link-button">
+                        <Link to={"/about"} className="link-button">
                             <button className="btn btn-primary">
                                 About Creator
                             </button>

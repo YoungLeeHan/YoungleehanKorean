@@ -1,24 +1,30 @@
-import "../../styles/components/nav/Header.scss";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/auth";
-import { Badge } from "antd";
-import { useCartQuantity } from "../../context/cartQuantity";
-import logoIMG from "../../assets/images/Common/logo.svg";
+// 👻 Developed by DanBi Choi on Aug 8th, 2023.
+// -----------------------------------------------------
 
-export default function MenuBer() {
+import "../../styles/components/nav/Header.scss";
+import { NavLink, useNavigate, Link } from "react-router-dom";
+import { useAuth } from "../../context/auth";
+import logoIMG from "../../assets/images/Common/logo.svg";
+import NavList from "./NavList";
+import NavOverlay from "./NavOverlay";
+import useWindowWidth from "./../../hooks/useWindowWidth";
+import CartIconOnHeader from "./CartIconOnHeader";
+import AnonUserBtns from "./UserBtns";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { useNavOverlay } from "../../context/navOverlay";
+import { toast } from "react-hot-toast";
+
+export default function Header() {
     //hooks
     const [auth, setAuth] = useAuth();
     const navigate = useNavigate();
-    const [cartQuantity, setCartQuantity] = useCartQuantity();
+    const windowWidth = useWindowWidth();
+    const [isNavOverlay, setIsNavOverlay] = useNavOverlay();
 
-    let cartTotal = 0;
-    for (const key in cartQuantity) {
-        cartTotal += cartQuantity[key];
-    }
-
-    const logout = () => {
+    const handleLogout = () => {
         setAuth({ ...auth, user: null, token: "" });
         localStorage.removeItem("auth");
+        toast.success("Bye 👋");
         navigate("/");
     };
 
@@ -27,91 +33,49 @@ export default function MenuBer() {
             <div className="nav-box sticky-top">
                 <div
                     className="container d-flex flex-row justify-content-between align-items-center"
-                    style={{ maxWidth: "1170px" }}
+                    style={{ maxWidth: "1170px", width: "100%" }}
                 >
-                    <div className="logo-box d-flex flex-row justify-content-between align-items-center">
-                        <img src={logoIMG} alt="Logo" />
-                        <h1>YoungLeeHan Korean</h1>
-                    </div>
-
-                    <ul className="d-flex flex-row justify-content-between align-items-center">
-                        <li className="nav-item">
-                            <NavLink
-                                className="nav-link"
-                                aria-current="page"
-                                to="/"
+                    <Link to="/">
+                        <div className="header-logo-box d-flex flex-row justify-content-between align-items-center">
+                            <img src={logoIMG} alt="Logo" />
+                            <h1
+                                style={
+                                    windowWidth < 400
+                                        ? { fontSize: "15px" }
+                                        : { fontSize: "18px" }
+                                }
                             >
-                                Home
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink
-                                className="nav-link"
-                                aria-current="page"
-                                to="/about"
-                            >
-                                About
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/shop">
-                                Shop
-                            </NavLink>
-                        </li>
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/blog">
-                                Blog
-                            </NavLink>
-                        </li>
+                                YoungLeeHan Korean
+                            </h1>
+                        </div>
+                    </Link>
 
-                        <li className="nav-item">
-                            <NavLink className="nav-link" to="/contact">
-                                Contact
-                            </NavLink>
-                        </li>
-                    </ul>
+                    {windowWidth > 1023 && <NavList />}
 
-                    <div className="nav-item">
-                        <NavLink className="nav-link" to="/cart">
-                            <Badge
-                                count={cartTotal}
-                                size="small"
-                                color="#ffbf35"
-                                showZero="true"
-                                offset={[8, 3]}
-                                styles={{
-                                    indicator: { colorText: "#52c41a" },
-                                }}
-                            >
-                                CART
-                            </Badge>
-                        </NavLink>
-                    </div>
-
-                    {!auth?.user ? (
+                    {windowWidth > 1023 && !auth?.user && (
                         <>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/login">
-                                    LOGIN
-                                </NavLink>
-                            </li>
-                            <li className="nav-item">
-                                <NavLink className="nav-link" to="/register">
-                                    REGISTER
-                                </NavLink>
-                            </li>
+                            <CartIconOnHeader />
+                            <AnonUserBtns />
                         </>
-                    ) : (
-                        <div className="dropdown">
-                            <li>
-                                <a
-                                    className="dropdown-toggle"
-                                    data-bs-toggle="dropdown"
-                                >
-                                    {auth?.user?.firstName}
-                                </a>
-                                <ul className="dropdown-menu">
-                                    <li>
+                    )}
+
+                    {windowWidth > 1023 && auth?.user && (
+                        <>
+                            <div className="dropdown">
+                                <div>
+                                    <a
+                                        href=""
+                                        className="dropdown-toggle"
+                                        data-bs-toggle="dropdown"
+                                        style={{
+                                            fontSize: "16px",
+                                            fontWeight: "500",
+                                            padding: "5px",
+                                        }}
+                                    >
+                                        Hi {auth?.user?.firstName}
+                                    </a>
+                                    <ul className="dropdown-menu">
                                         <li className="nav-item">
                                             <NavLink
                                                 className="nav-link"
@@ -126,16 +90,56 @@ export default function MenuBer() {
                                         </li>
                                         <li className="nav-item">
                                             <a
-                                                onClick={logout}
+                                                onClick={handleLogout}
                                                 className="nav-link"
+                                                style={{
+                                                    cursor: "pointer",
+                                                }}
                                             >
-                                                LOGOUT
+                                                Log Out
                                             </a>
                                         </li>
-                                    </li>
-                                </ul>
-                            </li>
-                        </div>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <CartIconOnHeader />
+
+                            <div className="header-btn-box">
+                                <NavLink
+                                    className="nav-link"
+                                    to="/dashboard/user/orders"
+                                >
+                                    <button className="purple-btn">
+                                        My Order
+                                    </button>
+                                </NavLink>
+                            </div>
+                        </>
+                    )}
+
+                    {windowWidth < 1023 && (
+                        <>
+                            <div className="d-flex flex-row justify-content-center align-items-center">
+                                <CartIconOnHeader />
+                                <RxHamburgerMenu
+                                    size="40px"
+                                    style={{
+                                        marginLeft: "15px",
+                                        cursor: "pointer",
+                                        padding: "5px",
+                                    }}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        setIsNavOverlay((curr) => !curr);
+                                    }}
+                                />
+                            </div>
+                        </>
+                    )}
+
+                    {windowWidth < 1023 && isNavOverlay && (
+                        <NavOverlay handleLogout={handleLogout} />
                     )}
                 </div>
             </div>

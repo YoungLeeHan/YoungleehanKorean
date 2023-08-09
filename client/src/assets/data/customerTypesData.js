@@ -9,7 +9,7 @@ export const customerTypesData = [
         image: learnerSVG,
         msg: "I still struggle with verb endings after 3 years of learning.",
         subMsg: "Our materials will train your brain to grab the correct ending for the context of the sentence.",
-        link: "/",
+        link: "/about",
     },
     {
         _id: 2,
@@ -17,7 +17,7 @@ export const customerTypesData = [
         image: parentsSVG,
         msg: "It’s hard to get my kids excited about learning Korean with boring materials.",
         subMsg: "Our materials are interactive and thought-provoking, improving retention of the subject.",
-        link: "/",
+        link: "/about",
     },
     {
         _id: 3,
@@ -25,6 +25,6 @@ export const customerTypesData = [
         image: teacherSVG,
         msg: "I want to give my students practice exercises, but I don't have enough time to make them.",
         subMsg: "Our materials are loaded with exercises for each grammar point and each exercise includes an explanation of the context.",
-        link: "/",
+        link: "/about",
     },
 ];
