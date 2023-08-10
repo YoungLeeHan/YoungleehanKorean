@@ -192,8 +192,8 @@ export default function ProductsView() {
                 });
                 break;
             default:
-                sortedProducts = [...products]?.sort((a, b) => {
-                    return b.createdAt - a.createdAt;
+                sortedProducts = [...products].sort((a, b) => {
+                    return new Date(b.createdAt) - new Date(a.createdAt);
                 });
                 break;
         }
