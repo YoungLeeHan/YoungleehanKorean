@@ -9,277 +9,290 @@ dotenv.config();
 
 // braintree config
 const gateway = new braintree.BraintreeGateway({
-  environment: braintree.Environment.Sandbox,
-  merchantId: process.env.BRAINTREE_MERCHANT_ID,
-  publicKey: process.env.BRAINTREE_PUBLIC_KEY,
-  privateKey: process.env.BRAINTREE_PRIVATE_KEY,
+    environment: braintree.Environment.Sandbox,
+    merchantId: process.env.BRAINTREE_MERCHANT_ID,
+    publicKey: process.env.BRAINTREE_PUBLIC_KEY,
+    privateKey: process.env.BRAINTREE_PRIVATE_KEY,
 });
 
 export const create = async (req, res) => {
-  try {
-    const { title, category, ageCategory, description, price, downloadUrl } =
-      req.fields;
-    const { images } = req.files;
+    try {
+        const {
+            title,
+            category,
+            ageCategory,
+            description,
+            price,
+            downloadUrl,
+        } = req.fields;
+        const { images } = req.files;
 
-    // validation
-    switch (true) {
-      case !title.trim():
-        return res.json({ error: "title is required" });
-      case images && images.size > 1000000:
-        return res.json({
-          error: "Image should be less than 1mb in size",
-        });
-      case !category.trim():
-        return res.json({ error: "Category is required" });
-      case !ageCategory.trim():
-        return res.json({ error: "Age category is required" });
-      case !description.trim():
-        return res.json({ error: "Description is required" });
-      case !price.trim():
-        return res.json({ error: "Price is required" });
-      case !downloadUrl.trim():
-        return res.json({ error: "DownloadUrl is required" });
+        // validation
+        switch (true) {
+            case !title.trim():
+                return res.json({ error: "title is required" });
+            case images && images.size > 1000000:
+                return res.json({
+                    error: "Image should be less than 1mb in size",
+                });
+            case !category.trim():
+                return res.json({ error: "Category is required" });
+            case !ageCategory.trim():
+                return res.json({ error: "Age category is required" });
+            case !description.trim():
+                return res.json({ error: "Description is required" });
+            case !price.trim():
+                return res.json({ error: "Price is required" });
+            case !downloadUrl.trim():
+                return res.json({ error: "DownloadUrl is required" });
+        }
+        // create product
+        const product = new Product({ ...req.fields, slug: slugify(title) });
+
+        if (images) {
+            product.images.data = fs.readFileSync(images.path);
+            product.images.contentType = images.type;
+        }
+
+        await product.save();
+        res.json(product);
+    } catch (err) {
+        console.log(err);
+        return res.status(400).json(err.message);
     }
-    // create product
-    const product = new Product({ ...req.fields, slug: slugify(title) });
-
-    if (images) {
-      product.images.data = fs.readFileSync(images.path);
-      product.images.contentType = images.type;
-    }
-
-    await product.save();
-    res.json(product);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).json(err.message);
-  }
 };
 
 export const list = async (req, res) => {
-  try {
-    const products = await Product.find({})
-      .populate("category")
-      .select("-images -downloadUrl")
-      .limit(12)
-      .sort({ createdAt: -1 });
+    try {
+        const products = await Product.find({})
+            .populate("category")
+            .select("-images -downloadUrl")
+            .limit(12)
+            .sort({ createdAt: -1 });
 
-    res.json(products);
-  } catch (err) {
-    console.log(err);
-  }
+        res.json(products);
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 export const read = async (req, res) => {
-  try {
-    const product = await Product.findOne({ slug: req.params.slug })
-      .select("-images -downloadUrl")
-      .populate("category")
-      .populate("ageCategory");
-    res.json(product);
-  } catch (err) {
-    console.log(err);
-  }
+    try {
+        const product = await Product.findOne({ slug: req.params.slug })
+            .select("-images -downloadUrl")
+            .populate("category")
+            .populate("ageCategory");
+        res.json(product);
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 export const images = async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.productId).select(
-      "images"
-    );
-    if (product.images.data) {
-      res.set("Content-Type", product.images.contentType);
-      return res.send(product.images.data);
+    try {
+        const product = await Product.findById(req.params.productId).select(
+            "images"
+        );
+        if (product.images.data) {
+            res.set("Content-Type", product.images.contentType);
+            return res.send(product.images.data);
+        }
+    } catch (err) {
+        console.log(err);
     }
-  } catch (err) {
-    console.log(err);
-  }
 };
 
 export const remove = async (req, res) => {
-  try {
-    const product = await Product.findByIdAndDelete(
-      req.params.productId
-    ).select("-images -downloadUrl");
-    res.json(product);
-  } catch (err) {
-    console.log(err);
-  }
+    try {
+        const product = await Product.findByIdAndDelete(
+            req.params.productId
+        ).select("-images -downloadUrl");
+        res.json(product);
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 export const update = async (req, res) => {
-  try {
-    const { title, description, price, category, ageCategory, downloadUrl } =
-      req.fields;
-    const { images } = req.files;
+    try {
+        const {
+            title,
+            description,
+            price,
+            category,
+            ageCategory,
+            downloadUrl,
+        } = req.fields;
+        const { images } = req.files;
 
-    // validation
-    switch (true) {
-      case !title.trim():
-        return res.json({ error: "Title is required" });
-      case !description.trim():
-        return res.json({ error: "Description is required" });
-      case !price.trim():
-        return res.json({ error: "Price is required" });
-      case !category.trim():
-        return res.json({ error: "Category is required" });
-      case !ageCategory.trim():
-        return res.json({ error: "Age Category is required" });
-      case images && images.size > 1000000:
-        return res.json({
-          error: "Image should be less than 1MB in size",
-        });
-      case !downloadUrl.trim():
-        return res.json({ error: "DownloadUrl is required" });
+        // validation
+        switch (true) {
+            case !title.trim():
+                return res.json({ error: "Title is required" });
+            case !description.trim():
+                return res.json({ error: "Description is required" });
+            case !price.trim():
+                return res.json({ error: "Price is required" });
+            case !category.trim():
+                return res.json({ error: "Category is required" });
+            case !ageCategory.trim():
+                return res.json({ error: "Age Category is required" });
+            case images && images.size > 1000000:
+                return res.json({
+                    error: "Image should be less than 1MB in size",
+                });
+            case !downloadUrl.trim():
+                return res.json({ error: "DownloadUrl is required" });
+        }
+
+        // update product
+        const product = await Product.findByIdAndUpdate(
+            req.params.productId,
+            {
+                ...req.fields,
+                slug: slugify(title),
+            },
+            { new: true }
+        );
+
+        if (images) {
+            product.images.data = fs.readFileSync(images.path);
+            product.images.contentType = images.type;
+        }
+
+        await product.save();
+        res.json(product);
+    } catch (err) {
+        console.log(err);
+        return res.status(400).json(err.message);
     }
-
-    // update product
-    const product = await Product.findByIdAndUpdate(
-      req.params.productId,
-      {
-        ...req.fields,
-        slug: slugify(title),
-      },
-      { new: true }
-    );
-
-    if (images) {
-      product.images.data = fs.readFileSync(images.path);
-      product.images.contentType = images.type;
-    }
-
-    await product.save();
-    res.json(product);
-  } catch (err) {
-    console.log(err);
-    return res.status(400).json(err.message);
-  }
 };
 
 export const filteredProducts = async (req, res) => {
-  try {
-    const { level, age, priceRange } = req.body;
+    try {
+        const { level, age, priceRange } = req.body;
 
-    const args = {};
-    if (level && level.length > 0) args.category = level;
+        const args = {};
+        if (level && level.length > 0) args.category = level;
 
-    if (age && age.length > 0) args.ageCategory = age;
+        if (age && age.length > 0) args.ageCategory = age;
 
-    if (priceRange && priceRange.length) {
-      args.price = { $gte: priceRange[0], $lte: priceRange[1] };
+        if (priceRange && priceRange.length) {
+            args.price = { $gte: priceRange[0], $lte: priceRange[1] };
+        }
+
+        const products = await Product.find(args);
+        res.json(products);
+    } catch (err) {
+        console.log(err);
     }
-
-    const products = await Product.find(args);
-    res.json(products);
-  } catch (err) {
-    console.log(err);
-  }
 };
 
 export const productsCount = async (req, res) => {
-  try {
-    const total = await Product.find({}).estimatedDocumentCount();
-    res.json(total);
-  } catch (err) {
-    console.log(err);
-  }
+    try {
+        const total = await Product.find({}).estimatedDocumentCount();
+        res.json(total);
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 export const listProducts = async (req, res) => {
-  try {
-    const perPage = 6;
-    const page = req.params.page ? req.params.page : 1;
+    try {
+        const perPage = 6;
+        const page = req.params.page ? req.params.page : 1;
 
-    const products = await Product.find({})
-      .select("-images -downloadUrl")
-      .skip((page - 1) * perPage)
-      .limit(perPage)
-      .sort({ createdAt: -1 });
+        const products = await Product.find({})
+            .select("-images -downloadUrl")
+            .skip((page - 1) * perPage)
+            .limit(perPage)
+            .sort({ createdAt: -1 });
 
-    res.json(products);
-  } catch (err) {
-    console.log(err);
-  }
+        res.json(products);
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 export const relatedProducts = async (req, res) => {
-  try {
-    const { productId, categoryId } = req.params;
-    const related = await Product.find({
-      category: categoryId,
-      _id: { $ne: productId },
-    })
-      .select("-photo")
-      .populate("category")
-      .limit(3);
+    try {
+        const { productId, categoryId } = req.params;
+        const related = await Product.find({
+            category: categoryId,
+            _id: { $ne: productId },
+        })
+            .select("-photo")
+            .populate("category")
+            .limit(3);
 
-    res.json(related);
-  } catch (err) {
-    console.log(err);
-  }
+        res.json(related);
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 export const getToken = async (req, res) => {
-  try {
-    await gateway.clientToken.generate({}, function (err, response) {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.send(response); // token to show the drop-in UI
-      }
-    });
-  } catch (err) {
-    console.log(err);
-  }
+    try {
+        await gateway.clientToken.generate({}, function (err, response) {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.send(response); // token to show the drop-in UI
+            }
+        });
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 export const processPayment = async (req, res) => {
-  try {
-    const { nonce, cart, cartQuantity } = req.body;
+    try {
+        const { nonce, cart, cartQuantity } = req.body;
 
-    let total = 0;
-    for (let i = 0; i < cart.length; i++) {
-      total += cart[i].price * cartQuantity[cart[i]._id];
-    }
-    total = total.toFixed(2);
-
-    let newTransaction = gateway.transaction.sale(
-      {
-        amount: total,
-        paymentMethodNonce: nonce,
-        options: {
-          submitForSettlement: true, //immediate settlement
-        },
-      },
-      function (error, result) {
-        if (result) {
-          const order = new Order({
-            products: cart,
-            payment: result,
-            buyer: req.user._id,
-          }).save();
-          res.json({ ok: true });
-        } else {
-          res.status(500).send(error);
+        let total = 0;
+        for (let i = 0; i < cart.length; i++) {
+            total += cart[i].price * cartQuantity[cart[i]._id];
         }
-      }
-    );
-  } catch (err) {
-    console.log(err);
-  }
+        total = total.toFixed(2);
+
+        let newTransaction = gateway.transaction.sale(
+            {
+                amount: total,
+                paymentMethodNonce: nonce,
+                options: {
+                    submitForSettlement: true, //immediate settlement
+                },
+            },
+            function (error, result) {
+                if (result) {
+                    const order = new Order({
+                        products: cart,
+                        payment: result,
+                        buyer: req.user._id,
+                    }).save();
+                    console.log(order);
+                    res.json({ ok: true });
+                } else {
+                    res.status(500).send(error);
+                }
+            }
+        );
+    } catch (err) {
+        console.log(err);
+    }
 };
 
 export const productsSearch = async (req, res) => {
-  try {
-    const { keyword } = req.params;
-    const results = await Product.find({
-      $or: [
-        { title: { $regex: keyword, $options: "i" } },
-        { description: { $regex: keyword, $options: "i" } },
-      ],
-    }).select("-images -downloadUrl");
-    res.json(results);
-  } catch (err) {
-    console.log(err);
-  }
+    try {
+        const { keyword } = req.params;
+        const results = await Product.find({
+            $or: [
+                { title: { $regex: keyword, $options: "i" } },
+                { description: { $regex: keyword, $options: "i" } },
+            ],
+        }).select("-images -downloadUrl");
+        res.json(results);
+    } catch (err) {
+        console.log(err);
+    }
 };

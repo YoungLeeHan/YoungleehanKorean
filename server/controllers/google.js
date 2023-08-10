@@ -21,8 +21,8 @@ export default function configurePassport(passport) {
                     email: (profile && profile.emails[0].value) || "",
                     password: (profile && profile.password) || "Aa123123!",
                 };
-                console.log("새유저있냐?", newUser);
-                console.log(profile);
+                //console.log("새유저있냐?", newUser);
+                //console.log(profile);
 
                 try {
                     // find the user in our database
