@@ -6,10 +6,11 @@ import envelopeSVG from "../../assets/images/Login/envelope.svg";
 import "../../styles/components/cards/LoginForm.scss";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";
+import { googleLogout, useGoogleLogin } from "@react-oauth/google";
 
 export default function LoginForm() {
     // state
@@ -23,49 +24,72 @@ export default function LoginForm() {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        try {
-            const { data } = await axios.post(`/login`, { email, password });
-            if (data?.error) {
-                toast.error(data.error);
-            } else {
-                localStorage.setItem("auth", JSON.stringify(data));
-                setAuth({ ...auth, token: data.token, user: data.user });
-
-                toast.success(`Welcome back! ${data?.user?.firstName} 👋`);
-                navigate(
-                    location.state ||
-                        `/dashboard/${
-                            data?.user?.role === 1 ? "admin" : "user"
-                        }`
-                );
+        if (!email || !password) {
+            toast.error("Please enter all required fields.");
+        } else {
+            try {
+                const { data } = await axios.post(`/login`, {
+                    email,
+                    password,
+                });
+                if (data?.error) {
+                    toast.error(data.error);
+                } else {
+                    localStorage.setItem("auth", JSON.stringify(data));
+                    setAuth({ ...auth, token: data.token, user: data.user });
+                    toast.success(`Welcome back! ${data?.user?.firstName} 👋`);
+                    navigate(
+                        location.state ||
+                            `/dashboard/${
+                                data?.user?.role === 1 ? "admin" : "user"
+                            }`
+                    );
+                }
+            } catch (err) {
+                toast.error("Login failed. \nPlease try again.");
+                console.log(err);
             }
-        } catch (err) {
-            toast.error("Login failed. \nPlease try again.");
-            console.log(err);
         }
     };
 
-    const handleGoogleLogin = async (e) => {
-        e.preventDefault();
-        toast.error("Google login under construction.");
-        console.log("google log in button clicked");
-        // try {
-        //   const { data } = await axios.post(`/login`, {
-        //     email,
-        //     password,
-        //   });
-        //   // console.log(data);
-        //   if (data?.error) {
-        //     toast.error(data.error);
-        //   } else {
-        //     localStorage.setItem("auth", JSON.stringify(data));
-        //     setAuth({ ...auth, token: data.token, user: data.user });
-        //     toast.success("Login successful");
-        //     navigate(
-        //       location.state ||
-        //         `/dashboard/${data?.user?.role === 1 ? "admin" : "user"}`
-        //     );
-        //   }
+    // Google Login Feature
+    const [user, setUser] = useState([]);
+    const [profile, setProfile] = useState([]);
+    const handleGoogleLogin = useGoogleLogin({
+        onSuccess: (codeResponse) => setUser(codeResponse),
+        onError: (error) => console.log("Log in Failed:", error),
+    });
+    // Using User token, fetch user data from google api
+    useEffect(() => {
+        if (user) {
+            axios
+                .get(
+                    `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+                    {
+                        headers: {
+                            Authorization: `Bearer ${user.access_token}`,
+                            Accept: "application/json",
+                        },
+                    }
+                )
+                .then((res) => {
+                    setProfile(res.data);
+                    toast.success(`Welcome back! ${res?.data?.name}👋`);
+                    console.log(user);
+                    console.log(res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                    toast.error("Something went wrong. Try again.");
+                });
+        }
+    }, [user]);
+
+    // Google Log Out Feature
+    const logOut = () => {
+        googleLogout();
+        setProfile(null);
+        toast.success("Bye 👋");
     };
 
     return (
@@ -117,7 +141,7 @@ export default function LoginForm() {
                     </li>
                     <li>
                         <button className="btn btn-primary" type="submit">
-                            Login
+                            Log in
                         </button>
                     </li>
                     <li>
@@ -126,18 +150,30 @@ export default function LoginForm() {
                             <span>—</span>
                         </h6>
                     </li>
-                    <li>
-                        <button
-                            className="btn btn-secondary"
-                            onClick={handleGoogleLogin}
-                        >
-                            <FcGoogle
-                                size="20px"
-                                style={{ marginRight: "5px" }}
-                            />
-                            Google
-                        </button>
-                    </li>
+                    {profile ? (
+                        <div>
+                            <img src={profile.picture} alt="user" />
+                            <h3>User Logged in</h3>
+                            <p>Name: {profile.name}</p>
+                            <p>Email Address: {profile.email}</p>
+                            <br />
+                            <br />
+                            <button onClick={logOut}>Log out</button>
+                        </div>
+                    ) : (
+                        <li>
+                            <button
+                                className="btn btn-secondary"
+                                onClick={handleGoogleLogin}
+                            >
+                                <FcGoogle
+                                    size="20px"
+                                    style={{ marginRight: "5px" }}
+                                />
+                                Google
+                            </button>
+                        </li>
+                    )}
                     <li>
                         <h4>
                             Don't have an account?{" "}

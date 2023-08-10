@@ -43,7 +43,7 @@ export default function ModalInfo({
                         <h3
                             style={
                                 windowWidth > 500
-                                    ? { fontSize: "18px" }
+                                    ? { fontSize: "16px" }
                                     : { fontSize: "14px" }
                             }
                         >

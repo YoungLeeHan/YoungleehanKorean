@@ -121,7 +121,7 @@ export default function Cart() {
                     isModalOpen={isModalOpen}
                     handleOk={handleOk}
                     handleCancel={handleCancel}
-                    okBtnText={"Login"}
+                    okBtnText={"Log in"}
                     text={"You need to be logged in to check out!"}
                 />
             </div>
