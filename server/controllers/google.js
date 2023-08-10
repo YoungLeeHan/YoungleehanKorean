@@ -19,7 +19,7 @@ export default function configurePassport(passport) {
                     lastName: profile.name.familyName,
                     images: (profile && profile.photos[0].value) || "",
                     email: (profile && profile.emails[0].value) || "",
-                    password: (profile && profile.password) || "Aa123123!",
+                    password: (profile && profile.password) || "",
                 };
                 console.log("새유저있냐?", newUser);
                 console.log(profile);

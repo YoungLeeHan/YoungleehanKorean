@@ -52,6 +52,7 @@ export default function LoginForm() {
         }
     };
 
+<<<<<<< HEAD
     // Google Login Feature
     const [user, setUser] = useState([]);
     const [profile, setProfile] = useState([]);
@@ -90,6 +91,39 @@ export default function LoginForm() {
         googleLogout();
         setProfile(null);
         toast.success("Bye 👋");
+=======
+    const handleGoogleLogin = async (e) => {
+        e.preventDefault();
+        // try {
+        //     const response = await axios.get("/auth");
+        //     const googleClientId = response.data.googleClientId;
+
+        //     console.log("google log in button clicked");
+
+        //     const { data } = await axios.post(`/auth`, {
+        //         email,
+        //         password,
+        //         googleClientId, // Google Client ID를 함께 보냄
+        //     });
+
+        //     if (data?.error) {
+        //         toast.error(data.error);
+        //     } else {
+        //         localStorage.setItem("auth", JSON.stringify(data));
+        //         setAuth({ ...auth, token: data.token, user: data.user });
+        //         toast.success("Login successful");
+        //         navigate(
+        //             location.state ||
+        //                 `/dashboard/${
+        //                     data?.user?.role === 1 ? "admin" : "user"
+        //                 }`
+        //         );
+        //     }
+        // } catch (err) {
+        //     toast.error("Login failed. \nPlease try again.");
+        //     console.log(err);
+        // }
+>>>>>>> fdaf7aa (chore: just for pulling)
     };
 
     return (
