@@ -11,6 +11,7 @@ import {
     secret,
     updateProfile,
     getOrders,
+    getRecentOrders,
     allOrders,
 } from "../controllers/auth.js";
 
@@ -24,6 +25,7 @@ router.get("/admin-check", requireSignin, isAdmin, (req, res) => {
     res.json({ ok: true });
 });
 router.get("/orders", requireSignin, getOrders);
+router.get("/recent-order", requireSignin, getRecentOrders);
 router.get("/all-orders", requireSignin, isAdmin, allOrders);
 router.get("/secret", requireSignin, isAdmin, secret);
 
