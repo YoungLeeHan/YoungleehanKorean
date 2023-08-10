@@ -63,7 +63,7 @@ export default function ForgotPasswordForm() {
                                     fontSize: "14px",
                                 }}
                             >
-                                Back to Login
+                                Back to Log in
                             </Link>
                         </h3>
                     </li>

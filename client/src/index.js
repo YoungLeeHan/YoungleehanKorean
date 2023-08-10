@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "antd/dist/reset.css";
 import "./styles/index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -7,8 +8,7 @@ import { AuthProvider } from "./context/auth";
 import { BrowserRouter } from "react-router-dom";
 import store from "./Reducer/store";
 import { Provider } from "react-redux";
-import "antd/dist/reset.css";
-import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import { CartProvider } from "./context/cart";
 import { CartQuantityProvider } from "./context/cartQuantity";
 import { CartTotalProvider } from "./context/cartTotal";
@@ -16,9 +16,9 @@ import { NavOverlayProvider } from "./context/navOverlay";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <React.StrictMode>
-        <NavOverlayProvider>
-            <GoogleOAuthProvider>
+    <GoogleOAuthProvider clientId="1068188557030-175p3hpav952phkcd1hp14ti2kb0h2rk.apps.googleusercontent.com">
+        <React.StrictMode>
+            <NavOverlayProvider>
                 <AuthProvider>
                     <CartProvider>
                         <CartQuantityProvider>
@@ -30,9 +30,9 @@ root.render(
                         </CartQuantityProvider>
                     </CartProvider>
                 </AuthProvider>
-            </GoogleOAuthProvider>
-        </NavOverlayProvider>
-    </React.StrictMode>
+            </NavOverlayProvider>
+        </React.StrictMode>
+    </GoogleOAuthProvider>
 );
 
 reportWebVitals();

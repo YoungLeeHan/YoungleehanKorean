@@ -31,7 +31,7 @@ export default function Login() {
 
     return (
         <>
-            <Jumbotron title={"Login"} directory={"Login"} />
+            <Jumbotron title={"Log in"} directory={"Log in"} />
             <div
                 style={{ maxWidth: "1170px" }}
                 className="container-fluid d-flex flex-column align-items-center"

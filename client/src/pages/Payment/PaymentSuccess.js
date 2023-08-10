@@ -51,7 +51,7 @@ export default function PaymentSuccess() {
                                     padding: "12px 15px",
                                 }}
                             >
-                                View My Order
+                                Back Home
                             </button>
                         </Link>
                         <Link to="/">
@@ -63,7 +63,7 @@ export default function PaymentSuccess() {
                                     padding: "12px 15px",
                                 }}
                             >
-                                Back Home
+                                View My Order
                             </button>
                         </Link>
                     </div>

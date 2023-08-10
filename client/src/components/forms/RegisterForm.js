@@ -184,7 +184,7 @@ export default function RegisterForm() {
                             Already have an account?{" "}
                             <span>
                                 <Link to="/login" style={{ color: "#7b1fa2" }}>
-                                    Login
+                                    Log in
                                 </Link>
                             </span>
                         </h4>
