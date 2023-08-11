@@ -1,0 +1,34 @@
+.averageContainer {
+  width: 140px;
+  height: 120px;
+  border-radius: 10px;
+  border: 1px solid #e1e1e1;
+  margin-right: 32px;
+  meter {
+    width: 120px;
+  }
+}
+
+.averageRating {
+  position: relative;
+  appearance: none;
+  color: transparent;
+  width: auto;
+  display: inline-block;
+  vertical-align: baseline;
+  font-size: 25px;
+}
+
+.averageRating::before {
+  --percent: calc(4.3/5*100%);
+  content: '★★★★★';
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: rgba(0,0,0,0.2);
+  background: linear-gradient(90deg, gold var(--percent), rgba(0,0,0,0.2) var(--percent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  width: 100%;
+}

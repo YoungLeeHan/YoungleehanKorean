@@ -43,7 +43,7 @@ export default function ProductCard({ product }) {
                 </Link>
             </div>
             <div className="text d-flex flex-column justify-content-between align-items-between">
-                <Link to={`product/${product?.slug}`}>
+                <Link to={`product/${product?._id}`}>
                     <h3>
                         {windowWidth > 450 &&
                             (product?.title?.length > 35
