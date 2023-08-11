@@ -147,6 +147,20 @@ export const getOrders = async (req, res) => {
   }
 };
 
+export const getRecentOrders = async (req, res) => {
+  try {
+    const orders = await Order.find({
+      buyer: req.user._id,
+    });
+    const sortedOrder = orders.sort((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    });
+    res.json(sortedOrder[0]._id);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const allOrders = async (req, res) => {
   try {
     const orders = await Order.find({})
