@@ -8,19 +8,17 @@ import { requireSignin, isAdmin } from "../middlewares/auth.js";
 
 //controllers
 import {
-    create,
-    list,
-    read,
-    images,
-    remove,
-    update,
-    filteredProducts,
-    productsCount,
-    listProducts,
-    productsSearch,
-    relatedProducts,
-    getToken,
-    processPayment,
+  create,
+  list,
+  read,
+  images,
+  remove,
+  update,
+  filteredProducts,
+  productsCount,
+  listProducts,
+  productsSearch,
+  relatedProducts,
 } from "../controllers/product.js";
 
 // admin product
@@ -45,8 +43,5 @@ router.get("/products-count", productsCount);
 router.get("/list-products/:page", listProducts);
 router.get("/products/search/:keyword", productsSearch);
 router.get("/related-products/:productId/:categoryId", relatedProducts);
-
-router.get("/braintree/token", getToken);
-router.post("/braintree/payment", requireSignin, processPayment);
 
 export default router;

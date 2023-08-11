@@ -10,7 +10,7 @@ const orderSchema = new Schema(
     buyer: { type: ObjectId, ref: "User" },
     status: {
       type: String,
-      default: "Not processed",
+      default: "Not downloaded",
       enum: [
         "Not downloaded",
         "Downloaded",
