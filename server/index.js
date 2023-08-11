@@ -53,8 +53,8 @@ app.use("/api", authRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", ageCategoryRoutes);
 app.use("/api", productRoutes);
-app.use("/api", blogCategoryRoutes);
-app.use("/api", blogPostRoutes);
+app.use("/api/blog", blogCategoryRoutes);
+app.use("/api/blog", blogPostRoutes);
 app.use("/auth", authGoogle);
 app.use("/index", indexGoogle);
 

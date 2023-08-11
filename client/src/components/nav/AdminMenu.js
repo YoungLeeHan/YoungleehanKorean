@@ -5,7 +5,7 @@ export default function AdminMenu() {
         <>
             <div className="p-3 mt-2 mb-2 h4 bg-light">Admin Links</div>
             <ul className="list-group list-unstyled">
-                <div className="p-1 pt-2"><h3>- Product Management</h3></div>
+                <div className="p-1 pt-2"><h5>- Product Management</h5></div>
                 <li>
                     <NavLink
                         className="list-group-item"
@@ -32,7 +32,7 @@ export default function AdminMenu() {
                     </NavLink>
                 </li>
 
-                <div className="p-1 pt-4"><h3>- Blog Management</h3></div>
+                <div className="p-1 pt-4"><h5>- Blog Management</h5></div>
                 <li>
                     <NavLink
                         className="list-group-item"
