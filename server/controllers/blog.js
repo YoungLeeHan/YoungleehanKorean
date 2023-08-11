@@ -1,6 +1,18 @@
 import BlogPost from "../models/BlogPost.js";
 import slugify from "slugify";
 import fs from "fs";
+import sanitizeHtml from 'sanitize-html'
+
+
+const removeHtmlandShorten = body => {
+    const filtered = sanitizeHtml(body, {
+        allowedTags: [],
+    });
+    return filtered.length < 200? filtered: `${filtered.slice(0,200)}...`;
+};
+
+
+
 
 
 export const create = async (req, res) => {
@@ -51,13 +63,23 @@ export const images = async (req, res) => {
 };
 
 
+
 export const list = async (req, res) => {
     try {
         const posts = await BlogPost.find({})
             .populate("category")
             .limit(12)
             .sort({createdAt: -1});
-        res.json(posts);
+
+        // Convert the 'value' field to HTML tag excluded and shortened form
+        const sanitizedPosts = posts.map(post => {
+            return {
+                ...post._doc,
+                value: removeHtmlandShorten(post.value),
+            };
+        });
+
+        res.json(sanitizedPosts);
     } catch (err) {
         console.log(err);
     }
