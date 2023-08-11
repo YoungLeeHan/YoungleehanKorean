@@ -58,7 +58,7 @@ app.use("/api", ageCategoryRoutes);
 app.use("/api", productRoutes);
 app.use("/api", reviewRoutes);
 app.use("/api", checkoutRoutes);
-app.use("api", userOrderRoutes);
+app.use("/api", userOrderRoutes);
 app.use("/api", blogCategoryRoutes);
 app.use("/api", blogPostRoutes);
 app.use("/auth", authGoogle);

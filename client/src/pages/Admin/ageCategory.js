@@ -4,10 +4,10 @@ import Jumbotron from "../../components/cards/Jumbotron";
 import AdminMenu from "../../components/nav/AdminMenu";
 import axios from "axios";
 import toast from "react-hot-toast";
-import CategoryForm from "../../components/forms/CategoryForm";
+import AgeCategoryForm from "../../components/forms/AgeCategoryForm";
 import { Modal } from "antd";
 
-export default function AdminCategory() {
+export default function AdminAgeCategory() {
     // context
     const [auth, setAuth] = useAuth();
     // state
@@ -23,7 +23,7 @@ export default function AdminCategory() {
 
     const loadAgeCategories = async () => {
         try {
-            const { data } = await axios.get("/agecategories");
+            const { data } = await axios.get("/ageCategories");
             setAgeCategories(data);
         } catch (err) {
             console.log(err);
@@ -64,7 +64,7 @@ export default function AdminCategory() {
             }
         } catch (err) {
             console.log(err);
-            toast.error("Category may already exist. Try again.");
+            toast.error("Age category may already exist. Try again.");
         }
     };
 
@@ -103,7 +103,7 @@ export default function AdminCategory() {
                             Manage Product ageCategories
                         </div>
                         <div>
-                            <ageCategoryForm
+                            <AgeCategoryForm
                                 value={name}
                                 setValue={setName}
                                 handleSubmit={handleSubmit}
@@ -133,7 +133,7 @@ export default function AdminCategory() {
                                 onCancel={() => setVisible(false)}
                                 footer={null}
                             >
-                                <ageCategoryForm
+                                <AgeCategoryForm
                                     value={updatingName}
                                     setValue={setUpdatingName}
                                     handleSubmit={handleUpdate}

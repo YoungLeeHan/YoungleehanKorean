@@ -1,4 +1,4 @@
-export default function CategoryForm({
+export default function AgeCategoryForm({
     value,
     setValue,
     handleSubmit,

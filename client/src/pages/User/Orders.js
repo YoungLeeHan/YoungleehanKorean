@@ -29,10 +29,7 @@ export default function UserOrders() {
                 title={`Hello ${auth?.user?.firstName}`}
                 subTitle="Dashboard"
             />
-            <div
-                style={{ maxWidth: "1170px", height: "500px" }}
-                className="container-fluid"
-            >
+            <div style={{ maxWidth: "1170px" }} className="container-fluid">
                 <div className="row">
                     <div className="col-md-3">
                         <UserMenu />
