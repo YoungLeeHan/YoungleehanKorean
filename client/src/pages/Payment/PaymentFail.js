@@ -16,7 +16,7 @@ export default function PaymentFail() {
                 className="container-fluid d-flex flex-column align-items-center"
             >
                 <div
-                    className="payment-result-box container-fluid d-flex flex-column justify-content-center align-items-center"
+                    className="payment-result-box container-fluid d-flex flex-column justify-content-center align-items-center text-center"
                     style={{ marginTop: "68px" }}
                 >
                     <img src={FailSVG} alt="Failed" />
@@ -30,7 +30,7 @@ export default function PaymentFail() {
                     >
                         Something went wrong. Please try again.
                     </h1>
-                    {/* TODO: show error message*/}
+
                     <h3
                         style={{
                             margin: "25px 0",
@@ -38,10 +38,10 @@ export default function PaymentFail() {
                             fontSize: "20px",
                         }}
                     >
-                        Error message will be here
+                        If issue persist, please contact site owner.
                     </h3>
                     <div className="button-box d-flex flex-row justify-content-center align-items-center">
-                        <Link to="/cart">
+                        <Link to="/">
                             <button
                                 className="btn btn-outline-primary"
                                 style={{
@@ -54,7 +54,7 @@ export default function PaymentFail() {
                                 Back Home
                             </button>
                         </Link>
-                        <Link to="/">
+                        <Link to="/cart">
                             <button
                                 className="btn btn-primary"
                                 style={{

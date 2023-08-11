@@ -45,19 +45,20 @@ export default function UserCartSidebar() {
                 cart,
                 cartQuantity,
             });
-            // console.log("buy response => ", data);
             setLoading(false);
             localStorage.removeItem("cart");
             setCart([]);
             setCartQuantity({});
             setInstance("");
-            navigate("/cart/checkout/success");
             toast.success("Payment successful");
+            navigate("/cart/checkout/success");
         } catch (err) {
-            navigate("/cart/checkout/fail");
-            toast.error(err.message);
-            console.log(err);
-            setLoading(false);
+            if (err.name === "DropinError") {
+                toast.error(err.message);
+                setLoading(false);
+            } else {
+                navigate("/cart/checkout/fail");
+            }
         }
     };
 
@@ -76,7 +77,6 @@ export default function UserCartSidebar() {
                     />
                 )}
             </div>
-            {/* TODO: Inactivate Buy Button when no purchase method is selected / no purchase info is entered */}
             <button
                 onClick={handleBuy}
                 className="btn btn-primary col-12 mt-2"
