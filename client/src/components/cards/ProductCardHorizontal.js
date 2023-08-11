@@ -21,7 +21,7 @@ export default function ProductCardHorizontal({ p, remove = true }) {
             <div className="row g-0">
                 <div className="col-md-4">
                     <img
-                        src={`${process.env.REACT_APP_API}/product/photo/${p._id}`}
+                        src={`${process.env.REACT_APP_API}/product/images/${p._id}`}
                         alt={p.name}
                         style={{
                             height: "150px",

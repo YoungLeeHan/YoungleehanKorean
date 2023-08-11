@@ -105,7 +105,7 @@ export const login = async (req, res) => {
 
 export const updateProfile = async (req, res) => {
     try {
-        const { firstName, LastName, password, address } = req.body;
+        const { firstName, lastName, password, address } = req.body;
         const user = await User.findById(req.user._id);
         // check password length
         if (password && password.length < 6) {
@@ -121,8 +121,8 @@ export const updateProfile = async (req, res) => {
         const updated = await User.findByIdAndUpdate(
             req.user._id,
             {
-                name: firstName || user.firstName,
-                name: LastName || user.LastName,
+                firstName: firstName || user.firstName,
+                lastName: lastName || user.lastName,
                 password: hashedPassword || user.password,
                 address: address || user.address,
             },
@@ -139,10 +139,25 @@ export const updateProfile = async (req, res) => {
 export const getOrders = async (req, res) => {
     console.log(req.body);
     try {
-        const orders = await Order.find({ buyer: req.user._id })
-            .populate("products", "-photo")
-            .populate("buyer", "name");
+        const orders = await Order.find({ buyer: req.user._id }).populate(
+            "products",
+            "-images"
+        );
         res.json(orders);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+export const getRecentOrders = async (req, res) => {
+    try {
+        const orders = await Order.find({
+            buyer: req.user._id,
+        });
+        const sortedOrder = orders.sort((a, b) => {
+            return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        res.json(sortedOrder[0]._id);
     } catch (err) {
         console.log(err);
     }
@@ -151,8 +166,8 @@ export const getOrders = async (req, res) => {
 export const allOrders = async (req, res) => {
     try {
         const orders = await Order.find({})
-            .populate("products", "-photo")
-            .populate("buyer", "name")
+            .populate("products", "-images")
+            .populate("buyer", "firstName")
             .sort({ createdAt: "-1" });
         res.json(orders);
     } catch (err) {

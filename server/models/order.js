@@ -12,7 +12,8 @@ const orderSchema = new Schema(
             type: String,
             default: "Not processed",
             enum: [
-                "Not processed",
+                "Not downloaded",
+                "Downloaded",
                 "Processing",
                 "Shipped",
                 "Delivered",

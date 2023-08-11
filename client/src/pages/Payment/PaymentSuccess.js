@@ -2,11 +2,38 @@
 // -----------------------------------------------------
 import Jumbotron from "../../components/cards/Jumbotron";
 import useScrollToTop from "../../hooks/useScrollToTop";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import SuccessSVG from "../../assets/images/Checkout/PaymentSuccess.svg";
+import axios from "axios";
+import { useAuth } from "../../context/auth";
+import { useEffect, useState } from "react";
+import useWindowWidth from "./../../hooks/useWindowWidth";
 
 export default function PaymentSuccess() {
     useScrollToTop();
+
+    //hooks
+    const [auth, setAuth] = useAuth();
+    const navigate = useNavigate();
+    const windowWidth = useWindowWidth();
+
+    //state
+    const [orderId, setOrderId] = useState();
+
+    // redirect anonymous user
+    useEffect(() => {
+        if (!auth?.token) navigate("/login");
+        if (auth?.token) getOrderNumber();
+    }, []);
+
+    const getOrderNumber = async () => {
+        try {
+            const { data } = await axios.get(`/recent-order`);
+            setOrderId(data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
 
     return (
         <>
@@ -16,7 +43,7 @@ export default function PaymentSuccess() {
                 className="container-fluid d-flex flex-column align-items-center"
             >
                 <div
-                    className="payment-result-box container-fluid d-flex flex-column justify-content-center align-items-center"
+                    className="payment-result-box container-fluid d-flex flex-column justify-content-center align-items-center text-center"
                     style={{ marginTop: "68px" }}
                 >
                     <img src={SuccessSVG} alt="Successful" />
@@ -30,7 +57,7 @@ export default function PaymentSuccess() {
                     >
                         Thank you for your order!
                     </h1>
-                    {/* TODO: present order number */}
+
                     <h3
                         style={{
                             margin: "25px 0",
@@ -41,7 +68,7 @@ export default function PaymentSuccess() {
                         Your order #{orderId} was successfully created.
                     </h3>
                     <div className="button-box d-flex flex-row justify-content-center align-items-center">
-                        <Link to="/dashboard/user/orders">
+                        <Link to="/">
                             <button
                                 className="btn btn-outline-primary"
                                 style={{
@@ -54,7 +81,7 @@ export default function PaymentSuccess() {
                                 Back Home
                             </button>
                         </Link>
-                        <Link to="/">
+                        <Link to="/dashboard/user/orders">
                             <button
                                 className="btn btn-primary"
                                 style={{
