@@ -36,17 +36,17 @@ export default function BlogPostCard({ post }) {
                     </h3>
                     <h5>
                         {windowWidth > 1200 &&
-                            (post?.content?.length > 140
-                                ? post?.content.substring(0, 140) + "..."
-                                : post?.content)}
+                            (post?.value?.length > 140
+                                ? post?.value.substring(0, 140) + "..."
+                                : post?.value)}
                         {windowWidth < 1200 &&
-                            (post?.content?.length > 70
-                                ? post?.content.substring(0, 70) + "..."
-                                : post?.content)}
+                            (post?.value?.length > 70
+                                ? post?.value.substring(0, 70) + "..."
+                                : post?.value)}
                     </h5>
 
                     <div className="text-bottom d-flex flex-row justify-content-between align-items-center">
-                        <h4>Posted by {post?.writer}</h4>
+                        <h4>Posted by {post?.author}</h4>
                         <p>
                             <MdOutlineDateRange fill="#7b1fa2" />{" "}
                             {moment(post?.createdAt).format("MMMM DD YYYY")}

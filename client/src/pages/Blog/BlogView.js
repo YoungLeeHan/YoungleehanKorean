@@ -26,6 +26,8 @@ export default function BlogView() {
     const [isLoading, setIsLoading] = useState(true);
     const [blogCategories, setBlogCategories] = useState([]);
 
+
+
     // hooks
     const windowWidth = useWindowWidth();
 
@@ -60,21 +62,28 @@ export default function BlogView() {
     useEffect(() => {
         if (!categoryFilter) {
             loadBlogPosts();
-            toast.error(
-                "Blog page is under construction. These are dummy data."
-            );
         }
     }, []);
 
+    // const loadBlogPosts = async () => {
+    //     try {
+    //     	const {data} = await axios.get(`/blog/list`);
+    //     	setBlogList(data);
+    //     } catch (err) {
+    //     	console.log(err);
+    //     }
+    // };
+
+    // previous code
     const loadBlogPosts = async () => {
-        setBlogList(dummyData);
+        // setBlogList(dummyData);
         setIsLoading(false);
-        // try {
-        // 	const {data} = await axios.get(`/bloglist`);
-        // 	setBlogList(data);
-        // } catch (err) {
-        // 	console.log(err);
-        // }
+        try {
+        	const {data} = await axios.get(`/blog/list`);
+        	setBlogList(data);
+        } catch (err) {
+        	console.log(err);
+        }
     };
 
     // Blog Category filter
@@ -157,6 +166,9 @@ export default function BlogView() {
     return (
         <>
             <Jumbotron title={"Blog"} directory={"Blog"} />
+            {/*<div>*/}
+            {/*    {blogList?.length}*/}
+            {/*</div>*/}
             <div
                 style={{ maxWidth: "1170px" }}
                 className="container-fluid d-flex flex-column align-items-center"

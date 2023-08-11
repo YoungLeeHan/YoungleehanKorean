@@ -22,6 +22,7 @@ export default function BlogList() {
         loadBlogList();
     }, []);
 
+
     const loadBlogList = async () => {
         try {
             const { data } = await axios.get("/blog/list");
