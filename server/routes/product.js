@@ -8,17 +8,17 @@ import { requireSignin, isAdmin } from "../middlewares/auth.js";
 
 //controllers
 import {
-  create,
-  list,
-  read,
-  images,
-  remove,
-  update,
-  filteredProducts,
-  productsCount,
-  listProducts,
-  productsSearch,
-  relatedProducts,
+    create,
+    list,
+    read,
+    images,
+    remove,
+    update,
+    filteredProducts,
+    productsCount,
+    listProducts,
+    productsSearch,
+    relatedProducts,
 } from "../controllers/product.js";
 
 // admin product
