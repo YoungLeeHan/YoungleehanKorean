@@ -59,7 +59,7 @@ export const list = async (req, res) => {
 
 export const read = async (req, res) => {
   try {
-    const product = await Product.findOne({ slug: req.params.slug })
+    const product = await Product.findById(req.params.slug)
       .select("-images -downloadUrl")
       .populate("category")
       .populate("ageCategory");
