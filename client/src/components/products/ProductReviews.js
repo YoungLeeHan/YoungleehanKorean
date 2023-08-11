@@ -60,6 +60,9 @@ const ProductReviews = ({ id }) => {
   const onSubmit = (data) => {
     console.log(data)
     // post review to DB
+    // postReview(data).then(({ data }) => {
+    //   setReviews(data);
+    // });
   }
 
   return (
