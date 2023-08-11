@@ -4,18 +4,23 @@
 import { useNavigate } from "react-router-dom";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { useNavOverlay } from "../../context/navOverlay";
+import { useAuth } from "../../context/auth";
 
 export default function UserBtns({ userType, handleLogout }) {
     //hooks
     const windowWidth = useWindowWidth();
     const [isNavOverlay, setIsNavOverlay] = useNavOverlay();
     const navigate = useNavigate();
+    const [auth, setAuth] = useAuth();
 
     let btn1 = {};
     let btn2 = {};
 
     if (userType === "loggedIn") {
-        btn1 = { name: "My Page", linkTo: "/dashboard/user" };
+        btn1 = {
+            name: "My Page",
+            linkTo: `/dashboard/${auth.user.role === 1 ? "admin" : "user"}`,
+        };
         btn2 = { name: "My Order", linkTo: "/dashboard/user/orders" };
     } else if (userType === "anonymous") {
         btn1 = { name: "Log In", linkTo: "/login" };

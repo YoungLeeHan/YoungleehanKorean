@@ -7,6 +7,7 @@ import axios from "axios";
 import DropIn from "braintree-web-drop-in-react";
 import toast from "react-hot-toast";
 import useWindowWidth from "./../../hooks/useWindowWidth";
+import loadingGIF from "../../assets/images/Common/loading.gif";
 
 export default function UserCartSidebar() {
     //hooks
@@ -65,6 +66,17 @@ export default function UserCartSidebar() {
     return (
         <>
             <div style={windowWidth < 767 ? { margin: "70px 0" } : null}>
+                {!clientToken && (
+                    <img
+                        src={loadingGIF}
+                        alt="Loading..."
+                        style={{
+                            width: "50px",
+                            height: "50px",
+                            margin: "100px",
+                        }}
+                    />
+                )}
                 {clientToken && (
                     <DropIn
                         options={{

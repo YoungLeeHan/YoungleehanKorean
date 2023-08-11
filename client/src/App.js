@@ -67,7 +67,7 @@ export default function App() {
 
                 {/*blog*/}
                 <Route path="/blog" element={<BlogView />} />
-                <Route path="/blog/:_id" element={<SingleBlogView />} />
+                <Route path="/blog/:slug" element={<SingleBlogView />} />
                 {/* <Route path="/blog/upload" element={<Upload />} /> */}
 
                 {/*Cart & Payment*/}

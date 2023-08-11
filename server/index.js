@@ -60,7 +60,9 @@ app.use("/api/blog", blogCategoryRoutes);
 app.use("/api/blog", blogPostRoutes);
 app.use("/api", reviewRoutes);
 app.use("/api", checkoutRoutes);
-app.use("api", userOrderRoutes);
+app.use("/api", userOrderRoutes);
+app.use("/api", blogCategoryRoutes);
+app.use("/api", blogPostRoutes);
 app.use("/auth", authGoogle);
 app.use("/index", indexGoogle);
 

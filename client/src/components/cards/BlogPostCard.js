@@ -1,4 +1,5 @@
 // 👻 Developed by DanBi Choi on July 27th, 2023.
+// 👻 Developed by DanBi Choi on Aug 11th, 2023. (dynamic data applied)
 // -----------------------------------------------------
 
 import { Link } from "react-router-dom";
@@ -13,18 +14,20 @@ export default function BlogPostCard({ post }) {
     // hooks
     const windowWidth = useWindowWidth();
 
+    // change html tagged string to non-tagged string
+    const strippedText = post?.value.replace(/<[^>]+>/g, "");
+
     return (
-        <Link to={`${post._id}`}>
+        <Link to={`${post?.slug}`}>
             <div className="card-container">
                 <div className="img">
                     <img
-                        src="https://media.istockphoto.com/id/1199279669/photo/big-eyed-naughty-obese-cat-behind-the-desk-with-red-hat-grey-color-british-sort-hair-cat.jpg?s=612x612&w=0&k=20&c=hoxRypOLncBNMyRrY-wiWSQDkNcageAVpFGGRi_KHKI="
-                        alt="cat"
-                    />{" "}
+                        src={`${process.env.REACT_APP_API}/blog/images/${post._id}`}
+                        alt={post?.title}
+                    />
                 </div>
                 <div className="text blog-text d-flex flex-column justify-content-between align-items-between">
                     <h3>
-                        {" "}
                         {windowWidth > 450 &&
                             (post?.title?.length > 35
                                 ? post?.title?.substring(0, 35) + "..."
@@ -36,17 +39,17 @@ export default function BlogPostCard({ post }) {
                     </h3>
                     <h5>
                         {windowWidth > 1200 &&
-                            (post?.value?.length > 140
-                                ? post?.value.substring(0, 140) + "..."
-                                : post?.value)}
+                            (strippedText?.length > 140
+                                ? strippedText.substring(0, 140) + "..."
+                                : strippedText)}
                         {windowWidth < 1200 &&
-                            (post?.value?.length > 70
-                                ? post?.value.substring(0, 70) + "..."
-                                : post?.value)}
+                            (strippedText?.length > 70
+                                ? strippedText.substring(0, 70) + "..."
+                                : strippedText)}
                     </h5>
 
                     <div className="text-bottom d-flex flex-row justify-content-between align-items-center">
-                        <h4>Posted by {post?.author}</h4>
+                        <h4>Posted by YoungHyun</h4>
                         <p>
                             <MdOutlineDateRange fill="#7b1fa2" />{" "}
                             {moment(post?.createdAt).format("MMMM DD YYYY")}
