@@ -38,7 +38,7 @@ export default function PaymentSuccess() {
                             fontSize: "20px",
                         }}
                     >
-                        Your order #00000 was successfully created.
+                        Your order #{orderId} was successfully created.
                     </h3>
                     <div className="button-box d-flex flex-row justify-content-center align-items-center">
                         <Link to="/dashboard/user/orders">
