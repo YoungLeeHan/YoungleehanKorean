@@ -64,6 +64,16 @@ export default function BlogView() {
         }
     }, []);
 
+    // const loadBlogPosts = async () => {
+    //     try {
+    //     	const {data} = await axios.get(`/blog/list`);
+    //     	setBlogList(data);
+    //     } catch (err) {
+    //     	console.log(err);
+    //     }
+    // };
+
+    // previous code
     const loadBlogPosts = async () => {
         try {
             const { data } = await axios.get(`/blog/list`);
@@ -127,6 +137,9 @@ export default function BlogView() {
     return (
         <>
             <Jumbotron title={"Blog"} directory={"Blog"} />
+            {/*<div>*/}
+            {/*    {blogList?.length}*/}
+            {/*</div>*/}
             <div
                 style={{ maxWidth: "1170px" }}
                 className="container-fluid d-flex flex-column align-items-center"

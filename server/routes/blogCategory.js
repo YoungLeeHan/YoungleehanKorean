@@ -14,11 +14,11 @@ import {
     // productsByCategory,
 } from "../controllers/blogCategory.js";
 
-router.post("/blog/category", requireSignin, isAdmin, create);
-router.put("/blog/category/:categoryId", requireSignin, isAdmin, update);
-router.delete("/blog/category/:categoryId", requireSignin, isAdmin, remove);
-router.get("/blog/categories", list);
-router.get("/blog/category/:slug", read);
+router.post("/category", requireSignin, isAdmin, create);
+router.put("/category/:categoryId", requireSignin, isAdmin, update);
+router.delete("/category/:categoryId", requireSignin, isAdmin, remove);
+router.get("/categories", list);
+router.get("/category/:slug", read);
 // router.get("/products-by-category/:slug", productsByCategory);
 
 export default router;

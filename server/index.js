@@ -56,6 +56,8 @@ app.use("/api", authRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", ageCategoryRoutes);
 app.use("/api", productRoutes);
+app.use("/api/blog", blogCategoryRoutes);
+app.use("/api/blog", blogPostRoutes);
 app.use("/api", reviewRoutes);
 app.use("/api", checkoutRoutes);
 app.use("/api", userOrderRoutes);
