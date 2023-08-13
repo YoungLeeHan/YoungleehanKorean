@@ -2,6 +2,7 @@ import BlogPost from "../models/BlogPost.js";
 import slugify from "slugify";
 import fs from "fs";
 import sanitizeHtml from 'sanitize-html'
+import Product from "../models/product.js";
 
 
 const removeHtmlandShorten = body => {
@@ -10,8 +11,6 @@ const removeHtmlandShorten = body => {
     });
     return filtered.length < 200? filtered: `${filtered.slice(0,200)}...`;
 };
-
-
 
 
 
@@ -145,6 +144,58 @@ export const remove = async (req, res) => {
         const post = await BlogPost.findByIdAndDelete(
             req.params.postId
         ).select("-images");
+        res.json(post);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+// filteredPost
+export const filteredPost = async (req, res) => {
+    try {
+        const { category } = req.body;
+
+        const args = {};
+        if (category && category.length > 0) args.category = level;
+
+
+        const post = await BlogPost.find(args);
+        res.json(post);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+
+// postSearch
+
+export const postSearch = async (req, res) => {
+    try {
+        const { keyword } = req.params;
+        const results = await BlogPost.find({
+            $or: [
+                { title: { $regex: keyword, $options: "i" } },
+                { value: { $regex: keyword, $options: "i" } },
+            ],
+        }).select("-images -downloadUrl");
+        res.json(results);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+// listPosts
+export const listPosts = async (req, res) => {
+    try {
+        const perPage = 6;
+        const page = req.params.page ? req.params.page : 1;
+
+        const post = await BlogPost.find({})
+            .select("-images -downloadUrl")
+            .skip((page - 1) * perPage)
+            .limit(perPage)
+            .sort({ createdAt: -1 });
+
         res.json(post);
     } catch (err) {
         console.log(err);
