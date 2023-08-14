@@ -74,7 +74,7 @@ export default function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/cart/checkout" element={<Checkout />} />
                 <Route
-                    path="/cart/checkout/success"
+                    path="/cart/checkout/success/:orderNumber"
                     element={<PaymentSuccess />}
                 />
                 <Route path="/cart/checkout/fail" element={<PaymentFail />} />

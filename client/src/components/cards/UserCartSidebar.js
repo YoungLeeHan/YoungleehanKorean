@@ -51,8 +51,9 @@ export default function UserCartSidebar() {
             setCart([]);
             setCartQuantity({});
             setInstance("");
+            console.log(data);
             toast.success("Payment successful");
-            navigate("/cart/checkout/success");
+            navigate(`/cart/checkout/success/${data.orderId}`);
         } catch (err) {
             if (err.name === "DropinError") {
                 toast.error(err.message);

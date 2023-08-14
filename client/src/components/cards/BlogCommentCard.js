@@ -60,10 +60,12 @@ export default function BlogCommentCard({ comment }) {
                         style={{
                             backgroundColor: "transparent",
                             border: "none",
+                            fontWeight: isFirstLike ? "400" : "600",
                         }}
                     >
                         <BiLike
                             fill={isFirstLike ? "#ffbf35" : "#7b1fa2"}
+                            className={isFirstLike ? "" : "bold-icon"}
                             style={{
                                 margin: "0 10px 3px 0",
                             }}
