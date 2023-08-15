@@ -50,7 +50,7 @@ export default function BlogView() {
 
     const loadBlogCategories = async () => {
         try {
-            const { data } = await axios.get("/blog/categories");
+            const { data } = await axios.get("/blog/category/list");
             setBlogCategories(data);
         } catch (err) {
             console.log(err);
