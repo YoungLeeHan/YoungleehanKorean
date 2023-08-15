@@ -1,3 +1,6 @@
+// 👻 Developed by DanBi Choi on Aug 15th, 2023.
+// -----------------------------------------------------
+
 export default function AboutBadge({ badgeType, text, numberText }) {
     return (
         <div className="badge-box d-flex flex-row justify-content-center align-items-center">

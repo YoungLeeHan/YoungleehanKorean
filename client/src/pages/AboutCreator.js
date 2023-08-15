@@ -1,3 +1,5 @@
+// 👻 Developed by DanBi Choi on Aug 15th, 2023.
+// -----------------------------------------------------
 import "../styles/pages/AboutCreator.scss";
 import Jumbotron from "../components/cards/Jumbotron";
 import useScrollToTop from "../hooks/useScrollToTop";
