@@ -64,15 +64,6 @@ export default function BlogView() {
         }
     }, []);
 
-    // const loadBlogPosts = async () => {
-    //     try {
-    //     	const {data} = await axios.get(`/blog/list`);
-    //     	setBlogList(data);
-    //     } catch (err) {
-    //     	console.log(err);
-    //     }
-    // };
-
     // previous code
     const loadBlogPosts = async () => {
         try {
@@ -97,18 +88,14 @@ export default function BlogView() {
     }, [categoryFilter]);
 
     const loadFilteredPosts = async () => {
-        toast.error("Filter endpoints are under construction.");
-        console.log({
-            categoryFilter,
-        });
-        // try {
-        //     const { data } = await axios.post(`/filtered-bloglist`, {
-        //         categoryFilter
-        //     });
-        //     setBlogList(data);
-        // } catch (err) {
-        //     console.log(err);
-        // }
+        try {
+            const { data } = await axios.post(`/blog/filtered-bloglist`, {
+                categoryFilter,
+            });
+            setBlogList(data);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     // Blog Post Search
@@ -119,15 +106,14 @@ export default function BlogView() {
     const handleSearchBlog = async () => {
         // if there is a search keyword, search database with that keyword
         if (searchKeyword) {
-            console.log(`searching for ${searchKeyword}`);
-            // try {
-            //     const { data } = await axios.get(
-            //         `/blog/search/${searchKeyword}`
-            //     );
-            //     setBlogList(data);
-            // } catch (err) {
-            //     console.log(err);
-            // }
+            try {
+                const { data } = await axios.get(
+                    `/blog/search/${searchKeyword}`
+                );
+                setBlogList(data);
+            } catch (err) {
+                console.log(err);
+            }
         } else {
             // if keyword is/became empty, fetch all posts from database
             loadBlogPosts();
@@ -137,9 +123,6 @@ export default function BlogView() {
     return (
         <>
             <Jumbotron title={"Blog"} directory={"Blog"} />
-            {/*<div>*/}
-            {/*    {blogList?.length}*/}
-            {/*</div>*/}
             <div
                 style={{ maxWidth: "1170px" }}
                 className="container-fluid d-flex flex-column align-items-center"

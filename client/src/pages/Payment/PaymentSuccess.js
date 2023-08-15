@@ -2,7 +2,7 @@
 // -----------------------------------------------------
 import Jumbotron from "../../components/cards/Jumbotron";
 import useScrollToTop from "../../hooks/useScrollToTop";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import SuccessSVG from "../../assets/images/Checkout/PaymentSuccess.svg";
 import axios from "axios";
 import { useAuth } from "../../context/auth";
@@ -16,6 +16,7 @@ export default function PaymentSuccess() {
     const [auth, setAuth] = useAuth();
     const navigate = useNavigate();
     const windowWidth = useWindowWidth();
+    const params = useParams();
 
     //state
     const [orderId, setOrderId] = useState();
@@ -65,7 +66,8 @@ export default function PaymentSuccess() {
                             fontSize: "20px",
                         }}
                     >
-                        Your order #{orderId} was successfully created.
+                        Your order #{params.orderNumber} was successfully
+                        created.
                     </h3>
                     <div className="button-box d-flex flex-row justify-content-center align-items-center">
                         <Link to="/">
