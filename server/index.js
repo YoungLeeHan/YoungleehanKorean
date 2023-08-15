@@ -63,8 +63,9 @@ app.use("/api", checkoutRoutes);
 app.use("/api", userOrderRoutes);
 app.use("/api", blogCategoryRoutes);
 app.use("/api", blogPostRoutes);
-app.use("/api/auth", authGoogle);
-app.use("/api/index", indexGoogle);
+
+app.use("/auth", authGoogle);
+app.use("/index", indexGoogle);
 
 mongoose
     .connect(process.env.MONGO_URI, {
