@@ -24,7 +24,7 @@ export default function BlogCategory() {
 
     const loadCategories = async () => {
         try {
-            const { data } = await axios.get("/blog/categories");
+            const { data } = await axios.get("/blog/category/list");
             setCategories(data);
         } catch (err) {
             console.log(err);
