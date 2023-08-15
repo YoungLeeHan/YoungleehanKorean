@@ -8,7 +8,7 @@ export default function configurePassport(passport) {
             {
                 clientID: process.env.GOOGLE_CLIENT_ID,
                 clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-                callbackURL: "/api/auth/google/callback",
+                callbackURL: "/auth/google/callback",
             },
             async (accessToken, refreshToken, profile, done) => {
                 // get the user data from google
