@@ -17,6 +17,7 @@ import ageCategoryRoutes from "./routes/ageCategory.js";
 import path from "path";
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 import configurePassport from "./controllers/google.js";
+import blogCommentRoutes from "./routes/blogComment.js";
 import blogCategoryRoutes from "./routes/blogCategory.js";
 import blogPostRoutes from "./routes/blogPost.js";
 
@@ -57,13 +58,11 @@ app.use("/api", categoryRoutes);
 app.use("/api", ageCategoryRoutes);
 app.use("/api", productRoutes);
 app.use("/api/blog", blogCategoryRoutes);
+app.use("/api/blog", blogCommentRoutes);
 app.use("/api/blog", blogPostRoutes);
 app.use("/api", reviewRoutes);
 app.use("/api", checkoutRoutes);
 app.use("/api", userOrderRoutes);
-app.use("/api", blogCategoryRoutes);
-app.use("/api", blogPostRoutes);
-
 app.use("/auth", authGoogle);
 app.use("/index", indexGoogle);
 
