@@ -54,7 +54,7 @@ export default function LoginForm() {
     const handleGoogleLogin = (e) => {
         e.preventDefault();
         // This URL must be changed on production!
-        window.location.href = `http://localhost:8000/api/auth/google`;
+        window.location.href = `http://localhost:8000/auth/google`;
     };
 
     return (
