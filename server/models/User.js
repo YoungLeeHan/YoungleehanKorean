@@ -30,9 +30,31 @@ const userSchema = new Schema(
             min: 6,
             max: 64,
         },
-        address: {
+        country: {
             type: String,
             trim: true,
+        },
+        address1: {
+            type: String,
+            trim: true,
+        },
+        address2: {
+            type: String,
+            trim: true,
+        },
+        city: {
+            type: String,
+            trim: true,
+        },
+        state: {
+            type: String,
+            trim: true,
+        },
+        zipcode: {
+            type: String,
+            trim: true,
+            min: 5,
+            max: 5,
         },
         role: {
             type: Number,

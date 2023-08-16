@@ -1,23 +1,34 @@
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
 import UserMenu from "../../components/nav/UserMenu";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function UserDashboard() {
     const [auth, setAuth] = useAuth();
 
+    const navigate = useNavigate();
+
+    // redirect anonymous user
+    useEffect(() => {
+        if (!auth?.token) {
+            navigate("/login");
+        }
+    }, []);
+
     return (
         <>
             <Jumbotron
-                title={`Hello ${auth?.user?.firstName}`}
-                subTitle="Dashboard"
+                title={`Hello, ${auth?.user?.firstName}!`}
+                directory={"Dashboard"}
             />
             <div
-                style={{ maxWidth: "1170px", minHeight: "500px" }}
+                style={{ maxWidth: "1170px", minHeight: "300px" }}
                 className="container-fluid"
             >
-                <div className="row">
+                <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
-                        <UserMenu />
+                        <UserMenu id={0} />
                     </div>
                     <div className="col-md-9">
                         <div className="p-3 mt-2 mb-2 h4 bg-light">
