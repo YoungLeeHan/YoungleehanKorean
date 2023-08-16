@@ -1,0 +1,61 @@
+// 👻 Developed by DanBi Choi on Aug 16th, 2023.
+// -----------------------------------------------------
+
+@import "../../App.scss";
+
+.profile-box {
+    li {
+        display: grid;
+        gap: 10px;
+        align-items: center;
+        margin: 10px 0;
+
+        &.single {
+            grid-template-columns: auto 1fr;
+        }
+
+        &.double {
+            grid-template-columns: 1fr 2fr 1fr 2fr;
+        }
+
+        @include mobile {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin: 10px 0;
+        }
+
+        label {
+            font-size: $desktop-font-medium;
+            font-weight: 500;
+            width: 120px;
+            @include mobile {
+                font-size: $mobile-font-medium;
+            }
+        }
+
+        input {
+            width: 100%;
+            @include mobile {
+                font-size: $mobile-font-medium;
+                padding: 15px;
+            }
+        }
+
+        select {
+            border: none;
+            background-color: $background-color-gray;
+            color: $color-black;
+            border-radius: 10px;
+            padding: 20px;
+            font-size: $desktop-font-small;
+            cursor: pointer;
+            width: 100%;
+
+            @include mobile {
+                font-size: $mobile-font-medium;
+                padding: 15px;
+            }
+        }
+    }
+}

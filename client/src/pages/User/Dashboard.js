@@ -1,9 +1,20 @@
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
 import UserMenu from "../../components/nav/UserMenu";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function UserDashboard() {
     const [auth, setAuth] = useAuth();
+
+    const navigate = useNavigate();
+
+    // redirect anonymous user
+    useEffect(() => {
+        if (!auth?.token) {
+            navigate("/login");
+        }
+    }, []);
 
     return (
         <>
@@ -12,7 +23,7 @@ export default function UserDashboard() {
                 directory={"Dashboard"}
             />
             <div
-                style={{ maxWidth: "1170px", minHeight: "500px" }}
+                style={{ maxWidth: "1170px", minHeight: "300px" }}
                 className="container-fluid"
             >
                 <div className="row" style={{ margin: "75px 0" }}>

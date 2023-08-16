@@ -5,10 +5,20 @@ import UserMenu from "../../components/nav/UserMenu";
 import axios from "axios";
 import moment from "moment";
 import ProductCardHorizontal from "../../components/cards/ProductCardHorizontal";
+import { useNavigate } from "react-router-dom";
 
 export default function UserOrders() {
     const [auth, setAuth] = useAuth();
     const [orders, setOrders] = useState([]);
+
+    const navigate = useNavigate();
+
+    // redirect anonymous user
+    useEffect(() => {
+        if (!auth?.token) {
+            navigate("/login");
+        }
+    }, []);
 
     useEffect(() => {
         if (auth?.token) getOrders();
@@ -31,7 +41,7 @@ export default function UserOrders() {
                 subDirectory={"My Order"}
             />
             <div
-                style={{ maxWidth: "1170px", minHeight: "500px" }}
+                style={{ maxWidth: "1170px", minHeight: "300px" }}
                 className="container-fluid"
             >
                 <div className="row" style={{ margin: "75px 0" }}>
