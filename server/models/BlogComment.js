@@ -25,7 +25,17 @@ const blogCommentSchema = new mongoose.Schema({
                 ref: "User",
             },
         ],
-    }, { timestamps: true }
+        isDisLiked: {
+            type: Boolean,
+            default: false,
+        },
+        disLikes: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User",
+            },
+        ],
+    }, {timestamps: true}
 );
 
-export default mongoose.model("blogComment", blogCommentSchema);
+export default mongoose.model("BlogComment", blogCommentSchema);

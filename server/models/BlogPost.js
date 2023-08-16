@@ -12,7 +12,18 @@ const blogPostSchema = new mongoose.Schema(
         images: {data: Buffer, contentType: String},
         slug: {type: String, lowercase: true},
     },
-    {timestamps: true}
+    {
+        toJSON: {virtuals: true,},
+        toObject: {virtuals: true,},
+        timestamps: true,
+}
 );
+
+//populate comments
+blogPostSchema.virtual("comments", {
+        ref: "BlogComment",
+        foreignField: "BlogPost",
+        localField: "_id",
+});
 
 export default mongoose.model("BlogPost", blogPostSchema);
