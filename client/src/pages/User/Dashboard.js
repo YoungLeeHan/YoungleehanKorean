@@ -8,16 +8,16 @@ export default function UserDashboard() {
     return (
         <>
             <Jumbotron
-                title={`Hello ${auth?.user?.firstName}`}
-                subTitle="Dashboard"
+                title={`Hello, ${auth?.user?.firstName}!`}
+                directory={"Dashboard"}
             />
             <div
                 style={{ maxWidth: "1170px", minHeight: "500px" }}
                 className="container-fluid"
             >
-                <div className="row">
+                <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
-                        <UserMenu />
+                        <UserMenu id={0} />
                     </div>
                     <div className="col-md-9">
                         <div className="p-3 mt-2 mb-2 h4 bg-light">
