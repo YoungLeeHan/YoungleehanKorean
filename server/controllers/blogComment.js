@@ -4,7 +4,7 @@ import { validateMongodbId } from "../helpers/validateMongodbID.js";
 
 export const create = async (req, res) => {
     const user = req.user;
-    const {postId, description} = req.body;
+    const { postId, description } = req.body;
     try {
         const comment = await BlogComment.create({
             post: postId,
@@ -18,6 +18,7 @@ export const create = async (req, res) => {
     }
 };
 
+
 export const list = async (req, res) => {
     try {
         const all = await BlogComment.find({}).sort("-created");
@@ -30,7 +31,7 @@ export const list = async (req, res) => {
 
 export const update = async (req, res) => {
     const { id } = req.params;
-    validateMongodbId(id)
+    validateMongodbId(id);
 
     try {
         const existingComment = await BlogComment.findById(id);
@@ -49,7 +50,7 @@ export const update = async (req, res) => {
                 runValidators: true,
             }
         );
-        res.json(update)
+        res.json(update);
     } catch (err) {
         return res.status(400).json({ message: err.message });
     }
@@ -58,7 +59,7 @@ export const update = async (req, res) => {
 
 export const remove = async (req, res) => {
     const { id } = req.params;
-    validateMongodbId(id)
+    validateMongodbId(id);
 
     try {
         const removed = await BlogComment.findByIdAndDelete(id);
@@ -100,4 +101,5 @@ export const like = async (req, res) => {
         res.json(comment);
     }
 };
+
 

@@ -90,7 +90,7 @@ export default function Home() {
                 <div className="story-box row">
                     <div className="col-md-4 mb-3">
                         <img
-                            src="https://t4.ftcdn.net/jpg/02/66/72/41/360_F_266724172_Iy8gdKgMa7XmrhYYxLCxyhx6J7070Pr8.jpg"
+                            src="https://catastic.b-cdn.net/wp-content/uploads/2023/04/white-british-cat-are-wear-sunglass-shirt-concept-summer-yellow-background-1.jpg"
                             alt="Founder"
                         />
                     </div>
