@@ -13,16 +13,16 @@ const blogPostSchema = new mongoose.Schema(
         slug: {type: String, lowercase: true},
     },
     {
-            toJSON: { virtuals: true },
-            toObject: { virtuals: true },
-            timestamps: true
-    }
+        toJSON: {virtuals: true,},
+        toObject: {virtuals: true,},
+        timestamps: true,
+}
 );
 
-
-blogPostSchema.virtual("blogComment", {
+//populate comments
+blogPostSchema.virtual("comments", {
         ref: "BlogComment",
-        foreignField: "blogPost",
+        foreignField: "BlogPost",
         localField: "_id",
 });
 
