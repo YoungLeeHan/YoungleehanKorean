@@ -61,14 +61,21 @@ export default function BlogCommentCard({ comment }) {
                             backgroundColor: "transparent",
                             border: "none",
                             fontWeight: isFirstLike ? "400" : "600",
+                            padding: "5px 10px",
+                            borderRadius: "20px",
+                            ...(isFirstLike
+                                ? {
+                                      border: "1px solid #ffbf35",
+                                  }
+                                : {
+                                      border: "1px solid #7b1fa2",
+                                  }),
                         }}
                     >
                         <BiLike
                             fill={isFirstLike ? "#ffbf35" : "#7b1fa2"}
                             className={isFirstLike ? "" : "bold-icon"}
-                            style={{
-                                margin: "0 10px 3px 0",
-                            }}
+                            style={{ margin: "0 10px 3px 0" }}
                         />
                         {likeCount}
                     </button>
