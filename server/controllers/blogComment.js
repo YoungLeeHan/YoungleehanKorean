@@ -2,6 +2,11 @@ import BlogComment from "../models/BlogComment.js";
 import { validateMongodbId } from "../helpers/validateMongodbID.js";
 
 export const create = async (req, res) => {
+<<<<<<< HEAD
+=======
+    console.log("create comment");
+
+>>>>>>> ff17569 (chore: nothing)
     const user = req.user;
     const { postId, description } = req.body;
     try {
@@ -27,6 +32,20 @@ export const list = async (req, res) => {
     }
 };
 
+<<<<<<< HEAD
+=======
+export const read = async (req, res) => {
+    const { id } = req.params;
+    validateMongodbId(id);
+    try {
+        const comment = await BlogComment.findById(id);
+        res.json(comment);
+    } catch (err) {
+        return res.status(400).json(err.message);
+    }
+};
+
+>>>>>>> ff17569 (chore: nothing)
 export const update = async (req, res) => {
     const { id } = req.params;
     validateMongodbId(id);
@@ -66,6 +85,7 @@ export const remove = async (req, res) => {
     }
 };
 
+<<<<<<< HEAD
 export const like = async (req, res) => {
     const { id } = req.body;
     const comment = await BlogComment.findById(id);
@@ -96,3 +116,36 @@ export const like = async (req, res) => {
         res.json(comment);
     }
 };
+=======
+// export const like = async (req, res) => {
+//
+//     const { id } = req.body;
+//     const comment = await blogComment.findById(id)
+//
+//     const loginUserId = req?.user?._id;
+//     const isLiked = comment?.isLiked;
+//
+//     if (isLiked) {
+//         const comment = await blogComment.findByIdAndUpdate(
+//             postId,
+//             {
+//                 $pull: { likes: loginUserId },
+//                 isLiked: false,
+//             },
+//             { new: true }
+//         );
+//         res.json(comment);
+//     } else {
+//         //add to likes
+//         const comment = await blogComment.findByIdAndUpdate(
+//             postId,
+//             {
+//                 $push: { likes: loginUserId },
+//                 isLiked: true,
+//             },
+//             { new: true }
+//         );
+//         res.json(comment);
+//     }
+// };
+>>>>>>> ff17569 (chore: nothing)
