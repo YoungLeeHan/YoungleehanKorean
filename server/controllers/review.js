@@ -1,51 +1,36 @@
 import Product from "../models/product.js";
+import Review from "../models/review.js";
+import User from "../models/User.js";
 import fs from "fs";
 import slugify from "slugify";
 
 export const reviewCreate = async (req, res) => {
     try {
-        const {
-            title,
-            category,
-            ageCategory,
-            description,
-            price,
-            downloadUrl,
-        } = req.fields;
-        const { images } = req.files;
+        const temp = {
+            review: req.body.review,
+            productId: req.body.productId,
+        };
 
-        // validation
-        switch (true) {
-            case !title.trim():
-                return res.json({ error: "title is required" });
-            case images && images.size > 1000000:
-                return res.json({
-                    error: "Image should be less than 1mb in size",
-                });
-            case !category.trim():
-                return res.json({ error: "Category is required" });
-            case !ageCategory.trim():
-                return res.json({ error: "Age category is required" });
-            case !description.trim():
-                return res.json({ error: "Description is required" });
-            case !price.trim():
-                return res.json({ error: "Price is required" });
-            case !downloadUrl.trim():
-                return res.json({ error: "DownloadUrl is required" });
-        }
-        // create product
-        const product = new Product({ ...req.fields, slug: slugify(title) });
+        const userInfo = await User.findOne({ _id: req.body._id }).exec();
 
-        if (images) {
-            product.images.data = fs.readFileSync(images.path);
-            product.images.contentType = images.type;
+        if (!userInfo) {
+            return res
+                .status(404)
+                .json({ success: false, message: "User not found" });
         }
 
-        await product.save();
-        res.json(product);
+        temp.author = userInfo._id;
+        const newReview = new Review(temp);
+        await newReview.save();
+
+        await Product.findOneAndUpdate(
+            { _id: req.body.productId },
+            { $inc: { reviewNum: 1 } }
+        ).exec();
+
+        return res.status(200).json({ success: true });
     } catch (err) {
-        console.log(err);
-        return res.status(400).json(err.message);
+        return res.status(400).json({ success: false, error: err.message });
     }
 };
 

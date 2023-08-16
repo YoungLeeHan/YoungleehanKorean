@@ -15,7 +15,7 @@ import {
 } from "../controllers/review.js";
 
 router.get("/:productId/review", reviewList);
-router.post("/:productId/review", requireSignin, formidable(), reviewCreate);
+router.post("/review", requireSignin, reviewCreate);
 router.put("/:productId/review", requireSignin, formidable(), reviewUpdate);
 router.delete("/:productId/review", requireSignin, reviewRemove);
 router.get("/:productId/review/images", reviewImages);
