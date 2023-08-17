@@ -1,4 +1,5 @@
 // 👻 Developed by DanBi Choi on Aug 11th, 2023.
+// 👻 Developed by DanBi Choi on Aug 16th, 2023. (Comment Feature Backend Connection)
 // -----------------------------------------------------
 
 import { toast } from "react-hot-toast";
@@ -8,38 +9,35 @@ import { useAuth } from "../../context/auth";
 import ModalInfo from "../common/ModalInfo";
 import { useNavigate } from "react-router-dom";
 
-export default function BlogCommentForm() {
+export default function BlogCommentForm({ postId, loadBlogComments }) {
     //states
-    const [content, setContent] = useState("");
+    const [description, setDescription] = useState("");
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     // hooks
     const [auth, setAuth] = useAuth();
     const navigate = useNavigate();
 
-    const handleCommentSubmit = async (e) => {
-        toast.error("Blog comment feature is under construction.");
-        e.preventDefault();
-        if (!content) {
+    const handleCommentSubmit = async () => {
+        if (!description) {
             toast.error("All fields are required.");
         } else {
-            console.log({ content });
-            // try {
-            //     const { data } = await axios.post(`/blog/comment-create`, {
-            //         content,
-            //     });
-            //     if (data?.error) {
-            //         console.log(data?.error);
-            //     } else {
-            //         toast.success("Thank you for your comment!");
-            //     }
-            // } catch (err) {
-            //     console.log(err);
-            // }
+            try {
+                await axios.post(`/blog/comment`, {
+                    description,
+                    postId,
+                });
+                setDescription("");
+                toast.success("Thank you for your comment!");
+
+                loadBlogComments();
+            } catch (err) {
+                console.log(err);
+            }
         }
     };
 
-    // Modal Handlers
+    // Modal Handlers (for unauthorized users only)
     const handleOk = () => {
         setIsModalOpen(false);
         navigate("/login");
@@ -48,7 +46,13 @@ export default function BlogCommentForm() {
 
     return (
         <>
-            <form className="comment-write" onSubmit={handleCommentSubmit}>
+            <form
+                className="comment-write"
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    handleCommentSubmit();
+                }}
+            >
                 {auth?.user ? (
                     <h3>Tell us what you think, {auth?.user.firstName}</h3>
                 ) : (
@@ -56,11 +60,11 @@ export default function BlogCommentForm() {
                 )}
                 <textarea
                     placeholder="Your message"
-                    value={content}
+                    value={description}
                     onChange={(e) => {
                         e.preventDefault();
                         if (auth?.user) {
-                            setContent(e.target.value);
+                            setDescription(e.target.value);
                         } else {
                             setIsModalOpen(true);
                         }
