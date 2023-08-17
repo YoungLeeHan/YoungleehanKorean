@@ -11,6 +11,7 @@ import {
   secret,
   updateProfile,
   userInfo,
+  sendCode,
 } from "../controllers/auth.js";
 
 router.post("/register", register);
