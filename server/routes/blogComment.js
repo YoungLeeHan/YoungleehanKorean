@@ -13,7 +13,7 @@ import {
     like,
 } from "../controllers/blogComment.js";
 
-router.get("/", list);
+router.get("/:postId", list);
 router.post("/", requireSignin, create);
 router.put("/:id", requireSignin, update);
 router.delete("/:id", requireSignin, remove);

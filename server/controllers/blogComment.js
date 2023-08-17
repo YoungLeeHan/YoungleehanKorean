@@ -20,8 +20,9 @@ export const create = async (req, res) => {
 
 
 export const list = async (req, res) => {
+    const { postId } = req.params;
     try {
-        const all = await BlogComment.find({}).sort("-created");
+        const all = await BlogComment.find({ post: postId }).sort("-created");
         res.json(all);
     } catch (err) {
         return res.status(400).json(err.message);
