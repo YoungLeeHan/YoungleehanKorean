@@ -90,7 +90,6 @@ export default function RegisterForm() {
                             placeholder="Your last name"
                             value={lastName}
                             onChange={(e) => setLastName(e.target.value)}
-                            autoFocus
                         />
                     </li>
 
@@ -106,7 +105,6 @@ export default function RegisterForm() {
                             placeholder="Name@example.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            autoFocus
                         />
                     </li>
                     <li>
@@ -121,7 +119,6 @@ export default function RegisterForm() {
                             placeholder="Password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            autoFocus
                         />
                     </li>
                     <li>

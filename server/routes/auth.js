@@ -10,13 +10,14 @@ import {
   login,
   secret,
   updateProfile,
-  sendCode,
+  userInfo,
 } from "../controllers/auth.js";
 
 router.post("/register", register);
 router.post("/send-code", sendCode);
 router.post("/login", login);
-router.put("/profile", requireSignin, updateProfile);
+router.get("/userInfo", requireSignin, userInfo);
+router.put("/profileUpdate", requireSignin, updateProfile);
 router.get("/auth-check", requireSignin, (req, res) => {
   res.json({ ok: true });
 });

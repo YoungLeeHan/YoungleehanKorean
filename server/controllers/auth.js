@@ -94,7 +94,7 @@ export const login = async (req, res) => {
         lastName: user.lastName,
         email: user.email,
         role: user.role,
-        address: user.address,
+        country: user.country,
       },
       token,
     });
@@ -103,32 +103,59 @@ export const login = async (req, res) => {
   }
 };
 
+export const userInfo = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    res.json(user);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const updateProfile = async (req, res) => {
   try {
-    const { firstName, lastName, password, address } = req.body;
+    const {
+      firstName,
+      lastName,
+      password,
+      country,
+      address1,
+      address2,
+      city,
+      state,
+      zipcode,
+    } = req.body;
+
     const user = await User.findById(req.user._id);
+
     // check password length
-    if (password && password.length < 6) {
+    if (!password || password.length < 6) {
       return res.json({
-        error: "Password is required and should be min 6 characters long",
+        error: "Password is required and should be min 6 characters long.",
       });
     }
-    // hash the password
-    const hashedPassword = password ? await hashPassword(password) : undefined;
 
-    const updated = await User.findByIdAndUpdate(
+    // check if password matches
+    const match = await comparePassword(password, user.password);
+    if (!match) {
+      return res.json({ error: "Wrong password." });
+    }
+
+    const updatedProfile = await User.findByIdAndUpdate(
       req.user._id,
       {
         firstName: firstName || user.firstName,
         lastName: lastName || user.lastName,
-        password: hashedPassword || user.password,
-        address: address || user.address,
+        country: country,
+        address1: address1,
+        address2: address2,
+        city: city,
+        state: state,
+        zipcode: zipcode,
       },
       { new: true }
     );
-
-    updated.password = undefined;
-    res.json(updated);
+    res.json(updatedProfile);
   } catch (err) {
     console.log(err);
   }

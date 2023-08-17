@@ -8,20 +8,16 @@ import { requireSignin } from "../middlewares/auth.js";
 import {
     create,
     list,
-    read,
     update,
     remove,
-    // like,
-    // dislike
+    like,
 } from "../controllers/blogComment.js";
 
-router.get("/", list);
+router.get("/:postId", list);
 router.post("/", requireSignin, create);
-router.get("/:id", requireSignin, read);
 router.put("/:id", requireSignin, update);
 router.delete("/:id", requireSignin, remove);
-// router.put("likes", requireSignin, like);
-// router.put("dislikes", requireSignin, dislike);
+router.put("/:id/like", requireSignin, like);
 
 
 export default router;
