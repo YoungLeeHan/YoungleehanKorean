@@ -1,7 +1,6 @@
 import BlogComment from "../models/BlogComment.js";
 import { validateMongodbId } from "../helpers/validateMongodbID.js";
 
-
 export const create = async (req, res) => {
     const user = req.user;
     const { postId, description } = req.body;
@@ -18,7 +17,6 @@ export const create = async (req, res) => {
     }
 };
 
-
 export const list = async (req, res) => {
     const { postId } = req.params;
     try {
@@ -29,7 +27,6 @@ export const list = async (req, res) => {
     }
 };
 
-
 export const update = async (req, res) => {
     const { id } = req.params;
     validateMongodbId(id);
@@ -37,7 +34,7 @@ export const update = async (req, res) => {
     try {
         const existingComment = await BlogComment.findById(id);
         if (!existingComment) {
-            return res.status(404).json({ message: 'Comment not found' });
+            return res.status(404).json({ message: "Comment not found" });
         }
 
         const update = await BlogComment.findByIdAndUpdate(
@@ -57,7 +54,6 @@ export const update = async (req, res) => {
     }
 };
 
-
 export const remove = async (req, res) => {
     const { id } = req.params;
     validateMongodbId(id);
@@ -70,11 +66,9 @@ export const remove = async (req, res) => {
     }
 };
 
-
 export const like = async (req, res) => {
-
     const { id } = req.body;
-    const comment = await BlogComment.findById(id)
+    const comment = await BlogComment.findById(id);
 
     const loginUserId = req?.user?._id;
     const isLiked = comment?.isLiked;
@@ -102,5 +96,3 @@ export const like = async (req, res) => {
         res.json(comment);
     }
 };
-
-
