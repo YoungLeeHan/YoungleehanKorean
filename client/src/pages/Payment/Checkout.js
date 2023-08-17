@@ -1,3 +1,5 @@
+// 👻 Developed by DanBi Choi on Aug 9th, 2023.
+// -----------------------------------------------------
 import UserCartSidebar from "../../components/cards/UserCartSidebar";
 import Jumbotron from "../../components/cards/Jumbotron";
 import { useCartTotal } from "../../context/cartTotal";

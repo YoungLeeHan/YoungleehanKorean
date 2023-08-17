@@ -4,6 +4,26 @@
 @import "../../App.scss";
 
 .profile-box {
+    padding: 35px;
+    background-color: $color-white;
+    border-radius: 10px;
+    box-shadow: 0px 5px 30px 0px rgba(219, 219, 219, 0.3);
+
+    .profile-box-title {
+        margin-bottom: 23px;
+        h1 {
+            font-size: $desktop-font-large;
+            font-weight: 600;
+        }
+
+        h5 {
+            font-size: $desktop-font-small;
+            span {
+                color: $color-purple;
+            }
+        }
+    }
+
     li {
         display: grid;
         gap: 10px;
@@ -31,6 +51,10 @@
             width: 120px;
             @include mobile {
                 font-size: $mobile-font-medium;
+            }
+
+            span {
+                color: $color-purple;
             }
         }
 

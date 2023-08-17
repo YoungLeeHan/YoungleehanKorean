@@ -146,25 +146,13 @@ export default function UserProfile() {
                         <UserMenu id={1} />
                     </div>
                     <div className="col-md-9">
-                        <div
-                            className="profile-box"
-                            style={{
-                                padding: "35px",
-                                backgroundColor: "#FFF",
-                                borderRadius: "10px",
-                                boxShadow:
-                                    "0px 5px 30px 0px rgba(219, 219, 219, 0.30)",
-                            }}
-                        >
-                            <h1
-                                style={{
-                                    fontSize: "20px",
-                                    fontWeight: "600",
-                                    marginBottom: "23px",
-                                }}
-                            >
-                                My Profile
-                            </h1>
+                        <div className="profile-box">
+                            <div className="profile-box-title d-flex flex-row justify-content-between align-items-center">
+                                <h1>My Profile</h1>
+                                <h5>
+                                    <span>*</span> fields are required.
+                                </h5>
+                            </div>
                             <ul className="profileForm d-flex flex-column justify-content-between">
                                 <li className="single">
                                     <ProfileInput
@@ -202,6 +190,7 @@ export default function UserProfile() {
                                         value={password}
                                         placeholder={"Current password"}
                                         handleInput={handleInput}
+                                        required={true}
                                     />
                                 </li>
                                 <li className="single">
@@ -297,9 +286,8 @@ export default function UserProfile() {
                 handleOk={handleOk}
                 handleCancel={handleCancel}
                 okBtnText={"Ok"}
-                text={
-                    "Password is required and should be min 6 characters long."
-                }
+                width={450}
+                text={"Make sure to type in your current password."}
             />
         </>
     );
