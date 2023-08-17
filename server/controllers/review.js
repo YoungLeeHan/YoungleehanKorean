@@ -1,4 +1,5 @@
 import Product from "../models/product.js";
+import review from "../models/review.js";
 import Review from "../models/review.js";
 import User from "../models/User.js";
 import fs from "fs";
@@ -11,15 +12,15 @@ export const reviewCreate = async (req, res) => {
             productId: req.body.productId,
         };
 
-        const userInfo = await User.findOne({ _id: req.body._id }).exec();
+        const author = await User.findOne({ _id: req.body._id }).exec();
 
-        if (!userInfo) {
+        if (!author) {
             return res
                 .status(404)
                 .json({ success: false, message: "User not found" });
         }
 
-        temp.author = userInfo._id;
+        temp.author = author._id;
         const newReview = new Review(temp);
         await newReview.save();
 
@@ -36,15 +37,10 @@ export const reviewCreate = async (req, res) => {
 
 export const reviewList = async (req, res) => {
     try {
-        const products = await Product.find({})
-            .populate("category")
-            .select("-images -downloadUrl")
-            .limit(12)
-            .sort({ createdAt: -1 });
-
-        res.json(products);
+        const all = await Review.find({}).sort("-created");
+        res.json(all);
     } catch (err) {
-        console.log(err);
+        return res.status(400).json(err.message);
     }
 };
 
@@ -63,30 +59,40 @@ export const reviewImages = async (req, res) => {
 };
 
 export const reviewRemove = async (req, res) => {
+    const { reviewId } = req.params;
+
     try {
-        const product = await Product.findByIdAndDelete(
-            req.params.productId
-        ).select("-images -downloadUrl");
-        res.json(product);
+        const removed = await Review.findByIdAndDelete(reviewId);
+        res.json(removed);
     } catch (err) {
-        console.log(err);
+        return res.status(400).json(err.message);
     }
 };
 
 export const reviewUpdate = async (req, res) => {
+    const { reviewId } = req.params;
+    console.log("파라미터에 들어온 reviewId=> ", reviewId);
+
     try {
-        const { title } = req.body;
-        const { productId } = req.params;
-        const product = await product.findByIdAndUpdate(
-            productId,
-            {
-                title,
-                slug: slugify(title),
-            },
-            { new: true }
-        );
-        res.json(product);
+        const existingReview = await Review.findById(reviewId);
+        if (!existingReview) {
+            return res.status(404).json({ message: "Review not found" });
+        }
+
+        const { review, productId } = req.body;
+
+        if (review) {
+            existingReview.review = review;
+        }
+
+        if (productId) {
+            existingReview.productId = productId;
+        }
+
+        await existingReview.save();
+
+        return res.status(200).json({ message: "Review updated successfully" });
     } catch (err) {
-        return res.status(500).json(err.message);
+        return res.status(400).json({ error: err.message });
     }
 };
