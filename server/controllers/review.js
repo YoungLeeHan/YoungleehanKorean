@@ -1,9 +1,6 @@
 import Product from "../models/product.js";
-import review from "../models/review.js";
 import Review from "../models/review.js";
 import User from "../models/User.js";
-import fs from "fs";
-import slugify from "slugify";
 
 export const reviewCreate = async (req, res) => {
     try {
@@ -44,34 +41,8 @@ export const reviewList = async (req, res) => {
     }
 };
 
-export const reviewImages = async (req, res) => {
-    try {
-        const product = await Product.findById(req.params.productId).select(
-            "images"
-        );
-        if (product.images.data) {
-            res.set("Content-Type", product.images.contentType);
-            return res.send(product.images.data);
-        }
-    } catch (err) {
-        console.log(err);
-    }
-};
-
-export const reviewRemove = async (req, res) => {
-    const { reviewId } = req.params;
-
-    try {
-        const removed = await Review.findByIdAndDelete(reviewId);
-        res.json(removed);
-    } catch (err) {
-        return res.status(400).json(err.message);
-    }
-};
-
 export const reviewUpdate = async (req, res) => {
     const { reviewId } = req.params;
-    console.log("파라미터에 들어온 reviewId=> ", reviewId);
 
     try {
         const existingReview = await Review.findById(reviewId);
@@ -94,5 +65,30 @@ export const reviewUpdate = async (req, res) => {
         return res.status(200).json({ message: "Review updated successfully" });
     } catch (err) {
         return res.status(400).json({ error: err.message });
+    }
+};
+
+export const reviewRemove = async (req, res) => {
+    const { reviewId } = req.params;
+
+    try {
+        const removed = await Review.findByIdAndDelete(reviewId);
+        res.json(removed);
+    } catch (err) {
+        return res.status(400).json(err.message);
+    }
+};
+
+export const reviewImages = async (req, res) => {
+    try {
+        const product = await Product.findById(req.params.productId).select(
+            "images"
+        );
+        if (product.images.data) {
+            res.set("Content-Type", product.images.contentType);
+            return res.send(product.images.data);
+        }
+    } catch (err) {
+        console.log(err);
     }
 };
