@@ -92,11 +92,12 @@ export default function BlogCommentCard({ comment, loadBlogComments }) {
                             style={{ margin: "3px 10px 0 0" }}
                         />
                         <h4>
-                            {comment?.user.firstName} {comment?.user.lastName}.
+                            {comment?.user?.firstName} {comment?.user?.lastName}
+                            .
                         </h4>
                     </div>
 
-                    {auth?.user?._id === comment?.user._id && (
+                    {auth?.user?._id === comment?.user?._id && (
                         <div className="d-flex flex-row">
                             <button
                                 style={{
@@ -158,7 +159,7 @@ export default function BlogCommentCard({ comment, loadBlogComments }) {
                             className={comment?.isLiked ? "" : "bold-icon"}
                             style={{ margin: "0 10px 3px 0" }}
                         />
-                        {comment?.likes.length}
+                        {comment?.likes?.length}
                     </button>
                 </h5>
             </li>
