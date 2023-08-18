@@ -23,7 +23,7 @@ export default function SingleBlogView() {
     const [post, setPost] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const [comments, setComments] = useState([]);
-    const [postId, setPostId] = useState();
+    //const [postId, setPostId] = useState();
 
     useEffect(() => {
         if (params.slug) {
@@ -43,14 +43,14 @@ export default function SingleBlogView() {
 
     useEffect(() => {
         if (post) {
-            setPostId(post._id);
-            loadBlogComments();
+            // setPostId(post._id);
+            loadBlogComments(post._id);
         }
     }, [post]);
 
-    const loadBlogComments = async () => {
+    const loadBlogComments = async (id) => {
         try {
-            const { data } = await axios.get(`/blog/comment/${post._id}`);
+            const { data } = await axios.get(`/blog/comment/${id}`);
             setComments(data);
         } catch (err) {
             console.log(err);
@@ -111,7 +111,7 @@ export default function SingleBlogView() {
                     </div>
                     <div className="col-md-6 post-comment-box">
                         <BlogCommentForm
-                            postId={postId}
+                            postId={post?._id}
                             loadBlogComments={loadBlogComments}
                         />
                     </div>
@@ -120,7 +120,7 @@ export default function SingleBlogView() {
                         <ul>
                             {comments &&
                                 comments.map((comment) => (
-                                    <div key={comment._id}>
+                                    <div key={comment?._id}>
                                         <BlogCommentCard
                                             comment={comment}
                                             loadBlogComments={loadBlogComments}
@@ -134,30 +134,3 @@ export default function SingleBlogView() {
         </>
     );
 }
-
-const commentsDummy = [
-    {
-        _id: 1,
-        name: "Danbi",
-        createdAt: new Date(),
-        content:
-            "Qui esse fugiat officia occaecat cupidatat consequat incididunt dolore ex enim.",
-        likeCount: 3,
-    },
-    {
-        _id: 2,
-        name: "Young",
-        createdAt: new Date(),
-        content:
-            "Elit ullamco occaecat id et ex sit. Veniam ex veniam incididunt pariatur pariatur deserunt laborum.",
-        likeCount: 8,
-    },
-    {
-        _id: 3,
-        name: "May",
-        createdAt: new Date(),
-        content:
-            "Aliquip aliquip proident aliqua magna nostrud eiusmod ullamco. Reprehenderit nisi ex ullamco nisi eu deserunt velit dolor non fugiat dolore aute. Mollit esse eiusmod culpa occaecat non. Velit est velit aliquip eiusmod in elit. Duis sit consequat sint sit nostrud commodo non sint et.",
-        likeCount: 13,
-    },
-];
