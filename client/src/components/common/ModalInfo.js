@@ -6,6 +6,7 @@ import { BsInfoCircleFill } from "react-icons/bs";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 export default function ModalInfo({
+    color = "#ffbf35",
     isModalOpen,
     handleOk,
     handleCancel,
@@ -21,9 +22,9 @@ export default function ModalInfo({
             <ConfigProvider
                 theme={{
                     token: {
-                        colorPrimary: "#ffbf35",
+                        colorPrimary: color,
                         lineHeight: "2",
-                        colorPrimaryBorder: "#ffbf35",
+                        colorPrimaryBorder: color,
                     },
                 }}
             >
@@ -40,9 +41,9 @@ export default function ModalInfo({
                         style={{ padding: "40px 0 30px 0" }}
                     >
                         <BsInfoCircleFill
-                            fill="#ffbf35"
+                            fill={color}
                             size="25px"
-                            style={{ marginRight: "10px" }}
+                            style={{ margin: "0 10px" }}
                         />
                         <h3
                             style={

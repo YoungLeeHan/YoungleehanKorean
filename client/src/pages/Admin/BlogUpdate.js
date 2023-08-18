@@ -8,6 +8,7 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Select } from "antd";
+import { editorModules, editorFormats } from "../../constants/constant";
 
 const { Option } = Select;
 
@@ -26,36 +27,6 @@ export default function AdminBlogUpdate() {
     //hook
     const navigate = useNavigate();
     const params = useParams();
-
-    // Quill Editor Settings
-    const editorModules = {
-        toolbar: [
-            [{ header: [1, 2, 3, 4, 5, 6, false] }],
-            ["bold", "italic", "underline", "strike", "blockquote"],
-            [
-                { list: "ordered" },
-                { list: "bullet" },
-                { indent: "-1" },
-                { indent: "+1" },
-            ],
-            ["link", "image"],
-            ["clean"],
-        ],
-    };
-
-    const editorFormats = [
-        "header",
-        "bold",
-        "italic",
-        "underline",
-        "strike",
-        "blockquote",
-        "list",
-        "bullet",
-        "indent",
-        "link",
-        "image",
-    ];
 
     // fetch blog category list from DB
     useEffect(() => {

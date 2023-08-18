@@ -13,6 +13,7 @@ import { Col, Row, Checkbox, ConfigProvider, Slider } from "antd";
 import ProductCard from "../../components/cards/ProductCard";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
 import loadingGIF from "../../assets/images/Common/loading.gif";
+import { mobileWidth } from "../../constants/constant";
 
 export default function ProductsView() {
     useScrollToTop();
@@ -34,7 +35,7 @@ export default function ProductsView() {
 
     // Show or hide 'show filter' button depending on screen size
     useEffect(() => {
-        if (windowWidth < 767) {
+        if (windowWidth < mobileWidth) {
             setShowFilter(false);
         } else {
             setShowFilter(true);
@@ -232,7 +233,7 @@ export default function ProductsView() {
                             {/* Filter #1: Product Search ends here*/}
 
                             {/* 👉 Mobile responsive show/hide filter button starts here */}
-                            {windowWidth < 767 && (
+                            {windowWidth < mobileWidth && (
                                 <ResponsiveShowFilter
                                     handleShowFilter={handleShowFilter}
                                     showFilter={showFilter}

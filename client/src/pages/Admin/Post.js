@@ -1,15 +1,13 @@
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
 import AdminMenu from "../../components/nav/AdminMenu";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Select } from "antd";
 import { useNavigate } from "react-router-dom";
 
-
 const { Option } = Select;
-
 
 export default function AdminBlog() {
     //context
@@ -23,9 +21,6 @@ export default function AdminBlog() {
     const [photo, setPhoto] = useState("");
     //hook
     const navigate = useNavigate();
-
-
-
 
     useEffect(() => {
         loadCategories();
@@ -49,11 +44,12 @@ export default function AdminBlog() {
             postData.append("description", description);
             postData.append("category", category);
 
-            console.log([...postData]);
-
-            const { data } = await axios.post('/dashboard/admin/post', postData);
-            if(data?.error) {
-                toast.error(data.error)
+            const { data } = await axios.post(
+                "/dashboard/admin/post",
+                postData
+            );
+            if (data?.error) {
+                toast.error(data.error);
             } else {
                 toast.success(`${data.title} is created`);
                 navigate("/dashboard/admin/posts");
@@ -84,27 +80,32 @@ export default function AdminBlog() {
                         </div>
                         <div className="p-3">
                             <form onSubmit={handleSubmit}>
-                                {photo && <div className="text-center">
-                                    <img
-                                        src={(URL.createObjectURL(photo))}
-                                        alt="Blog Photo"
-                                        className="img img-responsive"
-                                        height="200px"
-                                    />
-                                </div>}
+                                {photo && (
+                                    <div className="text-center">
+                                        <img
+                                            src={URL.createObjectURL(photo)}
+                                            alt="blog"
+                                            className="img img-responsive"
+                                            height="200px"
+                                        />
+                                    </div>
+                                )}
 
-
-                                <div className= "pt-2">
+                                <div className="pt-2">
                                     <label className="btn btn-outline-secondary p-2 col-12 mb-3">
-                                        {photo? photo.name: "Upload main image"}
-                                        <input type="file"
-                                               name="photo"
-                                               accept="image/*"
-                                               onChange={(e) => setPhoto(e.target.files[0])}
-                                               hidden
+                                        {photo
+                                            ? photo.name
+                                            : "Upload main image"}
+                                        <input
+                                            type="file"
+                                            name="photo"
+                                            accept="image/*"
+                                            onChange={(e) =>
+                                                setPhoto(e.target.files[0])
+                                            }
+                                            hidden
                                         />
                                     </label>
-
                                 </div>
 
                                 <input
@@ -120,7 +121,9 @@ export default function AdminBlog() {
                                     className="form-control p-2 mb-3"
                                     placeholder="Write a content"
                                     value={description}
-                                    onChange={(e) => setDescription(e.target.value)}
+                                    onChange={(e) =>
+                                        setDescription(e.target.value)
+                                    }
                                 />
 
                                 <Select
@@ -132,7 +135,10 @@ export default function AdminBlog() {
                                     onChange={(value) => setCategory(value)}
                                 >
                                     {categories?.map((category) => (
-                                        <Option key={category._id} value={category._id}>
+                                        <Option
+                                            key={category._id}
+                                            value={category._id}
+                                        >
                                             {category.name}
                                         </Option>
                                     ))}

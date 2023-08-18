@@ -10,35 +10,42 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Modal, ConfigProvider } from "antd";
 import useWindowWidth from "../../hooks/useWindowWidth";
-import ModalWarning from "./../common/ModalWarning";
+import ModalInfo from "./../common/ModalInfo";
 import { HiPencilAlt } from "react-icons/hi";
 import { MdDelete } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 export default function BlogCommentCard({ comment, loadBlogComments }) {
     //hooks
     const [auth, setAuth] = useAuth();
     const windowWidth = useWindowWidth();
+    const navigate = useNavigate();
 
     // states
     const [newDescription, setNewDescription] = useState(comment?.description);
     const [isModalOpenModify, setIsModalOpenModify] = useState(false);
     const [isModalOpenDelete, setIsModalOpenDelete] = useState(false);
+    const [isModalOpenLogin, setIsModalOpenLogin] = useState(false);
 
     const handleLikeClick = async (id) => {
-        try {
-            await axios.put(`/blog/comment/${id}/like`, {
-                id,
-            });
-            loadBlogComments();
-        } catch (err) {
-            console.log(err);
+        if (!auth?.user) {
+            setIsModalOpenLogin(true);
+        } else {
+            try {
+                await axios.put(`/blog/comment/${id}/like`, {
+                    id,
+                });
+                loadBlogComments();
+            } catch (err) {
+                console.log(err);
+            }
         }
     };
 
     // modal controller for comment modification
     const handleOkModify = async () => {
         try {
-            await axios.put(`/blog/comment/${comment._id}`, {
+            await axios.put(`/blog/comment/${comment?._id}`, {
                 newDescription,
             });
             loadBlogComments();
@@ -52,7 +59,7 @@ export default function BlogCommentCard({ comment, loadBlogComments }) {
     // modal controller for comment deletion
     const handleOkDelete = async () => {
         try {
-            await axios.delete(`/blog/comment/${comment._id}`);
+            await axios.delete(`/blog/comment/${comment?._id}`);
             loadBlogComments();
             setIsModalOpenDelete(false);
         } catch (err) {
@@ -60,6 +67,17 @@ export default function BlogCommentCard({ comment, loadBlogComments }) {
         }
     };
     const handleCancelDelete = () => setIsModalOpenDelete(false);
+
+    // modal controller for anonymous user who clicked on like button
+    const handleOkLogin = async () => {
+        try {
+            setIsModalOpenLogin(false);
+            navigate("/login");
+        } catch (err) {
+            console.log(err);
+        }
+    };
+    const handleCancelLogin = () => setIsModalOpenLogin(false);
 
     return (
         <>
@@ -78,7 +96,7 @@ export default function BlogCommentCard({ comment, loadBlogComments }) {
                         </h4>
                     </div>
 
-                    {auth?.user._id === comment?.user._id && (
+                    {auth?.user?._id === comment?.user._id && (
                         <div className="d-flex flex-row">
                             <button
                                 style={{
@@ -118,7 +136,7 @@ export default function BlogCommentCard({ comment, loadBlogComments }) {
                         disable={comment?.isLiked ? "true" : "false"}
                         onClick={(e) => {
                             e.preventDefault();
-                            handleLikeClick(comment._id);
+                            handleLikeClick(comment?._id);
                         }}
                         style={{
                             backgroundColor: "transparent",
@@ -188,7 +206,8 @@ export default function BlogCommentCard({ comment, loadBlogComments }) {
             </ConfigProvider>
             {/* Modal for Comment Modification ends here */}
             {/* Modal for Comment Deletion starts here */}
-            <ModalWarning
+            <ModalInfo
+                color={"#9E1800"}
                 isModalOpen={isModalOpenDelete}
                 handleOk={handleOkDelete}
                 handleCancel={handleCancelDelete}
@@ -197,6 +216,15 @@ export default function BlogCommentCard({ comment, loadBlogComments }) {
                 width={250}
             />
             {/* Modal for Comment Deletion ends here */}
+            {/* Modal for Anonymous user starts here */}
+            <ModalInfo
+                isModalOpen={isModalOpenLogin}
+                handleOk={handleOkLogin}
+                handleCancel={handleCancelLogin}
+                okBtnText={"Log in"}
+                text={"Please log in to like a comment!"}
+            />
+            {/* Modal for Anonymous user ends here */}
         </>
     );
 }

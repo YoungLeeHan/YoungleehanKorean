@@ -39,71 +39,89 @@ import PaymentFail from "./pages/Payment/PaymentFail";
 import AboutCreator from "./pages/AboutCreator";
 
 export default function App() {
-  return (
-    <BrowserRouter>
-      <Header />
-      <Toaster position="top-right" reverseOrder={false} />
+    return (
+        <BrowserRouter>
+            <Header />
+            <Toaster position="top-right" reverseOrder={false} />
 
-      <Routes>
-        {/*single page*/}
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<AboutCreator />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="*" element={<PageNotFound />} />
-        <Route path="/categories" element={<CategoriesList />} />
+            <Routes>
+                {/*single page*/}
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<AboutCreator />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="*" element={<PageNotFound />} />
+                <Route path="/categories" element={<CategoriesList />} />
 
-        {/*login*/}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/:id/verify/:token" element={<EmailVerification />} />
-        <Route path="/forgotpassword" element={<ForgotPassword />} />
-        <Route path="/verification" element={<Verification />} />
-        <Route path="/newpassword" element={<NewPassword />} />
+                {/*login*/}
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route
+                    path="/:id/verify/:token"
+                    element={<EmailVerification />}
+                />
+                <Route path="/forgotpassword" element={<ForgotPassword />} />
+                <Route path="/verification" element={<Verification />} />
+                <Route path="/newpassword" element={<NewPassword />} />
 
-        {/*shop*/}
-        <Route path="/shop" element={<ProductsView />} />
-        <Route path="/shop/product/:slug" element={<SingleProductView />} />
+                {/*shop*/}
+                <Route path="/shop" element={<ProductsView />} />
+                <Route
+                    path="/shop/product/:slug"
+                    element={<SingleProductView />}
+                />
 
-        {/*blog*/}
-        <Route path="/blog" element={<BlogView />} />
-        <Route path="/blog/:slug" element={<SingleBlogView />} />
-        {/* <Route path="/blog/upload" element={<Upload />} /> */}
+                {/*blog*/}
+                <Route path="/blog" element={<BlogView />} />
+                <Route path="/blog/:slug" element={<SingleBlogView />} />
+                {/* <Route path="/blog/upload" element={<Upload />} /> */}
 
-        {/*Cart & Payment*/}
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/cart/checkout" element={<Checkout />} />
-        <Route
-          path="/cart/checkout/success/:orderNumber"
-          element={<PaymentSuccess />}
-        />
-        <Route path="/cart/checkout/fail" element={<PaymentFail />} />
+                {/*Cart & Payment*/}
+                <Route path="/cart" element={<Cart />} />
+                <Route path="/cart/checkout" element={<Checkout />} />
+                <Route
+                    path="/cart/checkout/success/:orderNumber"
+                    element={<PaymentSuccess />}
+                />
+                <Route path="/cart/checkout/fail" element={<PaymentFail />} />
 
-        {/*user dashboard*/}
-        <Route path="/dashboard" element={<PrivateRoute />}>
-          <Route path="user" element={<Dashboard />} />
-          <Route path="user/profile" element={<UserProfile />} />
-          <Route path="user/orders" element={<UserOrders />} />
-        </Route>
+                {/*user dashboard*/}
+                <Route path="/dashboard" element={<PrivateRoute />}>
+                    <Route path="user" element={<Dashboard />} />
+                    <Route path="user/profile" element={<UserProfile />} />
+                    <Route path="user/orders" element={<UserOrders />} />
+                </Route>
 
-        {/*admin dashboard*/}
-        <Route path="/dashboard" element={<AdminRoute />}>
-          <Route path="admin" element={<AdminDashboard />} />
-          <Route path="admin/blog" element={<AdminBlog />} />
+                {/*admin dashboard*/}
+                <Route path="/dashboard" element={<AdminRoute />}>
+                    <Route path="admin" element={<AdminDashboard />} />
+                    <Route path="admin/blog" element={<AdminBlog />} />
 
-          <Route path="admin/category" element={<AdminCategory />} />
-          <Route path="admin/product" element={<AdminProduct />} />
-          <Route path="admin/products" element={<AdminProducts />} />
-          <Route
-            path="admin/product/update/:slug"
-            element={<AdminProductUpdate />}
-          />
-          <Route path="admin/blog/category" element={<AdminBlogCategory />} />
-          <Route path="admin/blog/createpost" element={<AdminCreatePost />} />
-          <Route path="admin/blog/list" element={<AdminBlogPostList />} />
-          <Route path="admin/blog/update/:slug" element={<AdminBlogUpdate />} />
-        </Route>
-      </Routes>
-      <Footer />
-    </BrowserRouter>
-  );
+                    <Route path="admin/category" element={<AdminCategory />} />
+                    <Route path="admin/product" element={<AdminProduct />} />
+                    <Route path="admin/products" element={<AdminProducts />} />
+                    <Route
+                        path="admin/product/update/:slug"
+                        element={<AdminProductUpdate />}
+                    />
+                    <Route
+                        path="admin/blog/category"
+                        element={<AdminBlogCategory />}
+                    />
+                    <Route
+                        path="admin/blog/createpost"
+                        element={<AdminCreatePost />}
+                    />
+                    <Route
+                        path="admin/blog/list"
+                        element={<AdminBlogPostList />}
+                    />
+                    <Route
+                        path="admin/blog/update/:slug"
+                        element={<AdminBlogUpdate />}
+                    />
+                </Route>
+            </Routes>
+            <Footer />
+        </BrowserRouter>
+    );
 }
