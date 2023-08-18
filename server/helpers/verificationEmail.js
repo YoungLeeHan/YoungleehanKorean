@@ -23,9 +23,9 @@ export const sendVerificationEmail = async (email, subject, content) => {
       html: content,
     };
 
-    smtpTransport.sendMail(mailOptions, function (error, response) {
-      if (error) {
-        console.log(error);
+    smtpTransport.sendMail(mailOptions, function (err, res) {
+      if (err) {
+        console.log(err);
         res.status(500).json({ message: "Failed to send email" });
       } else {
         console.log("Email sent!");
