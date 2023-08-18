@@ -1,4 +1,3 @@
-import "../../styles/pages/Admin/CreatePost.scss";
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
 import AdminMenu from "../../components/nav/AdminMenu";
@@ -11,7 +10,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Select } from "antd";
 
 const { Option } = Select;
-
 
 export default function AdminBlogUpdate() {
     // context
@@ -28,7 +26,6 @@ export default function AdminBlogUpdate() {
     //hook
     const navigate = useNavigate();
     const params = useParams();
-
 
     // Quill Editor Settings
     const editorModules = {
@@ -70,7 +67,6 @@ export default function AdminBlogUpdate() {
         loadBlog();
     }, []);
 
-
     const loadBlogCategories = async () => {
         try {
             const { data } = await axios.get("/blog/categories");
@@ -79,7 +75,6 @@ export default function AdminBlogUpdate() {
             console.log(err);
         }
     };
-
 
     const loadBlog = async () => {
         try {
@@ -92,8 +87,6 @@ export default function AdminBlogUpdate() {
             console.log(err);
         }
     };
-
-
 
     // Update Post when user clicks Submit Button
     const handleSubmit = async (e) => {
@@ -110,17 +103,13 @@ export default function AdminBlogUpdate() {
                 blogPostData.append("category", category);
                 blogPostData.append("value", value);
 
-
-                const { data } = await axios.put(
-                    `/blog/${id}`,
-                    blogPostData
-                );
+                const { data } = await axios.put(`/blog/${id}`, blogPostData);
                 if (data?.error) {
                     toast.error(data.error);
                 } else {
                     toast.success(`"${data.title}" is update`);
                     navigate("/dashboard/admin/blog/list");
-                    window.location.reload()
+                    window.location.reload();
                 }
             } catch (err) {
                 toast.error("Something went wrong. Try again.");
@@ -134,17 +123,15 @@ export default function AdminBlogUpdate() {
             let answer = window.confirm(
                 "Are you sure you want to delete this post?"
             );
-            if(!answer) return;
+            if (!answer) return;
             const { data } = await axios.delete(`/blog/${id}`);
             toast.success(`"${data.title}" is deleted`);
             navigate("/dashboard/admin/blog");
         } catch (err) {
-            console.log(err)
-            toast.error("Delete failed. Try again.")
+            console.log(err);
+            toast.error("Delete failed. Try again.");
         }
-    }
-
-
+    };
 
     return (
         <>
@@ -172,14 +159,17 @@ export default function AdminBlogUpdate() {
                                     height="200px"
                                 />
                             </div>
-                        ) : (<div className="text-center">
+                        ) : (
+                            <div className="text-center">
                                 <img
-                                    src={`${process.env.REACT_APP_API}/blog/images/${id}?${new Date().getTime()}`}
+                                    src={`${
+                                        process.env.REACT_APP_API
+                                    }/blog/images/${id}?${new Date().getTime()}`}
                                     alt="blog images"
                                     className="img img-responsive"
                                     height="200px"
                                 />
-                        </div>
+                            </div>
                         )}
 
                         <div className="pt-2">
@@ -197,55 +187,54 @@ export default function AdminBlogUpdate() {
                             </label>
                         </div>
 
-
                         <div className="text-editor-box">
-                                <input
-                                    type="text"
-                                    className="form-control p-2 mb-3"
-                                    placeholder="Write a title"
-                                    value={title}
-                                    onChange={(e) => setTitle(e.target.value)}
-                                />
-                                <Select
-                                    bordered={false}
-                                    size="large"
-                                    className="form-select mb-3"
-                                    placeholder="Choose category"
-                                    onChange={(value) => setCategory(value)}
-                                    value={category}
-                                >
-                                    {categories?.map((category) => (
-                                        <Option
-                                            key={category._id}
-                                            value={category._id}
-                                        >
-                                            {category.name}
-                                        </Option>
-                                    ))}
-                                </Select>
-                                <ReactQuill
-                                    theme="snow"
-                                    value={value}
-                                    onChange={setValue}
-                                    modules={editorModules}
-                                    formats={editorFormats}
-                                    placeholder="Enter your contents here..."
-                                ></ReactQuill>
+                            <input
+                                type="text"
+                                className="form-control p-2 mb-3"
+                                placeholder="Write a title"
+                                value={title}
+                                onChange={(e) => setTitle(e.target.value)}
+                            />
+                            <Select
+                                bordered={false}
+                                size="large"
+                                className="form-select mb-3"
+                                placeholder="Choose category"
+                                onChange={(value) => setCategory(value)}
+                                value={category}
+                            >
+                                {categories?.map((category) => (
+                                    <Option
+                                        key={category._id}
+                                        value={category._id}
+                                    >
+                                        {category.name}
+                                    </Option>
+                                ))}
+                            </Select>
+                            <ReactQuill
+                                theme="snow"
+                                value={value}
+                                onChange={setValue}
+                                modules={editorModules}
+                                formats={editorFormats}
+                                placeholder="Enter your contents here..."
+                            ></ReactQuill>
 
-                                <div className="d-flex justify-content-between">
-                                    <button
-                                        className="btn btn-primary mt-3 mb-5"
-                                        onClick= {handleSubmit}
-                                    >
-                                        Update
-                                    </button>
-                                    <button
-                                        className="btn btn-danger mt-3 mb-5"
-                                        onClick= {handleDelete}
-                                    >
-                                        Delete
-                                    </button>
-                                </div>
+                            <div className="d-flex justify-content-between">
+                                <button
+                                    className="btn btn-primary mt-3 mb-5"
+                                    onClick={handleSubmit}
+                                >
+                                    Update
+                                </button>
+                                <button
+                                    className="btn btn-danger mt-3 mb-5"
+                                    onClick={handleDelete}
+                                >
+                                    Delete
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
