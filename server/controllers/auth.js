@@ -21,7 +21,7 @@ export const register = async (req, res) => {
       return res.json({ error: "Last name is required" });
     }
     if (!email) {
-      return res.json({ error: "Email is taken" }); //409
+      return res.json({ error: "Email is taken" });
     }
     if (!password || !pwReg.test(password)) {
       return res.json({
@@ -62,6 +62,7 @@ export const register = async (req, res) => {
         lastName: user.lastName,
         email: user.email,
         role: user.role,
+        _id: user._id,
       },
       token,
     });
@@ -105,6 +106,7 @@ export const login = async (req, res) => {
         email: user.email,
         role: user.role,
         country: user.country,
+        _id: user._id,
       },
       token,
     });

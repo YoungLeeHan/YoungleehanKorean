@@ -1,65 +1,81 @@
 import Product from "../models/product.js";
-import fs from "fs";
-import slugify from "slugify";
+import Review from "../models/review.js";
+import User from "../models/User.js";
 
 export const reviewCreate = async (req, res) => {
     try {
-        const {
-            title,
-            category,
-            ageCategory,
-            description,
-            price,
-            downloadUrl,
-        } = req.fields;
-        const { images } = req.files;
+        const temp = {
+            review: req.body.review,
+            productId: req.body.productId,
+        };
 
-        // validation
-        switch (true) {
-            case !title.trim():
-                return res.json({ error: "title is required" });
-            case images && images.size > 1000000:
-                return res.json({
-                    error: "Image should be less than 1mb in size",
-                });
-            case !category.trim():
-                return res.json({ error: "Category is required" });
-            case !ageCategory.trim():
-                return res.json({ error: "Age category is required" });
-            case !description.trim():
-                return res.json({ error: "Description is required" });
-            case !price.trim():
-                return res.json({ error: "Price is required" });
-            case !downloadUrl.trim():
-                return res.json({ error: "DownloadUrl is required" });
-        }
-        // create product
-        const product = new Product({ ...req.fields, slug: slugify(title) });
+        const author = await User.findOne({ _id: req.body._id }).exec();
 
-        if (images) {
-            product.images.data = fs.readFileSync(images.path);
-            product.images.contentType = images.type;
+        if (!author) {
+            return res
+                .status(404)
+                .json({ success: false, message: "User not found" });
         }
 
-        await product.save();
-        res.json(product);
+        temp.author = author._id;
+        const newReview = new Review(temp);
+        await newReview.save();
+
+        await Product.findOneAndUpdate(
+            { _id: req.body.productId },
+            { $inc: { reviewNum: 1 } }
+        ).exec();
+
+        return res.status(200).json({ success: true });
     } catch (err) {
-        console.log(err);
-        return res.status(400).json(err.message);
+        return res.status(400).json({ success: false, error: err.message });
     }
 };
 
 export const reviewList = async (req, res) => {
     try {
-        const products = await Product.find({})
-            .populate("category")
-            .select("-images -downloadUrl")
-            .limit(12)
-            .sort({ createdAt: -1 });
-
-        res.json(products);
+        const all = await Review.find({}).sort("-created");
+        res.json(all);
     } catch (err) {
-        console.log(err);
+        return res.status(400).json(err.message);
+    }
+};
+
+export const reviewUpdate = async (req, res) => {
+    const { reviewId } = req.params;
+
+    try {
+        const existingReview = await Review.findById(reviewId);
+        if (!existingReview) {
+            return res.status(404).json({ message: "Review not found" });
+        }
+
+        const { review, productId } = req.body;
+
+        if (review) {
+            existingReview.review = review;
+        }
+
+        if (productId) {
+            existingReview.productId = productId;
+        }
+
+        await existingReview.save();
+
+        return res.status(200).json({ message: "Review updated successfully" });
+    } catch (err) {
+        return res.status(400).json({ error: err.message });
+    }
+};
+
+export const reviewRemove = async (req, res) => {
+    const { reviewId } = req.params;
+
+    try {
+        const removed = await Review.findByIdAndDelete(reviewId);
+        res.json(removed);
+    } catch (err) {
+        return res.status(400).json(err.message);
     }
 };
 
@@ -74,34 +90,5 @@ export const reviewImages = async (req, res) => {
         }
     } catch (err) {
         console.log(err);
-    }
-};
-
-export const reviewRemove = async (req, res) => {
-    try {
-        const product = await Product.findByIdAndDelete(
-            req.params.productId
-        ).select("-images -downloadUrl");
-        res.json(product);
-    } catch (err) {
-        console.log(err);
-    }
-};
-
-export const reviewUpdate = async (req, res) => {
-    try {
-        const { title } = req.body;
-        const { productId } = req.params;
-        const product = await product.findByIdAndUpdate(
-            productId,
-            {
-                title,
-                slug: slugify(title),
-            },
-            { new: true }
-        );
-        res.json(product);
-    } catch (err) {
-        return res.status(500).json(err.message);
     }
 };

@@ -1,11 +1,11 @@
-// 👻 Developed by DanBi Choi on Aug 9th, 2023.
+// 👻 Developed by DanBi Choi on Aug 17th, 2023.
 // -----------------------------------------------------
 
 import { Modal, ConfigProvider } from "antd";
 import { BsInfoCircleFill } from "react-icons/bs";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
-export default function ModalInfo({
+export default function ModalWarning({
     isModalOpen,
     handleOk,
     handleCancel,
@@ -21,9 +21,9 @@ export default function ModalInfo({
             <ConfigProvider
                 theme={{
                     token: {
-                        colorPrimary: "#ffbf35",
+                        colorPrimary: "#9E1800",
                         lineHeight: "2",
-                        colorPrimaryBorder: "#ffbf35",
+                        colorPrimaryBorder: "#9E1800",
                     },
                 }}
             >
@@ -40,7 +40,7 @@ export default function ModalInfo({
                         style={{ padding: "40px 0 30px 0" }}
                     >
                         <BsInfoCircleFill
-                            fill="#ffbf35"
+                            fill="#9E1800"
                             size="25px"
                             style={{ marginRight: "10px" }}
                         />

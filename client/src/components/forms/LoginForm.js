@@ -6,7 +6,7 @@ import envelopeSVG from "../../assets/images/Login/envelope.svg";
 import "../../styles/components/cards/LoginForm.scss";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";

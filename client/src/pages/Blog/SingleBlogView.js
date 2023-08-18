@@ -23,6 +23,7 @@ export default function SingleBlogView() {
     const [post, setPost] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const [comments, setComments] = useState([]);
+    const [postId, setPostId] = useState();
 
     useEffect(() => {
         if (params.slug) {
@@ -41,16 +42,19 @@ export default function SingleBlogView() {
     };
 
     useEffect(() => {
-        if (post) loadBlogComments();
+        if (post) {
+            setPostId(post._id);
+            loadBlogComments();
+        }
     }, [post]);
 
     const loadBlogComments = async () => {
-        // try {
-        //     const { data } = await axios.get(`/blog/comments/${post._id}`);
-        //     setComments(data);
-        // } catch (err) {
-        //     console.log(err);
-        // }
+        try {
+            const { data } = await axios.get(`/blog/comment/${post._id}`);
+            setComments(data);
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (
@@ -106,16 +110,23 @@ export default function SingleBlogView() {
                         <p dangerouslySetInnerHTML={{ __html: post?.value }} />
                     </div>
                     <div className="col-md-6 post-comment-box">
-                        <BlogCommentForm />
+                        <BlogCommentForm
+                            postId={postId}
+                            loadBlogComments={loadBlogComments}
+                        />
                     </div>
                     <div className="col-md-6 post-comment-list ">
                         <h3>Recent Comments</h3>
                         <ul>
-                            {commentsDummy?.map((comment) => (
-                                <div key={comment._id}>
-                                    <BlogCommentCard comment={comment} />
-                                </div>
-                            ))}
+                            {comments &&
+                                comments.map((comment) => (
+                                    <div key={comment._id}>
+                                        <BlogCommentCard
+                                            comment={comment}
+                                            loadBlogComments={loadBlogComments}
+                                        />
+                                    </div>
+                                ))}
                         </ul>
                     </div>
                 </div>
