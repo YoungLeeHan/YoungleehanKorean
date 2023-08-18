@@ -1,6 +1,5 @@
 // 👻 Developed by DanBi Choi on Aug 2nd, 2023.
 // -----------------------------------------------------
-import "../../styles/pages/Admin/CreatePost.scss";
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
 import AdminMenu from "../../components/nav/AdminMenu";
@@ -89,7 +88,6 @@ export default function Blog() {
                 blogPostData.append("value", value);
                 blogPostData.append("images", images);
 
-
                 const { data } = await axios.post(
                     `/blog/post-create`,
                     blogPostData
@@ -149,7 +147,6 @@ export default function Blog() {
                                 />
                             </label>
                         </div>
-
 
                         <div className="text-editor-box">
                             <form onSubmit={handleCreatePost}>
