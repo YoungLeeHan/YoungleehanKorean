@@ -8,6 +8,7 @@ import yellowBadge from "../assets/images/About/yellowBadge.svg";
 import AboutBadge from "../components/cards/AboutBadge";
 import useWindowWidth from "./../hooks/useWindowWidth";
 import catImg from "./../assets/images/About/cat_square.jpg";
+import { mobileWidth } from "../constants/constant";
 
 export default function AboutCreator() {
     useScrollToTop();
@@ -31,7 +32,7 @@ export default function AboutCreator() {
                         </div>
                     </div>
                     <div className="col-md-8 d-flex flex-column justify-content-between text-start">
-                        {windowWidth > 767 ? (
+                        {windowWidth > mobileWidth ? (
                             <h1>
                                 Young-Hyun Lee
                                 <span> | 영현 선생님</span>

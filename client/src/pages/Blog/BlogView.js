@@ -15,6 +15,7 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
 import { toast } from "react-hot-toast";
 import loadingGIF from "../../assets/images/Common/loading.gif";
+import { mobileWidth } from "../../constants/constant";
 
 export default function BlogView() {
     useScrollToTop();
@@ -31,7 +32,7 @@ export default function BlogView() {
     const windowWidth = useWindowWidth();
 
     useEffect(() => {
-        if (windowWidth < 767) {
+        if (windowWidth < mobileWidth) {
             setShowFilter(false);
         } else {
             setShowFilter(true);
@@ -151,7 +152,7 @@ export default function BlogView() {
                             </form>
                             {/* Filter #1: Product Search ends here*/}
                             {/* 👉 Mobile responsive show/hide filter button starts here */}
-                            {windowWidth < 767 && (
+                            {windowWidth < mobileWidth && (
                                 <ResponsiveShowFilter
                                     handleShowFilter={handleShowFilter}
                                     showFilter={showFilter}

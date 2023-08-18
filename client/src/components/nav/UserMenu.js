@@ -2,27 +2,21 @@
 // -----------------------------------------------------
 
 import { useNavigate } from "react-router-dom";
-import { AiOutlineUser, AiOutlineShopping } from "react-icons/ai";
-import { BsClipboard } from "react-icons/bs";
+
 import DashboardSideBarMenu from "../cards/DashboardSideBarMenu";
 import { useState } from "react";
-
-const menuData = [
-    { _id: 0, name: "Dashboard", link: "/", icon: BsClipboard },
-    { _id: 1, name: "Profile", link: "/profile", icon: AiOutlineUser },
-    { _id: 2, name: "My Order", link: "/orders", icon: AiOutlineShopping },
-];
+import { userMenuData } from "../../constants/constant";
 
 export default function UserMenu({ id }) {
     // state
-    const [currentMenu, setCurrentMenu] = useState(menuData[id].name);
+    const [currentMenu, setCurrentMenu] = useState(userMenuData[id].name);
 
     // hook
     const navigate = useNavigate();
 
     const handleMenuClick = (id) => {
-        navigate(`/dashboard/user${menuData[id].link}`);
-        setCurrentMenu(menuData[id].name);
+        navigate(`/dashboard/user${userMenuData[id].link}`);
+        setCurrentMenu(userMenuData[id].name);
     };
 
     return (
@@ -45,7 +39,7 @@ export default function UserMenu({ id }) {
                 User Dashboard
             </h3>
             <ul>
-                {menuData.map((menu) => (
+                {userMenuData.map((menu) => (
                     <li key={menu._id}>
                         <DashboardSideBarMenu
                             menu={menu}
