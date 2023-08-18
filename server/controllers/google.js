@@ -20,6 +20,7 @@ export default function configurePassport(passport) {
                     images: (profile && profile.photos[0].value) || "",
                     email: (profile && profile.emails[0].value) || "",
                     password: (profile && profile.password) || "",
+                    verified: true,
                 };
                 //console.log("새유저있냐?", newUser);
                 //console.log(profile);
