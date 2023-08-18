@@ -27,8 +27,8 @@ export default function EmailVerification() {
   return (
     <>
       <Jumbotron
-        title={"Verify email address"}
-        directory={"Verify email address"}
+        title={"Email address verified"}
+        directory={"Email address verified"}
       />
       <div
         style={{ maxWidth: "1170px" }}
@@ -36,7 +36,7 @@ export default function EmailVerification() {
       >
         {validUrl ? (
           <div className="d-flex flex-column justify-content-between">
-            <h3> Email verified successfully. </h3>
+            <h3> Thank you for verifying your email address! </h3>
             <Link to="/login" style={{ color: "#7b1fa2" }}>
               <button className="btn btn-primary mb-10" type="Log in">
                 Log in

@@ -81,13 +81,32 @@ export const login = async (req, res) => {
     }
     if (!password || password.length < 6) {
       return res.json({
-        error: "Password must be at least 6 characters long",
+        error: "Wrong password. Hint: 6 characters or more",
       });
     }
 
     const user = await User.findOne({ email });
     if (!user) {
       return res.json({ error: "User not found" });
+    }
+
+    if (!user.verified) {
+      const token = await new Token({
+        userId: user._id,
+        token: crypto.randomBytes(32).toString("hex"),
+      }).save();
+
+      const verificationUrl = `http://localhost:3000/${user.id}/verify/${token.token}`;
+
+      await sendVerificationEmail(
+        user.email,
+        "Verify Your Email Address",
+        verificationUrl
+      );
+
+      return res
+        .status(400)
+        .send({ message: "A verification link sent to your email address." });
     }
 
     const match = await comparePassword(password, user.password);
