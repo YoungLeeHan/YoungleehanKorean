@@ -11,11 +11,11 @@ import {
   secret,
   updateProfile,
   userInfo,
-  sendCode,
+  verifyEmail,
 } from "../controllers/auth.js";
 
 router.post("/register", register);
-router.post("/send-code", sendCode);
+router.get("/:id/verify/:token", verifyEmail);
 router.post("/login", login);
 router.get("/userInfo", requireSignin, userInfo);
 router.put("/profileUpdate", requireSignin, updateProfile);

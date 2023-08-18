@@ -12,39 +12,39 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function Register() {
-    useScrollToTop();
+  useScrollToTop();
 
-    // hooks
-    const [auth, setAuth] = useAuth();
-    const navigate = useNavigate();
+  // hooks
+  const [auth, setAuth] = useAuth();
+  const navigate = useNavigate();
 
-    // redirect to user dashboard if user is logged in
-    useEffect(() => {
-        const authCheck = async () => {
-            const { data } = await axios.get(`/auth-check`);
-            if (data.ok) {
-                navigate(`/dashboard/user`);
-            }
-        };
+  // redirect to user dashboard if user is logged in
+  useEffect(() => {
+    const authCheck = async () => {
+      const { data } = await axios.get(`/auth-check`);
+      if (data.ok) {
+        navigate(`/dashboard/user`);
+      }
+    };
 
-        if (auth?.token) authCheck();
-    }, [auth?.token]);
+    if (auth?.token) authCheck();
+  }, [auth?.token]);
 
-    return (
-        <>
-            <Jumbotron title={"Sign Up"} directory={"Sign Up"} />
-            <div
-                style={{ maxWidth: "1170px" }}
-                className="container-fluid d-flex flex-column align-items-center"
-            >
-                <AccountControlBox
-                    title={"Create New Account"}
-                    subtitle={
-                        "Create your account. Enjoy exclusive features and many more."
-                    }
-                    formtype={RegisterForm}
-                />
-            </div>
-        </>
-    );
+  return (
+    <>
+      <Jumbotron title={"Sign Up"} directory={"Sign Up"} />
+      <div
+        style={{ maxWidth: "1170px" }}
+        className="container-fluid d-flex flex-column align-items-center"
+      >
+        <AccountControlBox
+          title={"Create New Account"}
+          subtitle={
+            "Create your account. Enjoy exclusive features and many more."
+          }
+          formtype={RegisterForm}
+        />
+      </div>
+    </>
+  );
 }
