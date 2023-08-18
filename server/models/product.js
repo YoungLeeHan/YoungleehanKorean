@@ -5,7 +5,6 @@ const productSchema = new mongoose.Schema(
     {
         title: { type: String, trim: true, required: true, maxlength: 160 },
         slug: { type: String, lowercase: true },
-        downloadUrl: { type: String, trim: true, required: true },
         images: { data: Buffer, contentType: String },
         category: { type: ObjectId, ref: "Category", required: true },
         ageCategory: { type: ObjectId, ref: "ageCategory", required: true },
