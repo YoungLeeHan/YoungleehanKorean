@@ -40,7 +40,7 @@ export default function configurePassport(passport) {
                         done(null, user);
                     }
                 } catch (err) {
-                    console.error(err);
+                    // console.error(err);
                     done(err, null);
                 }
             }
