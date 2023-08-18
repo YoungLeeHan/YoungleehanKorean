@@ -19,15 +19,10 @@ export default function Login() {
 
     // redirect to user dashboard if user is logged in
     useEffect(() => {
-        const authCheck = async () => {
-            const { data } = await axios.get(`/auth-check`);
-            if (data.ok) {
-                navigate(`/dashboard/user`);
-            }
-        };
-
-        if (auth?.token) authCheck();
-    }, [auth?.token]);
+        if (auth?.token) {
+            navigate("/dashboard/user");
+        }
+    }, []);
 
     return (
         <>
