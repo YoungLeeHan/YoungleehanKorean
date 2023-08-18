@@ -1,8 +1,10 @@
 import User from "../models/User.js";
+import Token from "../models/token.js";
+import crypto from "crypto";
+import { sendVerificationEmail } from "../helpers/verificationEmail.js";
 import { hashPassword, comparePassword } from "../helpers/auth.js";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
-import nodemailer from "nodemailer";
 
 dotenv.config();
 
@@ -19,7 +21,7 @@ export const register = async (req, res) => {
       return res.json({ error: "Last name is required" });
     }
     if (!email) {
-      return res.json({ error: "Email is taken" });
+      return res.json({ error: "Email is taken" }); //409
     }
     if (!password || !pwReg.test(password)) {
       return res.json({
@@ -29,7 +31,7 @@ export const register = async (req, res) => {
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      return res.json({ error: "Email is taken" });
+      return res.json({ error: "This email is already registered." });
     }
 
     const hashedPassword = await hashPassword(password);
@@ -41,9 +43,18 @@ export const register = async (req, res) => {
       password: hashedPassword,
     }).save();
 
-    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "7d",
-    });
+    const token = await new Token({
+      userId: user._id,
+      token: crypto.randomBytes(32).toString("hex"),
+    }).save();
+
+    const verificationUrl = `http://localhost:3000/${user.id}/verify/${token.token}`;
+
+    await sendVerificationEmail(
+      user.email,
+      "Verify Your Email Address",
+      verificationUrl
+    );
 
     res.json({
       user: {
@@ -51,7 +62,6 @@ export const register = async (req, res) => {
         lastName: user.lastName,
         email: user.email,
         role: user.role,
-        address: user.address,
       },
       token,
     });
@@ -165,45 +175,25 @@ export const secret = async (req, res) => {
   res.json({ currentUser: req.user });
 };
 
-export const sendCode = async (req, res) => {
+export const verifyEmail = async (req, res) => {
   try {
-    const { email } = req.body;
-    const payload = Math.floor(100000 + Math.random() * 900000) + "";
+    const user = await User.findOne({ _id: req.params.id });
+    if (!user) return res.status(400).send({ message: "Invalid link" });
 
-    const smtpTransport = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.NODE_MAILER_ID,
-        pass: process.env.NODE_MAILER_PASSWORD,
-      },
-      tls: {
-        rejectUnauthorized: false,
-      },
+    const token = await Token.findOne({
+      userId: user._id,
+      token: req.params.token,
     });
+    if (!token) return res.status(400).send({ message: "Invalid link" });
 
-    if (email) {
-      const mailOptions = {
-        from: process.env.NODE_MAILER_ID,
-        to: email,
-        subject: "Test 인증 메일",
-        html: `<strong>인증번호는 ${payload} 입니다.</strong>`,
-      };
+    await User.updateOne({ _id: user._id }, { $set: { verified: true } });
+    // await token.removeToken();
 
-      smtpTransport.sendMail(mailOptions, function (error, info) {
-        if (error) {
-          console.log(error);
-          res.status(500).json({ message: "Failed to send email" });
-        } else {
-          console.log("Email sent: " + info.response);
-          res.status(200).json({ message: "Email sent successfully", payload });
-        }
-        smtpTransport.close();
-      });
-    } else {
-      res.status(400).json({ message: "Email is required" });
-    }
+    res.status(200).send({ message: "Email verified successfully" });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Internal server error" });
+    res
+      .status(500)
+      .send({ message: "Verification failed. Internal Server Error" });
   }
 };

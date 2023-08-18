@@ -1,4 +1,3 @@
-"use strict";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
@@ -7,8 +6,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import { Select } from "antd";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 
