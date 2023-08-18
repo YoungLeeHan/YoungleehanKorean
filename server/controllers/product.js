@@ -1,44 +1,21 @@
 import Product from "../models/product.js";
 import fs from "fs";
 import slugify from "slugify";
+import { validateProduct } from "../helpers/validateProduct.js";
 
 export const create = async (req, res) => {
     try {
-        const {
-            title,
-            category,
-            ageCategory,
-            description,
-            price,
-            downloadUrl,
-        } = req.fields;
-        const { images } = req.files;
+        const productData = validateProduct(req, res);
 
-        // validation
-        switch (true) {
-            case !title.trim():
-                return res.json({ error: "title is required" });
-            case images && images.size > 1000000:
-                return res.json({
-                    error: "Image should be less than 1mb in size",
-                });
-            case !category.trim():
-                return res.json({ error: "Category is required" });
-            case !ageCategory.trim():
-                return res.json({ error: "Age category is required" });
-            case !description.trim():
-                return res.json({ error: "Description is required" });
-            case !price.trim():
-                return res.json({ error: "Price is required" });
-            case !downloadUrl.trim():
-                return res.json({ error: "DownloadUrl is required" });
-        }
         // create product
-        const product = new Product({ ...req.fields, slug: slugify(title) });
+        const product = new Product({
+            ...req.fields,
+            slug: slugify(productData.title),
+        });
 
-        if (images) {
-            product.images.data = fs.readFileSync(images.path);
-            product.images.contentType = images.type;
+        if (productData.images) {
+            product.images.data = fs.readFileSync(productData.images.path);
+            product.images.contentType = productData.images.type;
         }
 
         await product.save();
@@ -53,7 +30,7 @@ export const list = async (req, res) => {
     try {
         const products = await Product.find({})
             .populate("category")
-            .select("-images -downloadUrl")
+            .select("-images")
             .limit(12)
             .sort({ createdAt: -1 });
 
@@ -66,7 +43,7 @@ export const list = async (req, res) => {
 export const read = async (req, res) => {
     try {
         const product = await Product.findOne({ slug: req.params.slug })
-            .select("-images -downloadUrl")
+            .select("-images")
             .populate("category")
             .populate("ageCategory");
         res.json(product);
@@ -93,7 +70,7 @@ export const remove = async (req, res) => {
     try {
         const product = await Product.findByIdAndDelete(
             req.params.productId
-        ).select("-images -downloadUrl");
+        ).select("-images");
         res.json(product);
     } catch (err) {
         console.log(err);
@@ -102,49 +79,21 @@ export const remove = async (req, res) => {
 
 export const update = async (req, res) => {
     try {
-        const {
-            title,
-            description,
-            price,
-            category,
-            ageCategory,
-            downloadUrl,
-        } = req.fields;
-        const { images } = req.files;
-
-        // validation
-        switch (true) {
-            case !title.trim():
-                return res.json({ error: "Title is required" });
-            case !description.trim():
-                return res.json({ error: "Description is required" });
-            case !price.trim():
-                return res.json({ error: "Price is required" });
-            case !category.trim():
-                return res.json({ error: "Category is required" });
-            case !ageCategory.trim():
-                return res.json({ error: "Age Category is required" });
-            case images && images.size > 1000000:
-                return res.json({
-                    error: "Image should be less than 1MB in size",
-                });
-            case !downloadUrl.trim():
-                return res.json({ error: "DownloadUrl is required" });
-        }
+        const productData = validateProduct(req, res);
 
         // update product
         const product = await Product.findByIdAndUpdate(
             req.params.productId,
             {
                 ...req.fields,
-                slug: slugify(title),
+                slug: slugify(productData.title),
             },
             { new: true }
         );
 
-        if (images) {
-            product.images.data = fs.readFileSync(images.path);
-            product.images.contentType = images.type;
+        if (productData.images) {
+            product.images.data = fs.readFileSync(productData.images.path);
+            product.images.contentType = productData.images.type;
         }
 
         await product.save();
@@ -190,7 +139,7 @@ export const listProducts = async (req, res) => {
         const page = req.params.page ? req.params.page : 1;
 
         const products = await Product.find({})
-            .select("-images -downloadUrl")
+            .select("-images")
             .skip((page - 1) * perPage)
             .limit(perPage)
             .sort({ createdAt: -1 });
@@ -226,7 +175,7 @@ export const productsSearch = async (req, res) => {
                 { title: { $regex: keyword, $options: "i" } },
                 { description: { $regex: keyword, $options: "i" } },
             ],
-        }).select("-images -downloadUrl");
+        }).select("-images");
         res.json(results);
     } catch (err) {
         console.log(err);
