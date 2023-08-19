@@ -3,39 +3,6 @@
 
 @import "../App.scss";
 
-// .container-fluid {
-//     border: 1px solid $color-yellow;
-// }
-
-@mixin section-name {
-    font-weight: 500;
-    font-size: $desktop-font-large;
-    margin-bottom: 0;
-    @content;
-}
-
-@mixin section-title {
-    font-size: $desktop-font-xlarge;
-    font-weight: 600;
-    margin-bottom: 10px;
-    @content;
-
-    span {
-        color: $color-purple;
-        font-size: $desktop-font-xlarge;
-        font-weight: 600;
-        margin-bottom: 10px;
-    }
-}
-
-@mixin section-subtitle {
-    margin: 10px 0 40px 0;
-    color: $color-gray;
-    font-size: $desktop-font-medium;
-    line-height: 160%;
-    @content;
-}
-
 .landing-view {
     padding: 150px 0 100px 0;
     @include mobile-center;
@@ -84,18 +51,6 @@
 }
 
 .customerTypes {
-    padding-top: 155px;
-    text-align: center;
-
-    h1 {
-        @include section-title;
-    }
-
-    p {
-        @include section-subtitle;
-        max-width: 620px;
-    }
-
     .card-box {
         width: 100%;
         padding: 40px 31px 40px 31px;
@@ -141,17 +96,8 @@
 }
 
 .creatorStory {
-    padding-top: 114px;
     text-align: center;
-    h3 {
-        @include section-name;
-    }
-    h1 {
-        @include section-title;
-    }
-
     .story-box {
-        margin-top: 40px;
         background-color: $background-color-beige;
         padding: 45px 0;
 
@@ -169,7 +115,10 @@
             @include mobile-center;
         }
         p {
-            @include section-subtitle;
+            margin: 10px 0 40px 0;
+            color: $color-gray;
+            font-size: $desktop-font-medium;
+            line-height: 160%;
             max-width: 670px;
             @include mobile-center;
         }
