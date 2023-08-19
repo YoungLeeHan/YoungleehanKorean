@@ -5,18 +5,17 @@ import { validateProduct } from "../helpers/validateProduct.js";
 
 export const create = async (req, res) => {
     try {
-        const { title, category, ageCategory, description, price } = req.fields;
-        const { images } = req.files;
+        const productData = validateProduct(req, res);
 
         // create product
         const product = new Product({
             ...req.fields,
-            slug: slugify(title),
+            slug: slugify(productData.title),
         });
 
-        if (images) {
-            product.images.data = fs.readFileSync(images.path);
-            product.images.contentType = images.type;
+        if (productData.images) {
+            product.images.data = fs.readFileSync(productData.images.path);
+            product.images.contentType = productData.images.type;
         }
 
         await product.save();
@@ -80,22 +79,21 @@ export const remove = async (req, res) => {
 
 export const update = async (req, res) => {
     try {
-        const { title, category, ageCategory, description, price } = req.fields;
-        const { images } = req.files;
+        const productData = validateProduct(req, res);
 
         // update product
         const product = await Product.findByIdAndUpdate(
             req.params.productId,
             {
                 ...req.fields,
-                slug: slugify(title),
+                slug: slugify(productData.title),
             },
             { new: true }
         );
 
-        if (images) {
-            product.images.data = fs.readFileSync(images.path);
-            product.images.contentType = images.type;
+        if (productData.images) {
+            product.images.data = fs.readFileSync(productData.images.path);
+            product.images.contentType = productData.images.type;
         }
 
         await product.save();
