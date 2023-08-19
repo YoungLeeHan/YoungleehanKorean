@@ -1,6 +1,6 @@
 import express from "express";
 import formidable from "express-formidable";
-
+import { validateProduct } from "../helpers/validateProduct.js";
 const router = express.Router();
 
 //middlewares
@@ -21,12 +21,26 @@ import {
     relatedProducts,
 } from "../controllers/product.js";
 
-router.post("/product", requireSignin, isAdmin, formidable(), create);
+router.post(
+    "/product",
+    requireSignin,
+    isAdmin,
+    formidable(),
+    validateProduct,
+    create
+);
 router.get("/products", list);
 router.get("/product/:slug", read);
 router.get("/product/images/:productId", images);
 router.delete("/product/:productId", requireSignin, isAdmin, remove);
-router.put("/product/:productId", requireSignin, isAdmin, formidable(), update);
+router.put(
+    "/product/:productId",
+    requireSignin,
+    isAdmin,
+    formidable(),
+    validateProduct,
+    update
+);
 router.post("/filtered-products", filteredProducts);
 router.get("/products-count", productsCount);
 router.get("/list-products/:page", listProducts);
