@@ -63,9 +63,14 @@ export const images = async (req, res) => {
 
 export const list = async (req, res) => {
     try {
+        let limit = 12;
+        if (req.query) {
+            limit = req.query.limit;
+        }
+
         const posts = await BlogPost.find({})
             .populate("category")
-            .limit(12)
+            .limit(limit)
             .sort({ createdAt: -1 });
 
         // Convert the 'value' field to HTML tag excluded and shortened form

@@ -1,12 +1,32 @@
 // 👻 Developed by DanBi Choi on July 19th, 2023.
+// 👻 Developed by DanBi Choi on Aug 18th, 2023. (Blog section updated)
 // -----------------------------------------------------
 import CustomerTypesCard from "../components/cards/CustomerTypesCard";
 import "../styles/pages/Home.scss";
 import { customerTypesData } from "../assets/data/customerTypesData";
-import yellowLinesSVG from "../assets/images/Home/yellowLines.svg";
 import { Link } from "react-router-dom";
+import TitleCard from "../components/cards/TitleCard";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import BlogPostCardVertical from "../components/cards/BlogPostCardVertical";
 
 export default function Home() {
+    //states
+    const [blogList, setBlogList] = useState([]);
+
+    useEffect(() => {
+        loadBlogPosts();
+    }, []);
+
+    const loadBlogPosts = async () => {
+        try {
+            const { data } = await axios.get(`/blog/list?limit=4`);
+            setBlogList(data);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     return (
         <div
             style={{ maxWidth: "1170px" }}
@@ -56,15 +76,14 @@ export default function Home() {
             </section>
 
             <section className="customerTypes container-fluid d-flex flex-column align-items-center">
-                <h1>
-                    <span>YoungLeeHan Korean</span> For You
-                </h1>
-                <p>
-                    YoungLeeHan Korean materials are great for learners looking
-                    to study on their own, parents searching for activities to
-                    keep their kids entertained while learning, and teachers
-                    sourcing exercises for their students.
-                </p>
+                <TitleCard
+                    sectionTitle={"Our Customers"}
+                    mainTitle2={"YoungLeeHan Korean"}
+                    mainTitle3={"For You"}
+                    subParagraph={
+                        "YoungLeeHan Korean materials are great for learners looking to study on their own, parents searching for activities to keep their kids entertained while learning, and teachers sourcing exercises for their students."
+                    }
+                />
                 <div className="row" style={{ width: "100%" }}>
                     {customerTypesData?.map((data) => (
                         <div className="col-md-4 mb-3" key={data._id}>
@@ -78,15 +97,12 @@ export default function Home() {
                 className="creatorStory container-fluid"
                 style={{ width: "100%" }}
             >
-                <h3>#Creator Story</h3>
-                <img
-                    src={yellowLinesSVG}
-                    alt="highlight"
-                    style={{ transform: "translateY(-10px)" }}
+                <TitleCard
+                    sectionTitle={"Creator Story"}
+                    mainTitle1={"Why"}
+                    mainTitle2={"YoungLeeHan Korean"}
+                    mainTitle3={"Started"}
                 />
-                <h1>
-                    Why <span>YoungLeeHan Korean</span> Started
-                </h1>
                 <div className="story-box row">
                     <div className="col-md-4 mb-3">
                         <img
@@ -110,6 +126,31 @@ export default function Home() {
                             </button>
                         </Link>
                     </div>
+                </div>
+            </section>
+            <section
+                className="blog d-flex flex-column align-items-center"
+                style={{ width: "100%", marginBottom: "30px" }}
+            >
+                <TitleCard
+                    sectionTitle={"Blog"}
+                    barWidth={"80px"}
+                    mainTitle1={"Stories"}
+                    mainTitle2={"& More"}
+                    subParagraph={
+                        "YoungLeeHan’s editors dish about Korean culture and drop some Korean language knowledge."
+                    }
+                />
+                <div className="row" style={{ width: "100%" }}>
+                    {blogList &&
+                        blogList.map((post) => (
+                            <div
+                                className="col-md-3 d-flex flex-column justify-content-between align-items-center"
+                                key={post._id}
+                            >
+                                <BlogPostCardVertical post={post} />
+                            </div>
+                        ))}
                 </div>
             </section>
         </div>
