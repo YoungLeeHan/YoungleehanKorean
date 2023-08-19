@@ -11,8 +11,9 @@ import {
   secret,
   updateProfile,
   userInfo,
-  verifyEmail,
 } from "../controllers/auth.js";
+
+import { verifyEmail } from "../helpers/verificationEmail.js";
 
 router.post("/register", register);
 router.get("/:id/verify/:token", verifyEmail);
