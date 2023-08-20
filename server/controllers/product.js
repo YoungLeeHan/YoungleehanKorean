@@ -39,7 +39,6 @@ export const list = async (req, res) => {
         console.log(err);
     }
 };
-
 export const read = async (req, res) => {
     try {
         const product = await Product.findOne({ slug: req.params.slug })
@@ -116,8 +115,10 @@ export const filteredProducts = async (req, res) => {
         if (priceRange && priceRange.length) {
             args.price = { $gte: priceRange[0], $lte: priceRange[1] };
         }
-
-        const products = await Product.find(args);
+        const products = await Product.find(args)
+            .select("-images")
+            .populate("category")
+            .populate("ageCategory");
         res.json(products);
     } catch (err) {
         console.log(err);

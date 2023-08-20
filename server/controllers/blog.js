@@ -70,6 +70,7 @@ export const list = async (req, res) => {
 
         const posts = await BlogPost.find({})
             .populate("category")
+            .select("-images")
             .limit(limit)
             .sort({ createdAt: -1 });
 
@@ -161,7 +162,9 @@ export const filteredPost = async (req, res) => {
         if (categoryFilter && categoryFilter.length > 0)
             args.category = categoryFilter;
 
-        const post = await BlogPost.find(args);
+        const post = await BlogPost.find(args)
+            .select("-images")
+            .populate("category");
         res.json(post);
     } catch (err) {
         console.log(err);
@@ -177,7 +180,7 @@ export const postSearch = async (req, res) => {
                 { title: { $regex: keyword, $options: "i" } },
                 { value: { $regex: keyword, $options: "i" } },
             ],
-        }).select("-images -downloadUrl");
+        }).select("-images");
         res.json(results);
     } catch (err) {
         console.log(err);
@@ -191,7 +194,7 @@ export const listPosts = async (req, res) => {
         const page = req.params.page ? req.params.page : 1;
 
         const post = await BlogPost.find({})
-            .select("-images -downloadUrl")
+            .select("-images")
             .skip((page - 1) * perPage)
             .limit(perPage)
             .sort({ createdAt: -1 });
