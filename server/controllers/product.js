@@ -28,10 +28,12 @@ export const create = async (req, res) => {
 
 export const list = async (req, res) => {
     try {
+        let limit = 12;
+        if (req.query) limit = req.query.limit;
         const products = await Product.find({})
             .populate("category")
             .select("-images")
-            .limit(12)
+            .limit(limit)
             .sort({ createdAt: -1 });
 
         res.json(products);
@@ -39,6 +41,7 @@ export const list = async (req, res) => {
         console.log(err);
     }
 };
+
 export const read = async (req, res) => {
     try {
         const product = await Product.findOne({ slug: req.params.slug })
