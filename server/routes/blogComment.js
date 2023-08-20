@@ -19,5 +19,4 @@ router.put("/:id", requireSignin, update);
 router.delete("/:id", requireSignin, remove);
 router.put("/:id/like", requireSignin, like);
 
-
 export default router;
