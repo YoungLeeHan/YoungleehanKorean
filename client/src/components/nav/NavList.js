@@ -4,6 +4,7 @@
 import { useNavigate } from "react-router-dom";
 import useWindowWidth from "./../../hooks/useWindowWidth";
 import { useNavOverlay } from "../../context/navOverlay";
+import { desktopWidth } from "../../constants/constant";
 
 export default function NavList() {
     //hooks
@@ -22,10 +23,10 @@ export default function NavList() {
     return (
         <ul
             className={`d-flex ${
-                windowWidth > 1023 ? "flex-row" : "flex-column"
+                windowWidth > desktopWidth ? "flex-row" : "flex-column"
             } justify-content-between align-items-center`}
             style={
-                windowWidth > 1023
+                windowWidth > desktopWidth
                     ? { margin: "0 5.2vw" }
                     : { margin: "15vh 0" }
             }

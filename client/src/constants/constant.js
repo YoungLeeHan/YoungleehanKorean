@@ -3,6 +3,8 @@ import { BsClipboard } from "react-icons/bs";
 
 export const mobileWidth = 767;
 
+export const desktopWidth = 1023;
+
 export const userMenuData = [
     { _id: 0, name: "Dashboard", link: "/", icon: BsClipboard },
     { _id: 1, name: "Profile", link: "/profile", icon: AiOutlineUser },

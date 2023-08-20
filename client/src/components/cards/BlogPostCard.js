@@ -26,7 +26,8 @@ export default function BlogPostCard({ post }) {
                         alt={post?.title}
                     />
                 </div>
-                <div className="text blog-text d-flex flex-column justify-content-between align-items-between">
+                <div className="text blog-text d-flex flex-column justify-content-between align-items-start">
+                    <h2>{post?.category?.name}</h2>
                     <h3>
                         {windowWidth > 450 &&
                             (post?.title?.length > 35
@@ -47,8 +48,10 @@ export default function BlogPostCard({ post }) {
                                 ? strippedText.substring(0, 70) + "..."
                                 : strippedText)}
                     </h5>
-
-                    <div className="text-bottom d-flex flex-row justify-content-between align-items-center">
+                    <div
+                        className="text-bottom d-flex flex-row justify-content-between align-items-center"
+                        style={{ width: "100%" }}
+                    >
                         <h4>Posted by YoungHyun</h4>
                         <p>
                             <MdOutlineDateRange fill="#7b1fa2" />{" "}

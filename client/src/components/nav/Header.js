@@ -13,6 +13,7 @@ import UserBtns from "./UserBtns";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useNavOverlay } from "../../context/navOverlay";
 import { toast } from "react-hot-toast";
+import { desktopWidth } from "../../constants/constant";
 
 export default function Header() {
     //hooks
@@ -50,16 +51,16 @@ export default function Header() {
                         </div>
                     </Link>
 
-                    {windowWidth > 1023 && <NavList />}
+                    {windowWidth > desktopWidth && <NavList />}
 
-                    {windowWidth > 1023 && !auth?.user && (
+                    {windowWidth > desktopWidth && !auth?.user && (
                         <>
                             <CartIconOnHeader />
                             <UserBtns userType="anonymous" />
                         </>
                     )}
 
-                    {windowWidth > 1023 && auth?.user && (
+                    {windowWidth > desktopWidth && auth?.user && (
                         <>
                             <div className="dropdown">
                                 <div>
@@ -118,7 +119,7 @@ export default function Header() {
                         </>
                     )}
 
-                    {windowWidth < 1023 && (
+                    {windowWidth < desktopWidth && (
                         <>
                             <div className="d-flex flex-row justify-content-center align-items-center">
                                 <CartIconOnHeader />
@@ -138,7 +139,7 @@ export default function Header() {
                         </>
                     )}
 
-                    {windowWidth < 1023 && isNavOverlay && (
+                    {windowWidth < desktopWidth && isNavOverlay && (
                         <NavOverlay handleLogout={handleLogout} />
                     )}
                 </div>

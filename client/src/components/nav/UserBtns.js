@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { useNavOverlay } from "../../context/navOverlay";
 import { useAuth } from "../../context/auth";
+import { desktopWidth } from "../../constants/constant";
 
 export default function UserBtns({ userType, handleLogout }) {
     //hooks
@@ -31,13 +32,15 @@ export default function UserBtns({ userType, handleLogout }) {
         <>
             <div
                 className="header-btn-box nav-item d-flex flex-column align-items-center"
-                style={windowWidth < 1023 ? { marginBottom: "25vh" } : null}
+                style={
+                    windowWidth < desktopWidth ? { marginBottom: "25vh" } : null
+                }
             >
                 <div className="d-flex flex-row">
                     <button
                         className="white-btn"
                         style={
-                            windowWidth < 1023
+                            windowWidth < desktopWidth
                                 ? {
                                       border: "1px solid #7b1fa2",
                                       width: "115px",

@@ -43,7 +43,7 @@ $desktop-font-xlarge: 32px;
 }
 
 @mixin desktop {
-    @media screen and (min-width: 1170px) {
+    @media screen and (min-width: 1023px) {
         @content;
     }
 }
