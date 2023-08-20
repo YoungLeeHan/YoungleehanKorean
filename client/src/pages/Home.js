@@ -8,20 +8,39 @@ import { Link } from "react-router-dom";
 import TitleCard from "../components/cards/TitleCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import ProductCardVertical from "../components/cards/ProductCardVertical";
 import BlogPostCardVertical from "../components/cards/BlogPostCardVertical";
+import loadingGIF from "../assets/images/Common/loading.gif";
 
 export default function Home() {
     //states
+    const [shopList, setShopList] = useState([]);
+    const [isShopListLoading, setIsShopListLoading] = useState(true);
     const [blogList, setBlogList] = useState([]);
+    const [isBlogListLoading, setIsBlogListLoading] = useState(true);
 
     useEffect(() => {
         loadBlogPosts();
+        loadShopList();
     }, []);
 
+    const loadShopList = async () => {
+        setIsShopListLoading(true);
+        try {
+            const { data } = await axios.get(`/products?limit=4`);
+            setShopList(data);
+            setIsShopListLoading(false);
+        } catch (err) {
+            console.log(err);
+        }
+    };
+
     const loadBlogPosts = async () => {
+        setIsBlogListLoading(true);
         try {
             const { data } = await axios.get(`/blog/list?limit=4`);
             setBlogList(data);
+            setIsBlogListLoading(false);
         } catch (err) {
             console.log(err);
         }
@@ -129,6 +148,31 @@ export default function Home() {
                 </div>
             </section>
             <section
+                className="shop d-flex flex-column align-items-center"
+                style={{ width: "100%", marginBottom: "30px" }}
+            >
+                <TitleCard
+                    sectionTitle={"Top Marterials"}
+                    mainTitle1={"Explore"}
+                    mainTitle2={"YoungLeeHan Worksheets"}
+                    subParagraph={
+                        "Ready-to-use materials for students, parents, and teachers."
+                    }
+                />
+                <div className="row" style={{ width: "100%" }}>
+                    {isShopListLoading && <div>{loadingGIF}</div>}
+                    {shopList &&
+                        shopList.map((item) => (
+                            <div
+                                className="col-md-3 d-flex flex-column justify-content-between align-items-center"
+                                key={item._id}
+                            >
+                                <ProductCardVertical item={item} />
+                            </div>
+                        ))}
+                </div>
+            </section>
+            <section
                 className="blog d-flex flex-column align-items-center"
                 style={{ width: "100%", marginBottom: "30px" }}
             >
@@ -142,6 +186,7 @@ export default function Home() {
                     }
                 />
                 <div className="row" style={{ width: "100%" }}>
+                    {isBlogListLoading && <div>{loadingGIF}</div>}
                     {blogList &&
                         blogList.map((post) => (
                             <div
