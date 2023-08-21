@@ -1,6 +1,5 @@
 // 👻 Developed by DanBi Choi on July 24th, 2023.
 // -----------------------------------------------------
-
 import lockSVG from "../../assets/images/Login/lock.svg";
 import envelopeSVG from "../../assets/images/Login/envelope.svg";
 import userSVG from "../../assets/images/Login/user.svg";
@@ -10,7 +9,6 @@ import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useAuth } from "../../context/auth";
 import ModalInfo from "../common/ModalInfo";
 
 export default function RegisterForm() {
@@ -24,7 +22,6 @@ export default function RegisterForm() {
 
     // hook
     const navigate = useNavigate();
-    const [auth, setAuth] = useAuth();
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -59,6 +56,7 @@ export default function RegisterForm() {
     //Modal controllers
     const handleOk = () => {
         setIsModalOpen(false);
+        window.scrollTo(0, 0);
         navigate("/");
     };
 

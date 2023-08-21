@@ -3,16 +3,17 @@
 import { useNavigate } from "react-router-dom";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { mobileWidth } from "../../constants/constant";
+import useAddToCart from "../../hooks/useAddToCart";
 
 export default function ProductCardVertical({ item }) {
     //hook
     const navigate = useNavigate();
     const windowWidth = useWindowWidth();
+    const addToCart = useAddToCart();
 
     const handleAddToCart = (e) => {
         e.preventDefault();
-        // TO DO: add to cart feature
-        console.log("add to cart clicked");
+        addToCart(item);
     };
 
     const handleCardClick = (e) => {

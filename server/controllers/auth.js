@@ -78,8 +78,8 @@ export const login = async (req, res) => {
             const token = await generateVerificationToken(user);
             await sendVerificationEmail(user, token);
 
-            return res.status(400).send({
-                message: "A verification link sent to your email address.",
+            return res.json({
+                error: "Email Verfication Needed",
             });
         }
 

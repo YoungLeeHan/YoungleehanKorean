@@ -161,9 +161,10 @@ export const relatedProducts = async (req, res) => {
             category: categoryId,
             _id: { $ne: productId },
         })
-            .select("-photo")
+            .select("-images")
             .populate("category")
-            .limit(3);
+            .populate("ageCategory")
+            .limit(4);
 
         res.json(related);
     } catch (err) {
@@ -179,7 +180,10 @@ export const productsSearch = async (req, res) => {
                 { title: { $regex: keyword, $options: "i" } },
                 { description: { $regex: keyword, $options: "i" } },
             ],
-        }).select("-images");
+        })
+            .select("-images")
+            .populate("category")
+            .populate("ageCategory");
         res.json(results);
     } catch (err) {
         console.log(err);

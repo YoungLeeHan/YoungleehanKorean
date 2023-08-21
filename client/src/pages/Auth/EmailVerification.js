@@ -14,9 +14,7 @@ export default function EmailVerification() {
     useEffect(() => {
         const verifyEmailUrl = async () => {
             try {
-                const { data } = await axios.get(
-                    `/${params.id}/verify/${params.token}`
-                );
+                await axios.get(`/${params.id}/verify/${params.token}`);
                 setValidUrl(true);
             } catch (err) {
                 console.log(err);

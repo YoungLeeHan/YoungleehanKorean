@@ -46,7 +46,7 @@ export default function SingleBlogView() {
             // setPostId(post._id);
             loadBlogComments(post._id);
         }
-    }, [post]);
+    }, [post, comments]);
 
     const loadBlogComments = async (id) => {
         try {
@@ -116,9 +116,13 @@ export default function SingleBlogView() {
                         />
                     </div>
                     <div className="col-md-6 post-comment-list ">
-                        <h3>Recent Comments</h3>
+                        {comments.length < 1 ? (
+                            <h3>Be the first one to leave a comment!</h3>
+                        ) : (
+                            <h3>Recent Comments</h3>
+                        )}
                         <ul>
-                            {comments &&
+                            {comments.length > 0 &&
                                 comments.map((comment) => (
                                     <div key={comment?._id}>
                                         <BlogCommentCard

@@ -180,7 +180,9 @@ export const postSearch = async (req, res) => {
                 { title: { $regex: keyword, $options: "i" } },
                 { value: { $regex: keyword, $options: "i" } },
             ],
-        }).select("-images");
+        })
+            .select("-images")
+            .populate("category");
         res.json(results);
     } catch (err) {
         console.log(err);

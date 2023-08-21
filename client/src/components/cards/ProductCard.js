@@ -1,37 +1,22 @@
 // 👻 Developed by DanBi Choi on July 26th, 2023.
 // 👻 Developed by DanBi Choi on July 29th, 2023. (Add To Cart Button)
+// 👻 Developed by DanBi Choi on Aug 20th, 2023. (Add To Cart Modulized)
 // -----------------------------------------------------
-
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../../styles/components/cards/ProductCard.scss";
 import { AiFillStar } from "react-icons/ai";
-import { useCart } from "../../context/cart";
-import { useCartQuantity } from "../../context/cartQuantity";
-import { toast } from "react-hot-toast";
 import useWindowWidth from "../../hooks/useWindowWidth";
-import { useNavigate } from "react-router-dom";
+import useAddToCart from "../../hooks/useAddToCart";
 
 export default function ProductCard({ product }) {
     // hooks
     const windowWidth = useWindowWidth();
     const navigate = useNavigate();
-    const [cart, setCart] = useCart();
-    const [cartQuantity, setCartQuantity] = useCartQuantity();
+    const addtoCart = useAddToCart();
 
     const handleAddToCart = (e) => {
         e.preventDefault();
-        try {
-            const productInCart = cart.some((item) => item._id === product._id); // returns true if product is found
-            if (!productInCart) setCart([...cart, product]);
-            setCartQuantity((prev) => ({
-                ...prev,
-                [product._id]: prev[product._id] + 1 || 1,
-            }));
-            // localStorage.setItem("cart", JSON.stringify([...cart, product]));
-            toast.success("Item added to cart!");
-        } catch (err) {
-            toast.error("Failed. Please try again.");
-        }
+        addtoCart(product);
     };
 
     const handleLinkClick = (e) => {
