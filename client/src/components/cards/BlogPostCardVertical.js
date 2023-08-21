@@ -26,7 +26,7 @@ export default function BlogPostCardVertical({ post }) {
                 style={{
                     width: "100%",
                     height: "206px",
-                    borderRadius: "10px",
+                    borderRadius: "10px 10px 0 0",
                     backgroundColor: "#C4C4C4",
                 }}
             >
@@ -34,7 +34,7 @@ export default function BlogPostCardVertical({ post }) {
                     style={{
                         width: "100%",
                         height: "100%",
-                        borderRadius: "10px",
+                        borderRadius: "10px 10px 0 0",
                         objectFit: "cover",
                     }}
                     src={`${process.env.REACT_APP_API}/blog/images/${post?._id}`}

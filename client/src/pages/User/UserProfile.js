@@ -53,7 +53,6 @@ export default function UserProfile() {
             if (data?.error) {
                 console.log(data.error);
             } else {
-                // console.log(data);
                 setFirstName(data.firstName);
                 setLastName(data.lastName);
                 setEmail(data.email);
