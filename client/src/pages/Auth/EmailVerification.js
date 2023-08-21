@@ -5,28 +5,54 @@ import PageNotFound from "../PageNotFound";
 import axios from "axios";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { mobileWidth } from "../../constants/constant";
+import { toast } from "react-hot-toast";
+import loadingGIF from "../../assets/images/Common/loading.gif";
 
 export default function EmailVerification() {
+    const [isLoading, setIsLoading] = useState(true);
     const [validUrl, setValidUrl] = useState(false);
     const params = useParams();
     const windowWidth = useWindowWidth();
 
     useEffect(() => {
-        const verifyEmailUrl = async () => {
-            try {
-                await axios.get(`/${params.id}/verify/${params.token}`);
-                setValidUrl(true);
-            } catch (err) {
-                console.log(err);
-                setValidUrl(false);
-            }
-        };
         verifyEmailUrl();
-    }, [params]);
+    }, []);
+
+    const verifyEmailUrl = async () => {
+        try {
+            const { data } = await axios.get(
+                `/${params.id}/verify/${params.token}`
+            );
+            if (data?.error) {
+                console.log(data.error);
+                toast.error(data.error);
+            } else {
+                setValidUrl(true);
+            }
+        } catch (err) {
+            console.log(err);
+        }
+        setIsLoading(false);
+    };
 
     return (
         <>
-            {validUrl ? (
+            {isLoading && (
+                <div
+                    className="d-flex justify-content-center"
+                    style={{ margin: "200px 0" }}
+                >
+                    <img
+                        src={loadingGIF}
+                        alt="Loading"
+                        style={{
+                            width: "50px",
+                            height: "50px",
+                        }}
+                    />
+                </div>
+            )}
+            {validUrl && !isLoading ? (
                 <>
                     <Jumbotron
                         title={"Verify email address"}
