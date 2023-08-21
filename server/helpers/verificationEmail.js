@@ -65,14 +65,19 @@ export const verifyEmail = async (req, res) => {
             token: req.params.token,
         });
 
-        if (!user) return res.status(400).send({ message: "No such user" });
+        if (!user)
+            return res.json({
+                error: "No such user",
+            });
 
         if (!token)
-            return res.status(400).send({ message: "No token for the user" });
+            return res.json({
+                error: "No token for the user",
+            });
 
         await User.updateOne({ _id: user._id }, { $set: { verified: true } });
 
-        res.status(200).send({ message: "Email verified successfully" });
+        res.json({ result: "ok" });
     } catch (err) {
         console.log(err);
         res.status(500).send({
