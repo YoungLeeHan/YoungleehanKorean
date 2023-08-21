@@ -10,11 +10,13 @@ import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";
+import ModalInfo from "../common/ModalInfo";
 
 export default function LoginForm() {
     // state
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     // hook
     const navigate = useNavigate();
@@ -32,7 +34,11 @@ export default function LoginForm() {
                     password,
                 });
                 if (data?.error) {
-                    toast.error(data.error);
+                    if (data.error === "Email Verfication Needed") {
+                        setIsModalOpen(true);
+                    } else {
+                        toast.error(data.error);
+                    }
                 } else {
                     localStorage.setItem("auth", JSON.stringify(data));
                     setAuth({ ...auth, token: data.token, user: data.user });
@@ -56,6 +62,10 @@ export default function LoginForm() {
         // This URL must be changed on production!
         window.location.href = `http://localhost:8000/auth/google`;
     };
+
+    //Modal controllers for unverified user only
+    const handleOk = () => setIsModalOpen(false);
+    const handleCancel = () => setIsModalOpen(false);
 
     return (
         <>
@@ -154,6 +164,16 @@ export default function LoginForm() {
                     </li>
                 </ul>
             </form>
+            {/* Modal for Unverified User : Email Verication Sent */}
+            <ModalInfo
+                color={"#30a14e"}
+                isModalOpen={isModalOpen}
+                handleOk={handleOk}
+                handleCancel={handleCancel}
+                okBtnText={"Got it"}
+                text={`Verification email sent to ${email}`}
+                width={350}
+            />
         </>
     );
 }
