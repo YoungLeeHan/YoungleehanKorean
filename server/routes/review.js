@@ -14,10 +14,11 @@ import {
     reviewImages,
 } from "../controllers/review.js";
 
-router.get("/review", reviewList);
+router.get("/review/:productId", reviewList);
 router.post("/review", requireSignin, reviewCreate);
-router.put("/review/:reviewId", requireSignin, reviewUpdate);
-router.delete("/review/:reviewId", requireSignin, reviewRemove);
+router.put("/review/:id", requireSignin, reviewUpdate);
+router.delete("/review/:id", requireSignin, reviewRemove);
+
 router.get("/:productId/review/images", reviewImages);
 
 export default router;

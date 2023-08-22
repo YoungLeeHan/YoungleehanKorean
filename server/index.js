@@ -47,9 +47,8 @@ const applyCOOP = (req, res, next) => {
     next();
 };
 
-app.use(applyCOOP);
-
 // middlewares
+app.use(applyCOOP);
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -66,6 +65,7 @@ app.use("/api/blog", blogPostRoutes);
 app.use("/api", reviewRoutes);
 app.use("/api", checkoutRoutes);
 app.use("/api", userOrderRoutes);
+
 app.use("/auth", authGoogle);
 app.use("/index", indexGoogle);
 
