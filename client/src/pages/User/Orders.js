@@ -3,9 +3,8 @@ import { useEffect, useState } from "react";
 import Jumbotron from "../../components/cards/Jumbotron";
 import UserMenu from "../../components/nav/UserMenu";
 import axios from "axios";
-import moment from "moment";
-import ProductCardHorizontal from "../../components/cards/ProductCardHorizontal";
 import { useNavigate } from "react-router-dom";
+import MyOrderCard from "../../components/cards/MyOrderCard";
 
 export default function UserOrders() {
     const [auth, setAuth] = useAuth();
@@ -49,64 +48,18 @@ export default function UserOrders() {
                         <UserMenu id={2} />
                     </div>
                     <div className="col-md-9">
-                        <div className="p-3 mt-2 mb-2 h4 bg-light">Orders</div>
-                        <a href="https://docs.google.com/uc?export=download&id=1VpR7bUb7Cyb8fwTsl_mDw_VUGh5_WO7Y&confirm=t">
-                            🔗 Click to download your worksheet
-                        </a>
-                        {orders?.map((o, i) => {
-                            return (
-                                <div
-                                    key={o._id}
-                                    className="border shadow bg-light rounded-4 mb-5"
-                                >
-                                    <table className="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">Status</th>
-                                                <th scope="col">Buyer</th>
-                                                <th scope="col">Ordered</th>
-                                                <th scope="col">Payment</th>
-                                                <th scope="col">Quantity</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>{i + 1}</td>
-                                                <td>{o?.status}</td>
-                                                <td>{o?.buyer?.firstName}</td>
-                                                <td>
-                                                    {moment(
-                                                        o?.createdAt
-                                                    ).fromNow()}
-                                                </td>
-                                                <td>
-                                                    {o?.payment?.success
-                                                        ? "Success"
-                                                        : "Failed"}
-                                                </td>
-                                                <td>
-                                                    {o?.products?.length}{" "}
-                                                    products
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                    <div className="container">
-                                        <div className="row m-2">
-                                            {o?.products?.map((p, i) => (
-                                                <ProductCardHorizontal
-                                                    key={i}
-                                                    p={p}
-                                                    remove={false}
-                                                />
-                                            ))}
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
+                        {orders?.length < 1 && (
+                            <h5
+                                className="d-flex flex-column justify-content-center align-items-center"
+                                style={{ minHeight: "200px" }}
+                            >
+                                No order has been placed yet.
+                            </h5>
+                        )}
+                        {orders?.length > 0 &&
+                            orders.map((order) => (
+                                <MyOrderCard key={order._id} order={order} />
+                            ))}
                     </div>
                 </div>
             </div>
