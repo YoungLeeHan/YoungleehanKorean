@@ -15,7 +15,7 @@ import { HiPencilAlt } from "react-icons/hi";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
-export default function BlogCommentCard({ comment, loadBlogComments }) {
+export default function BlogCommentCard({ comment, postId, loadBlogComments }) {
     //hooks
     const [auth, setAuth] = useAuth();
     const windowWidth = useWindowWidth();
@@ -35,7 +35,7 @@ export default function BlogCommentCard({ comment, loadBlogComments }) {
                 await axios.put(`/blog/comment/${id}/like`, {
                     id,
                 });
-                loadBlogComments();
+                loadBlogComments(postId);
             } catch (err) {
                 console.log(err);
             }
@@ -48,7 +48,7 @@ export default function BlogCommentCard({ comment, loadBlogComments }) {
             await axios.put(`/blog/comment/${comment?._id}`, {
                 newDescription,
             });
-            loadBlogComments();
+            loadBlogComments(postId);
             setIsModalOpenModify(false);
         } catch (err) {
             console.log(err);
@@ -60,7 +60,7 @@ export default function BlogCommentCard({ comment, loadBlogComments }) {
     const handleOkDelete = async () => {
         try {
             await axios.delete(`/blog/comment/${comment?._id}`);
-            loadBlogComments();
+            loadBlogComments(postId);
             setIsModalOpenDelete(false);
         } catch (err) {
             console.log(err);

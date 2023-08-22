@@ -52,7 +52,7 @@ export const update = async (req, res) => {
             id,
             {
                 user: req?.user,
-                description: req?.body?.description,
+                description: req?.body?.newDescription,
             },
             {
                 new: true,
