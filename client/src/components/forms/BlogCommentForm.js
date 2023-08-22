@@ -29,8 +29,7 @@ export default function BlogCommentForm({ postId, loadBlogComments }) {
                 });
                 setDescription("");
                 toast.success("Thank you for your comment!");
-
-                loadBlogComments();
+                loadBlogComments(postId);
             } catch (err) {
                 console.log(err);
             }

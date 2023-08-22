@@ -23,7 +23,6 @@ export default function SingleBlogView() {
     const [post, setPost] = useState();
     const [isLoading, setIsLoading] = useState(true);
     const [comments, setComments] = useState([]);
-    //const [postId, setPostId] = useState();
 
     useEffect(() => {
         if (params.slug) {
@@ -43,10 +42,9 @@ export default function SingleBlogView() {
 
     useEffect(() => {
         if (post) {
-            // setPostId(post._id);
             loadBlogComments(post._id);
         }
-    }, [post, comments]);
+    }, [post]);
 
     const loadBlogComments = async (id) => {
         try {
@@ -127,6 +125,7 @@ export default function SingleBlogView() {
                                     <div key={comment?._id}>
                                         <BlogCommentCard
                                             comment={comment}
+                                            postId={post._id}
                                             loadBlogComments={loadBlogComments}
                                         />
                                     </div>

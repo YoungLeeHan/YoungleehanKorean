@@ -1,22 +1,34 @@
 // 👻 Developed by DanBi Choi on Aug 20th, 2023.
+// 👻 Developed by DanBi Choi on Aug 22th, 2023. (modulized for My Order Page)
 // -----------------------------------------------------
 import { useNavigate } from "react-router-dom";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { mobileWidth } from "../../constants/constant";
 import useAddToCart from "../../hooks/useAddToCart";
+import { toast } from "react-hot-toast";
 
-export default function ProductCardVertical({ item }) {
+export default function ProductCardVertical({ item, download = false }) {
     //hook
     const navigate = useNavigate();
     const windowWidth = useWindowWidth();
     const addToCart = useAddToCart();
+
+    const handleCardClick = (e) => {
+        e.preventDefault();
+        navigate(`/shop/product/${item?.slug}`);
+    };
 
     const handleAddToCart = (e) => {
         e.preventDefault();
         addToCart(item);
     };
 
-    const handleCardClick = (e) => {
+    const handleDownload = (e) => {
+        e.preventDefault();
+        toast.error("Download feature is under construction.");
+    };
+
+    const handleWriteReview = (e) => {
         e.preventDefault();
         navigate(`/shop/product/${item?.slug}`);
     };
@@ -25,7 +37,7 @@ export default function ProductCardVertical({ item }) {
         <div
             className="d-flex flex-column justify-content-between align-items-start"
             style={{
-                marginBottom: "30px",
+                marginBottom: "5px",
                 width: "100%",
                 height: "100%",
                 borderRadius: "10px",
@@ -76,27 +88,58 @@ export default function ProductCardVertical({ item }) {
                 className="d-flex flex-row justify-content-between align-items-center"
                 style={{ width: "100%" }}
             >
-                <h5
-                    style={{
-                        fontSize: "13px",
-                        color: "#7B1FA2",
-                        fontWeight: "500",
-                    }}
-                >
-                    ${item?.price}
-                </h5>
-                <button
-                    className="btn btn-primary"
-                    onClick={handleAddToCart}
-                    style={{
-                        fontSize: "13px",
-                        fontWeight: "500",
-                        padding: "7px 10px",
-                        borderRadius: "10px",
-                    }}
-                >
-                    Add to Cart
-                </button>
+                {!download && (
+                    <>
+                        <h5
+                            style={{
+                                fontSize: "13px",
+                                color: "#7B1FA2",
+                                fontWeight: "500",
+                            }}
+                        >
+                            ${item?.price}
+                        </h5>
+                        <button
+                            className="btn btn-primary"
+                            onClick={handleAddToCart}
+                            style={{
+                                fontSize: "13px",
+                                fontWeight: "500",
+                                padding: "7px 10px",
+                                borderRadius: "10px",
+                            }}
+                        >
+                            Add to Cart
+                        </button>
+                    </>
+                )}
+                {download && (
+                    <>
+                        <h5
+                            onClick={handleWriteReview}
+                            style={{
+                                fontSize: "13px",
+                                color: "#7B1FA2",
+                                fontWeight: "500",
+                                cursor: "pointer",
+                            }}
+                        >
+                            Write a review
+                        </h5>
+                        <button
+                            className="btn btn-primary"
+                            onClick={handleDownload}
+                            style={{
+                                fontSize: "13px",
+                                fontWeight: "500",
+                                padding: "7px 10px",
+                                borderRadius: "10px",
+                            }}
+                        >
+                            Download
+                        </button>
+                    </>
+                )}
             </div>
         </div>
     );
