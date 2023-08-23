@@ -109,10 +109,6 @@ export default function UserProfile() {
         }
     };
 
-    // Modal Handlers
-    const handleOk = () => setIsModalOpen(false);
-    const handleCancel = () => setIsModalOpen(false);
-
     const handleInput = (label, value) => {
         switch (label) {
             case "First Name":
@@ -308,8 +304,8 @@ export default function UserProfile() {
             </div>
             <ModalInfo
                 isModalOpen={isModalOpen}
-                handleOk={handleOk}
-                handleCancel={handleCancel}
+                handleOk={() => setIsModalOpen(false)}
+                handleCancel={() => setIsModalOpen(false)}
                 okBtnText={"Ok"}
                 width={450}
                 text={"Make sure to type in your current password."}

@@ -42,7 +42,11 @@ export default function ProductList() {
                             Products
                         </div>
                         {products?.map((p) => (
-                            <ProductCardHorizontal product={p} modify={true} />
+                            <ProductCardHorizontal
+                                key={p._id}
+                                product={p}
+                                modify={true}
+                            />
                         ))}
                     </div>
                 </div>

@@ -13,7 +13,7 @@ export default function ProductCategory() {
     // state
     const [name, setName] = useState("");
     const [categories, setCategories] = useState([]);
-    const [visible, setVisible] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [selected, setSelected] = useState(null);
     const [updatingName, setUpdatingName] = useState("");
 
@@ -60,7 +60,7 @@ export default function ProductCategory() {
                 setSelected(null);
                 setUpdatingName("");
                 loadCategories();
-                setVisible(false);
+                setIsModalOpen(false);
             }
         } catch (err) {
             console.log(err);
@@ -78,7 +78,7 @@ export default function ProductCategory() {
                 toast.success(`"${data.name}" is deleted`);
                 setSelected(null);
                 loadCategories();
-                setVisible(false);
+                setIsModalOpen(false);
             }
         } catch (err) {
             console.log(err);
@@ -117,7 +117,7 @@ export default function ProductCategory() {
                                         key={c._id}
                                         className="btn btn-outline-primary m-3"
                                         onClick={() => {
-                                            setVisible(true);
+                                            setIsModalOpen(true);
                                             setSelected(c);
                                             setUpdatingName(c.name);
                                         }}
@@ -128,9 +128,9 @@ export default function ProductCategory() {
                             </div>
 
                             <Modal
-                                visible={visible}
-                                onOk={() => setVisible(false)}
-                                onCancel={() => setVisible(false)}
+                                open={isModalOpen}
+                                onOk={() => setIsModalOpen(false)}
+                                onCancel={() => setIsModalOpen(false)}
                                 footer={null}
                             >
                                 <CategoryForm

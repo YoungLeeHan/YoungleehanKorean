@@ -13,7 +13,7 @@ export default function ProductAgeCategory() {
     // state
     const [name, setName] = useState("");
     const [ageCategories, setAgeCategories] = useState([]);
-    const [visible, setVisible] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [selected, setSelected] = useState(null);
     const [updatingName, setUpdatingName] = useState("");
 
@@ -60,7 +60,7 @@ export default function ProductAgeCategory() {
                 setSelected(null);
                 setUpdatingName("");
                 loadAgeCategories();
-                setVisible(false);
+                setIsModalOpen(false);
             }
         } catch (err) {
             console.log(err);
@@ -78,7 +78,7 @@ export default function ProductAgeCategory() {
                 toast.success(`"${data.name}" is deleted`);
                 setSelected(null);
                 loadAgeCategories();
-                setVisible(false);
+                setIsModalOpen(false);
             }
         } catch (err) {
             console.log(err);
@@ -117,7 +117,7 @@ export default function ProductAgeCategory() {
                                         key={c._id}
                                         className="btn btn-outline-primary m-3"
                                         onClick={() => {
-                                            setVisible(true);
+                                            setIsModalOpen(true);
                                             setSelected(c);
                                             setUpdatingName(c.name);
                                         }}
@@ -128,9 +128,9 @@ export default function ProductAgeCategory() {
                             </div>
 
                             <Modal
-                                visible={visible}
-                                onOk={() => setVisible(false)}
-                                onCancel={() => setVisible(false)}
+                                open={isModalOpen}
+                                onOk={() => setIsModalOpen(false)}
+                                onCancel={() => setIsModalOpen(false)}
                                 footer={null}
                             >
                                 <AgeCategoryForm

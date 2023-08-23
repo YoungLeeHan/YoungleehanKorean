@@ -33,7 +33,7 @@ export default function BlogCreate() {
 
     const loadBlogCategories = async () => {
         try {
-            const { data } = await axios.get("/blog/categories");
+            const { data } = await axios.get("/blog/category/list");
             if (data.error) {
                 toast.error(data.error);
             } else {

@@ -52,6 +52,7 @@ export default function BlogList() {
                         <div className="blog-list-box">
                             {list?.map((p) => (
                                 <BlogPostCardHorizontal
+                                    key={p._id}
                                     post={p}
                                     modify={true}
                                 />
