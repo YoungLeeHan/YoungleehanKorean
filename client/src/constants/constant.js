@@ -4,6 +4,7 @@ import {
     AiOutlineFileAdd,
     AiOutlineUnorderedList,
     AiOutlineRead,
+    AiOutlineLock,
 } from "react-icons/ai";
 import { BsClipboard } from "react-icons/bs";
 
@@ -14,7 +15,13 @@ export const desktopWidth = 1023;
 export const userMenuData = [
     { _id: 0, name: "Dashboard", link: "user", icon: BsClipboard },
     { _id: 1, name: "Profile", link: "user/profile", icon: AiOutlineUser },
-    { _id: 2, name: "My Order", link: "user/orders", icon: AiOutlineShopping },
+    {
+        _id: 2,
+        name: "Change Password",
+        link: "user/profile/password",
+        icon: AiOutlineLock,
+    },
+    { _id: 3, name: "My Order", link: "user/orders", icon: AiOutlineShopping },
 ];
 export const adminMenuData = [
     { _id: 0, name: "Dashboard", link: "admin", icon: BsClipboard },

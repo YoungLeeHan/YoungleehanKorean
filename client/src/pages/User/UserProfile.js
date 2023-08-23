@@ -1,5 +1,6 @@
 // 👻 Developed by DanBi Choi on Aug 16th, 2023.
 // -----------------------------------------------------
+import "../../styles/pages/User/UserProfile.scss";
 import Jumbotron from "../../components/cards/Jumbotron";
 import DashboardMenu from "../../components/nav/DashboardMenu";
 import { useState, useEffect } from "react";
@@ -7,7 +8,6 @@ import { useAuth } from "../../context/auth";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-import "../../styles/pages/User/UserProfile.scss";
 import useWindowWidth from "./../../hooks/useWindowWidth";
 import ProfileInput from "../../components/cards/ProfileInput";
 import ProfileDropDownInput from "../../components/cards/ProfileDropDownInput";
@@ -17,8 +17,8 @@ import {
     mobileWidth,
 } from "../../constants/constant";
 import loadingGIF from "../../assets/images/Common/loading.gif";
-
 import ModalInfo from "../../components/common/ModalInfo";
+import useScrollToTop from "../../hooks/useScrollToTop";
 
 export default function UserProfile() {
     // states
@@ -39,6 +39,7 @@ export default function UserProfile() {
     const [auth, setAuth] = useAuth();
     const navigate = useNavigate();
     const windowWidth = useWindowWidth();
+    useScrollToTop();
 
     // redirect anonymous user
     useEffect(() => {
@@ -165,140 +166,142 @@ export default function UserProfile() {
                                 />
                             </div>
                         )}
-                        <div className="profile-box">
-                            <div className="profile-box-title d-flex flex-row justify-content-between align-items-center">
-                                <h1>My Profile</h1>
-                                <h5>
-                                    <span>*</span> fields are required.
-                                </h5>
-                            </div>
-                            <ul className="profileForm d-flex flex-column justify-content-between">
-                                <li className="single">
-                                    <ProfileInput
-                                        label={"Email"}
-                                        type={"email"}
-                                        value={email}
-                                        disabled={true}
-                                    />
-                                </li>
-                                <li
-                                    className={
-                                        windowWidth > mobileWidth
-                                            ? "double"
-                                            : "single"
-                                    }
-                                >
-                                    <ProfileInput
-                                        label={"First Name"}
-                                        type={"text"}
-                                        value={firstName}
-                                        placeholder={"Your first name"}
-                                        handleInput={handleInput}
-                                    />
+                        {!isLoading && (
+                            <div className="profile-box">
+                                <div className="profile-box-title d-flex flex-row justify-content-between align-items-center">
+                                    <h1>My Profile</h1>
+                                    <h5>
+                                        <span>*</span> fields are required.
+                                    </h5>
+                                </div>
+                                <ul className="profileForm d-flex flex-column justify-content-between">
+                                    <li className="single">
+                                        <ProfileInput
+                                            label={"Email"}
+                                            type={"email"}
+                                            value={email}
+                                            disabled={true}
+                                        />
+                                    </li>
+                                    <li
+                                        className={
+                                            windowWidth > mobileWidth
+                                                ? "double"
+                                                : "single"
+                                        }
+                                    >
+                                        <ProfileInput
+                                            label={"First Name"}
+                                            type={"text"}
+                                            value={firstName}
+                                            placeholder={"Your first name"}
+                                            handleInput={handleInput}
+                                        />
 
-                                    <ProfileInput
-                                        label={"Last Name"}
-                                        type={"text"}
-                                        value={lastName}
-                                        placeholder={"Your last name"}
-                                        handleInput={handleInput}
-                                    />
-                                </li>
-                                <li className="single">
-                                    <ProfileInput
-                                        label={"Password"}
-                                        type={"password"}
-                                        value={password}
-                                        placeholder={"Current password"}
-                                        handleInput={handleInput}
-                                        required={true}
-                                    />
-                                </li>
-                                <li className="single">
-                                    <ProfileDropDownInput
-                                        label={"Country"}
-                                        value={country}
-                                        placeholder={"Select your country"}
-                                        handleInput={handleInput}
-                                        data={countryList}
-                                    />
-                                </li>
-                                {country === "United States" && (
-                                    <>
-                                        <li
-                                            className={
-                                                windowWidth > mobileWidth
-                                                    ? "double"
-                                                    : "single"
-                                            }
-                                        >
-                                            <ProfileInput
-                                                label={"Address 1"}
-                                                type={"text"}
-                                                value={address1}
-                                                placeholder={"Your address"}
-                                                handleInput={handleInput}
-                                            />
-                                            <ProfileInput
-                                                label={"Address 2"}
-                                                type={"text"}
-                                                value={address2}
-                                                placeholder={"(Optional)"}
-                                                handleInput={handleInput}
-                                            />
-                                        </li>
-                                        <li
-                                            className={
-                                                windowWidth > mobileWidth
-                                                    ? "double"
-                                                    : "single"
-                                            }
-                                        >
-                                            <ProfileInput
-                                                label={"City"}
-                                                type={"text"}
-                                                value={city}
-                                                placeholder={"City"}
-                                                handleInput={handleInput}
-                                            />
-                                            <ProfileDropDownInput
-                                                label={"State"}
-                                                value={state}
-                                                placeholder={"State"}
-                                                handleInput={handleInput}
-                                                data={usStatesList}
-                                            />
-                                        </li>
-                                        <li
-                                            className={
-                                                windowWidth > mobileWidth
-                                                    ? "double"
-                                                    : "single"
-                                            }
-                                        >
-                                            <ProfileInput
-                                                label={"Zip code"}
-                                                type={"text"}
-                                                value={zipcode}
-                                                placeholder={"Zip code"}
-                                                handleInput={handleInput}
-                                                maxlength={5}
-                                            />
-                                        </li>
-                                    </>
-                                )}
-                                <button
-                                    className="btn btn-primary"
-                                    style={{
-                                        margin: "10px 0",
-                                        borderRadius: "10px",
-                                    }}
-                                    onClick={handleSubmit}
-                                >
-                                    Update Profile
-                                </button>
-                            </ul>
-                        </div>
+                                        <ProfileInput
+                                            label={"Last Name"}
+                                            type={"text"}
+                                            value={lastName}
+                                            placeholder={"Your last name"}
+                                            handleInput={handleInput}
+                                        />
+                                    </li>
+                                    <li className="single">
+                                        <ProfileInput
+                                            label={"Password"}
+                                            type={"password"}
+                                            value={password}
+                                            placeholder={"Current password"}
+                                            handleInput={handleInput}
+                                            required={true}
+                                        />
+                                    </li>
+                                    <li className="single">
+                                        <ProfileDropDownInput
+                                            label={"Country"}
+                                            value={country}
+                                            placeholder={"Select your country"}
+                                            handleInput={handleInput}
+                                            data={countryList}
+                                        />
+                                    </li>
+                                    {country === "United States" && (
+                                        <>
+                                            <li
+                                                className={
+                                                    windowWidth > mobileWidth
+                                                        ? "double"
+                                                        : "single"
+                                                }
+                                            >
+                                                <ProfileInput
+                                                    label={"Address 1"}
+                                                    type={"text"}
+                                                    value={address1}
+                                                    placeholder={"Your address"}
+                                                    handleInput={handleInput}
+                                                />
+                                                <ProfileInput
+                                                    label={"Address 2"}
+                                                    type={"text"}
+                                                    value={address2}
+                                                    placeholder={"(Optional)"}
+                                                    handleInput={handleInput}
+                                                />
+                                            </li>
+                                            <li
+                                                className={
+                                                    windowWidth > mobileWidth
+                                                        ? "double"
+                                                        : "single"
+                                                }
+                                            >
+                                                <ProfileInput
+                                                    label={"City"}
+                                                    type={"text"}
+                                                    value={city}
+                                                    placeholder={"City"}
+                                                    handleInput={handleInput}
+                                                />
+                                                <ProfileDropDownInput
+                                                    label={"State"}
+                                                    value={state}
+                                                    placeholder={"State"}
+                                                    handleInput={handleInput}
+                                                    data={usStatesList}
+                                                />
+                                            </li>
+                                            <li
+                                                className={
+                                                    windowWidth > mobileWidth
+                                                        ? "double"
+                                                        : "single"
+                                                }
+                                            >
+                                                <ProfileInput
+                                                    label={"Zip code"}
+                                                    type={"text"}
+                                                    value={zipcode}
+                                                    placeholder={"Zip code"}
+                                                    handleInput={handleInput}
+                                                    maxlength={5}
+                                                />
+                                            </li>
+                                        </>
+                                    )}
+                                    <button
+                                        className="btn btn-primary"
+                                        style={{
+                                            margin: "10px 0",
+                                            borderRadius: "10px",
+                                        }}
+                                        onClick={handleSubmit}
+                                    >
+                                        Update Profile
+                                    </button>
+                                </ul>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>

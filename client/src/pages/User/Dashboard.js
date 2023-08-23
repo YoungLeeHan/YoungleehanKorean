@@ -3,11 +3,13 @@ import Jumbotron from "../../components/cards/Jumbotron";
 import DashboardMenu from "../../components/nav/DashboardMenu";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import useScrollToTop from "../../hooks/useScrollToTop";
 
 export default function UserDashboard() {
+    // hooks
     const [auth, setAuth] = useAuth();
-
     const navigate = useNavigate();
+    useScrollToTop();
 
     // redirect anonymous user
     useEffect(() => {

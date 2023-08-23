@@ -7,12 +7,17 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import { mobileWidth } from "../../constants/constant";
 import { toast } from "react-hot-toast";
 import loadingGIF from "../../assets/images/Common/loading.gif";
+import useScrollToTop from "../../hooks/useScrollToTop";
 
 export default function EmailVerification() {
+    // states
     const [isLoading, setIsLoading] = useState(true);
     const [validUrl, setValidUrl] = useState(false);
+
+    //hooks
     const params = useParams();
     const windowWidth = useWindowWidth();
+    useScrollToTop();
 
     useEffect(() => {
         verifyEmailUrl();

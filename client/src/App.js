@@ -24,7 +24,7 @@ import AdminProductCategory from "./pages/Admin/ProductCategory";
 import AdminProductAgeCategory from "./pages/Admin/ProductAgeCategory";
 import UserOrders from "./pages/User/Orders";
 import UserProfile from "./pages/User/UserProfile";
-import CategoriesList from "./pages/CategoriesList";
+import ChangePassword from "./pages/User/ChangePassword";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Payment/Checkout";
 import ProductsView from "./pages/Shop/ProductsView";
@@ -50,7 +50,6 @@ export default function App() {
                 <Route path="/about" element={<AboutCreator />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="*" element={<PageNotFound />} />
-                <Route path="/categories" element={<CategoriesList />} />
 
                 {/*login*/}
                 <Route path="/login" element={<Login />} />
@@ -73,7 +72,6 @@ export default function App() {
                 {/*blog*/}
                 <Route path="/blog" element={<BlogView />} />
                 <Route path="/blog/:slug" element={<SingleBlogView />} />
-                {/* <Route path="/blog/upload" element={<Upload />} /> */}
 
                 {/*Cart & Payment*/}
                 <Route path="/cart" element={<Cart />} />
@@ -88,6 +86,10 @@ export default function App() {
                 <Route path="/dashboard" element={<PrivateRoute />}>
                     <Route path="user" element={<Dashboard />} />
                     <Route path="user/profile" element={<UserProfile />} />
+                    <Route
+                        path="user/profile/password"
+                        element={<ChangePassword />}
+                    />
                     <Route path="user/orders" element={<UserOrders />} />
                 </Route>
 
