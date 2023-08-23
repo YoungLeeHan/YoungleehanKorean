@@ -1,12 +1,6 @@
 import express from "express";
-// const express = require("express");
 import passport from "passport";
 const router = express.Router();
-
-// middlewares
-import { requireSignin, isAdmin } from "../middlewares/auth.js";
-// controllers
-import { register, login, secret } from "../controllers/auth.js";
 
 router.get("/", (req, res) => {
     res.render("login");

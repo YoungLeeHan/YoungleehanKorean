@@ -22,8 +22,8 @@ export default function configurePassport(passport) {
                     password: (profile && profile.password) || "",
                     verified: true,
                 };
-                //console.log("새유저있냐?", newUser);
-                //console.log(profile);
+                // console.log("새유저있냐?", newUser);
+                // console.log(profile);
 
                 try {
                     // find the user in our database

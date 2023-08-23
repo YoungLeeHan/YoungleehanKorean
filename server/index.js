@@ -84,7 +84,6 @@ configurePassport(passport);
 
 app.get("/", (req, res) => {
     res.render("login");
-    // console.log(`여기는 "localhost ${port}/"입니다!`);
 });
 
 const port = process.env.PORT || 8000;
