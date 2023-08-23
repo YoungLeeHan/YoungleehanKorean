@@ -3,12 +3,12 @@
 // -----------------------------------------------------
 
 import { Link } from "react-router-dom";
-import "../../styles/components/cards/ProductCard.scss";
+import "../../styles/components/cards/ProductCardHorizontal.scss";
 import { MdOutlineDateRange } from "react-icons/md";
 import moment from "moment";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
-export default function BlogPostCard({ post }) {
+export default function BlogPostCardHorizontal({ post, modify = false }) {
     moment.locale("en");
 
     // hooks
@@ -18,7 +18,13 @@ export default function BlogPostCard({ post }) {
     const strippedText = post?.value.replace(/<[^>]+>/g, "");
 
     return (
-        <Link to={`${post?.slug}`}>
+        <Link
+            to={
+                modify
+                    ? `/dashboard/admin/blog/update/${post?.slug}`
+                    : `${post?.slug}`
+            }
+        >
             <div className="card-container">
                 <div className="img">
                     <img

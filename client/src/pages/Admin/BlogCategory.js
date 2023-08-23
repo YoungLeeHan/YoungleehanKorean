@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
-import AdminMenu from "../../components/nav/AdminMenu";
+import DashboardMenu from "../../components/nav/DashboardMenu";
 import axios from "axios";
 import toast from "react-hot-toast";
 import CategoryForm from "../../components/forms/CategoryForm";
@@ -14,7 +14,7 @@ export default function BlogCategory() {
     // state
     const [name, setName] = useState("");
     const [categories, setCategories] = useState([]);
-    const [visible, setVisible] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [selected, setSelected] = useState(null);
     const [updatingName, setUpdatingName] = useState("");
 
@@ -61,7 +61,7 @@ export default function BlogCategory() {
                 setSelected(null);
                 setUpdatingName("");
                 loadCategories();
-                setVisible(false);
+                setIsModalOpen(false);
             }
         } catch (err) {
             console.log(err);
@@ -81,7 +81,7 @@ export default function BlogCategory() {
                 toast.success(`"${data.name}" is deleted`);
                 setSelected(null);
                 loadCategories();
-                setVisible(false);
+                setIsModalOpen(false);
             }
         } catch (err) {
             console.log(err);
@@ -99,11 +99,11 @@ export default function BlogCategory() {
             <div style={{ maxWidth: "1170px" }} className="container-fluid">
                 <div className="row">
                     <div className="col-md-3">
-                        <AdminMenu />
+                        <DashboardMenu id={5} menutype={"admin"} />
                     </div>
                     <div className="col-md-9">
                         <div className="p-3 mt-2 mb-2 h4 bg-light">
-                            Manage Blog Categories
+                            Manage Blog Category
                         </div>
                         <div>
                             <CategoryForm
@@ -120,7 +120,7 @@ export default function BlogCategory() {
                                         key={c._id}
                                         className="btn btn-outline-primary m-3"
                                         onClick={() => {
-                                            setVisible(true);
+                                            setIsModalOpen(true);
                                             setSelected(c);
                                             setUpdatingName(c.name);
                                         }}
@@ -131,9 +131,9 @@ export default function BlogCategory() {
                             </div>
 
                             <Modal
-                                open={visible}
-                                onOk={() => setVisible(false)}
-                                onCancel={() => setVisible(false)}
+                                open={isModalOpen}
+                                onOk={() => setIsModalOpen(false)}
+                                onCancel={() => setIsModalOpen(false)}
                                 footer={null}
                             >
                                 <CategoryForm

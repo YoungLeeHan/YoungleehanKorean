@@ -1,11 +1,11 @@
 // 👻 Developed by DanBi Choi on Aug 2nd, 2023.
 // -----------------------------------------------------
-import { useAuth } from "../../context/auth";
-import Jumbotron from "../../components/cards/Jumbotron";
-import AdminMenu from "../../components/nav/AdminMenu";
-import { useState, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useAuth } from "../../context/auth";
+import Jumbotron from "../../components/cards/Jumbotron";
+import DashboardMenu from "../../components/nav/DashboardMenu";
+import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +14,7 @@ import { editorModules, editorFormats } from "../../constants/constant";
 
 const { Option } = Select;
 
-export default function Blog() {
+export default function BlogCreate() {
     // hook
     const [auth, setAuth] = useAuth();
     const navigate = useNavigate();
@@ -33,7 +33,7 @@ export default function Blog() {
 
     const loadBlogCategories = async () => {
         try {
-            const { data } = await axios.get("/blog/categories");
+            const { data } = await axios.get("/blog/category/list");
             if (data.error) {
                 toast.error(data.error);
             } else {
@@ -86,7 +86,7 @@ export default function Blog() {
             <div style={{ maxWidth: "1170px" }} className="container-fluid">
                 <div className="row">
                     <div className="col-md-3">
-                        <AdminMenu />
+                        <DashboardMenu id={6} menutype={"admin"} />
                     </div>
                     <div className="col-md-9">
                         <div className="p-3 mt-2 mb-2 h4 bg-light">
@@ -151,10 +151,16 @@ export default function Blog() {
                                     modules={editorModules}
                                     formats={editorFormats}
                                     placeholder="Enter your contents here..."
-                                ></ReactQuill>
+                                    style={{
+                                        height: "500px",
+                                    }}
+                                />
                                 <button
-                                    className="btn btn-primary mt-3 mb-5"
+                                    className="btn btn-primary"
                                     type="submit"
+                                    style={{
+                                        margin: "60px 0 20px 0",
+                                    }}
                                 >
                                     Create Post
                                 </button>

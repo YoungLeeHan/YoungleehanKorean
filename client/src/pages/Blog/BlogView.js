@@ -10,10 +10,9 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { BsSearch } from "react-icons/bs";
 import { Col, Row, Checkbox, ConfigProvider } from "antd";
-import BlogPostCard from "../../components/cards/BlogPostCard";
+import BlogPostCardHorizontal from "../../components/cards/BlogPostCardHorizontal";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
-import { toast } from "react-hot-toast";
 import loadingGIF from "../../assets/images/Common/loading.gif";
 import { mobileWidth } from "../../constants/constant";
 
@@ -240,7 +239,7 @@ export default function BlogView() {
                                 !isLoading &&
                                 blogList?.map((post) => (
                                     <div key={post._id}>
-                                        <BlogPostCard post={post} />
+                                        <BlogPostCardHorizontal post={post} />
                                     </div>
                                 ))}
 

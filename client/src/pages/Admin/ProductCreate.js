@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
-import AdminMenu from "../../components/nav/AdminMenu";
+import DashboardMenu from "../../components/nav/DashboardMenu";
 import axios from "axios";
 import { Select } from "antd";
 import toast from "react-hot-toast";
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 const { Option } = Select;
 
-export default function AdminProduct() {
+export default function AdminProductCreate() {
     const [auth, setAuth] = useAuth();
     // state
     const [category, setCategory] = useState("");
@@ -85,7 +85,7 @@ export default function AdminProduct() {
             <div style={{ maxWidth: "1170px" }} className="container-fluid">
                 <div className="row">
                     <div className="col-md-3">
-                        <AdminMenu />
+                        <DashboardMenu id={3} menutype={"admin"} />
                     </div>
                     <div className="col-md-9">
                         <div className="p-3 mt-2 mb-2 h4 bg-light">

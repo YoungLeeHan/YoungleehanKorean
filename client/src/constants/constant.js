@@ -1,4 +1,10 @@
-import { AiOutlineUser, AiOutlineShopping } from "react-icons/ai";
+import {
+    AiOutlineUser,
+    AiOutlineShopping,
+    AiOutlineFileAdd,
+    AiOutlineUnorderedList,
+    AiOutlineRead,
+} from "react-icons/ai";
 import { BsClipboard } from "react-icons/bs";
 
 export const mobileWidth = 767;
@@ -6,9 +12,54 @@ export const mobileWidth = 767;
 export const desktopWidth = 1023;
 
 export const userMenuData = [
-    { _id: 0, name: "Dashboard", link: "/", icon: BsClipboard },
-    { _id: 1, name: "Profile", link: "/profile", icon: AiOutlineUser },
-    { _id: 2, name: "My Order", link: "/orders", icon: AiOutlineShopping },
+    { _id: 0, name: "Dashboard", link: "user", icon: BsClipboard },
+    { _id: 1, name: "Profile", link: "user/profile", icon: AiOutlineUser },
+    { _id: 2, name: "My Order", link: "user/orders", icon: AiOutlineShopping },
+];
+export const adminMenuData = [
+    { _id: 0, name: "Dashboard", link: "admin", icon: BsClipboard },
+    {
+        _id: 1,
+        name: "Product level category",
+        link: "admin/category",
+        icon: AiOutlineRead,
+    },
+    {
+        _id: 2,
+        name: "Product age category",
+        link: "admin/ageCategory",
+        icon: AiOutlineRead,
+    },
+    {
+        _id: 3,
+        name: "Create a new product",
+        link: "admin/product",
+        icon: AiOutlineFileAdd,
+    },
+    {
+        _id: 4,
+        name: "View products",
+        link: "admin/products",
+        icon: AiOutlineUnorderedList,
+    },
+    {
+        _id: 5,
+        name: "Blog category",
+        link: "admin/blog/category",
+        icon: AiOutlineRead,
+    },
+    {
+        _id: 6,
+        name: "Create a blog post",
+        link: "admin/blog/createpost",
+        icon: AiOutlineFileAdd,
+    },
+    {
+        _id: 7,
+        name: "View blog posts",
+        link: "admin/blog/list",
+        icon: AiOutlineUnorderedList,
+    },
 ];
 
 // Quill Editor Settings 1

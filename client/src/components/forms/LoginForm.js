@@ -63,10 +63,6 @@ export default function LoginForm() {
         window.location.href = `http://localhost:8000/auth/google`;
     };
 
-    //Modal controllers for unverified user only
-    const handleOk = () => setIsModalOpen(false);
-    const handleCancel = () => setIsModalOpen(false);
-
     return (
         <>
             <form onSubmit={handleLogin}>
@@ -168,8 +164,8 @@ export default function LoginForm() {
             <ModalInfo
                 color={"#30a14e"}
                 isModalOpen={isModalOpen}
-                handleOk={handleOk}
-                handleCancel={handleCancel}
+                handleOk={() => setIsModalOpen(false)}
+                handleCancel={() => setIsModalOpen(false)}
                 okBtnText={"Got it"}
                 text={`Verification email sent to ${email}`}
                 width={350}

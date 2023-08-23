@@ -1,7 +1,7 @@
 // 👻 Developed by DanBi Choi on Aug 16th, 2023.
 // -----------------------------------------------------
 import Jumbotron from "../../components/cards/Jumbotron";
-import UserMenu from "../../components/nav/UserMenu";
+import DashboardMenu from "../../components/nav/DashboardMenu";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/auth";
 import axios from "axios";
@@ -16,11 +16,13 @@ import {
     usStatesList,
     mobileWidth,
 } from "../../constants/constant";
+import loadingGIF from "../../assets/images/Common/loading.gif";
 
 import ModalInfo from "../../components/common/ModalInfo";
 
 export default function UserProfile() {
     // states
+    const [isLoading, setIsLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -48,6 +50,7 @@ export default function UserProfile() {
     }, []);
 
     const loadUserProfile = async () => {
+        setIsLoading(true);
         try {
             const { data } = await axios.get(`/userInfo`);
             if (data?.error) {
@@ -67,6 +70,7 @@ export default function UserProfile() {
             console.log(err);
             toast.error("Something went wrong. Please try again.");
         }
+        setIsLoading(false);
     };
 
     const handleSubmit = async (e) => {
@@ -104,10 +108,6 @@ export default function UserProfile() {
             }
         }
     };
-
-    // Modal Handlers
-    const handleOk = () => setIsModalOpen(false);
-    const handleCancel = () => setIsModalOpen(false);
 
     const handleInput = (label, value) => {
         switch (label) {
@@ -147,9 +147,24 @@ export default function UserProfile() {
             >
                 <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
-                        <UserMenu id={1} />
+                        <DashboardMenu id={1} />
                     </div>
                     <div className="col-md-9">
+                        {isLoading && (
+                            <div
+                                className="d-flex justify-content-center"
+                                style={{ margin: "200px 0" }}
+                            >
+                                <img
+                                    src={loadingGIF}
+                                    alt="Loading"
+                                    style={{
+                                        width: "50px",
+                                        height: "50px",
+                                    }}
+                                />
+                            </div>
+                        )}
                         <div className="profile-box">
                             <div className="profile-box-title d-flex flex-row justify-content-between align-items-center">
                                 <h1>My Profile</h1>
@@ -289,8 +304,8 @@ export default function UserProfile() {
             </div>
             <ModalInfo
                 isModalOpen={isModalOpen}
-                handleOk={handleOk}
-                handleCancel={handleCancel}
+                handleOk={() => setIsModalOpen(false)}
+                handleCancel={() => setIsModalOpen(false)}
                 okBtnText={"Ok"}
                 width={450}
                 text={"Make sure to type in your current password."}

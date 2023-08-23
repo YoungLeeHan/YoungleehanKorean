@@ -1,14 +1,19 @@
 import { useAuth } from "../../context/auth";
 import { useEffect, useState } from "react";
 import Jumbotron from "../../components/cards/Jumbotron";
-import UserMenu from "../../components/nav/UserMenu";
+import DashboardMenu from "../../components/nav/DashboardMenu";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import MyOrderCard from "../../components/cards/MyOrderCard";
+import loadingGIF from "../../assets/images/Common/loading.gif";
 
 export default function UserOrders() {
+    //hooks
     const [auth, setAuth] = useAuth();
+
+    //states
     const [orders, setOrders] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const navigate = useNavigate();
 
@@ -24,12 +29,14 @@ export default function UserOrders() {
     }, [auth?.token]);
 
     const getOrders = async () => {
+        setIsLoading(true);
         try {
             const { data } = await axios.get("/orders");
             setOrders(data);
         } catch (err) {
             console.log(err);
         }
+        setIsLoading(false);
     };
 
     return (
@@ -45,9 +52,24 @@ export default function UserOrders() {
             >
                 <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
-                        <UserMenu id={2} />
+                        <DashboardMenu id={2} />
                     </div>
                     <div className="col-md-9">
+                        {isLoading && (
+                            <div
+                                className="d-flex justify-content-center"
+                                style={{ margin: "200px 0" }}
+                            >
+                                <img
+                                    src={loadingGIF}
+                                    alt="Loading"
+                                    style={{
+                                        width: "50px",
+                                        height: "50px",
+                                    }}
+                                />
+                            </div>
+                        )}
                         {orders?.length < 1 && (
                             <h5
                                 className="d-flex flex-column justify-content-center align-items-center"

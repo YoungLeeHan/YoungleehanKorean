@@ -1,7 +1,6 @@
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
-import AdminMenu from "../../components/nav/AdminMenu";
-
+import DashboardMenu from "../../components/nav/DashboardMenu";
 export default function AdminDashboard() {
     const [auth, setAuth] = useAuth();
 
@@ -17,7 +16,7 @@ export default function AdminDashboard() {
             >
                 <div className="row">
                     <div className="col-md-3">
-                        <AdminMenu />
+                        <DashboardMenu id={0} menutype={"admin"} />
                     </div>
                     <div className="col-md-9">
                         <div className="p-3 mt-2 mb-2 h4 bg-light">
