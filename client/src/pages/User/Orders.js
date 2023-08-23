@@ -1,7 +1,7 @@
 import { useAuth } from "../../context/auth";
 import { useEffect, useState } from "react";
 import Jumbotron from "../../components/cards/Jumbotron";
-import UserMenu from "../../components/nav/UserMenu";
+import DashboardMenu from "../../components/nav/DashboardMenu";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import MyOrderCard from "../../components/cards/MyOrderCard";
@@ -45,7 +45,7 @@ export default function UserOrders() {
             >
                 <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
-                        <UserMenu id={2} />
+                        <DashboardMenu id={2} />
                     </div>
                     <div className="col-md-9">
                         {orders?.length < 1 && (

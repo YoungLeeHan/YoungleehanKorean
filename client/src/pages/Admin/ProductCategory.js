@@ -7,10 +7,9 @@ import toast from "react-hot-toast";
 import CategoryForm from "../../components/forms/CategoryForm";
 import { Modal } from "antd";
 
-export default function BlogCategory() {
+export default function ProductCategory() {
     // context
     const [auth, setAuth] = useAuth();
-
     // state
     const [name, setName] = useState("");
     const [categories, setCategories] = useState([]);
@@ -24,7 +23,7 @@ export default function BlogCategory() {
 
     const loadCategories = async () => {
         try {
-            const { data } = await axios.get("/blog/category/list");
+            const { data } = await axios.get("/categories");
             setCategories(data);
         } catch (err) {
             console.log(err);
@@ -34,7 +33,7 @@ export default function BlogCategory() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.post("/blog/category", { name });
+            const { data } = await axios.post("/category", { name });
             if (data?.error) {
                 toast.error(data.error);
             } else {
@@ -51,7 +50,7 @@ export default function BlogCategory() {
     const handleUpdate = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.put(`/blog/category/${selected._id}`, {
+            const { data } = await axios.put(`/category/${selected._id}`, {
                 name: updatingName,
             });
             if (data?.error) {
@@ -72,9 +71,7 @@ export default function BlogCategory() {
     const handleDelete = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.delete(
-                `/blog/category/${selected._id}`
-            );
+            const { data } = await axios.delete(`/category/${selected._id}`);
             if (data?.error) {
                 toast.error(data.error);
             } else {
@@ -94,16 +91,16 @@ export default function BlogCategory() {
             <Jumbotron
                 title={`Hello ${auth?.user?.firstName}`}
                 directory={"Admin Dashboard"}
-                subDirectory={"Blog Category Management"}
+                subDirectory={"Product Category Management"}
             />
             <div style={{ maxWidth: "1170px" }} className="container-fluid">
                 <div className="row">
                     <div className="col-md-3">
-                        <DashboardMenu id={5} menutype={"admin"} />
+                        <DashboardMenu id={1} menutype={"admin"} />
                     </div>
                     <div className="col-md-9">
                         <div className="p-3 mt-2 mb-2 h4 bg-light">
-                            Manage Blog Categories
+                            Manage Product Categories
                         </div>
                         <div>
                             <CategoryForm
@@ -131,7 +128,7 @@ export default function BlogCategory() {
                             </div>
 
                             <Modal
-                                open={visible}
+                                visible={visible}
                                 onOk={() => setVisible(false)}
                                 onCancel={() => setVisible(false)}
                                 footer={null}

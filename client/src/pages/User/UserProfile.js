@@ -1,7 +1,7 @@
 // 👻 Developed by DanBi Choi on Aug 16th, 2023.
 // -----------------------------------------------------
 import Jumbotron from "../../components/cards/Jumbotron";
-import UserMenu from "../../components/nav/UserMenu";
+import DashboardMenu from "../../components/nav/DashboardMenu";
 import { useState, useEffect } from "react";
 import { useAuth } from "../../context/auth";
 import axios from "axios";
@@ -147,7 +147,7 @@ export default function UserProfile() {
             >
                 <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
-                        <UserMenu id={1} />
+                        <DashboardMenu id={1} />
                     </div>
                     <div className="col-md-9">
                         <div className="profile-box">

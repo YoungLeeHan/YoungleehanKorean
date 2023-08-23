@@ -2,21 +2,29 @@
 // -----------------------------------------------------
 
 import { useNavigate } from "react-router-dom";
-
+import { useAuth } from "../../context/auth";
 import DashboardSideBarMenu from "../cards/DashboardSideBarMenu";
 import { useState } from "react";
-import { userMenuData } from "../../constants/constant";
+import { userMenuData, adminMenuData } from "../../constants/constant";
 
-export default function UserMenu({ id }) {
-    // state
-    const [currentMenu, setCurrentMenu] = useState(userMenuData[id].name);
-
+export default function DashboardMenu({ id, menutype = "user" }) {
     // hook
     const navigate = useNavigate();
+    const [auth, setAuth] = useAuth();
+
+    // state
+    const [menuData, setMenuData] = useState(() => {
+        if (menutype === "admin") {
+            return adminMenuData;
+        } else {
+            return userMenuData;
+        }
+    });
+    const [currentMenu, setCurrentMenu] = useState(menuData[id].name);
 
     const handleMenuClick = (id) => {
-        navigate(`/dashboard/user${userMenuData[id].link}`);
-        setCurrentMenu(userMenuData[id].name);
+        navigate(`/dashboard/${menuData[id].link}`);
+        setCurrentMenu(menuData[id].name);
     };
 
     return (
@@ -36,10 +44,10 @@ export default function UserMenu({ id }) {
                     marginBottom: "23px",
                 }}
             >
-                User Dashboard
+                {menutype === "admin" ? "Admin Dashboard" : "User Dashboard"}
             </h3>
             <ul>
-                {userMenuData.map((menu) => (
+                {menuData.map((menu) => (
                     <li key={menu._id}>
                         <DashboardSideBarMenu
                             menu={menu}
