@@ -18,10 +18,10 @@ import Dashboard from "./pages/User/Dashboard";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import AdminDashboard from "./pages/Admin/Dashboard";
 import AdminRoute from "./components/routes/AdminRoute";
-import AdminBlog from "./pages/Admin/Post";
-import AdminProduct from "./pages/Admin/Product";
-import AdminProducts from "./pages/Admin/Products";
-import AdminCategory from "./pages/Admin/Category";
+import AdminProductCreate from "./pages/Admin/ProductCreate";
+import AdminProductList from "./pages/Admin/ProductList";
+import AdminProductCategory from "./pages/Admin/ProductCategory";
+import AdminProductAgeCategory from "./pages/Admin/ProductAgeCategory";
 import UserOrders from "./pages/User/Orders";
 import UserProfile from "./pages/User/UserProfile";
 import CategoriesList from "./pages/CategoriesList";
@@ -30,7 +30,7 @@ import Checkout from "./pages/Payment/Checkout";
 import ProductsView from "./pages/Shop/ProductsView";
 import SingleProductView from "./pages/Shop/SingleProductView";
 import AdminProductUpdate from "./pages/Admin/ProductUpdate";
-import AdminCreatePost from "./pages/Admin/Blog";
+import AdminCreatePost from "./pages/Admin/BlogCreate";
 import AdminBlogCategory from "./pages/Admin/BlogCategory";
 import AdminBlogPostList from "./pages/Admin/BlogList";
 import AdminBlogUpdate from "./pages/Admin/BlogUpdate";
@@ -94,11 +94,22 @@ export default function App() {
                 {/*admin dashboard*/}
                 <Route path="/dashboard" element={<AdminRoute />}>
                     <Route path="admin" element={<AdminDashboard />} />
-                    <Route path="admin/blog" element={<AdminBlog />} />
-
-                    <Route path="admin/category" element={<AdminCategory />} />
-                    <Route path="admin/product" element={<AdminProduct />} />
-                    <Route path="admin/products" element={<AdminProducts />} />
+                    <Route
+                        path="admin/category"
+                        element={<AdminProductCategory />}
+                    />
+                    <Route
+                        path="admin/ageCategory"
+                        element={<AdminProductAgeCategory />}
+                    />
+                    <Route
+                        path="admin/product"
+                        element={<AdminProductCreate />}
+                    />
+                    <Route
+                        path="admin/products"
+                        element={<AdminProductList />}
+                    />
                     <Route
                         path="admin/product/update/:slug"
                         element={<AdminProductUpdate />}

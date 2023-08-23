@@ -10,7 +10,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { BsSearch } from "react-icons/bs";
 import { Col, Row, Checkbox, ConfigProvider, Slider } from "antd";
-import ProductCard from "../../components/cards/ProductCard";
+import ProductCardHorizontal from "../../components/cards/ProductCardHorizontal";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
 import loadingGIF from "../../assets/images/Common/loading.gif";
 import { mobileWidth } from "../../constants/constant";
@@ -434,7 +434,9 @@ export default function ProductsView() {
                                 !isLoading &&
                                 products?.map((product) => (
                                     <div key={product._id}>
-                                        <ProductCard product={product} />
+                                        <ProductCardHorizontal
+                                            product={product}
+                                        />
                                     </div>
                                 ))}
                             {products?.length === 0 && !isLoading && (
