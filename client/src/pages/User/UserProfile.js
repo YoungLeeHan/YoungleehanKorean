@@ -16,11 +16,13 @@ import {
     usStatesList,
     mobileWidth,
 } from "../../constants/constant";
+import loadingGIF from "../../assets/images/Common/loading.gif";
 
 import ModalInfo from "../../components/common/ModalInfo";
 
 export default function UserProfile() {
     // states
+    const [isLoading, setIsLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -48,6 +50,7 @@ export default function UserProfile() {
     }, []);
 
     const loadUserProfile = async () => {
+        setIsLoading(true);
         try {
             const { data } = await axios.get(`/userInfo`);
             if (data?.error) {
@@ -67,6 +70,7 @@ export default function UserProfile() {
             console.log(err);
             toast.error("Something went wrong. Please try again.");
         }
+        setIsLoading(false);
     };
 
     const handleSubmit = async (e) => {
@@ -150,6 +154,21 @@ export default function UserProfile() {
                         <DashboardMenu id={1} />
                     </div>
                     <div className="col-md-9">
+                        {isLoading && (
+                            <div
+                                className="d-flex justify-content-center"
+                                style={{ margin: "200px 0" }}
+                            >
+                                <img
+                                    src={loadingGIF}
+                                    alt="Loading"
+                                    style={{
+                                        width: "50px",
+                                        height: "50px",
+                                    }}
+                                />
+                            </div>
+                        )}
                         <div className="profile-box">
                             <div className="profile-box-title d-flex flex-row justify-content-between align-items-center">
                                 <h1>My Profile</h1>
