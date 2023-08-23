@@ -11,6 +11,7 @@ import {
     secret,
     updateProfile,
     userInfo,
+    updatePassword,
 } from "../controllers/auth.js";
 
 import { verifyEmail } from "../helpers/verificationEmail.js";
@@ -20,6 +21,7 @@ router.get("/:id/verify/:token", verifyEmail);
 router.post("/login", login);
 router.get("/userInfo", requireSignin, userInfo);
 router.put("/profileUpdate", requireSignin, updateProfile);
+router.put("/passwordUpdate", requireSignin, updatePassword);
 router.get("/auth-check", requireSignin, (req, res) => {
     res.json({ ok: true });
 });
