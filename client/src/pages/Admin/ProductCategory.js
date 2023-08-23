@@ -100,7 +100,7 @@ export default function ProductCategory() {
                     </div>
                     <div className="col-md-9">
                         <div className="p-3 mt-2 mb-2 h4 bg-light">
-                            Manage Product Categories
+                            Manage Product Level Category
                         </div>
                         <div>
                             <CategoryForm

@@ -103,7 +103,7 @@ export default function BlogCategory() {
                     </div>
                     <div className="col-md-9">
                         <div className="p-3 mt-2 mb-2 h4 bg-light">
-                            Manage Blog Categories
+                            Manage Blog Category
                         </div>
                         <div>
                             <CategoryForm

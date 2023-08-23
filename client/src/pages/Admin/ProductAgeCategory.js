@@ -4,7 +4,7 @@ import Jumbotron from "../../components/cards/Jumbotron";
 import DashboardMenu from "../../components/nav/DashboardMenu";
 import axios from "axios";
 import toast from "react-hot-toast";
-import AgeCategoryForm from "../../components/forms/AgeCategoryForm";
+import CategoryForm from "../../components/forms/CategoryForm";
 import { Modal } from "antd";
 
 export default function ProductAgeCategory() {
@@ -100,10 +100,10 @@ export default function ProductAgeCategory() {
                     </div>
                     <div className="col-md-9">
                         <div className="p-3 mt-2 mb-2 h4 bg-light">
-                            Manage Product ageCategories
+                            Manage Product Age Category
                         </div>
                         <div>
-                            <AgeCategoryForm
+                            <CategoryForm
                                 value={name}
                                 setValue={setName}
                                 handleSubmit={handleSubmit}
@@ -133,7 +133,7 @@ export default function ProductAgeCategory() {
                                 onCancel={() => setIsModalOpen(false)}
                                 footer={null}
                             >
-                                <AgeCategoryForm
+                                <CategoryForm
                                     value={updatingName}
                                     setValue={setUpdatingName}
                                     handleSubmit={handleUpdate}
