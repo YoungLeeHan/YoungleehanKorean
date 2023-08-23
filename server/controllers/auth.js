@@ -166,6 +166,44 @@ export const updateProfile = async (req, res) => {
     }
 };
 
+export const updatePassword = async (req, res) => {
+    try {
+        const { currentPassword, newPassword } = req.body;
+        const pwReg =
+            /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/;
+
+        const user = await User.findById(req.user._id);
+
+        // check password length
+        if (!newPassword || newPassword.length < 6) {
+            return res.json({
+                error: "Password is required and should be min 6 characters long.",
+            });
+        }
+
+        // check if password matches & meets password requirements
+        const match = await comparePassword(currentPassword, user.password);
+        if (!match) {
+            return res.json({ error: "Wrong password." });
+        } else if (!pwReg.test(newPassword)) {
+            return res.json({ error: "Invalid Password." });
+        }
+
+        const hashedPassword = await hashPassword(newPassword);
+
+        await User.findByIdAndUpdate(
+            req.user._id,
+            {
+                password: hashedPassword,
+            },
+            { new: true }
+        );
+        res.json({ result: "ok" });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+};
 export const secret = async (req, res) => {
     res.json({ currentUser: req.user });
 };

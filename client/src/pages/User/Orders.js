@@ -6,10 +6,12 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import MyOrderCard from "../../components/cards/MyOrderCard";
 import loadingGIF from "../../assets/images/Common/loading.gif";
+import useScrollToTop from "./../../hooks/useScrollToTop";
 
 export default function UserOrders() {
     //hooks
     const [auth, setAuth] = useAuth();
+    useScrollToTop();
 
     //states
     const [orders, setOrders] = useState([]);
@@ -52,7 +54,7 @@ export default function UserOrders() {
             >
                 <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
-                        <DashboardMenu id={2} />
+                        <DashboardMenu id={3} />
                     </div>
                     <div className="col-md-9">
                         {isLoading && (
@@ -70,7 +72,7 @@ export default function UserOrders() {
                                 />
                             </div>
                         )}
-                        {orders?.length < 1 && (
+                        {!isLoading && orders?.length < 1 && (
                             <h5
                                 className="d-flex flex-column justify-content-center align-items-center"
                                 style={{ minHeight: "200px" }}
@@ -78,7 +80,8 @@ export default function UserOrders() {
                                 No order has been placed yet.
                             </h5>
                         )}
-                        {orders?.length > 0 &&
+                        {!isLoading &&
+                            orders?.length > 0 &&
                             orders.map((order) => (
                                 <MyOrderCard key={order._id} order={order} />
                             ))}

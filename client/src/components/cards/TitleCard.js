@@ -26,7 +26,7 @@ export default function titleCard({
                 src={yellowLinesSVG}
                 alt="highlight"
                 style={{
-                    transform: "translateY(-10px)",
+                    transform: "translateY(-7px)",
                     width: `${barWidth}`,
                     height: "16px",
                 }}
