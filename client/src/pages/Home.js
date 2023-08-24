@@ -1,9 +1,9 @@
 // 👻 Developed by DanBi Choi on July 19th, 2023.
-// 👻 Developed by DanBi Choi on Aug 18th, 2023. (Blog section updated)
+// 👻 Developed by DanBi Choi on Aug 18th, 2023. (Blog, shop section updated)
 // -----------------------------------------------------
-import CustomerTypesCard from "../components/cards/CustomerTypesCard";
 import "../styles/pages/Home.scss";
-import { customerTypesData } from "../assets/data/customerTypesData";
+import CustomerTypesCard from "../components/cards/CustomerTypesCard";
+import { customerTypesData, mobileWidth } from "../constants/constant";
 import { Link } from "react-router-dom";
 import TitleCard from "../components/cards/TitleCard";
 import axios from "axios";
@@ -11,8 +11,16 @@ import { useEffect, useState } from "react";
 import ProductCardVertical from "../components/cards/ProductCardVertical";
 import BlogPostCardVertical from "../components/cards/BlogPostCardVertical";
 import loadingGIF from "../assets/images/Common/loading.gif";
+import AccordionDisplay from "../components/common/AccordionDisplay";
+import { BsArrowUpRight } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import useWindowWidth from "../hooks/useWindowWidth";
 
 export default function Home() {
+    // hooks
+    const navigate = useNavigate();
+    const windowWidth = useWindowWidth();
+
     //states
     const [shopList, setShopList] = useState([]);
     const [isShopListLoading, setIsShopListLoading] = useState(true);
@@ -146,6 +154,45 @@ export default function Home() {
                         </Link>
                     </div>
                 </div>
+            </section>
+            <section
+                className="worksheet d-flex flex-column justify-content-center align-items-center"
+                style={{ width: "100%" }}
+            >
+                <TitleCard
+                    sectionTitle={"Worksheet"}
+                    mainTitle1={"What Makes"}
+                    mainTitle2={"YoungLeeHan"}
+                    mainTitle3={"Special"}
+                />
+                <div className="worksheet-box row" style={{ width: "100%" }}>
+                    <div className="col-md-6">
+                        <img
+                            src="https://catastic.b-cdn.net/wp-content/uploads/2023/04/cute-white-british-cat-wearing-sunglasses-yellow-fabric-hammock-isolated-yellow-background-1.jpg"
+                            alt="Write something here"
+                        />
+                    </div>
+                    <div className="col-md-6">
+                        <AccordionDisplay />
+                    </div>
+                </div>
+                <button
+                    className="btn"
+                    style={{
+                        padding: "12px 32px",
+                        fontSize: "16px",
+                        border: "1px solid #EBEBEB",
+                        boxShadow: "0px 0px 0px 0px rgba(255, 231, 223, 0.00)",
+                        marginTop: "50px",
+                    }}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        navigate("/about");
+                    }}
+                >
+                    See More &nbsp;&nbsp;
+                    <BsArrowUpRight style={{ paddingBottom: "3px" }} />
+                </button>
             </section>
             <section
                 className="shop d-flex flex-column align-items-center"
