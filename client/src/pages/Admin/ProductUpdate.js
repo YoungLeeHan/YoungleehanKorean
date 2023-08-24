@@ -6,14 +6,18 @@ import axios from "axios";
 import { Select } from "antd";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
+import useScrollToTop from "./../../hooks/useScrollToTop";
 
 const { Option } = Select;
 
 export default function AdminProductUpdate() {
-    // context
+    // hooks
     const [auth, setAuth] = useAuth();
+    const navigate = useNavigate();
+    const params = useParams();
+    useScrollToTop();
 
-    // state
+    // states
     const [images, setimages] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
@@ -24,10 +28,6 @@ export default function AdminProductUpdate() {
     const [ageCategory, setAgeCategory] = useState({});
     const [id, setId] = useState("");
     const [downloadUrl, setDownloadUrl] = useState("");
-
-    // hook
-    const navigate = useNavigate();
-    const params = useParams();
 
     useEffect(() => {
         loadProduct();
@@ -132,7 +132,7 @@ export default function AdminProductUpdate() {
             />
 
             <div style={{ maxWidth: "1170px" }} className="container-fluid">
-                <div className="row">
+                <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
                         <DashboardMenu id={3} menutype={"admin"} />
                     </div>

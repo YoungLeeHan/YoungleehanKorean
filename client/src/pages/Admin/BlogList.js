@@ -7,10 +7,12 @@ import { useState, useEffect } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import BlogPostCardHorizontal from "./../../components/cards/BlogPostCardHorizontal";
+import useScrollToTop from "./../../hooks/useScrollToTop";
 
 export default function BlogList() {
-    // context
+    // hooks
     const [auth, setAuth] = useAuth();
+    useScrollToTop();
 
     //states
     const [list, setList] = useState([]);
@@ -41,7 +43,7 @@ export default function BlogList() {
                 subDirectory={"Blog Posts"}
             />
             <div style={{ maxWidth: "1170px" }} className="container-fluid">
-                <div className="row">
+                <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
                         <DashboardMenu id={7} menutype={"admin"} />
                     </div>

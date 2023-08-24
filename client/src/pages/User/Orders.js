@@ -1,3 +1,5 @@
+// 👻 Developed by DanBi Choi on Aug 22th, 2023.
+// -----------------------------------------------------
 import { useAuth } from "../../context/auth";
 import { useEffect, useState } from "react";
 import Jumbotron from "../../components/cards/Jumbotron";
@@ -49,7 +51,7 @@ export default function UserOrders() {
                 subDirectory={"My Order"}
             />
             <div
-                style={{ maxWidth: "1170px", minHeight: "300px" }}
+                style={{ maxWidth: "1170px", minHeight: "400px" }}
                 className="container-fluid"
             >
                 <div className="row" style={{ margin: "75px 0" }}>

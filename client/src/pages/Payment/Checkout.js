@@ -2,7 +2,6 @@
 // -----------------------------------------------------
 import PaymentMethodInput from "../../components/cards/PaymentMethodInput";
 import Jumbotron from "../../components/cards/Jumbotron";
-import { useCartTotal } from "../../context/cartTotal";
 import { useAuth } from "../../context/auth";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
@@ -11,7 +10,6 @@ import useScrollToTop from "../../hooks/useScrollToTop";
 
 export default function Checkout() {
     // hooks
-    const [cartTotal, setCartTotal] = useCartTotal();
     const [auth, setAuth] = useAuth();
     const navigate = useNavigate();
     useScrollToTop();

@@ -6,12 +6,14 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import CategoryForm from "../../components/forms/CategoryForm";
 import { Modal } from "antd";
+import useScrollToTop from "./../../hooks/useScrollToTop";
 
 export default function BlogCategory() {
-    // context
+    // hooks
     const [auth, setAuth] = useAuth();
+    useScrollToTop();
 
-    // state
+    // states
     const [name, setName] = useState("");
     const [categories, setCategories] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -97,7 +99,7 @@ export default function BlogCategory() {
                 subDirectory={"Blog Category Management"}
             />
             <div style={{ maxWidth: "1170px" }} className="container-fluid">
-                <div className="row">
+                <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
                         <DashboardMenu id={5} menutype={"admin"} />
                     </div>

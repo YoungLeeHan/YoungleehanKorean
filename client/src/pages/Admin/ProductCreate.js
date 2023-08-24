@@ -6,12 +6,17 @@ import axios from "axios";
 import { Select } from "antd";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
+import useScrollToTop from "./../../hooks/useScrollToTop";
 
 const { Option } = Select;
 
 export default function AdminProductCreate() {
+    // hooks
     const [auth, setAuth] = useAuth();
-    // state
+    const navigate = useNavigate();
+    useScrollToTop();
+
+    // states
     const [category, setCategory] = useState("");
     const [categories, setCategories] = useState([]);
     const [ageCategory, setAgeCategory] = useState("");
@@ -21,8 +26,6 @@ export default function AdminProductCreate() {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [downloadUrl, setDownloadUrl] = useState("");
-
-    const navigate = useNavigate();
 
     useEffect(() => {
         loadCategories();
@@ -83,7 +86,7 @@ export default function AdminProductCreate() {
                 subDirectory={"Create Product"}
             />
             <div style={{ maxWidth: "1170px" }} className="container-fluid">
-                <div className="row">
+                <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
                         <DashboardMenu id={3} menutype={"admin"} />
                     </div>

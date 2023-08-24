@@ -1,8 +1,12 @@
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
 import DashboardMenu from "../../components/nav/DashboardMenu";
+import useScrollToTop from "./../../hooks/useScrollToTop";
+
 export default function AdminDashboard() {
+    //hooks
     const [auth, setAuth] = useAuth();
+    useScrollToTop();
 
     return (
         <>
@@ -14,7 +18,7 @@ export default function AdminDashboard() {
                 style={{ maxWidth: "1170px", minHeight: "500px" }}
                 className="container-fluid"
             >
-                <div className="row">
+                <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
                         <DashboardMenu id={0} menutype={"admin"} />
                     </div>

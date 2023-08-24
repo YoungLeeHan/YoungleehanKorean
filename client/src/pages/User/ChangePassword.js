@@ -81,7 +81,7 @@ export default function ChangePassword() {
                 subDirectory={"Change password"}
             />
             <div
-                style={{ maxWidth: "1170px", minHeight: "300px" }}
+                style={{ maxWidth: "1170px", minHeight: "400px" }}
                 className="container-fluid"
             >
                 <div className="row" style={{ margin: "75px 0" }}>

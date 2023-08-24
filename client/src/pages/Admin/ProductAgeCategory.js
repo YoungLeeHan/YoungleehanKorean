@@ -6,11 +6,14 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import CategoryForm from "../../components/forms/CategoryForm";
 import { Modal } from "antd";
+import useScrollToTop from "./../../hooks/useScrollToTop";
 
 export default function ProductAgeCategory() {
-    // context
+    // hooks
     const [auth, setAuth] = useAuth();
-    // state
+    useScrollToTop();
+
+    // states
     const [name, setName] = useState("");
     const [ageCategories, setAgeCategories] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -94,7 +97,7 @@ export default function ProductAgeCategory() {
                 subDirectory={"Product Category Management"}
             />
             <div style={{ maxWidth: "1170px" }} className="container-fluid">
-                <div className="row">
+                <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
                         <DashboardMenu id={2} menutype={"admin"} />
                     </div>
