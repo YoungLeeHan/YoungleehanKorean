@@ -33,7 +33,7 @@ export default function MyOrderCard({ order }) {
                 </li>
             </ul>
             <div className="row" style={{ width: "100%" }}>
-                {order.products.map((product) => (
+                {order?.products.map((product) => (
                     <div
                         className="col-md-4 d-flex flex-column justify-content-between align-items-center"
                         key={product._id}

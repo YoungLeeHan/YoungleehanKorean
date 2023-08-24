@@ -1,6 +1,8 @@
 import yellowLinesSVG from "../../assets/images/Home/yellowLines.svg";
+import { mobileWidth } from "../../constants/constant";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
-export default function titleCard({
+export default function TitleCard({
     sectionTitle,
     barWidth = 145,
     mainTitle1,
@@ -8,6 +10,9 @@ export default function titleCard({
     mainTitle3,
     subParagraph,
 }) {
+    //hooks
+    const windowWidth = useWindowWidth();
+
     return (
         <div
             className={"d-flex flex-column align-items-center"}
@@ -16,7 +21,7 @@ export default function titleCard({
             <h3
                 style={{
                     fontWeight: "500",
-                    fontSize: "20px",
+                    fontSize: windowWidth < mobileWidth ? "18px" : "20px",
                     marginBottom: "0",
                 }}
             >
@@ -34,7 +39,7 @@ export default function titleCard({
             <h1
                 style={{
                     fontWeight: "600",
-                    fontSize: "32px",
+                    fontSize: windowWidth < mobileWidth ? "28px" : "32px",
                     marginBottom: "10px",
                 }}
             >
@@ -43,7 +48,7 @@ export default function titleCard({
                     style={{
                         color: "#7b1fa2",
                         fontWeight: "600",
-                        fontSize: "32px",
+                        fontSize: windowWidth < mobileWidth ? "28px" : "32px",
                         marginBottom: "10px",
                     }}
                 >
@@ -54,7 +59,7 @@ export default function titleCard({
             <p
                 style={{
                     color: "#706866",
-                    fontSize: "16px",
+                    fontSize: windowWidth < mobileWidth ? "14px" : "16px",
                     margin: "10px 0 40px 0",
                     lineHeight: "160%",
                     maxWidth: "620px",

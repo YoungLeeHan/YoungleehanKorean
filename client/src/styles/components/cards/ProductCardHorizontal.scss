@@ -69,7 +69,6 @@
         h3 {
             font-weight: 500;
             line-height: 150%;
-            font-size: $desktop-font-large;
             margin-bottom: 9px;
             cursor: pointer;
         }
@@ -77,7 +76,6 @@
         h5 {
             line-height: 170%;
             color: $color-gray;
-            font-size: $desktop-font-medium;
             margin-bottom: 20px;
             cursor: pointer;
         }
@@ -126,7 +124,6 @@
         }
 
         p {
-            font-size: $desktop-font-small;
             color: $color-gray;
             font-weight: 400;
             line-height: 100%;

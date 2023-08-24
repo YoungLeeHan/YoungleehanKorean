@@ -31,9 +31,16 @@
             font-size: $desktop-font-xlarge;
             font-weight: 600;
             line-height: 160%;
+            @include mobile {
+                font-size: $mobile-font-xlarge;
+            }
+
             span {
                 font-size: $desktop-font-large;
                 font-weight: 600;
+                @include mobile {
+                    font-size: $mobile-font-large;
+                }
             }
         }
         h5 {
@@ -45,6 +52,11 @@
             color: $color-gray;
             font-size: $desktop-font-small;
             line-height: 170%;
+            @include mobile {
+                padding: 0 15px;
+                text-align: center;
+                font-size: $mobile-font-small;
+            }
         }
     }
 }

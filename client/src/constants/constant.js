@@ -7,6 +7,9 @@ import {
     AiOutlineLock,
 } from "react-icons/ai";
 import { BsClipboard } from "react-icons/bs";
+import learnerSVG from "../assets/images/Home/customer_learner.svg";
+import parentsSVG from "../assets/images/Home/customer_parents.svg";
+import teacherSVG from "../assets/images/Home/customer_teacher.svg";
 
 export const mobileWidth = 767;
 
@@ -23,6 +26,7 @@ export const userMenuData = [
     },
     { _id: 3, name: "My Order", link: "user/orders", icon: AiOutlineShopping },
 ];
+
 export const adminMenuData = [
     { _id: 0, name: "Dashboard", link: "admin", icon: BsClipboard },
     {
@@ -66,6 +70,54 @@ export const adminMenuData = [
         name: "View blog posts",
         link: "admin/blog/list",
         icon: AiOutlineUnorderedList,
+    },
+];
+
+export const worksheetTextData = [
+    {
+        _id: 1,
+        title: "Fun subjects",
+        description:
+            "As a teacher of kids and adults, I have seen that students learn the best when having fun. My materials explore Korean through age-appropriate, entertaining subjects.",
+    },
+    {
+        _id: 2,
+        title: "Practical Language",
+        description:
+            "Officia id occaecat qui ea qui nisi occaecat id commodo irure est nostrud reprehenderit mollit. Veniam exercitation magna quis eu anim ea reprehenderit enim veniam.",
+    },
+    {
+        _id: 3,
+        title: "Accuracy",
+        description:
+            "Mollit duis fugiat tempor laboris pariatur sint cillum. Excepteur culpa minim qui ad pariatur id qui eu. Proident duis minim cupidatat est aliquip eu duis do nostrud laborum commodo sit.",
+    },
+];
+
+export const customerTypesData = [
+    {
+        _id: 1,
+        name: "Language Learners",
+        image: learnerSVG,
+        msg: "I still struggle with verb endings after 3 years of learning.",
+        subMsg: "Our materials will train your brain to grab the correct ending for the context of the sentence.",
+        link: "/about",
+    },
+    {
+        _id: 2,
+        name: "Parents",
+        image: parentsSVG,
+        msg: "It’s hard to get my kids excited about learning Korean with boring materials.",
+        subMsg: "Our materials are interactive and thought-provoking, improving retention of the subject.",
+        link: "/about",
+    },
+    {
+        _id: 3,
+        name: "Korean Teachers",
+        image: teacherSVG,
+        msg: "I want to give my students practice exercises, but I don't have enough time to make them.",
+        subMsg: "Our materials are loaded with exercises for each grammar point and each exercise includes an explanation of the context.",
+        link: "/about",
     },
 ];
 

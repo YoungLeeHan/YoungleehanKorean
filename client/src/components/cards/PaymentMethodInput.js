@@ -21,7 +21,7 @@ export default function PaymentMethodInput() {
     //states
     const [clientToken, setClientToken] = useState("");
     const [instance, setInstance] = useState("");
-    const [loading, setLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (auth?.token) {
@@ -40,14 +40,14 @@ export default function PaymentMethodInput() {
 
     const handleBuy = async () => {
         try {
-            setLoading(true);
+            setIsLoading(true);
             const { nonce } = await instance.requestPaymentMethod();
             const { data } = await axios.post("/braintree/payment", {
                 nonce,
                 cart,
                 cartQuantity,
             });
-            setLoading(false);
+            setIsLoading(false);
             localStorage.removeItem("cart");
             setCart([]);
             setCartQuantity({});
@@ -58,7 +58,7 @@ export default function PaymentMethodInput() {
         } catch (err) {
             if (err.name === "DropinError") {
                 toast.error(err.message);
-                setLoading(false);
+                setIsLoading(false);
             } else {
                 navigate("/cart/checkout/fail");
             }
@@ -97,10 +97,13 @@ export default function PaymentMethodInput() {
                 onClick={handleBuy}
                 className="btn btn-primary col-12 mt-2"
                 disabled={
-                    !cart?.length || !auth?.user?.email || !instance || loading
+                    !cart?.length ||
+                    !auth?.user?.email ||
+                    !instance ||
+                    isLoading
                 }
             >
-                {loading ? "Processing..." : "Buy"}
+                {isLoading ? "Processing..." : "Buy"}
             </button>
         </>
     );

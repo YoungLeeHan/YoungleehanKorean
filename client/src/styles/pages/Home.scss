@@ -16,6 +16,9 @@
         font-weight: 700;
         margin-bottom: 38px;
         max-width: 562px;
+        @include mobile {
+            font-size: 32px;
+        }
     }
 
     p {
@@ -24,6 +27,9 @@
         color: $color-gray;
         max-width: 552px;
         line-height: 160%;
+        @include mobile {
+            font-size: $mobile-font-medium;
+        }
     }
     h5 {
         font-size: $desktop-font-medium;
@@ -31,6 +37,9 @@
         font-weight: 600;
         margin-bottom: 33px;
         line-height: 160%;
+        @include mobile {
+            font-size: $mobile-font-medium;
+        }
     }
 
     img {
@@ -61,22 +70,30 @@
 
         h3 {
             padding-top: 14px;
-            font-size: 28px;
+            font-size: $desktop-font-large;
             font-weight: 600;
             margin-bottom: 0;
+            @include mobile {
+                font-size: $mobile-font-large;
+            }
         }
 
         h4 {
             color: $color-white;
-            font-size: 22px;
+            font-size: $desktop-font-large;
             font-weight: 600;
+            @include mobile {
+                font-size: $mobile-font-large;
+            }
         }
 
         p {
             margin: 14px 0 20px 0;
-
             color: $color-white;
-            font-size: $desktop-font-medium;
+            font-size: $desktop-font-small;
+            @include mobile {
+                font-size: $mobile-font-medium;
+            }
         }
 
         &:hover {
@@ -88,9 +105,13 @@
             color: #fff;
             width: 160px;
             font-weight: 500;
-            font-size: 16px;
+            font-size: $desktop-font-small;
             border-radius: 10px;
-            padding: 12px 38px;
+            padding: 8px 10px;
+            @include mobile {
+                font-size: $mobile-font-small;
+                padding: 8px 10px;
+            }
         }
     }
 }
@@ -113,6 +134,9 @@
             font-size: 22px;
             line-height: 160%;
             @include mobile-center;
+            @include mobile {
+                font-size: $mobile-font-large;
+            }
         }
         p {
             margin: 10px 0 40px 0;
@@ -121,9 +145,28 @@
             line-height: 160%;
             max-width: 670px;
             @include mobile-center;
+            @include mobile {
+                font-size: $mobile-font-medium;
+            }
         }
         .link-button {
             @include mobile-center;
+        }
+    }
+}
+
+.worksheet {
+    .worksheet-box {
+        .col-md-6 {
+            height: 285px;
+            margin-bottom: 10px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
         }
     }
 }

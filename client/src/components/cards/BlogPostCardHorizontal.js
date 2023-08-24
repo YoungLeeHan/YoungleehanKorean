@@ -1,71 +1,82 @@
 // 👻 Developed by DanBi Choi on July 27th, 2023.
 // 👻 Developed by DanBi Choi on Aug 11th, 2023. (dynamic data applied)
 // -----------------------------------------------------
-
-import { Link } from "react-router-dom";
 import "../../styles/components/cards/ProductCardHorizontal.scss";
+import { useNavigate } from "react-router-dom";
 import { MdOutlineDateRange } from "react-icons/md";
 import moment from "moment";
 import useWindowWidth from "../../hooks/useWindowWidth";
+import { mobileWidth } from "../../constants/constant";
 
 export default function BlogPostCardHorizontal({ post, modify = false }) {
     moment.locale("en");
 
     // hooks
     const windowWidth = useWindowWidth();
+    const navigate = useNavigate();
 
-    // change html tagged string to non-tagged string
-    const strippedText = post?.value.replace(/<[^>]+>/g, "");
+    const handleLinkClick = () => {
+        if (modify) navigate(`/dashboard/admin/blog/update/${post?.slug}`);
+        if (!modify) navigate(`${post?.slug}`);
+    };
 
     return (
-        <Link
-            to={
-                modify
-                    ? `/dashboard/admin/blog/update/${post?.slug}`
-                    : `${post?.slug}`
-            }
+        <div
+            className="card-container"
+            style={{
+                height: windowWidth < mobileWidth ? "400px" : "240px",
+            }}
+            onClick={handleLinkClick}
         >
-            <div className="card-container">
-                <div className="img">
-                    <img
-                        src={`${process.env.REACT_APP_API}/blog/images/${post._id}`}
-                        alt={post?.title}
-                    />
-                </div>
-                <div className="text blog-text d-flex flex-column justify-content-between align-items-start">
-                    <h2>{post?.category?.name}</h2>
-                    <h3>
-                        {windowWidth > 450 &&
-                            (post?.title?.length > 35
-                                ? post?.title?.substring(0, 35) + "..."
-                                : post?.title)}
-                        {windowWidth < 450 &&
-                            (post?.title?.length > 25
-                                ? post?.title?.substring(0, 25) + "..."
-                                : post?.title)}
-                    </h3>
-                    <h5>
-                        {windowWidth > 1200 &&
-                            (strippedText?.length > 140
-                                ? strippedText.substring(0, 140) + "..."
-                                : strippedText)}
-                        {windowWidth < 1200 &&
-                            (strippedText?.length > 70
-                                ? strippedText.substring(0, 70) + "..."
-                                : strippedText)}
-                    </h5>
-                    <div
-                        className="text-bottom d-flex flex-row justify-content-between align-items-center"
-                        style={{ width: "100%" }}
+            <div className="img">
+                <img
+                    src={`${process.env.REACT_APP_API}/blog/images/${post._id}`}
+                    alt={post?.title}
+                />
+            </div>
+            <div className="text blog-text d-flex flex-column justify-content-between align-items-start">
+                <h2>{post?.category?.name}</h2>
+                <h3
+                    style={{
+                        fontSize: windowWidth < mobileWidth ? "16px" : "20px",
+                    }}
+                >
+                    {post?.title?.length > 35
+                        ? post.title.substring(0, 35) + "..."
+                        : post.title}{" "}
+                </h3>
+                <h5
+                    style={{
+                        fontSize: windowWidth < mobileWidth ? "14px" : "16px",
+                    }}
+                >
+                    {post?.value?.length > 80
+                        ? post.value.substring(0, 80) + "..."
+                        : post.value}
+                </h5>
+                <div
+                    className="text-bottom d-flex flex-row justify-content-between align-items-center"
+                    style={{ width: "100%" }}
+                >
+                    <h4
+                        style={{
+                            fontSize:
+                                windowWidth < mobileWidth ? "12px" : "15px",
+                        }}
                     >
-                        <h4>Posted by YoungHyun</h4>
-                        <p>
-                            <MdOutlineDateRange fill="#7b1fa2" />{" "}
-                            {moment(post?.createdAt).format("MMMM DD YYYY")}
-                        </p>
-                    </div>
+                        Posted by YoungHyun
+                    </h4>
+                    <p
+                        style={{
+                            fontSize:
+                                windowWidth < mobileWidth ? "11px" : "14px",
+                        }}
+                    >
+                        <MdOutlineDateRange fill="#7b1fa2" />{" "}
+                        {moment(post?.createdAt).format("MMMM DD YYYY")}
+                    </p>
                 </div>
             </div>
-        </Link>
+        </div>
     );
 }

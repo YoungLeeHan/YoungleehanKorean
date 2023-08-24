@@ -4,9 +4,13 @@ import Jumbotron from "../../components/cards/Jumbotron";
 import useScrollToTop from "../../hooks/useScrollToTop";
 import { Link } from "react-router-dom";
 import FailSVG from "../../assets/images/Checkout/PaymentFail.svg";
+import useWindowWidth from "./../../hooks/useWindowWidth";
+import { mobileWidth } from "../../constants/constant";
 
 export default function PaymentFail() {
+    //hooks
     useScrollToTop();
+    const windowWidth = useWindowWidth();
 
     return (
         <>
@@ -22,7 +26,8 @@ export default function PaymentFail() {
                     <img src={FailSVG} alt="Failed" />
                     <h1
                         style={{
-                            fontSize: "32px",
+                            fontSize:
+                                windowWidth < mobileWidth ? "20px" : "32px",
                             color: "#7B1FA2",
                             fontWeight: "600",
                             margin: "0",
@@ -35,7 +40,8 @@ export default function PaymentFail() {
                         style={{
                             margin: "25px 0",
                             color: "#706866",
-                            fontSize: "20px",
+                            fontSize:
+                                windowWidth < mobileWidth ? "14px" : "20px",
                         }}
                     >
                         If issue persist, please contact site owner.
