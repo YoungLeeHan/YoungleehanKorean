@@ -21,6 +21,12 @@ import ModalInfo from "../../components/common/ModalInfo";
 import useScrollToTop from "../../hooks/useScrollToTop";
 
 export default function UserProfile() {
+    // hooks
+    const [auth, setAuth] = useAuth();
+    const navigate = useNavigate();
+    const windowWidth = useWindowWidth();
+    useScrollToTop();
+
     // states
     const [isLoading, setIsLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,12 +40,6 @@ export default function UserProfile() {
     const [city, setCity] = useState("");
     const [state, setState] = useState("");
     const [zipcode, setZipcode] = useState("");
-
-    // hooks
-    const [auth, setAuth] = useAuth();
-    const navigate = useNavigate();
-    const windowWidth = useWindowWidth();
-    useScrollToTop();
 
     // redirect anonymous user
     useEffect(() => {
@@ -167,7 +167,13 @@ export default function UserProfile() {
                             </div>
                         )}
                         {!isLoading && (
-                            <div className="profile-box">
+                            <div
+                                className="profile-box"
+                                style={{
+                                    marginTop:
+                                        windowWidth < mobileWidth ? "15px" : "",
+                                }}
+                            >
                                 <div className="profile-box-title d-flex flex-row justify-content-between align-items-center">
                                     <h1>My Profile</h1>
                                     <h5>

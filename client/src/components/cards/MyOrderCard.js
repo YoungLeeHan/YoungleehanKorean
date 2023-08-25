@@ -1,7 +1,11 @@
 import ProductCardVertical from "./ProductCardVertical";
 import moment from "moment";
+import useWindowWidth from "../../hooks/useWindowWidth";
+import { mobileWidth } from "../../constants/constant";
 
 export default function MyOrderCard({ order }) {
+    const windowWidth = useWindowWidth();
+
     return (
         <div
             style={{
@@ -10,7 +14,8 @@ export default function MyOrderCard({ order }) {
                 border: "1px solid rgba(219, 219, 219, 0.50)",
                 backgroundColor: "#FFFEFB",
                 padding: "20px",
-                margin: "15px 0",
+                marginBottom: "15px",
+                marginTop: windowWidth < mobileWidth ? "15px" : "",
             }}
         >
             <ul

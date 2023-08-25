@@ -13,13 +13,12 @@ import useScrollToTop from "../../hooks/useScrollToTop";
 export default function MyOrders() {
     //hooks
     const [auth, setAuth] = useAuth();
+    const navigate = useNavigate();
     useScrollToTop();
 
     //states
     const [orders, setOrders] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-
-    const navigate = useNavigate();
 
     // redirect anonymous user
     useEffect(() => {
