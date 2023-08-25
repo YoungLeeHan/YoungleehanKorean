@@ -1,5 +1,6 @@
 import Product from "../models/product.js";
 import Review from "../models/review.js";
+import MultipleFile from "../models/multiplefile.js";
 import { validateMongodbId } from "../helpers/validateMongodbID.js";
 
 export const reviewCreate = async (req, res) => {
@@ -12,7 +13,26 @@ export const reviewCreate = async (req, res) => {
             review,
             rating,
         });
-        res.json(newReview);
+
+        const singleFileId = req.body.singleFileId;
+        const multipleFileIds = req.body.multipleFileIds;
+
+        if (singleFileId) {
+            newReview.singleFiles.push(singleFileId);
+            await newReview.save();
+        }
+
+        if (multipleFileIds && multipleFileIds.length > 0) {
+            newReview.multipleFiles = multipleFileIds;
+            await newReview.save();
+
+            await MultipleFile.updateMany(
+                { _id: { $in: multipleFileIds } },
+                { $set: { review: newReview._id } }
+            );
+        }
+
+        // res.json(newReview);
         return res.status(200).json({ success: true });
     } catch (err) {
         return res.status(400).json({ success: false, error: err.message });

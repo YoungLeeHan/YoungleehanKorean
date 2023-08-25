@@ -12,6 +12,8 @@ import authRoutes from "./routes/auth.js";
 import categoryRoutes from "./routes/category.js";
 import productRoutes from "./routes/product.js";
 import reviewRoutes from "./routes/review.js";
+import fileRoutes from "./routes/fileUploadRoutes.js";
+import reviewFileRoutes from "./routes/reviewFileRoutes.js";
 import checkoutRoutes from "./routes/checkout.js";
 import userOrderRoutes from "./routes/userOrder.js";
 import configurePassport from "./controllers/google.js";
@@ -62,10 +64,16 @@ app.use("/api", productRoutes);
 app.use("/api/blog/comment", blogCommentRoutes);
 app.use("/api/blog/category", blogCategoryRoutes);
 app.use("/api/blog", blogPostRoutes);
-app.use("/api", reviewRoutes);
 app.use("/api", checkoutRoutes);
 app.use("/api", userOrderRoutes);
 
+//review
+app.use("/api", reviewRoutes);
+app.use("/api", fileRoutes.routes);
+app.use("/api", reviewFileRoutes);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+//google
 app.use("/auth", authGoogle);
 app.use("/index", indexGoogle);
 
