@@ -121,7 +121,8 @@ export const filteredProducts = async (req, res) => {
         const products = await Product.find(args)
             .select("-images")
             .populate("category")
-            .populate("ageCategory");
+            .populate("ageCategory")
+            .sort({ createdAt: -1 });
         res.json(products);
     } catch (err) {
         console.log(err);
@@ -164,7 +165,8 @@ export const relatedProducts = async (req, res) => {
             .select("-images")
             .populate("category")
             .populate("ageCategory")
-            .limit(4);
+            .limit(4)
+            .sort({ createdAt: -1 });
 
         res.json(related);
     } catch (err) {
@@ -183,7 +185,8 @@ export const productsSearch = async (req, res) => {
         })
             .select("-images")
             .populate("category")
-            .populate("ageCategory");
+            .populate("ageCategory")
+            .sort({ createdAt: -1 });
         res.json(results);
     } catch (err) {
         console.log(err);

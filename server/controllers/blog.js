@@ -2,7 +2,6 @@ import BlogPost from "../models/BlogPost.js";
 import slugify from "slugify";
 import fs from "fs";
 import sanitizeHtml from "sanitize-html";
-import Product from "../models/product.js";
 
 const removeHtmlandShorten = (body) => {
     const filtered = sanitizeHtml(body, {
@@ -162,10 +161,20 @@ export const filteredPost = async (req, res) => {
         if (categoryFilter && categoryFilter.length > 0)
             args.category = categoryFilter;
 
-        const post = await BlogPost.find(args)
+        const posts = await BlogPost.find(args)
             .select("-images")
-            .populate("category");
-        res.json(post);
+            .populate("category")
+            .sort({ createdAt: -1 });
+
+        // Convert the 'value' field to HTML tag excluded and shortened form
+        const sanitizedPosts = posts.map((post) => {
+            return {
+                ...post._doc,
+                value: removeHtmlandShorten(post.value),
+            };
+        });
+
+        res.json(sanitizedPosts);
     } catch (err) {
         console.log(err);
     }
@@ -175,15 +184,25 @@ export const filteredPost = async (req, res) => {
 export const postSearch = async (req, res) => {
     try {
         const { keyword } = req.params;
-        const results = await BlogPost.find({
+        const posts = await BlogPost.find({
             $or: [
                 { title: { $regex: keyword, $options: "i" } },
                 { value: { $regex: keyword, $options: "i" } },
             ],
         })
             .select("-images")
-            .populate("category");
-        res.json(results);
+            .populate("category")
+            .sort({ createdAt: -1 });
+
+        // Convert the 'value' field to HTML tag excluded and shortened form
+        const sanitizedPosts = posts.map((post) => {
+            return {
+                ...post._doc,
+                value: removeHtmlandShorten(post.value),
+            };
+        });
+
+        res.json(sanitizedPosts);
     } catch (err) {
         console.log(err);
     }
@@ -195,13 +214,21 @@ export const listPosts = async (req, res) => {
         const perPage = 6;
         const page = req.params.page ? req.params.page : 1;
 
-        const post = await BlogPost.find({})
+        const posts = await BlogPost.find({})
             .select("-images")
             .skip((page - 1) * perPage)
             .limit(perPage)
             .sort({ createdAt: -1 });
 
-        res.json(post);
+        // Convert the 'value' field to HTML tag excluded and shortened form
+        const sanitizedPosts = posts.map((post) => {
+            return {
+                ...post._doc,
+                value: removeHtmlandShorten(post.value),
+            };
+        });
+
+        res.json(sanitizedPosts);
     } catch (err) {
         console.log(err);
     }
