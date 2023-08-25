@@ -73,7 +73,7 @@ export default function UserBtns({ userType, handleLogout }) {
                     <button
                         style={{
                             border: "none",
-                            marginTop: "5vh",
+                            marginTop: "3vh",
                             backgroundColor: "transparent",
                             fontWeight: "500",
                         }}

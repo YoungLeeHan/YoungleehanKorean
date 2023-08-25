@@ -26,6 +26,26 @@ export const userMenuData = [
     },
 ];
 
+export const testerWelcomeText = `
+    Welcome! 👋
+    <br /><br />
+    For the optimal website experience, we invite you to log in using the following user credentials. Feel free to utilize a dummy card to simulate a purchase and explore all that we have to offer!
+    <br />
+    <br />
+    <b>✅ User Info:</b>
+    <br />• Email: ylh.user@gmail.com
+    <br />• Pw: abcABC7@
+    <br />
+    <br />
+    <b>✅ Dummy Credit Card:</b>
+    <br />
+    • Card#: 371449635398431
+    <br />
+    • Exp Date: 12/23
+    <br />
+    • CVV: 1234
+`;
+
 export const adminMenuData = [
     { _id: 0, name: "Dashboard", link: "admin", icon: BsClipboard },
     {
