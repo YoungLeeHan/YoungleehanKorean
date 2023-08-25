@@ -101,7 +101,7 @@ export const customerTypesData = [
         image: learnerSVG,
         msg: "I still struggle with verb endings after 3 years of learning.",
         subMsg: "Our materials will train your brain to grab the correct ending for the context of the sentence.",
-        link: "/about",
+        link: "/ourstory",
     },
     {
         _id: 2,
@@ -109,7 +109,7 @@ export const customerTypesData = [
         image: parentsSVG,
         msg: "It’s hard to get my kids excited about learning Korean with boring materials.",
         subMsg: "Our materials are interactive and thought-provoking, improving retention of the subject.",
-        link: "/about",
+        link: "/ourstory",
     },
     {
         _id: 3,
@@ -117,7 +117,28 @@ export const customerTypesData = [
         image: teacherSVG,
         msg: "I want to give my students practice exercises, but I don't have enough time to make them.",
         subMsg: "Our materials are loaded with exercises for each grammar point and each exercise includes an explanation of the context.",
-        link: "/about",
+        link: "/ourstory",
+    },
+];
+
+export const studentReviewsData = [
+    {
+        _id: 1,
+        name: "Danbi C***",
+        image: "https://as2.ftcdn.net/v2/jpg/05/34/48/37/1000_F_534483775_2hBgOxryd3El6t3tKOtbcM95Yq3OmTGG.jpg",
+        msg: "Youngleehan Korean provides an engaging and interactive approach to mastering the Korean language.",
+    },
+    {
+        _id: 2,
+        name: "Young S***",
+        image: "https://thumbs.dreamstime.com/b/cute-funny-cat-shower-cap-different-accessories-bathing-white-background-218410264.jpg",
+        msg: "Using the Youngleehan Korean's materials feels like having a personal guide through the rich tapestry of the Korean language.",
+    },
+    {
+        _id: 3,
+        name: "May K**",
+        image: "https://excitedcats.com/wp-content/uploads/2020/06/shutterstock_1151891519-copy-1024x683.jpg",
+        msg: "These materials offer clear explanations and practical exercises that boost confidence and fluency.",
     },
 ];
 
