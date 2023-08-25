@@ -6,6 +6,9 @@ import cors from "cors";
 import passport from "passport";
 import session from "express-session";
 import path from "path";
+//multer
+import multer from 'multer';
+
 
 // Import custom routes
 import authRoutes from "./routes/auth.js";
@@ -46,6 +49,8 @@ const applyCOOP = (req, res, next) => {
     res.setHeader("Cross-Origin-Opener-Policy", "cross-origin");
     next();
 };
+
+
 
 // middlewares
 app.use(applyCOOP);
