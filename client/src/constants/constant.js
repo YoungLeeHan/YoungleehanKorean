@@ -7,6 +7,9 @@ import {
     AiOutlineLock,
 } from "react-icons/ai";
 import { BsClipboard } from "react-icons/bs";
+import learnerSVG from "../assets/images/Home/customer_learner.svg";
+import parentsSVG from "../assets/images/Home/customer_parents.svg";
+import teacherSVG from "../assets/images/Home/customer_teacher.svg";
 
 export const mobileWidth = 767;
 
@@ -23,6 +26,7 @@ export const userMenuData = [
     },
     { _id: 3, name: "My Order", link: "user/orders", icon: AiOutlineShopping },
 ];
+
 export const adminMenuData = [
     { _id: 0, name: "Dashboard", link: "admin", icon: BsClipboard },
     {
@@ -66,6 +70,75 @@ export const adminMenuData = [
         name: "View blog posts",
         link: "admin/blog/list",
         icon: AiOutlineUnorderedList,
+    },
+];
+
+export const worksheetTextData = [
+    {
+        _id: 1,
+        title: "Fun subjects",
+        description:
+            "As a teacher of kids and adults, I have seen that students learn the best when having fun. My materials explore Korean through age-appropriate, entertaining subjects.",
+    },
+    {
+        _id: 2,
+        title: "Practical Language",
+        description:
+            "Officia id occaecat qui ea qui nisi occaecat id commodo irure est nostrud reprehenderit mollit. Veniam exercitation magna quis eu anim ea reprehenderit enim veniam.",
+    },
+    {
+        _id: 3,
+        title: "Accuracy",
+        description:
+            "Mollit duis fugiat tempor laboris pariatur sint cillum. Excepteur culpa minim qui ad pariatur id qui eu. Proident duis minim cupidatat est aliquip eu duis do nostrud laborum commodo sit.",
+    },
+];
+
+export const customerTypesData = [
+    {
+        _id: 1,
+        name: "Language Learners",
+        image: learnerSVG,
+        msg: "I still struggle with verb endings after 3 years of learning.",
+        subMsg: "Our materials will train your brain to grab the correct ending for the context of the sentence.",
+        link: "/ourstory",
+    },
+    {
+        _id: 2,
+        name: "Parents",
+        image: parentsSVG,
+        msg: "It’s hard to get my kids excited about learning Korean with boring materials.",
+        subMsg: "Our materials are interactive and thought-provoking, improving retention of the subject.",
+        link: "/ourstory",
+    },
+    {
+        _id: 3,
+        name: "Korean Teachers",
+        image: teacherSVG,
+        msg: "I want to give my students practice exercises, but I don't have enough time to make them.",
+        subMsg: "Our materials are loaded with exercises for each grammar point and each exercise includes an explanation of the context.",
+        link: "/ourstory",
+    },
+];
+
+export const studentReviewsData = [
+    {
+        _id: 1,
+        name: "Danbi C***",
+        image: "https://as2.ftcdn.net/v2/jpg/05/34/48/37/1000_F_534483775_2hBgOxryd3El6t3tKOtbcM95Yq3OmTGG.jpg",
+        msg: "Youngleehan Korean provides an engaging and interactive approach to mastering the Korean language.",
+    },
+    {
+        _id: 2,
+        name: "Young S***",
+        image: "https://thumbs.dreamstime.com/b/cute-funny-cat-shower-cap-different-accessories-bathing-white-background-218410264.jpg",
+        msg: "Using the Youngleehan Korean's materials feels like having a personal guide through the rich tapestry of the Korean language.",
+    },
+    {
+        _id: 3,
+        name: "May K**",
+        image: "https://excitedcats.com/wp-content/uploads/2020/06/shutterstock_1151891519-copy-1024x683.jpg",
+        msg: "These materials offer clear explanations and practical exercises that boost confidence and fluency.",
     },
 ];
 

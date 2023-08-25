@@ -1,19 +1,25 @@
 // 👻 Developed by DanBi Choi on July 19th, 2023.
 // -----------------------------------------------------
 
+import { mobileWidth } from "./../../constants/constant";
+import useWindowWidth from "./../../hooks/useWindowWidth";
+
 export default function Jumbotron({
     title,
     directory = null,
     subDirectory = null,
 }) {
+    //hooks
+    const windowWidth = useWindowWidth();
+
     const highlightedStyle = {
         color: "#ffbf35",
-        fontSize: "16px",
+        fontSize: windowWidth < mobileWidth ? "14px" : "16px",
         fontWeight: "400",
     };
     const defaultStyle = {
         color: "#706866",
-        fontSize: "16px",
+        fontSize: windowWidth < mobileWidth ? "14px" : "16px",
         fontWeight: "400",
     };
 
@@ -30,7 +36,8 @@ export default function Jumbotron({
                     <h1
                         style={{
                             fontWeight: "700",
-                            fontSize: "32px",
+                            fontSize:
+                                windowWidth < mobileWidth ? "28px" : "32px",
                             padding: "43px 0 15px 0",
                         }}
                     >

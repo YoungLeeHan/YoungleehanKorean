@@ -14,8 +14,9 @@ export default function NavList() {
 
     const linkData = [
         { name: "Home", linkTo: "/" },
-        { name: "About", linkTo: "/about" },
         { name: "Shop", linkTo: "/shop" },
+        { name: "Creator", linkTo: "/creator" },
+        { name: "Our Story", linkTo: "/ourstory" },
         { name: "Blog", linkTo: "/blog" },
         { name: "Contact", linkTo: "/contact" },
     ];
@@ -27,7 +28,7 @@ export default function NavList() {
             } justify-content-between align-items-center`}
             style={
                 windowWidth > desktopWidth
-                    ? { margin: "0 5.2vw" }
+                    ? { margin: "0 1vw" }
                     : { margin: "15vh 0" }
             }
         >

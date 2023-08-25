@@ -1,45 +1,26 @@
 // 👻 Developed by DanBi Choi on Aug 15th, 2023.
 // 👻 Developed by DanBi Choi on Aug 18th, 2023. (Blog section updated)
 // -----------------------------------------------------
-import "../styles/pages/AboutCreator.scss";
+import "../styles/pages/Creator.scss";
 import Jumbotron from "../components/cards/Jumbotron";
 import useScrollToTop from "../hooks/useScrollToTop";
-import purpleBadge from "../assets/images/About/purpleBadge.svg";
-import yellowBadge from "../assets/images/About/yellowBadge.svg";
+import purpleBadge from "../assets/images/Creator/purpleBadge.svg";
+import yellowBadge from "../assets/images/Creator/yellowBadge.svg";
 import AboutBadge from "../components/cards/AboutBadge";
-import useWindowWidth from "./../hooks/useWindowWidth";
-import catImg from "./../assets/images/About/cat_square.jpg";
+import useWindowWidth from "../hooks/useWindowWidth";
+import catImg from "./../assets/images/Creator/cat_square.jpg";
 import { mobileWidth } from "../constants/constant";
-import BlogPostCardVertical from "../components/cards/BlogPostCardVertical";
-import TitleCard from "../components/cards/TitleCard";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import BlogVerticalSummary from "../components/common/BlogVerticalSummary";
 
-export default function AboutCreator() {
+export default function Creator() {
     //hooks
     useScrollToTop();
     const windowWidth = useWindowWidth();
 
-    //states
-    const [blogList, setBlogList] = useState([]);
-
-    useEffect(() => {
-        loadBlogPosts();
-    }, []);
-
-    const loadBlogPosts = async () => {
-        try {
-            const { data } = await axios.get(`/blog/list?limit=4`);
-            setBlogList(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
     return (
         <>
             <Jumbotron
-                title={"About Creator"}
+                title={"Creator"}
                 directory={"About"}
                 subDirectory={"Creator"}
             />
@@ -105,31 +86,7 @@ export default function AboutCreator() {
                         </div>
                     </div>
                 </div>
-                <section
-                    className="blog d-flex flex-column align-items-center"
-                    style={{ width: "100%", marginBottom: "30px" }}
-                >
-                    <TitleCard
-                        sectionTitle={"Blog"}
-                        barWidth={"80px"}
-                        mainTitle1={"Stories"}
-                        mainTitle2={"& More"}
-                        subParagraph={
-                            "YoungLeeHan’s editors dish about Korean culture and drop some Korean language knowledge."
-                        }
-                    />
-                    <div className="row" style={{ width: "100%" }}>
-                        {blogList &&
-                            blogList.map((post) => (
-                                <div
-                                    className="col-md-3 d-flex flex-column justify-content-between align-items-center"
-                                    key={post._id}
-                                >
-                                    <BlogPostCardVertical post={post} />
-                                </div>
-                            ))}
-                    </div>
-                </section>
+                <BlogVerticalSummary />
             </div>
         </>
     );

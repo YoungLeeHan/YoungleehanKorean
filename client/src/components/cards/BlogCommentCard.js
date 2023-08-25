@@ -7,7 +7,7 @@ import { MdOutlineDateRange } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
 import { useAuth } from "../../context/auth";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Modal, ConfigProvider } from "antd";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import ModalInfo from "./../common/ModalInfo";

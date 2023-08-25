@@ -1,7 +1,12 @@
 // 👻 Developed by DanBi Choi on Aug 15th, 2023.
 // -----------------------------------------------------
+import { mobileWidth } from "../../constants/constant";
+import useWindowWidth from "../../hooks/useWindowWidth";
 
 export default function AboutBadge({ badgeType, text, numberText }) {
+    //hooks
+    const windowWidth = useWindowWidth();
+
     return (
         <div className="badge-box d-flex flex-row justify-content-center align-items-center">
             <img src={badgeType} alt="purpleBadge" style={{ zIndex: "5" }} />
@@ -18,7 +23,7 @@ export default function AboutBadge({ badgeType, text, numberText }) {
             >
                 <h3
                     style={{
-                        fontSize: "16px",
+                        fontSize: windowWidth < mobileWidth ? "14px" : "16px",
                         color: "#706866",
                     }}
                 >
@@ -26,7 +31,7 @@ export default function AboutBadge({ badgeType, text, numberText }) {
                 </h3>
                 <h1
                     style={{
-                        fontSize: "32px",
+                        fontSize: windowWidth < mobileWidth ? "28px" : "32px",
                         fontWeight: "600",
                         marginLeft: "17px",
                     }}

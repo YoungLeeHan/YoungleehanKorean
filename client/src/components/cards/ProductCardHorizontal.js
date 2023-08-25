@@ -2,11 +2,12 @@
 // 👻 Developed by DanBi Choi on July 29th, 2023. (Add To Cart Button)
 // 👻 Developed by DanBi Choi on Aug 20th, 2023. (Add To Cart Modulized)
 // -----------------------------------------------------
-import { useNavigate } from "react-router-dom";
 import "../../styles/components/cards/ProductCardHorizontal.scss";
+import { useNavigate } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import useAddToCart from "../../hooks/useAddToCart";
+import { mobileWidth } from "../../constants/constant";
 
 export default function ProductCardHorizontal({ product, modify = false }) {
     // hooks
@@ -34,27 +35,28 @@ export default function ProductCardHorizontal({ product, modify = false }) {
             </div>
             <div className="text d-flex flex-column justify-content-between align-items-start">
                 <h2>{product?.category?.name}</h2>
-                <h3 onClick={handleLinkClick}>
-                    {windowWidth > 450 &&
-                        (product?.title?.length > 35
-                            ? product?.title?.substring(0, 35) + "..."
-                            : product?.title)}
-                    {windowWidth < 450 &&
-                        (product?.title?.length > 25
-                            ? product?.title?.substring(0, 25) + "..."
-                            : product?.title)}
-                </h3>
-                <h5 onClick={handleLinkClick}>
-                    {windowWidth > 1200 &&
-                        (product?.description?.length > 140
-                            ? product?.description.substring(0, 140) + "..."
-                            : product?.description)}
-                    {windowWidth < 1200 &&
-                        (product?.description?.length > 70
-                            ? product?.description.substring(0, 70) + "..."
-                            : product?.description)}
-                </h5>
-
+                <div className="product-description" onClick={handleLinkClick}>
+                    <h3
+                        style={{
+                            fontSize:
+                                windowWidth < mobileWidth ? "16px" : "20px",
+                        }}
+                    >
+                        {product?.title?.length > 35
+                            ? product.title.substring(0, 35) + "..."
+                            : product.title}{" "}
+                    </h3>
+                    <h5
+                        style={{
+                            fontSize:
+                                windowWidth < mobileWidth ? "14px" : "16px",
+                        }}
+                    >
+                        {product?.description?.length > 80
+                            ? product.description.substring(0, 80) + "..."
+                            : product.description}
+                    </h5>
+                </div>
                 <div
                     className="text-bottom d-flex flex-row justify-content-between align-items-center"
                     style={{ width: "100%" }}

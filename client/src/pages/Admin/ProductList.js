@@ -4,12 +4,14 @@ import Jumbotron from "../../components/cards/Jumbotron";
 import DashboardMenu from "../../components/nav/DashboardMenu";
 import axios from "axios";
 import ProductCardHorizontal from "./../../components/cards/ProductCardHorizontal";
+import useScrollToTop from "./../../hooks/useScrollToTop";
 
 export default function ProductList() {
-    // context
+    // hooks
     const [auth, setAuth] = useAuth();
+    useScrollToTop();
 
-    // state
+    // states
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -33,7 +35,7 @@ export default function ProductList() {
                 subDirectory={"View Products"}
             />
             <div style={{ maxWidth: "1170px" }} className="container-fluid">
-                <div className="row">
+                <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
                         <DashboardMenu id={4} menutype={"admin"} />
                     </div>

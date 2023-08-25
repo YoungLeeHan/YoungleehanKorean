@@ -9,24 +9,24 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Select } from "antd";
 import { editorModules, editorFormats } from "../../constants/constant";
+import useScrollToTop from "./../../hooks/useScrollToTop";
 
 const { Option } = Select;
 
 export default function BlogUpdate() {
-    // context
+    //hooks
     const [auth, setAuth] = useAuth();
+    const navigate = useNavigate();
+    const params = useParams();
+    useScrollToTop();
 
-    // state
+    // states
     const [categories, setCategories] = useState([]);
     const [title, setTitle] = useState("");
     const [value, setValue] = useState("");
     const [category, setCategory] = useState("");
     const [images, setImages] = useState("");
     const [id, setId] = useState("");
-
-    //hook
-    const navigate = useNavigate();
-    const params = useParams();
 
     // fetch blog category list from DB
     useEffect(() => {
@@ -112,7 +112,7 @@ export default function BlogUpdate() {
                 subDirectory={"Create Blog Post"}
             />
             <div style={{ maxWidth: "1170px" }} className="container-fluid">
-                <div className="row">
+                <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
                         <DashboardMenu id={6} menutype={"admin"} />
                     </div>

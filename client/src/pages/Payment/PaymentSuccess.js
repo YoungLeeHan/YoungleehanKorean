@@ -4,10 +4,10 @@ import Jumbotron from "../../components/cards/Jumbotron";
 import useScrollToTop from "../../hooks/useScrollToTop";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import SuccessSVG from "../../assets/images/Checkout/PaymentSuccess.svg";
-import axios from "axios";
 import { useAuth } from "../../context/auth";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import useWindowWidth from "./../../hooks/useWindowWidth";
+import { mobileWidth } from "../../constants/constant";
 
 export default function PaymentSuccess() {
     useScrollToTop();
@@ -18,23 +18,10 @@ export default function PaymentSuccess() {
     const windowWidth = useWindowWidth();
     const params = useParams();
 
-    //state
-    const [orderId, setOrderId] = useState();
-
     // redirect anonymous user
     useEffect(() => {
         if (!auth?.token) navigate("/login");
-        if (auth?.token) getOrderNumber();
     }, []);
-
-    const getOrderNumber = async () => {
-        try {
-            const { data } = await axios.get(`/recent-order`);
-            setOrderId(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
 
     return (
         <>
@@ -50,7 +37,8 @@ export default function PaymentSuccess() {
                     <img src={SuccessSVG} alt="Successful" />
                     <h1
                         style={{
-                            fontSize: "32px",
+                            fontSize:
+                                windowWidth < mobileWidth ? "20px" : "32px",
                             color: "#7B1FA2",
                             fontWeight: "600",
                             margin: "0",
@@ -63,7 +51,8 @@ export default function PaymentSuccess() {
                         style={{
                             margin: "25px 0",
                             color: "#706866",
-                            fontSize: "20px",
+                            fontSize:
+                                windowWidth < mobileWidth ? "14px" : "20px",
                         }}
                     >
                         Your order #{params.orderNumber} was successfully
