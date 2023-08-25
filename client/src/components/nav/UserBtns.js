@@ -20,7 +20,9 @@ export default function UserBtns({ userType, handleLogout }) {
     if (userType === "loggedIn") {
         btn1 = {
             name: "My Page",
-            linkTo: `/dashboard/${auth.user.role === 1 ? "admin" : "user"}`,
+            linkTo: `/dashboard/${
+                auth.user.role === 1 ? "admin" : "user/orders"
+            }`,
         };
         btn2 = { name: "My Order", linkTo: "/dashboard/user/orders" };
     } else if (userType === "anonymous") {

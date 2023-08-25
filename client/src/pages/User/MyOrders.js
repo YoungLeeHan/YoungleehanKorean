@@ -8,9 +8,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import MyOrderCard from "../../components/cards/MyOrderCard";
 import loadingGIF from "../../assets/images/Common/loading.gif";
-import useScrollToTop from "./../../hooks/useScrollToTop";
+import useScrollToTop from "../../hooks/useScrollToTop";
 
-export default function UserOrders() {
+export default function MyOrders() {
     //hooks
     const [auth, setAuth] = useAuth();
     useScrollToTop();
@@ -56,7 +56,7 @@ export default function UserOrders() {
             >
                 <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
-                        <DashboardMenu id={3} />
+                        <DashboardMenu id={0} />
                     </div>
                     <div className="col-md-9">
                         {isLoading && (

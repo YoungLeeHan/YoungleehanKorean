@@ -14,7 +14,6 @@ import ForgotPassword from "./pages/Auth/ForgotPassword";
 import Verification from "./pages/Auth/Verification";
 import NewPassword from "./pages/Auth/NewPassword";
 import Contact from "./pages/Contact";
-import Dashboard from "./pages/User/Dashboard";
 import PrivateRoute from "./components/routes/PrivateRoute";
 import AdminDashboard from "./pages/Admin/Dashboard";
 import AdminRoute from "./components/routes/AdminRoute";
@@ -22,7 +21,7 @@ import AdminProductCreate from "./pages/Admin/ProductCreate";
 import AdminProductList from "./pages/Admin/ProductList";
 import AdminProductCategory from "./pages/Admin/ProductCategory";
 import AdminProductAgeCategory from "./pages/Admin/ProductAgeCategory";
-import UserOrders from "./pages/User/Orders";
+import MyOrders from "./pages/User/MyOrders";
 import UserProfile from "./pages/User/UserProfile";
 import ChangePassword from "./pages/User/ChangePassword";
 import Cart from "./pages/Cart";
@@ -86,13 +85,12 @@ export default function App() {
 
                 {/*user dashboard*/}
                 <Route path="/dashboard" element={<PrivateRoute />}>
-                    <Route path="user" element={<Dashboard />} />
                     <Route path="user/profile" element={<UserProfile />} />
                     <Route
                         path="user/profile/password"
                         element={<ChangePassword />}
                     />
-                    <Route path="user/orders" element={<UserOrders />} />
+                    <Route path="user/orders" element={<MyOrders />} />
                 </Route>
 
                 {/*admin dashboard*/}

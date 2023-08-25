@@ -25,6 +25,7 @@ export default function BlogPostCardHorizontal({ post, modify = false }) {
             className="card-container"
             style={{
                 height: windowWidth < mobileWidth ? "400px" : "240px",
+                cursor: "pointer",
             }}
             onClick={handleLinkClick}
         >

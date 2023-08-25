@@ -83,7 +83,7 @@ export default function Header() {
                                                 to={`/dashboard/${
                                                     auth?.user?.role === 1
                                                         ? "admin"
-                                                        : "user"
+                                                        : "user/orders"
                                                 }`}
                                             >
                                                 Dashboard

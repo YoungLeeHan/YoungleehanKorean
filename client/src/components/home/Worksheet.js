@@ -42,7 +42,7 @@ export default function Worksheet() {
                 }}
                 onClick={(e) => {
                     e.preventDefault();
-                    navigate("/outstory");
+                    navigate("/ourstory");
                 }}
             >
                 See More &nbsp;&nbsp;

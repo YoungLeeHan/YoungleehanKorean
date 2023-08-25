@@ -6,20 +6,20 @@ import useWindowWidth from "./../../hooks/useWindowWidth";
 import { useNavOverlay } from "../../context/navOverlay";
 import { desktopWidth } from "../../constants/constant";
 
+const linkData = [
+    { name: "Home", linkTo: "/" },
+    { name: "Shop", linkTo: "/shop" },
+    { name: "Creator", linkTo: "/creator" },
+    { name: "Our Story", linkTo: "/ourstory" },
+    { name: "Blog", linkTo: "/blog" },
+    { name: "Contact", linkTo: "/contact" },
+];
+
 export default function NavList() {
     //hooks
     const windowWidth = useWindowWidth();
     const [isNavOverlay, setIsNavOverlay] = useNavOverlay();
     const navigate = useNavigate();
-
-    const linkData = [
-        { name: "Home", linkTo: "/" },
-        { name: "Shop", linkTo: "/shop" },
-        { name: "Creator", linkTo: "/creator" },
-        { name: "Our Story", linkTo: "/ourstory" },
-        { name: "Blog", linkTo: "/blog" },
-        { name: "Contact", linkTo: "/contact" },
-    ];
 
     return (
         <ul
