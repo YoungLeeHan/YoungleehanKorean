@@ -27,5 +27,5 @@ export default function AdminRoute() {
         if (auth?.token) adminCheck();
     }, [auth?.token]);
 
-    return ok ? <Outlet /> : <Loading path="dashboard/user" />;
+    return ok ? <Outlet /> : <Loading path="dashboard/user/orders" />;
 }

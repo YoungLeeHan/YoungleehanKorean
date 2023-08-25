@@ -20,7 +20,7 @@ export default function Login() {
     // redirect to user dashboard if user is logged in
     useEffect(() => {
         if (auth?.token) {
-            navigate("/dashboard/user");
+            navigate("/dashboard/user/orders");
         }
     }, []);
 

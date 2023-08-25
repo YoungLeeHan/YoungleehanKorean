@@ -31,15 +31,19 @@ export default function ChangePassword() {
     }, []);
 
     const handleInput = (label, value) => {
-        switch (label) {
-            case "Current Password":
-                return setCurrentPassword(value);
-            case "New Password":
-                return setNewPassword(value);
-            case "Confirm Password":
-                return setConfirmPassword(value);
-            default:
-                return;
+        if (auth?.user._id === "64e7ee099ce707dadab29262") {
+            toast.error("Test user cannot change password.");
+        } else {
+            switch (label) {
+                case "Current Password":
+                    return setCurrentPassword(value);
+                case "New Password":
+                    return setNewPassword(value);
+                case "Confirm Password":
+                    return setConfirmPassword(value);
+                default:
+                    return;
+            }
         }
     };
     const handleSubmit = async (e) => {

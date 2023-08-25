@@ -46,7 +46,7 @@ export default function LoginForm() {
                     navigate(
                         location.state ||
                             `/dashboard/${
-                                data?.user?.role === 1 ? "admin" : "user"
+                                data?.user?.role === 1 ? "admin" : "user/orders"
                             }`
                     );
                 }
