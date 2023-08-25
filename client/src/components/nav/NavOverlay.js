@@ -7,13 +7,11 @@ import { IoClose } from "react-icons/io5";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { useNavOverlay } from "../../context/navOverlay";
 import { useAuth } from "../../context/auth";
-import { NavLink } from "react-router-dom";
 
 export default function NavOverlay({ handleLogout }) {
     //hooks
     const [auth, setAuth] = useAuth();
     const [isNavOverlay, setIsNavOverlay] = useNavOverlay();
-    const windowWidth = useWindowWidth();
 
     return (
         <div className="NavOverlay-box d-flex flex-column justify-content-between align-items-center">
@@ -24,8 +22,8 @@ export default function NavOverlay({ handleLogout }) {
                     padding: "5px",
                     margin: "5px",
                     position: "fixed",
-                    top: "0",
-                    right: "0",
+                    top: "10",
+                    right: "10",
                     cursor: "pointer",
                 }}
                 onClick={(e) => {

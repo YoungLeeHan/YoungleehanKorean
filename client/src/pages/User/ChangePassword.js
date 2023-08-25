@@ -89,7 +89,13 @@ export default function ChangePassword() {
                         <DashboardMenu id={2} />
                     </div>
                     <div className="col-md-9">
-                        <div className="profile-box">
+                        <div
+                            className="profile-box"
+                            style={{
+                                marginTop:
+                                    windowWidth < mobileWidth ? "15px" : "",
+                            }}
+                        >
                             <div
                                 className={`profile-box-title d-flex ${
                                     windowWidth < mobileWidth
@@ -138,6 +144,27 @@ export default function ChangePassword() {
                                         handleInput={handleInput}
                                         required={true}
                                     />
+                                </li>
+                                <li>
+                                    <h4
+                                        style={{
+                                            color: "#7b1fa2",
+                                            textAlign: "start",
+                                            fontSize: "14px",
+                                            fontWeight: "500",
+                                        }}
+                                    >
+                                        Password must contain the following:
+                                        <ul className="pw-list">
+                                            <li>• Minimum 6 characters</li>
+                                            <li>
+                                                • A uppercase and lowercase
+                                                letter
+                                            </li>
+                                            <li>• A number</li>
+                                            <li>• A special character</li>
+                                        </ul>
+                                    </h4>
                                 </li>
                                 <button
                                     className="btn btn-primary"

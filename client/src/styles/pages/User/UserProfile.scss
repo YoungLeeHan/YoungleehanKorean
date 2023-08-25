@@ -82,4 +82,16 @@
             }
         }
     }
+
+    .pw-list {
+        margin: 8px 0 20px 0;
+
+        li {
+            list-style-type: disc;
+            list-style-position: outside;
+            color: $color-gray;
+            font-size: $desktop-font-small;
+            font-weight: 400;
+        }
+    }
 }

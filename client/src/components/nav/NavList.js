@@ -29,7 +29,7 @@ export default function NavList() {
             style={
                 windowWidth > desktopWidth
                     ? { margin: "0 1vw" }
-                    : { margin: "15vh 0" }
+                    : { margin: "12vh 0 8vh 0" }
             }
         >
             {linkData.map((data, i) => (
