@@ -1,6 +1,6 @@
 import express from "express";
-import formidable from "express-formidable";
-
+// import multer from "multer";
+import { upload } from "../helpers/filehelper.js";
 const router = express.Router();
 
 //middlewares
@@ -11,14 +11,21 @@ import {
     reviewCreate,
     reviewUpdate,
     reviewRemove,
-    reviewImages,
 } from "../controllers/review.js";
 
 router.get("/review/:productId", reviewList);
-router.post("/review", requireSignin, reviewCreate);
-router.put("/review/:id", requireSignin, reviewUpdate);
+router.post(
+    "/review",
+    requireSignin,
+    upload.array("reviewImages", 5),
+    reviewCreate
+);
+router.put(
+    "/review/:id",
+    requireSignin,
+    upload.array("reviewImages", 5),
+    reviewUpdate
+);
 router.delete("/review/:id", requireSignin, reviewRemove);
-
-router.get("/:productId/review/images", reviewImages);
 
 export default router;

@@ -62,10 +62,14 @@ app.use("/api", productRoutes);
 app.use("/api/blog/comment", blogCommentRoutes);
 app.use("/api/blog/category", blogCategoryRoutes);
 app.use("/api/blog", blogPostRoutes);
-app.use("/api", reviewRoutes);
 app.use("/api", checkoutRoutes);
 app.use("/api", userOrderRoutes);
 
+//review
+app.use("/api", reviewRoutes);
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+//google
 app.use("/auth", authGoogle);
 app.use("/index", indexGoogle);
 
