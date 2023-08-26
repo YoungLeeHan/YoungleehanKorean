@@ -10,18 +10,7 @@ const reviewSchema = new mongoose.Schema(
             required: [true, "Product is required"],
         },
         rating: { type: Number, required: true },
-        singleFiles: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "SingleFile",
-            },
-        ],
-        multipleFiles: [
-            {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "MultipleFile",
-            },
-        ],
+        uploadedImagesPath: [{ type: String }],
     },
 
     { collection: "reviews", timestamps: true }
