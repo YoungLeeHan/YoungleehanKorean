@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import TitleCard from "../cards/TitleCard";
 import axios from "axios";
-import loadingGIF from "../../assets/images/Common/loading.gif";
 import ProductCardVertical from "../cards/ProductCardVertical";
+import Loading from "./Loading";
 
 export default function ShopVerticalSummary() {
     //states
@@ -40,21 +40,7 @@ export default function ShopVerticalSummary() {
                 }
             />
             <div className="row" style={{ width: "100%" }}>
-                {isShopListLoading && (
-                    <div
-                        className="d-flex justify-content-center"
-                        style={{ margin: "200px 0" }}
-                    >
-                        <img
-                            src={loadingGIF}
-                            alt="Loading"
-                            style={{
-                                width: "50px",
-                                height: "50px",
-                            }}
-                        />
-                    </div>
-                )}
+                {isShopListLoading && <Loading />}
                 {!isShopListLoading &&
                     shopList &&
                     shopList.map((item) => (

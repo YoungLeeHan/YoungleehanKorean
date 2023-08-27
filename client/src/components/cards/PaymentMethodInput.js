@@ -7,8 +7,8 @@ import axios from "axios";
 import DropIn from "braintree-web-drop-in-react";
 import toast from "react-hot-toast";
 import useWindowWidth from "../../hooks/useWindowWidth";
-import loadingGIF from "../../assets/images/Common/loading.gif";
 import { mobileWidth } from "../../constants/constant";
+import Loading from "../common/Loading";
 
 export default function PaymentMethodInput() {
     //hooks
@@ -70,17 +70,7 @@ export default function PaymentMethodInput() {
             <div
                 style={windowWidth < mobileWidth ? { margin: "70px 0" } : null}
             >
-                {!clientToken && (
-                    <img
-                        src={loadingGIF}
-                        alt="Loading..."
-                        style={{
-                            width: "50px",
-                            height: "50px",
-                            margin: "100px",
-                        }}
-                    />
-                )}
+                {!clientToken && <Loading />}
                 {clientToken && (
                     <DropIn
                         options={{

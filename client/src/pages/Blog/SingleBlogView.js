@@ -7,11 +7,11 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import moment from "moment";
-import loadingGIF from "../../assets/images/Common/loading.gif";
 import { MdOutlineDateRange } from "react-icons/md";
 import { AiOutlineUser } from "react-icons/ai";
 import BlogCommentForm from "../../components/forms/BlogCommentForm";
 import BlogCommentCard from "../../components/cards/BlogCommentCard";
+import Loading from "../../components/common/Loading";
 
 export default function SingleBlogView() {
     useScrollToTop();
@@ -71,21 +71,7 @@ export default function SingleBlogView() {
                         className="post-box col-md-12"
                         style={{ margin: "75px 0" }}
                     >
-                        {isLoading && (
-                            <div
-                                className="d-flex justify-content-center"
-                                style={{ margin: "200px 0" }}
-                            >
-                                <img
-                                    src={loadingGIF}
-                                    alt="Loading"
-                                    style={{
-                                        width: "50px",
-                                        height: "50px",
-                                    }}
-                                />
-                            </div>
-                        )}
+                        {isLoading && <Loading />}
                         <div className="img-box" style={{ width: "100%" }}>
                             {!isLoading && (
                                 <img
