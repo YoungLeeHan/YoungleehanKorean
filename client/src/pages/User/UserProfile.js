@@ -16,9 +16,9 @@ import {
     usStatesList,
     mobileWidth,
 } from "../../constants/constant";
-import loadingGIF from "../../assets/images/Common/loading.gif";
 import ModalInfo from "../../components/common/ModalInfo";
 import useScrollToTop from "../../hooks/useScrollToTop";
+import Loading from "../../components/common/Loading";
 
 export default function UserProfile() {
     // hooks
@@ -151,21 +151,7 @@ export default function UserProfile() {
                         <DashboardMenu id={1} />
                     </div>
                     <div className="col-md-9">
-                        {isLoading && (
-                            <div
-                                className="d-flex justify-content-center"
-                                style={{ margin: "200px 0" }}
-                            >
-                                <img
-                                    src={loadingGIF}
-                                    alt="Loading"
-                                    style={{
-                                        width: "50px",
-                                        height: "50px",
-                                    }}
-                                />
-                            </div>
-                        )}
+                        {isLoading && <Loading />}
                         {!isLoading && (
                             <div
                                 className="profile-box"

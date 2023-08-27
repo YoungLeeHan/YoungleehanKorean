@@ -25,7 +25,6 @@ export default function AdminProductCreate() {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
-    const [downloadUrl, setDownloadUrl] = useState("");
 
     useEffect(() => {
         loadCategories();
@@ -63,7 +62,6 @@ export default function AdminProductCreate() {
             productData.append("price", price);
             productData.append("category", category);
             productData.append("ageCategory", ageCategory);
-            productData.append("downloadUrl", downloadUrl);
 
             const { data } = await axios.post("/product", productData);
             if (data?.error) {
@@ -181,13 +179,6 @@ export default function AdminProductCreate() {
                                 ))}
                             </Select>
 
-                            <input
-                                type="text"
-                                className="form-control p-2 mb-3"
-                                placeholder="Enter download URL"
-                                value={downloadUrl}
-                                onChange={(e) => setDownloadUrl(e.target.value)}
-                            />
                             <button
                                 onClick={handleSubmit}
                                 className="btn btn-primary mb-5"

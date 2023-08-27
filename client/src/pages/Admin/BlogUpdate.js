@@ -97,7 +97,7 @@ export default function BlogUpdate() {
             if (!answer) return;
             const { data } = await axios.delete(`/blog/${id}`);
             toast.success(`"${data.title}" is deleted`);
-            navigate("/dashboard/admin/blog");
+            navigate("/dashboard/admin/blog/list");
         } catch (err) {
             console.log(err);
             toast.error("Delete failed. Try again.");

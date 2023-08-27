@@ -13,8 +13,8 @@ import { Col, Row, Checkbox, ConfigProvider } from "antd";
 import BlogPostCardHorizontal from "../../components/cards/BlogPostCardHorizontal";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
-import loadingGIF from "../../assets/images/Common/loading.gif";
 import { mobileWidth } from "../../constants/constant";
+import Loading from "../../components/common/Loading";
 
 export default function BlogView() {
     useScrollToTop();
@@ -220,21 +220,7 @@ export default function BlogView() {
                             )}
                         </div>
                         <div className="col-md-9">
-                            {isLoading && (
-                                <div
-                                    className="d-flex justify-content-center"
-                                    style={{ margin: "200px 0" }}
-                                >
-                                    <img
-                                        src={loadingGIF}
-                                        alt="Loading"
-                                        style={{
-                                            width: "50px",
-                                            height: "50px",
-                                        }}
-                                    />
-                                </div>
-                            )}
+                            {isLoading && <Loading />}
                             {blogList?.length > 0 &&
                                 !isLoading &&
                                 blogList?.map((post) => (

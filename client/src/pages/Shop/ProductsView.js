@@ -12,8 +12,8 @@ import { BsSearch } from "react-icons/bs";
 import { Col, Row, Checkbox, ConfigProvider, Slider } from "antd";
 import ProductCardHorizontal from "../../components/cards/ProductCardHorizontal";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
-import loadingGIF from "../../assets/images/Common/loading.gif";
 import { mobileWidth } from "../../constants/constant";
+import Loading from "../../components/common/Loading";
 
 export default function ProductsView() {
     useScrollToTop();
@@ -415,21 +415,7 @@ export default function ProductsView() {
                                     </li>
                                 </div>
                             </div>
-                            {isLoading && (
-                                <div
-                                    className="d-flex justify-content-center"
-                                    style={{ margin: "200px 0" }}
-                                >
-                                    <img
-                                        src={loadingGIF}
-                                        alt="Loading"
-                                        style={{
-                                            width: "50px",
-                                            height: "50px",
-                                        }}
-                                    />
-                                </div>
-                            )}
+                            {isLoading && <Loading />}
                             {products?.length > 0 &&
                                 !isLoading &&
                                 products?.map((product) => (

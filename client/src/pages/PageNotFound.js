@@ -4,8 +4,12 @@ import Jumbotron from "../components/cards/Jumbotron";
 import ErrorImage from "../assets/images/Else/404.svg";
 import { Link } from "react-router-dom";
 import useScrollToTop from "../hooks/useScrollToTop";
+import useWindowWidth from "../hooks/useWindowWidth";
+import { mobileWidth } from "../constants/constant";
 
 export default function PageNotFound() {
+    //hooks
+    const windowWidth = useWindowWidth();
     useScrollToTop();
 
     return (
@@ -15,11 +19,14 @@ export default function PageNotFound() {
                 <img
                     src={ErrorImage}
                     alt="404 Error"
-                    style={{ margin: "88px 0 38px 0" }}
+                    style={{
+                        margin: "88px 0 38px 0",
+                        width: windowWidth < mobileWidth ? "250px" : "350px",
+                    }}
                 />
                 <h1
                     style={{
-                        fontSize: "32px",
+                        fontSize: windowWidth < mobileWidth ? "20px" : "32px",
                         fontWeight: "600",
                         color: "#7B1FA2",
                         textAlign: "center",
