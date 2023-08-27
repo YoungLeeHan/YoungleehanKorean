@@ -60,7 +60,7 @@ export const reviewUpdate = async (req, res) => {
             id,
             {
                 user: req?.user,
-                review: req?.body?.review,
+                review: req?.body?.newReview,
                 rating: req?.body?.rating,
                 uploadedImagesPath: uploadedImagesPath,
             },
