@@ -1,17 +1,14 @@
 import express from "express";
-// import multer from "multer";
-import { upload } from "../helpers/filehelper.js";
-const router = express.Router();
-
-//middlewares
 import { requireSignin } from "../middlewares/auth.js";
-
+import { upload } from "../middlewares/filehelper.js";
 import {
     reviewList,
     reviewCreate,
     reviewUpdate,
     reviewRemove,
 } from "../controllers/review.js";
+
+const router = express.Router();
 
 router.get("/review/:productId", reviewList);
 router.post(

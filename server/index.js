@@ -31,7 +31,7 @@ dotenv.config();
 const app = express();
 const __dirname = path.dirname(new URL(import.meta.url).pathname);
 
-//이 세션이 아래 passport middleware보다 전에 위치해야함! 주의!!
+// [주의] 이 세션이 passport middleware보다 전에 위치해야함!
 app.use(
     session({
         secret: "keyboard-siba",
@@ -40,20 +40,12 @@ app.use(
     })
 );
 
-// Passport middleware
-app.use(passport.initialize());
-app.use(passport.session());
-
-const applyCOOP = (req, res, next) => {
-    res.setHeader("Cross-Origin-Opener-Policy", "cross-origin");
-    next();
-};
-
 // middlewares
-app.use(applyCOOP);
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 app.set("view engine", "ejs");
 app.set("/views", path.join(__dirname, "views"));
 app.use("/image", express.static("./image"));
