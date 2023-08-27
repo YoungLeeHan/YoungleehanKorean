@@ -26,6 +26,22 @@ export const userMenuData = [
     },
 ];
 
+export const storyboxCreatorData = {
+    image: "https://catastic.b-cdn.net/wp-content/uploads/2023/04/white-british-cat-are-wear-sunglass-shirt-concept-summer-yellow-background-1.jpg",
+    title: `Why aren’t there more exercises?`,
+    description:
+        "While teaching Korean, I was often frustrated by the amount of exercises for each grammar point in the textbooks. I would search the web for worksheets to give my students the extra practice they needed to master a grammar point. However, that was still not enough, so I decided to create on my own.",
+    buttonLinkTo: "/creator",
+    buttonText: "About Creator",
+};
+
+export const storyboxStudentData = {
+    image: "https://i.ytimg.com/vi/YSHDBB6id4A/maxresdefault.jpg",
+    title: `I can’t have conversation after three years of learning`,
+    description:
+        "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour. There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour.",
+};
+
 export const testerWelcomeText = `
     Welcome! 👋
     <br /><br />

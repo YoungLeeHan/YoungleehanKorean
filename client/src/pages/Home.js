@@ -32,7 +32,7 @@ export default function Home() {
                         backgroundColor: "#f6f4ee",
                         height: "300px",
                         position: "absolute",
-                        top: "3130px",
+                        top: "3150px",
                         zIndex: "-1",
                     }}
                 ></div>
