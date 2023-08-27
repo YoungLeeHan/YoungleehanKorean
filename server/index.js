@@ -7,8 +7,7 @@ import passport from "passport";
 import session from "express-session";
 import path from "path";
 //multer
-import multer from 'multer';
-
+import multer from "multer";
 
 // Import custom routes
 import authRoutes from "./routes/auth.js";
@@ -50,8 +49,6 @@ const applyCOOP = (req, res, next) => {
     next();
 };
 
-
-
 // middlewares
 app.use(applyCOOP);
 app.use(cors());
@@ -69,12 +66,8 @@ app.use("/api/blog/category", blogCategoryRoutes);
 app.use("/api/blog", blogPostRoutes);
 app.use("/api", checkoutRoutes);
 app.use("/api", userOrderRoutes);
-
-//review
 app.use("/api", reviewRoutes);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-
-//google
 app.use("/auth", authGoogle);
 app.use("/index", indexGoogle);
 

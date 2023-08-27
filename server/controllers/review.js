@@ -60,7 +60,7 @@ export const reviewUpdate = async (req, res) => {
             id,
             {
                 user: req?.user,
-                review: req?.body?.review,
+                review: req?.body?.newReview,
                 rating: req?.body?.rating,
                 uploadedImagesPath: uploadedImagesPath,
             },
@@ -84,19 +84,5 @@ export const reviewRemove = async (req, res) => {
         res.json(removed);
     } catch (err) {
         return res.status(400).json(err.message);
-    }
-};
-
-export const reviewImages = async (req, res) => {
-    try {
-        const product = await Product.findById(req.params.productId).select(
-            "images"
-        );
-        if (product.images.data) {
-            res.set("Content-Type", product.images.contentType);
-            return res.send(product.images.data);
-        }
-    } catch (err) {
-        console.log(err);
     }
 };
