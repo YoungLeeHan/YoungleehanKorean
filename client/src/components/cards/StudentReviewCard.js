@@ -25,7 +25,7 @@ export default function StudentReviewCard({ data }) {
                     borderRadius: "10px",
                     boxShadow: "0px 4px 50px 0px rgba(212, 207, 207, 0.20)",
                     padding: "28px",
-                    height: "330px",
+                    height: "350px",
                     marginTop: windowWidth < mobileWidth ? "10px" : "",
                     overflowY: "auto",
                     transform:

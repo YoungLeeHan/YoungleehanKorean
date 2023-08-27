@@ -14,25 +14,31 @@ export default function TitleCard({
     return (
         <div
             className={"d-flex flex-column align-items-center"}
-            style={{ paddingTop: "120px", textAlign: "center" }}
+            style={{
+                paddingTop: sectionTitle ? "120px" : "80px",
+                textAlign: "center",
+            }}
         >
-            <div
-                style={{
-                    padding: "2px",
-                    borderBottom: "3px solid #ffbf35",
-                    marginBottom: "12px",
-                }}
-            >
-                <h3
+            {sectionTitle && (
+                <div
                     style={{
-                        fontWeight: "500",
-                        fontSize: windowWidth < mobileWidth ? "18px" : "20px",
+                        padding: "2px",
                         borderBottom: "3px solid #ffbf35",
+                        marginBottom: "12px",
                     }}
                 >
-                    #{sectionTitle}
-                </h3>
-            </div>
+                    <h3
+                        style={{
+                            fontWeight: "500",
+                            fontSize:
+                                windowWidth < mobileWidth ? "18px" : "20px",
+                            borderBottom: "3px solid #ffbf35",
+                        }}
+                    >
+                        #{sectionTitle}
+                    </h3>
+                </div>
+            )}
             <h1
                 style={{
                     fontWeight: "600",

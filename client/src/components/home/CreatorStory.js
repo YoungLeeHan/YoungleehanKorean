@@ -1,7 +1,11 @@
 // 👻 Developed by DanBi Choi on July 19th, 2023.
 // -----------------------------------------------------
-import { Link } from "react-router-dom";
 import TitleCard from "../cards/TitleCard";
+import { storyboxCreatorData } from "../../constants/constant";
+import StoryBoxWithPicture from "../cards/StoryBoxWithPicture";
+
+const { image, title, description, buttonLinkTo, buttonText } =
+    storyboxCreatorData;
 
 export default function CreatorStory() {
     return (
@@ -15,10 +19,18 @@ export default function CreatorStory() {
                 mainTitle2={"YoungLeeHan Korean"}
                 mainTitle3={"Started"}
             />
-            <div className="story-box row">
+            <StoryBoxWithPicture
+                image={image}
+                title={title}
+                description={description}
+                buttonLinkTo={buttonLinkTo}
+                buttonText={buttonText}
+            />
+
+            {/* <div className="story-box row">
                 <div className="col-md-4 mb-3">
                     <img
-                        src="https://catastic.b-cdn.net/wp-content/uploads/2023/04/white-british-cat-are-wear-sunglass-shirt-concept-summer-yellow-background-1.jpg"
+                        src="
                         alt="Founder"
                     />
                 </div>
@@ -38,7 +50,7 @@ export default function CreatorStory() {
                         </button>
                     </Link>
                 </div>
-            </div>
+            </div> */}
         </section>
     );
 }
