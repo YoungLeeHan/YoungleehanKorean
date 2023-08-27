@@ -86,17 +86,3 @@ export const reviewRemove = async (req, res) => {
         return res.status(400).json(err.message);
     }
 };
-
-export const reviewImages = async (req, res) => {
-    try {
-        const product = await Product.findById(req.params.productId).select(
-            "images"
-        );
-        if (product.images.data) {
-            res.set("Content-Type", product.images.contentType);
-            return res.send(product.images.data);
-        }
-    } catch (err) {
-        console.log(err);
-    }
-};
