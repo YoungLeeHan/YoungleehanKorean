@@ -5,13 +5,14 @@ import Jumbotron from "../components/cards/Jumbotron";
 import useScrollToTop from "../hooks/useScrollToTop";
 import { useCart } from "../context/cart";
 import { useCartQuantity } from "../context/cartQuantity";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../context/auth";
 import { useCartTotal } from "../context/cartTotal";
 import CartProductCard from "./../components/cards/CartProductCard";
 import ModalInfo from "../components/common/ModalInfo";
 import CartTotalBox from "../components/cards/CartTotalBox";
+import NoOrderDisplay from "../components/common/NoOrderDisplay";
 
 export default function Cart() {
     useScrollToTop();
@@ -78,43 +79,34 @@ export default function Cart() {
                 className="container-fluid d-flex flex-column align-items-center"
             >
                 <div className="cart-box container-fluid">
-                    {!cart?.length && (
-                        <div className="d-flex flex-column justify-content-center align-items-center">
-                            <h3>Your cart is empty!</h3>
-                            <Link to="/shop">
-                                <button className="btn btn-primary goShopBtn">
-                                    Go to Shop
-                                </button>
-                            </Link>
-                        </div>
-                    )}
+                    {cart?.length === 0 && <NoOrderDisplay />}
                     {cart?.length > 0 && (
-                        <table>
-                            <tr>
-                                <th>Product</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                                <th> </th>
-                            </tr>
+                        <>
+                            <table>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Total</th>
+                                    <th> </th>
+                                </tr>
 
-                            {cart?.map((item) => {
-                                return (
-                                    <CartProductCard
-                                        key={item._id}
-                                        item={item}
-                                        cartQuantity={cartQuantity}
-                                        handleDelete={handleDelete}
-                                        handleQuantityChange={
-                                            handleQuantityChange
-                                        }
-                                    />
-                                );
-                            })}
-                        </table>
-                    )}
-                    {cart?.length > 0 && (
-                        <CartTotalBox handleCheckout={handleCheckout} />
+                                {cart?.map((item) => {
+                                    return (
+                                        <CartProductCard
+                                            key={item._id}
+                                            item={item}
+                                            cartQuantity={cartQuantity}
+                                            handleDelete={handleDelete}
+                                            handleQuantityChange={
+                                                handleQuantityChange
+                                            }
+                                        />
+                                    );
+                                })}
+                            </table>
+                            <CartTotalBox handleCheckout={handleCheckout} />
+                        </>
                     )}
                 </div>
                 <ModalInfo

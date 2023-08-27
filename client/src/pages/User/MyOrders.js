@@ -7,8 +7,9 @@ import DashboardMenu from "../../components/nav/DashboardMenu";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import MyOrderCard from "../../components/cards/MyOrderCard";
-import loadingGIF from "../../assets/images/Common/loading.gif";
 import useScrollToTop from "../../hooks/useScrollToTop";
+import NoOrderDisplay from "../../components/common/NoOrderDisplay";
+import Loading from "../../components/common/Loading";
 
 export default function MyOrders() {
     //hooks
@@ -58,29 +59,8 @@ export default function MyOrders() {
                         <DashboardMenu id={0} />
                     </div>
                     <div className="col-md-9">
-                        {isLoading && (
-                            <div
-                                className="d-flex justify-content-center"
-                                style={{ margin: "200px 0" }}
-                            >
-                                <img
-                                    src={loadingGIF}
-                                    alt="Loading"
-                                    style={{
-                                        width: "50px",
-                                        height: "50px",
-                                    }}
-                                />
-                            </div>
-                        )}
-                        {!isLoading && orders?.length < 1 && (
-                            <h5
-                                className="d-flex flex-column justify-content-center align-items-center"
-                                style={{ minHeight: "200px" }}
-                            >
-                                No order has been placed yet.
-                            </h5>
-                        )}
+                        {isLoading && <Loading />}
+                        {!isLoading && orders?.length < 1 && <NoOrderDisplay />}
                         {!isLoading &&
                             orders?.length > 0 &&
                             orders.map((order) => (
