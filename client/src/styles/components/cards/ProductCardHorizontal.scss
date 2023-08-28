@@ -16,6 +16,8 @@
     @include mobile {
         flex-direction: column;
         height: 430px;
+        margin-top: 20px;
+        margin-bottom: 40px;
     }
 
     &:hover {
