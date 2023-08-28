@@ -84,6 +84,7 @@ export default function ProductCardVertical({ item, download = false }) {
                     ? item?.title?.substring(0, 80) + "..."
                     : item?.title?.substring(0, 80)}
             </h3>
+
             <div
                 className="d-flex flex-row justify-content-between align-items-center"
                 style={{ width: "100%" }}
@@ -92,7 +93,7 @@ export default function ProductCardVertical({ item, download = false }) {
                     <>
                         <h5
                             style={{
-                                fontSize: "13px",
+                                fontSize: "15px",
                                 color: "#7B1FA2",
                                 fontWeight: "500",
                             }}
