@@ -1,6 +1,7 @@
 import productImage from "../models/productImage.js";
 import multer from "multer";
 import path from "path";
+import fs from "fs";
 
 
 let storage = multer.diskStorage({
@@ -24,21 +25,53 @@ function checkFileType(file, cb) {
     if(extname) {
         return cb(null, true);
     } else {
-        cb('Error: Please images only.');
+        cb('Error: Please upload image file only.');
     }
 }
 
+export const getImage = async (req, res, next) => {
+    try {
+        const images = await productImage.find({});
+        res.json(images);
+    } catch (err) {
+        console.error('ERROR: ' + err);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+};
 
-// 이미지 업로드 핸들러
+
+// Upload Image - Single
+
+export const uploadSingleImage = upload.single('singleImage');
+
+export const processSingleImage = async (req, res, next) => {
+    const file = req.file;
+
+    if (!file) {
+        return console.log('please select an Image.');
+    }
+    let url = file.path.replace("public", "");
+
+    productImage.create({imgUrl: url})
+        .then(img => {
+            console.log("image saved to DB");
+            res.json(productImage)
+        }).catch(err => {
+        console.error('ERROR: ' + err);
+        return res.status(500).json({error: 'Internal server error'});
+    });
+};
+
+// Upload Image - Multiple
+
 export const uploadMultiImages = upload.array('multipleImages');
 
-export const processImages = async (req, res, next) => {
+export const processMultiImages = async (req, res, next) => {
     const files = req.files;
 
     if (!files) {
         return res.status(400).json({ error: 'Please select images.' });
     }
-
     try {
         for (const file of files) {
             let url = file.path.replace('public', '');
@@ -52,53 +85,33 @@ export const processImages = async (req, res, next) => {
         }
 
         console.log("multiple image files uploaded");
-        console.log(files);
-        res.redirect('/api/products');
+        res.json(productImage)
     } catch (err) {
         console.error('ERROR: ' + err);
         return res.status(500).json({ error: 'Internal server error' });
     }
 };
 
-// 미스터리 부분
-// app.get('/upload', (req,res)=> {
-//     res.render('upload');
-// });
-//
-// app.get('/productImage', (req, res)=>{
-//     Picture.find({})
-//         .then(images => {
-//             res.render('index', {images : images});
-//         });
-// });
 
 
-//
-//
-// app.post('/uploadmultiple', upload.array('multipleImages'),(req, res, next)=> {
-//     const files = req.files;
-//     if(!files) {
-//         return console.log('Please select images.');
-//     }
-//
-//     files.forEach(file => {
-//         let url = file.path.replace('public', '');
-//
-//         Picture.findOne({imgUrl : url})
-//             .then(async img => {
-//                 if(img) {
-//                     return console.log('Duplicate Image.');
-//                 }
-//                 await Picture.create({imgUrl : url});
-//
-//             })
-//             .catch(err => {
-//                 return console.log('ERROR: '+err);
-//             })
-//     });
-//     console.log(files)
-//     res.redirect('/productImageView');
-//
-// });
+export const deleteProductImages = async (req, res, next) => {
+    let searchQuery = {_id : req.params.id};
+    const __dirname = path.dirname(new URL(import.meta.url).pathname);
+    const projectRootDir = path.resolve(__dirname, '..');
 
-
+    try {
+        productImage.findOne(searchQuery)
+            .then(img => {
+                fs.unlink(projectRootDir+'/public'+img.imgUrl, (err)=>{
+                    if(err) return console.log(err);
+                    productImage.deleteOne(searchQuery)
+                        .then(img => {
+                            res.json(productImage)
+                        })
+                })
+            })
+    } catch (err) {
+        console.error('ERROR: ' + err);
+        return res.status(500).json({ error: 'Internal server error' });
+    }
+}
