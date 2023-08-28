@@ -205,4 +205,9 @@ h6 {
     margin: 0;
 }
 
+.slick-next::before,
+.slick-prev::before {
+    color: $color-purple;
+}
+
 // End common css styles : added by Danbi on July 18th, 2023

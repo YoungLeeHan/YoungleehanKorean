@@ -11,6 +11,7 @@ import useWindowWidth from "../hooks/useWindowWidth";
 import catImg from "./../assets/images/Creator/cat_square.jpg";
 import { mobileWidth } from "../constants/constant";
 import BlogVerticalSummary from "../components/common/BlogVerticalSummary";
+import StudentReviewCarousel from "../components/common/StudentReviewCarousel";
 
 export default function Creator() {
     //hooks
@@ -86,6 +87,7 @@ export default function Creator() {
                         </div>
                     </div>
                 </div>
+                <StudentReviewCarousel />
                 <BlogVerticalSummary />
             </div>
         </>
