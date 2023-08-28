@@ -3,18 +3,19 @@
 import "../styles/pages/Home.scss";
 import Jumbotron from "../components/cards/Jumbotron";
 import useScrollToTop from "../hooks/useScrollToTop";
-import useWindowWidth from "../hooks/useWindowWidth";
 import ShopVerticalSummary from "../components/common/ShopVerticalSummary";
 import TitleCard from "../components/cards/TitleCard";
 import StoryBoxWithPicture from "../components/cards/StoryBoxWithPicture";
-import { storyboxStudentData } from "./../constants/constant";
-
+import WorksheetDataForStoryCard from "../components/cards/WorksheetDataForStoryCard";
+import {
+    storyboxStudentData,
+    worksheetTextDataForOurStory,
+} from "./../constants/constant";
 const { image, title, description } = storyboxStudentData;
 
 export default function Ourstory() {
     //hooks
     useScrollToTop();
-    const windowWidth = useWindowWidth();
 
     return (
         <>
@@ -37,6 +38,15 @@ export default function Ourstory() {
                     title={title}
                     description={description}
                 />
+                <TitleCard
+                    sectionTitle={"Worksheet "}
+                    mainTitle1={"What Makes"}
+                    mainTitle2={"YoungLeeHan"}
+                    mainTitle3={"Special"}
+                />
+                {worksheetTextDataForOurStory.map((data) => (
+                    <WorksheetDataForStoryCard data={data} />
+                ))}
                 <ShopVerticalSummary />
             </div>
         </>

@@ -62,6 +62,50 @@ export const testerWelcomeText = `
     • CVV: 1234
 `;
 
+export const worksheetTextDataForOurStory = [
+    {
+        _id: 1,
+        image: "https://img.freepik.com/premium-photo/white-british-cat-wears-gold-sunglasses-lies-yellow-wall_116578-698.jpg",
+        title: "Fun subjects",
+        msg: "As a teacher of kids and adults, I have seen that students learn the best when having fun. My materials explore Korean through age-appropriate, entertaining subjects.",
+    },
+    {
+        _id: 2,
+        image: "https://img.freepik.com/premium-photo/white-british-cat-wears-gold-sunglasses-lies-yellow-wall_116578-698.jpg",
+        title: "In-depth grammar",
+        msg: "As a teacher of kids and adults, I have seen that students learn the best when having fun. My materials explore Korean through age-appropriate, entertaining subjects.",
+    },
+    {
+        _id: 3,
+        image: "https://img.freepik.com/premium-photo/white-british-cat-wears-gold-sunglasses-lies-yellow-wall_116578-698.jpg",
+        title: "Emphasis on speaking",
+        msg: "As a teacher of kids and adults, I have seen that students learn the best when having fun. My materials explore Korean through age-appropriate, entertaining subjects.",
+    },
+];
+
+export const studentReviewForTeacher = [
+    {
+        name: "Catherine H.",
+        msg: "With previous experience taking foreign language classes, I can say with confidence that Younghyung is the best instructor I have ever had. Her tutoring is personalized and detailed, moving at a pace that both ensures I am comfortable with the information and that pushes me to go further. Her explanations and materials are incredibly helpful and she is always willing to answer questions. She makes lessons fun and engaging and I look forward to every class. I have been learning with Younghyun for three years and will continue to do so. If you want to learn Korean and learn it correctly while having fun at the same time, I highly recommend taking lessons!",
+    },
+    {
+        name: "Nikki D.",
+        msg: "이 선생님 is one of the best Korean teachers I have ever met! I’ve studied online with other teachers and materials but her lessons actually stick with you. I struggled with grammar a lot but with her teaching the grammar just clicks. Her teaching style is friendly and fun, with cultural lessons along the way. Not only do you get to learn how to express yourself in Korean but you get to learn about the culture. I highly recommend this teacher!! You won’t ever regret that you did… because one day you’ll be creating your own complex Korean sentences. :)",
+    },
+    {
+        name: "Mariah S.",
+        msg: "Teacher Younghyun has been teaching my young children in twice weekly group lessons, and myself in weekly private lessons. I was initially impressed by her organization, preparation, and high energy. She consistently engages well with my kids and presents korean to the young children in a fun manner. I have seen great improvement in my kids korean skills. For adult private lessons, she is always well prepared with new materials and teaches the material in a dynamic and fun fashion. As a native speaker, Younghyun can explain in detail the grammar and provides real life examples in korean culture for the grammar and language being taught in video clips and music. I have been told that my Korean skills have improved greatly since starting my private lessons with Younghyun by others, and feel more comfortable speaking in public. I would highly recommend anyone considering learning korean to take lessons with Younghyun.",
+    },
+    {
+        name: "Stephanie C.",
+        msg: "선생님 is an outstanding teacher, one of the best. She has taught me, and 2 out of 3 of my children (8 and 6 years old) for the last 2 1/2 years. She has a positive and welcoming energy that immediately helps you feel comfortable in her classroom. It has helped me overcome my fears of speaking in Korean. She is well organized and always prepared. She makes lessons fun, engaging, and individualizes the content. My children have had a lot of speaking and listening practice, as well as learning hangul. I have seen them practice and initiate conversation in Korean since having her as a tutor. I highly recommend her for anyone looking for a Korean tutor.",
+    },
+    {
+        name: "Katherine K.",
+        msg: "My daughter started Korean language classes with Mrs. Lee twice a week from the age of 3. Over the past two years, my daughter's Korean speaking, writing, and reading skills have expanded considerably. Each class is structured with a set curriculum, so each lesson builds on the previous one and the kids can learn systematically. Each of the previous lessons are continually reinforced in the next. While the class has a set framework, Mrs. Lee is excellent at pivoting, engaging the kids with songs and activities that enhance the lesson, or just using the kids' conversations and curiosities to teach new vocabulary or grammar. It is amazing what she fits into 30 minutes! As an aside, as a Korean-American mom, with less than fluent Korean language skills, this class has also helped ME learn new things that I can then incorporate into everyday speaking and teaching with my daughter. Mrs. Lee is an excellent educator with a gift for working with children. I highly recommend her to any mom looking to teach their children Korean!",
+    },
+];
+
 export const adminMenuData = [
     { _id: 0, name: "Dashboard", link: "admin", icon: BsClipboard },
     {
@@ -107,6 +151,28 @@ export const adminMenuData = [
         icon: AiOutlineUnorderedList,
     },
 ];
+
+export const sliderSettingWithDots = {
+    dots: true,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    speed: 300,
+    cssEase: "linear",
+    swipeToSlide: true,
+    arrows: true,
+};
+
+export const sliderSettingWithoutDots = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    speed: 300,
+    cssEase: "linear",
+    swipeToSlide: true,
+    arrows: true,
+};
 
 export const worksheetTextData = [
     {
