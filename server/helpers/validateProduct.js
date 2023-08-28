@@ -1,5 +1,5 @@
 export const validateProduct = (req, res) => {
-    const { title, category, ageCategory, description, price } = req.fields;
+    const { title, category, ageCategory, description, price } = req.body;
     const { images } = req.files;
 
     switch (true) {

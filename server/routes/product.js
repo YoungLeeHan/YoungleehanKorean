@@ -4,6 +4,7 @@ const router = express.Router();
 
 //middlewares
 import { requireSignin, isAdmin } from "../middlewares/auth.js";
+import { upload } from "../middlewares/filehelper.js";
 
 //controllers
 import {
@@ -19,15 +20,13 @@ import {
     productsSearch,
     relatedProducts,
 } from "../controllers/product.js";
-import {processImages, uploadMultiImages} from "../controllers/productImage.js";
 
-router.post("/product", requireSignin, isAdmin, formidable(), create);
+router.post("/product", requireSignin, isAdmin, upload.array("productImages", 5), create);
 router.get("/products", list);
 router.get("/product/:slug", read);
 router.get("/product/images/:productId", images);
-router.post("/product/multiimages", uploadMultiImages, processImages );
 router.delete("/product/:productId", requireSignin, isAdmin, remove);
-router.put("/product/:productId", requireSignin, isAdmin, formidable(), update);
+router.put("/product/:productId", requireSignin, isAdmin, upload.array("productImages", 5), update);
 router.post("/filtered-products", filteredProducts);
 router.get("/products-count", productsCount);
 router.get("/list-products/:page", listProducts);
