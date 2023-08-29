@@ -2,4 +2,4 @@
 deployment:
     tasks:
         - export DEPLOYPATH=/home/maybemay/repositories/YoungleehanKorean.git
-        - /bin/cp -R images $DEPLOYPATH
+        - /bin/cp -R $DEPLOYPATH
