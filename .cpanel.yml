@@ -1,5 +1,5 @@
 ---
 deployment:
     tasks:
-        - export DEPLOYPATH=/home/example/public_html/
+        - export DEPLOYPATH="/home/maybemay/repositories/YoungleehanKorean"
         - /bin/cp -R images $DEPLOYPATH
