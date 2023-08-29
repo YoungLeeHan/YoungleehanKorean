@@ -1,5 +1,5 @@
 ---
 deployment:
     tasks:
-        - export DEPLOYPATH=/home/maybemay/repositories/YoungleehanKorean.git
+        - export DEPLOYPATH=/home/maybemay/public.html/
         - /bin/cp -R $DEPLOYPATH /home/maybemay/public.html/
