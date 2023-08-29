@@ -21,7 +21,7 @@ export default function UserBtns({ userType, handleLogout }) {
         btn1 = {
             name: "My Page",
             linkTo: `/dashboard/${
-                auth.user.role === 1 ? "admin" : "user/orders"
+                auth.user.role === 1 ? "admin" : "user/profile"
             }`,
         };
         btn2 = { name: "My Order", linkTo: "/dashboard/user/orders" };

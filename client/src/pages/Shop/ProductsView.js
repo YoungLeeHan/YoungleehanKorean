@@ -8,12 +8,12 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import "../../styles/pages/ProductsView.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { BsSearch } from "react-icons/bs";
 import { Col, Row, Checkbox, ConfigProvider, Slider } from "antd";
 import ProductCardHorizontal from "../../components/cards/ProductCardHorizontal";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
 import { mobileWidth } from "../../constants/constant";
 import Loading from "../../components/common/Loading";
+import SearchUI from "../../components/common/SearchUI";
 
 export default function ProductsView() {
     useScrollToTop();
@@ -122,10 +122,10 @@ export default function ProductsView() {
 
     // Product Search
     useEffect(() => {
-        if (searchKeyword) handleSearchProduct();
+        if (searchKeyword) handleSearch();
     }, [searchKeyword]);
 
-    const handleSearchProduct = async () => {
+    const handleSearch = async () => {
         // if there is a search keyword, search database with that keyword
         if (searchKeyword) {
             try {
@@ -212,24 +212,11 @@ export default function ProductsView() {
                     <div className="row">
                         <div className="col-md-3">
                             {/* 👉 Filter #1: Product Search starts here*/}
-                            <form
-                                onSubmit={(e) => {
-                                    e.preventDefault();
-                                    handleSearchProduct();
-                                }}
-                            >
-                                <button type="submit" className="search-btn">
-                                    <BsSearch />
-                                </button>
-                                <input
-                                    type="search"
-                                    value={searchKeyword}
-                                    placeholder="Search"
-                                    onChange={(e) =>
-                                        setSearchKeyword(e.target.value)
-                                    }
-                                ></input>
-                            </form>
+                            <SearchUI
+                                handleSearch={handleSearch}
+                                searchKeyword={searchKeyword}
+                                setSearchKeyword={setSearchKeyword}
+                            />
                             {/* Filter #1: Product Search ends here*/}
 
                             {/* 👉 Mobile responsive show/hide filter button starts here */}
