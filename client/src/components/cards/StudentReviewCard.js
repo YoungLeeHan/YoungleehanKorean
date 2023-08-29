@@ -19,7 +19,7 @@ export default function StudentReviewCard({ data }) {
     return (
         <>
             <div
-                className="review-card d-flex flex-column justify-content-between align-items-center"
+                className="review-card scrollbarDesign d-flex flex-column justify-content-between align-items-center"
                 style={{
                     backgroundColor: "#FFFEFB",
                     borderRadius: "10px",
