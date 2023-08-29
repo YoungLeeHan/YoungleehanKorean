@@ -243,6 +243,62 @@ export const studentReviewsData = [
     },
 ];
 
+export const faqDataColumn1 = [
+    {
+        _id: 1,
+        question: "How To Learn Web Designing Step By Step?",
+        answer: "At vero eos et accusamus et iusto odio dignissimos ducimus qui bland praesentium voluptatum deleniti atque corrupti quos dolores et quas excepturi provident.",
+    },
+    {
+        _id: 2,
+        question: "Can I add other information be added to an invoice?",
+        answer: "At vero eos et accusamus et iusto odio dignissimos ducimus qui bland praesentium voluptatum deleniti atque corrupti quos dolores et quas excepturi provident.",
+    },
+    {
+        _id: 3,
+        question: "When should I use a new table vs. a view?",
+        answer: "At vero eos et accusamus et iusto odio dignissimos ducimus qui bland praesentium voluptatum deleniti atque corrupti quos dolores et quas excepturi provident.",
+    },
+    {
+        _id: 4,
+        question: "How can transfer data from one base to another?",
+        answer: "At vero eos et accusamus et iusto odio dignissimos ducimus qui bland praesentium voluptatum deleniti atque corrupti quos dolores et quas excepturi provident.",
+    },
+    {
+        _id: 5,
+        question: "How do I change my account email address?",
+        answer: "At vero eos et accusamus et iusto odio dignissimos ducimus qui bland praesentium voluptatum deleniti atque corrupti quos dolores et quas excepturi provident.",
+    },
+];
+
+export const faqDataColumn2 = [
+    {
+        _id: 1,
+        question: "How does billing work?",
+        answer: "At vero eos et accusamus et iusto odio dignissimos ducimus qui bland praesentium voluptatum deleniti atque corrupti quos dolores et quas excepturi provident.",
+    },
+    {
+        _id: 2,
+        question: "Can I share an individual app?",
+        answer: "At vero eos et accusamus et iusto odio dignissimos ducimus qui bland praesentium voluptatum deleniti atque corrupti quos dolores et quas excepturi provident.",
+    },
+    {
+        _id: 3,
+        question: "Can invoices be sent to other collaborators?",
+        answer: "At vero eos et accusamus et iusto odio dignissimos ducimus qui bland praesentium voluptatum deleniti atque corrupti quos dolores et quas excepturi provident.",
+    },
+    {
+        _id: 4,
+        question: "Learn web designing in basic lavel?",
+        answer: "At vero eos et accusamus et iusto odio dignissimos ducimus qui bland praesentium voluptatum deleniti atque corrupti quos dolores et quas excepturi provident.",
+    },
+    {
+        _id: 5,
+        question: "Learn web designing in advance level?",
+        answer: "At vero eos et accusamus et iusto odio dignissimos ducimus qui bland praesentium voluptatum deleniti atque corrupti quos dolores et quas excepturi provident.",
+    },
+];
+
 // Quill Editor Settings 1
 export const editorModules = {
     toolbar: [
