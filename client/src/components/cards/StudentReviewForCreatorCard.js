@@ -11,7 +11,7 @@ export default function StudentReviewForCreatorCard({ data }) {
     return (
         <>
             <div
-                className="d-flex flex-column justify-content-start align-items-center"
+                className="d-flex scrollbarDesign flex-column justify-content-start align-items-center"
                 style={{
                     backgroundColor: "#FFFEFB",
                     padding: "30px",

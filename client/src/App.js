@@ -37,6 +37,7 @@ import PaymentSuccess from "./pages/Payment/PaymentSuccess";
 import PaymentFail from "./pages/Payment/PaymentFail";
 import Creator from "./pages/Creator";
 import Ourstory from "./pages/Ourstory";
+import Faq from "./pages/Faq";
 
 export default function App() {
     return (
@@ -50,6 +51,7 @@ export default function App() {
                 <Route path="/creator" element={<Creator />} />
                 <Route path="/ourstory" element={<Ourstory />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/faq" element={<Faq />} />
                 <Route path="*" element={<PageNotFound />} />
 
                 {/*login*/}
