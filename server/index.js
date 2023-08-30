@@ -72,10 +72,6 @@ mongoose
 // Passport 설정을 configurePassport 함수로 이동
 configurePassport(passport);
 
-app.get("/", (req, res) => {
-    res.render("login");
-});
-
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
     console.log(`Node server is running on port ${port}`);

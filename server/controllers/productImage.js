@@ -2,50 +2,50 @@ import productImage from "../models/productImage.js";
 import multer from "multer";
 import path from "path";
 
-
 let storage = multer.diskStorage({
-    destination: './public/images/product/',
+    destination: "./public/images/product/",
     filename: (req, file, cb) => {
-        cb(null, file.originalname)
-    }
+        cb(null, file.originalname);
+    },
 });
 
 let upload = multer({
-    storage : storage,
-    fileFilter : (req, file, cb) => {
+    storage: storage,
+    fileFilter: (req, file, cb) => {
         checkFileType(file, cb);
-    }
+    },
 });
 
 function checkFileType(file, cb) {
     const fileTypes = /jpeg|jpg|png|gif/;
-    const extname = fileTypes.test(path.extname(file.originalname).toLowerCase());
+    const extname = fileTypes.test(
+        path.extname(file.originalname).toLowerCase()
+    );
 
-    if(extname) {
+    if (extname) {
         return cb(null, true);
     } else {
-        cb('Error: Please images only.');
+        cb("Error: Please images only.");
     }
 }
 
-
 // 이미지 업로드 핸들러
-export const uploadMultiImages = upload.array('multipleImages');
+export const uploadMultiImages = upload.array("multipleImages");
 
 export const processImages = async (req, res, next) => {
     const files = req.files;
 
     if (!files) {
-        return res.status(400).json({ error: 'Please select images.' });
+        return res.status(400).json({ error: "Please select images." });
     }
 
     try {
         for (const file of files) {
-            let url = file.path.replace('public', '');
+            let url = file.path.replace("public", "");
 
             const img = await productImage.findOne({ imgUrl: url });
             if (img) {
-                console.log('Duplicate Image.');
+                console.log("Duplicate Image.");
             } else {
                 await productImage.create({ imgUrl: url });
             }
@@ -53,10 +53,10 @@ export const processImages = async (req, res, next) => {
 
         console.log("multiple image files uploaded");
         console.log(files);
-        res.redirect('/api/products');
+        res.redirect("/api/products");
     } catch (err) {
-        console.error('ERROR: ' + err);
-        return res.status(500).json({ error: 'Internal server error' });
+        console.error("ERROR: " + err);
+        return res.status(500).json({ error: "Internal server error" });
     }
 };
 
@@ -71,7 +71,6 @@ export const processImages = async (req, res, next) => {
 //             res.render('index', {images : images});
 //         });
 // });
-
 
 //
 //
@@ -100,5 +99,3 @@ export const processImages = async (req, res, next) => {
 //     res.redirect('/productImageView');
 //
 // });
-
-
