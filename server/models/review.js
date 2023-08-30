@@ -10,7 +10,7 @@ const reviewSchema = new mongoose.Schema(
             required: [true, "Product is required"],
         },
         rating: { type: Number, required: true },
-        uploadedImagesPath: [{ type: String }],
+        imagePath: [{ type: String }],
     },
 
     { collection: "reviews", timestamps: true }
