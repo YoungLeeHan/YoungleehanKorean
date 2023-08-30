@@ -4,18 +4,17 @@ import { validateMongodbId } from "../helpers/validateMongodbID.js";
 
 export const reviewCreate = async (req, res) => {
     const user = req.user;
-    const uploadedImages = req.files;
     const { review, productId, rating } = req.body;
+    const filedata = req.files;
 
     try {
-        const uploadedImagesPath = uploadedImages.map((img) => img.path);
-
+        const uploadedImagePath = filedata.map((data) => data.location);
         const newReview = await Review.create({
             product: productId,
             user,
             review,
             rating,
-            uploadedImagesPath: uploadedImagesPath,
+            imagePath: uploadedImagePath,
         });
 
         return res.status(200).json({ success: true });
@@ -47,6 +46,7 @@ export const reviewList = async (req, res) => {
 export const reviewUpdate = async (req, res) => {
     const { id } = req.params;
     validateMongodbId(id);
+    const filedata = req.files;
 
     try {
         const existingReview = await Review.findById(id);
@@ -54,15 +54,14 @@ export const reviewUpdate = async (req, res) => {
         if (!existingReview) {
             return res.status(404).json({ message: "Review not found" });
         }
-
-        const uploadedImagesPath = req?.files?.map((file) => file.path);
+        const uploadedImagePath = filedata.map((data) => data.location);
         const update = await Review.findByIdAndUpdate(
             id,
             {
                 user: req?.user,
                 review: req?.body?.newReview,
                 rating: req?.body?.rating,
-                uploadedImagesPath: uploadedImagesPath,
+                imagePath: uploadedImagePath,
             },
             {
                 new: true,

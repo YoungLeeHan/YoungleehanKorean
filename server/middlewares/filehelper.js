@@ -1,18 +1,28 @@
-import multer from "multer";
+//multer-s3 버전
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, "uploads");
-    },
-    filename: (req, file, cb) => {
-        cb(
-            null,
-            new Date().toISOString().replace(/:/g, "-") +
-                "-" +
-                file.originalname
-        );
-    },
+import multer from "multer";
+import multerS3 from "multer-s3";
+import aws from "aws-sdk";
+
+const s3 = new aws.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    region: "us-east-2",
 });
+
+// const storage = multer.diskStorage({
+//     destination: (req, file, cb) => {
+//         cb(null, "uploads");
+//     },
+//     filename: (req, file, cb) => {
+//         cb(
+//             null,
+//             new Date().toISOString().replace(/:/g, "-") +
+//                 "-" +
+//                 file.originalname
+//         );
+//     },
+// });
 
 const filefilter = (req, file, cb) => {
     if (
@@ -26,6 +36,16 @@ const filefilter = (req, file, cb) => {
     }
 };
 
-const upload = multer({ storage, fileFilter: filefilter });
+const upload = multer({
+    storage: multerS3({
+        s3,
+        bucket: "maybemay8282",
+        // acl: "public-read", // Set appropriate ACL
+        key: (req, file, cb) => {
+            cb(null, `${Date.now().toString()}__${file.originalname}`);
+        },
+    }),
+    fileFilter: filefilter,
+});
 
 export { upload };
