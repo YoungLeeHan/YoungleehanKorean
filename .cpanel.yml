@@ -1,6 +1,0 @@
----
-deployment:
-    tasks:
-        - export DEPLOYPATH=/home/maybemay/public_html/
-        - git clone https://github.com/MayHyeyeonKim/YoungleehanKorean.git
-        - cp -R YoungleehanKorean/* $DEPLOYPATH
