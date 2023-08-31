@@ -1,0 +1,23 @@
+.userName {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 130%;
+  color: #221714;
+  margin-bottom: 14px;
+}
+.userName span {
+  color: #706866;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 130%;
+}
+
+.content {
+  color: #706866;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 160%;
+}/*# sourceMappingURL=ReviewItem.module.css.map */
