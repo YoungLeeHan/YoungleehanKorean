@@ -45,7 +45,6 @@ export default function AdminProductCreate() {
             if (data?.error) {
                 toast.error(data.error);
             } else {
-                console.log(data);
                 toast.success(`"${data.title}" is created`);
                 navigate("/dashboard/admin/products");
             }

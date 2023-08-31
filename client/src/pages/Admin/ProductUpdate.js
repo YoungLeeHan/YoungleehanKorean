@@ -54,9 +54,14 @@ export default function AdminProductUpdate() {
         e.preventDefault();
         try {
             const productData = new FormData();
+
             if (newImages.length > 0) {
                 for (const newImage of newImages) {
                     productData.append("productImages", newImage);
+                }
+            } else {
+                for (const image of images) {
+                    productData.append("productImages", image);
                 }
             }
             productData.append("title", title);

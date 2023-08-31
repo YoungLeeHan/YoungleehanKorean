@@ -91,7 +91,7 @@ export const update = async (req, res) => {
         const product = await Product.findByIdAndUpdate(
             req.params.productId,
             {
-                ...req.fields,
+                ...req.body,
                 slug: slugify(productData.title),
                 imagePath: uploadedImagePath,
             },
