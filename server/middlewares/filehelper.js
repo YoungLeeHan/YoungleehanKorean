@@ -25,7 +25,7 @@ const filefilter = (req, file, cb) => {
 const upload = multer({
     storage: multerS3({
         s3,
-        bucket: "maybemay8282",
+        bucket: "ylhprototype",
         key: (req, file, cb) => {
             cb(null, `${Date.now().toString()}__${file.originalname}`);
         },
