@@ -7,31 +7,19 @@ import toast from "react-hot-toast";
 import CategoryForm from "../../components/forms/CategoryForm";
 import { Modal } from "antd";
 import useScrollToTop from "./../../hooks/useScrollToTop";
+import useBlogCategory from "./../../hooks/useBlogCategory";
 
 export default function BlogCategory() {
     // hooks
-    const [auth, setAuth] = useAuth();
     useScrollToTop();
+    const [auth, setAuth] = useAuth();
+    const { blogCategories, loadBlogCategories } = useBlogCategory();
 
     // states
     const [name, setName] = useState("");
-    const [categories, setCategories] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selected, setSelected] = useState(null);
     const [updatingName, setUpdatingName] = useState("");
-
-    useEffect(() => {
-        loadCategories();
-    }, []);
-
-    const loadCategories = async () => {
-        try {
-            const { data } = await axios.get("/blog/category/list");
-            setCategories(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -40,7 +28,7 @@ export default function BlogCategory() {
             if (data?.error) {
                 toast.error(data.error);
             } else {
-                loadCategories();
+                loadBlogCategories();
                 setName("");
                 toast.success(`"${data.name}" is created`);
             }
@@ -62,7 +50,7 @@ export default function BlogCategory() {
                 toast.success(`"${data.name}" is updated`);
                 setSelected(null);
                 setUpdatingName("");
-                loadCategories();
+                loadBlogCategories();
                 setIsModalOpen(false);
             }
         } catch (err) {
@@ -82,7 +70,7 @@ export default function BlogCategory() {
             } else {
                 toast.success(`"${data.name}" is deleted`);
                 setSelected(null);
-                loadCategories();
+                loadBlogCategories();
                 setIsModalOpen(false);
             }
         } catch (err) {
@@ -117,7 +105,7 @@ export default function BlogCategory() {
                             <hr />
 
                             <div className="col">
-                                {categories?.map((c) => (
+                                {blogCategories?.map((c) => (
                                     <button
                                         key={c._id}
                                         className="btn btn-outline-primary m-3"

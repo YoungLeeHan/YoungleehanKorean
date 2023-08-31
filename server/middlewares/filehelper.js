@@ -18,7 +18,7 @@ const filefilter = (req, file, cb) => {
   ) {
     cb(null, true);
   } else {
-    cb(null, false);
+    cb("Error: Image files (.png, .jpg, .jpeg only.");
   }
 };
 

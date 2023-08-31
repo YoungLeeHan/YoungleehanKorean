@@ -7,31 +7,19 @@ import toast from "react-hot-toast";
 import CategoryForm from "../../components/forms/CategoryForm";
 import { Modal } from "antd";
 import useScrollToTop from "./../../hooks/useScrollToTop";
+import useAgeCategory from "../../hooks/useAgeCategory";
 
 export default function ProductAgeCategory() {
     // hooks
-    const [auth, setAuth] = useAuth();
     useScrollToTop();
+    const [auth, setAuth] = useAuth();
+    const { ageCategories, loadAgeCategories } = useAgeCategory();
 
     // states
     const [name, setName] = useState("");
-    const [ageCategories, setAgeCategories] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selected, setSelected] = useState(null);
     const [updatingName, setUpdatingName] = useState("");
-
-    useEffect(() => {
-        loadAgeCategories();
-    }, []);
-
-    const loadAgeCategories = async () => {
-        try {
-            const { data } = await axios.get("/ageCategories");
-            setAgeCategories(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
