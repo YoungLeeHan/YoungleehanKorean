@@ -1,21 +1,20 @@
 import Product from "../models/product.js";
-import fs from "fs";
 import slugify from "slugify";
 import { validateProduct } from "../helpers/validateProduct.js";
 
 export const create = async (req, res) => {
     try {
         const productData = validateProduct(req, res);
-        const uploadedImages = req.files;
+        const filedata = req.files;
 
 
-        const uploadedImagesPath = uploadedImages.map((img) => img.path);
+        const uploadedImagePath = filedata.map((data) => data.location);
 
         // create product
         const product = new Product({
             ...req.body,
             slug: slugify(productData.title),
-            uploadedImagesPath: uploadedImagesPath,
+            imagePath: uploadedImagePath,
         });
 
         // if (productData.images) {
@@ -59,6 +58,7 @@ export const read = async (req, res) => {
     }
 };
 
+// Have to Remove!
 export const images = async (req, res) => {
     try {
         const product = await Product.findById(req.params.productId).select(
@@ -87,7 +87,7 @@ export const remove = async (req, res) => {
 export const update = async (req, res) => {
     try {
         const productData = validateProduct(req, res);
-        const uploadedImagesPath = req?.files?.map((file) => file.path);
+        const uploadedImagePath = filedata.map((data) => data.location);
 
         // update product
         const product = await Product.findByIdAndUpdate(
@@ -95,16 +95,15 @@ export const update = async (req, res) => {
             {
                 ...req.fields,
                 slug: slugify(productData.title),
-                uploadedImagesPath: uploadedImagesPath,
+                imagePath: uploadedImagePath,
             },
             { new: true }
         );
-
-        if (productData.images) {
-            product.images.data = fs.readFileSync(productData.images.path);
-            product.images.contentType = productData.images.type;
-        }
-
+        //
+        // if (productData.images) {
+        //     product.images.data = fs.readFileSync(productData.images.path);
+        //     product.images.contentType = productData.images.type;
+        // }
         await product.save();
         res.json(product);
     } catch (err) {

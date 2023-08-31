@@ -5,12 +5,10 @@ const productSchema = new mongoose.Schema(
     {
         title: { type: String, trim: true, required: true, maxlength: 160 },
         slug: { type: String, lowercase: true },
-        // prev img
+        // prev img (single)
         images: { data: Buffer, contentType: String },
-        // new img
-        // thumbnail: { type: String },
-        uploadedImagesPath: [{ type: String }],
-        //
+        // new img (multi)
+        imagePath: [{ type: String }],
         category: { type: ObjectId, ref: "Category", required: true },
         ageCategory: { type: ObjectId, ref: "ageCategory", required: true },
         description: { type: {}, required: true, maxlength: 2000 },
