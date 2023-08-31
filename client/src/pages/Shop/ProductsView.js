@@ -8,15 +8,21 @@ import useWindowWidth from "../../hooks/useWindowWidth";
 import "../../styles/pages/ProductsView.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { BsSearch } from "react-icons/bs";
 import { Col, Row, Checkbox, ConfigProvider, Slider } from "antd";
 import ProductCardHorizontal from "../../components/cards/ProductCardHorizontal";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
 import { mobileWidth } from "../../constants/constant";
 import Loading from "../../components/common/Loading";
+import SearchUI from "../../components/common/SearchUI";
+import useLevelCategory from "../../hooks/useLevelCategory";
+import useAgeCategory from "../../hooks/useAgeCategory";
 
 export default function ProductsView() {
+    // hooks
     useScrollToTop();
+    const windowWidth = useWindowWidth();
+    const { levelCategories } = useLevelCategory();
+    const { ageCategories } = useAgeCategory();
 
     // states
     const [products, setProducts] = useState([]);
@@ -27,11 +33,6 @@ export default function ProductsView() {
     const [priceRange, setPriceRange] = useState();
     const [sortBy, setSortBy] = useState("");
     const [isLoading, setIsLoading] = useState(true);
-    const [levelCategories, setLevelCategories] = useState([]);
-    const [ageCategories, setAgeCategories] = useState([]);
-
-    // hooks
-    const windowWidth = useWindowWidth();
 
     // Show or hide 'show filter' button depending on screen size
     useEffect(() => {
@@ -45,34 +46,6 @@ export default function ProductsView() {
     const handleShowFilter = (e) => {
         e.preventDefault();
         setShowFilter((curr) => !curr);
-    };
-
-    // On page load, fetch level categories list from DB
-    useEffect(() => {
-        loadLevelCategories();
-    }, []);
-
-    const loadLevelCategories = async () => {
-        try {
-            const { data } = await axios.get("/categories");
-            setLevelCategories(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    // On page load, fetch age categories list from DB
-    useEffect(() => {
-        loadAgeCategories();
-    }, []);
-
-    const loadAgeCategories = async () => {
-        try {
-            const { data } = await axios.get("/ageCategories");
-            setAgeCategories(data);
-        } catch (err) {
-            console.log(err);
-        }
     };
 
     // On page load, fetch products list from DB
@@ -101,11 +74,6 @@ export default function ProductsView() {
     }, [level, age, priceRange]);
 
     const loadFilteredProducts = async () => {
-        console.log({
-            level,
-            age,
-            priceRange,
-        });
         setIsLoading(true);
         try {
             const { data } = await axios.post(`/filtered-products`, {
@@ -122,10 +90,10 @@ export default function ProductsView() {
 
     // Product Search
     useEffect(() => {
-        if (searchKeyword) handleSearchProduct();
+        if (searchKeyword) handleSearch();
     }, [searchKeyword]);
 
-    const handleSearchProduct = async () => {
+    const handleSearch = async () => {
         // if there is a search keyword, search database with that keyword
         if (searchKeyword) {
             try {
@@ -212,24 +180,11 @@ export default function ProductsView() {
                     <div className="row">
                         <div className="col-md-3">
                             {/* 👉 Filter #1: Product Search starts here*/}
-                            <form
-                                onSubmit={(e) => {
-                                    e.preventDefault();
-                                    handleSearchProduct();
-                                }}
-                            >
-                                <button type="submit" className="search-btn">
-                                    <BsSearch />
-                                </button>
-                                <input
-                                    type="search"
-                                    value={searchKeyword}
-                                    placeholder="Search"
-                                    onChange={(e) =>
-                                        setSearchKeyword(e.target.value)
-                                    }
-                                ></input>
-                            </form>
+                            <SearchUI
+                                handleSearch={handleSearch}
+                                searchKeyword={searchKeyword}
+                                setSearchKeyword={setSearchKeyword}
+                            />
                             {/* Filter #1: Product Search ends here*/}
 
                             {/* 👉 Mobile responsive show/hide filter button starts here */}

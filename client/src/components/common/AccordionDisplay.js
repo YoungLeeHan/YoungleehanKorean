@@ -2,14 +2,27 @@
 // -----------------------------------------------------
 import { Collapse } from "antd";
 import { FaPlus, FaMinus } from "react-icons/fa";
-import { worksheetTextData } from "../../constants/constant";
+import {
+    worksheetTextData,
+    faqDataColumn1,
+    faqDataColumn2,
+} from "../../constants/constant";
 import { mobileWidth } from "../../constants/constant";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { useState } from "react";
 
-const getItems = (panelStyle, windowWidth) => {
+const getItems = (panelStyle, windowWidth, type) => {
+    let originalData = [];
+    if (type === "faq1") {
+        originalData = faqDataColumn1;
+    } else if (type === "faq2") {
+        originalData = faqDataColumn2;
+    } else if (type === "home") {
+        originalData = worksheetTextData;
+    }
+
     let data = [];
-    for (let d of worksheetTextData) {
+    for (let d of originalData) {
         let obj = {
             key: d._id,
             label: (
@@ -19,7 +32,7 @@ const getItems = (panelStyle, windowWidth) => {
                         fontWeight: "600",
                     }}
                 >
-                    {d._id}.&nbsp;&nbsp;&nbsp;{d.title}
+                    {type === "home" ? d._id + ". " + d.title : `${d.question}`}
                 </h5>
             ),
             children: (
@@ -31,7 +44,7 @@ const getItems = (panelStyle, windowWidth) => {
                         lineHeight: "160%",
                     }}
                 >
-                    {d.description}
+                    {type === "home" ? `${d.description}` : `${d.answer}`}
                 </p>
             ),
             style: panelStyle,
@@ -41,7 +54,7 @@ const getItems = (panelStyle, windowWidth) => {
     return data;
 };
 
-export default function AccordionDisplay() {
+export default function AccordionDisplay({ type }) {
     //hooks
     const windowWidth = useWindowWidth();
 
@@ -70,14 +83,14 @@ export default function AccordionDisplay() {
         <>
             <Collapse
                 accordion
-                items={getItems(panelStyle, windowWidth)}
+                items={getItems(panelStyle, windowWidth, type)}
                 bordered={false}
                 activeKey={activeKey}
                 onChange={handlePanelChange}
                 expandIconPosition={"end"}
                 style={{
                     background: "#fcfcfc",
-                    height: "300px",
+                    height: "auto",
                 }}
                 expandIcon={({ isActive }) =>
                     isActive ? (

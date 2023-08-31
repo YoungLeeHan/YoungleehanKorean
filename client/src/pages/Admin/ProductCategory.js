@@ -7,31 +7,19 @@ import toast from "react-hot-toast";
 import CategoryForm from "../../components/forms/CategoryForm";
 import { Modal } from "antd";
 import useScrollToTop from "./../../hooks/useScrollToTop";
+import useLevelCategory from "../../hooks/useLevelCategory";
 
 export default function ProductCategory() {
     // hooks
-    const [auth, setAuth] = useAuth();
     useScrollToTop();
+    const [auth, setAuth] = useAuth();
+    const { levelCategories, loadLevelCategories } = useLevelCategory();
 
     // states
     const [name, setName] = useState("");
-    const [categories, setCategories] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selected, setSelected] = useState(null);
     const [updatingName, setUpdatingName] = useState("");
-
-    useEffect(() => {
-        loadCategories();
-    }, []);
-
-    const loadCategories = async () => {
-        try {
-            const { data } = await axios.get("/categories");
-            setCategories(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -40,7 +28,7 @@ export default function ProductCategory() {
             if (data?.error) {
                 toast.error(data.error);
             } else {
-                loadCategories();
+                loadLevelCategories();
                 setName("");
                 toast.success(`"${data.name}" is created`);
             }
@@ -62,7 +50,7 @@ export default function ProductCategory() {
                 toast.success(`"${data.name}" is updated`);
                 setSelected(null);
                 setUpdatingName("");
-                loadCategories();
+                loadLevelCategories();
                 setIsModalOpen(false);
             }
         } catch (err) {
@@ -80,7 +68,7 @@ export default function ProductCategory() {
             } else {
                 toast.success(`"${data.name}" is deleted`);
                 setSelected(null);
-                loadCategories();
+                loadLevelCategories();
                 setIsModalOpen(false);
             }
         } catch (err) {
@@ -115,7 +103,7 @@ export default function ProductCategory() {
                             <hr />
 
                             <div className="col">
-                                {categories?.map((c) => (
+                                {levelCategories?.map((c) => (
                                     <button
                                         key={c._id}
                                         className="btn btn-outline-primary m-3"

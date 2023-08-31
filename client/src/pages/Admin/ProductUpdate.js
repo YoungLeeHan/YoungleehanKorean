@@ -7,6 +7,8 @@ import { Select } from "antd";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import useScrollToTop from "./../../hooks/useScrollToTop";
+import useLevelCategory from "./../../hooks/useLevelCategory";
+import useAgeCategory from "./../../hooks/useAgeCategory";
 
 const { Option } = Select;
 
@@ -16,18 +18,17 @@ export default function AdminProductUpdate() {
     const navigate = useNavigate();
     const params = useParams();
     useScrollToTop();
+    const { levelCategories } = useLevelCategory();
+    const { ageCategories } = useAgeCategory();
 
     // states
     const [images, setimages] = useState("");
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
-    const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState({});
-    const [ageCategories, setAgeCategories] = useState([]);
     const [ageCategory, setAgeCategory] = useState({});
     const [id, setId] = useState("");
-    const [downloadUrl, setDownloadUrl] = useState("");
 
     useEffect(() => {
         loadProduct();
@@ -42,33 +43,6 @@ export default function AdminProductUpdate() {
             setCategory(data.category);
             setAgeCategory(data.ageCategory);
             setId(data._id);
-            setDownloadUrl(data.downloadUrl);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    useEffect(() => {
-        loadCategories();
-    }, []);
-
-    const loadCategories = async () => {
-        try {
-            const { data } = await axios.get("/categories");
-            setCategories(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    useEffect(() => {
-        loadAgeCategories();
-    }, []);
-
-    const loadAgeCategories = async () => {
-        try {
-            const { data } = await axios.get("/ageCategories");
-            setAgeCategories(data);
         } catch (err) {
             console.log(err);
         }
@@ -93,7 +67,6 @@ export default function AdminProductUpdate() {
             } else if (typeof ageCategory === "object") {
                 productData.append("ageCategory", ageCategory._id);
             }
-            productData.append("downloadUrl", downloadUrl);
 
             const { data } = await axios.put(`/product/${id}`, productData);
             if (data?.error) {
@@ -208,11 +181,10 @@ export default function AdminProductUpdate() {
                             className="form-select mb-3"
                             onChange={(value) => {
                                 setCategory(value);
-                                console.log(value);
                             }}
                             value={category.name}
                         >
-                            {categories?.map((category) => (
+                            {levelCategories?.map((category) => (
                                 <Option key={category._id} value={category._id}>
                                     {category.name}
                                 </Option>
@@ -225,7 +197,6 @@ export default function AdminProductUpdate() {
                             className="form-select mb-3"
                             onChange={(value) => {
                                 setAgeCategory(value);
-                                console.log(value);
                             }}
                             value={ageCategory.name}
                         >
@@ -238,15 +209,6 @@ export default function AdminProductUpdate() {
                                 </Option>
                             ))}
                         </Select>
-
-                        <input
-                            type="text"
-                            className="form-control p-2 mb-3"
-                            placeholder="Enter download URL"
-                            value={downloadUrl}
-                            onChange={(e) => setDownloadUrl(e.target.value)}
-                        />
-
                         <div className="d-flex justify-content-between">
                             <button
                                 onClick={handleSubmit}

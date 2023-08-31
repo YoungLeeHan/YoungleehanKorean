@@ -1,31 +1,17 @@
-import { useState, useEffect } from "react";
+// 👻 Developed by DanBi Choi on Aug 30th, 2023.
+// -----------------------------------------------------
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
 import DashboardMenu from "../../components/nav/DashboardMenu";
-import axios from "axios";
 import ProductCardHorizontal from "./../../components/cards/ProductCardHorizontal";
 import useScrollToTop from "./../../hooks/useScrollToTop";
+import useProductList from "../../hooks/useProductList";
 
 export default function ProductList() {
     // hooks
     const [auth, setAuth] = useAuth();
     useScrollToTop();
-
-    // states
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        loadProducts();
-    }, []);
-
-    const loadProducts = async () => {
-        try {
-            const { data } = await axios.get("/products");
-            setProducts(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
+    const productList = useProductList("/products");
 
     return (
         <>
@@ -43,7 +29,7 @@ export default function ProductList() {
                         <div className="p-3 mt-2 mb-2 h4 bg-light">
                             Product List
                         </div>
-                        {products?.map((p) => (
+                        {productList?.map((p) => (
                             <ProductCardHorizontal
                                 key={p._id}
                                 product={p}

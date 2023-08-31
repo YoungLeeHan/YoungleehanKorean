@@ -210,4 +210,47 @@ h6 {
     color: $color-purple;
 }
 
+/*! Firefox */
+html {
+    scrollbar-color: $background-color-gray $color-gray;
+}
+/*! Other Browser */
+body::-webkit-scrollbar {
+    width: 11px;
+}
+body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: $color-gray $background-color-gray;
+}
+body::-webkit-scrollbar-track {
+    background: $background-color-gray;
+}
+body::-webkit-scrollbar-thumb {
+    background-color: $color-gray;
+    border-radius: 6px;
+    border: 3px solid $background-color-gray;
+}
+
+body.hide-scrollbar::-webkit-scrollbar {
+    width: 0.1em;
+}
+
+body.hide-scrollbar::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.scrollbarDesign::-webkit-scrollbar {
+    width: 11px;
+}
+.scrollbarDesign::-webkit-scrollbar-track {
+    background: $background-color-beige;
+}
+.scrollbarDesign::-webkit-scrollbar-thumb {
+    background-color: #cacaca;
+    border-radius: 6px;
+    border: 3px solid $background-color-beige;
+}
+
 // End common css styles : added by Danbi on July 18th, 2023

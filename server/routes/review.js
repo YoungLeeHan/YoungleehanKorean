@@ -11,16 +11,11 @@ import {
 const router = express.Router();
 
 router.get("/review/:productId", reviewList);
-router.post(
-    "/review",
-    requireSignin,
-    upload.array("reviewImages", 5),
-    reviewCreate
-);
+router.post("/review", requireSignin, upload.array("images", 5), reviewCreate);
 router.put(
     "/review/:id",
     requireSignin,
-    upload.array("reviewImages", 5),
+    upload.array("images", 5),
     reviewUpdate
 );
 router.delete("/review/:id", requireSignin, reviewRemove);

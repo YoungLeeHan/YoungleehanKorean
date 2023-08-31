@@ -8,16 +8,20 @@ import useScrollToTop from "../../hooks/useScrollToTop";
 import "../../styles/pages/ProductsView.scss";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { BsSearch } from "react-icons/bs";
 import { Col, Row, Checkbox, ConfigProvider } from "antd";
 import BlogPostCardHorizontal from "../../components/cards/BlogPostCardHorizontal";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
 import { mobileWidth } from "../../constants/constant";
 import Loading from "../../components/common/Loading";
+import SearchUI from "../../components/common/SearchUI";
+import useBlogCategory from "../../hooks/useBlogCategory";
 
 export default function BlogView() {
+    // hooks
     useScrollToTop();
+    const windowWidth = useWindowWidth();
+    const { blogCategories } = useBlogCategory();
 
     // states
     const [showFilter, setShowFilter] = useState(true);
@@ -25,10 +29,6 @@ export default function BlogView() {
     const [blogList, setBlogList] = useState([]);
     const [categoryFilter, setCategoryFilter] = useState();
     const [isLoading, setIsLoading] = useState(true);
-    const [blogCategories, setBlogCategories] = useState([]);
-
-    // hooks
-    const windowWidth = useWindowWidth();
 
     useEffect(() => {
         if (windowWidth < mobileWidth) {
@@ -43,20 +43,6 @@ export default function BlogView() {
         setShowFilter((curr) => !curr);
     };
 
-    // fetch blog categories list from DB on first page loading
-    useEffect(() => {
-        loadBlogCategories();
-    }, []);
-
-    const loadBlogCategories = async () => {
-        try {
-            const { data } = await axios.get("/blog/category/list");
-            setBlogCategories(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
     // fetch blog list from DB on first page loading
     useEffect(() => {
         if (!categoryFilter) {
@@ -64,7 +50,6 @@ export default function BlogView() {
         }
     }, []);
 
-    // previous code
     const loadBlogPosts = async () => {
         try {
             const { data } = await axios.get(`/blog/list`);
@@ -100,10 +85,10 @@ export default function BlogView() {
 
     // Blog Post Search
     useEffect(() => {
-        if (searchKeyword) handleSearchBlog();
+        if (searchKeyword) handleSearch();
     }, [searchKeyword]);
 
-    const handleSearchBlog = async () => {
+    const handleSearch = async () => {
         // if there is a search keyword, search database with that keyword
         if (searchKeyword) {
             try {
@@ -131,24 +116,11 @@ export default function BlogView() {
                     <div className="row">
                         <div className="col-md-3">
                             {/* 👉 Filter #1: Product Search starts here*/}
-                            <form
-                                onSubmit={(e) => {
-                                    e.preventDefault();
-                                    handleSearchBlog();
-                                }}
-                            >
-                                <button type="submit" className="search-btn">
-                                    <BsSearch />
-                                </button>
-                                <input
-                                    type="search"
-                                    value={searchKeyword}
-                                    placeholder="Search"
-                                    onChange={(e) =>
-                                        setSearchKeyword(e.target.value)
-                                    }
-                                ></input>
-                            </form>
+                            <SearchUI
+                                handleSearch={handleSearch}
+                                searchKeyword={searchKeyword}
+                                setSearchKeyword={setSearchKeyword}
+                            />
                             {/* Filter #1: Product Search ends here*/}
                             {/* 👉 Mobile responsive show/hide filter button starts here */}
                             {windowWidth < mobileWidth && (

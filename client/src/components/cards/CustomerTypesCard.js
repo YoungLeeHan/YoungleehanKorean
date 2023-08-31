@@ -27,8 +27,12 @@ export default function CustomerTypesCard({ data }) {
         <>
             {windowWidth > mobileWidth && (
                 <div
-                    style={{ height: "320px" }}
-                    className={`card-box d-flex flex-column ${
+                    style={{
+                        height: "320px",
+                        overflowY: "auto",
+                        overflowX: "hidden",
+                    }}
+                    className={`card-box scrollbarDesign d-flex flex-column ${
                         isHovered
                             ? "justify-content-between align-items-start"
                             : "justify-content-center align-items-center"

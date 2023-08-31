@@ -28,7 +28,7 @@ export default function Worksheet() {
                     />
                 </div>
                 <div className="col-md-6">
-                    <AccordionDisplay />
+                    <AccordionDisplay type={"home"} />
                 </div>
             </div>
             <button
