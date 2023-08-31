@@ -3,37 +3,15 @@
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
 import DashboardMenu from "../../components/nav/DashboardMenu";
-import { useState, useEffect } from "react";
-import { toast } from "react-hot-toast";
-import axios from "axios";
 import BlogPostCardHorizontal from "./../../components/cards/BlogPostCardHorizontal";
 import useScrollToTop from "./../../hooks/useScrollToTop";
+import useBlogList from "../../hooks/useBlogList";
 
 export default function BlogList() {
     // hooks
     const [auth, setAuth] = useAuth();
+    const blogList = useBlogList("/blog/list");
     useScrollToTop();
-
-    //states
-    const [list, setList] = useState([]);
-
-    // fetch blog list from DB
-    useEffect(() => {
-        loadBlogList();
-    }, []);
-
-    const loadBlogList = async () => {
-        try {
-            const { data } = await axios.get("/blog/list");
-            if (data.error) {
-                toast.error(data.error);
-            } else {
-                setList(data);
-            }
-        } catch (err) {
-            console.log(err);
-        }
-    };
 
     return (
         <>
@@ -52,7 +30,7 @@ export default function BlogList() {
                             Blog Posts
                         </div>
                         <div className="blog-list-box">
-                            {list?.map((p) => (
+                            {blogList?.map((p) => (
                                 <BlogPostCardHorizontal
                                     key={p._id}
                                     post={p}
