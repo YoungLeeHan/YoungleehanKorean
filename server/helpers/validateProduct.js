@@ -1,5 +1,6 @@
 export const validateProduct = (req, res) => {
-  const { title, category, ageCategory, description, price } = req.body;
+  const { title, category, ageCategory, description, price, ylhPdfFile } =
+    req.body;
 
   switch (true) {
     case !title.trim():
@@ -12,6 +13,8 @@ export const validateProduct = (req, res) => {
       return res.json({ error: "Category is required" });
     case !ageCategory.trim():
       return res.json({ error: "Age Category is required" });
+    case !ylhPdfFile.trim():
+      return res.json({ error: "a PDF file is required" });
     default:
       return {
         title,
@@ -19,6 +22,7 @@ export const validateProduct = (req, res) => {
         price,
         category,
         ageCategory,
+        ylhPdfFile,
       };
   }
 };

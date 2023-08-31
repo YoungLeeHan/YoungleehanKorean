@@ -18,7 +18,7 @@ const filefilter = (req, file, cb) => {
   ) {
     cb(null, true);
   } else {
-    cb("Error: Image files (.png, .jpg, .jpeg only.");
+    cb("Error: Image files (.png, .jpg, .jpeg) only.");
   }
 };
 
@@ -38,13 +38,14 @@ const upload = (folder) =>
       },
     }),
     fileFilter: filefilter,
+    limits: { fileSize: 2000000 },
   });
 
 const pdfFilter = (req, file, cb) => {
   if (file.mimetype.split("/")[1] === "pdf") {
     cb(null, true);
   } else {
-    cb(null, false);
+    cb("Error: this is not a pdf file.");
   }
 };
 
