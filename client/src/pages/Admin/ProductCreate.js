@@ -32,7 +32,9 @@ export default function AdminProductCreate() {
         e.preventDefault();
         try {
             const productData = new FormData();
-            productData.append("images", images);
+            for (const image of images) {
+                productData.append("productImages", image);
+            }
             productData.append("title", title);
             productData.append("description", description);
             productData.append("price", price);

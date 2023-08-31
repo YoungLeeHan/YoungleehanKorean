@@ -63,7 +63,7 @@ export default function ProductCardVertical({ item, download = false }) {
                         borderRadius: "10px 10px 0px 0px",
                         objectFit: "cover",
                     }}
-                    src={`${process.env.REACT_APP_API}/product/images/${item?._id}`}
+                    src={item?.imagePath[0]}
                     alt={item?.title}
                 />
             </div>
