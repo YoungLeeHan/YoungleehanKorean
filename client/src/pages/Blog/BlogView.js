@@ -15,9 +15,13 @@ import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
 import { mobileWidth } from "../../constants/constant";
 import Loading from "../../components/common/Loading";
 import SearchUI from "../../components/common/SearchUI";
+import useBlogCategory from "../../hooks/useBlogCategory";
 
 export default function BlogView() {
+    // hooks
     useScrollToTop();
+    const windowWidth = useWindowWidth();
+    const { blogCategories } = useBlogCategory();
 
     // states
     const [showFilter, setShowFilter] = useState(true);
@@ -25,10 +29,6 @@ export default function BlogView() {
     const [blogList, setBlogList] = useState([]);
     const [categoryFilter, setCategoryFilter] = useState();
     const [isLoading, setIsLoading] = useState(true);
-    const [blogCategories, setBlogCategories] = useState([]);
-
-    // hooks
-    const windowWidth = useWindowWidth();
 
     useEffect(() => {
         if (windowWidth < mobileWidth) {
@@ -43,20 +43,6 @@ export default function BlogView() {
         setShowFilter((curr) => !curr);
     };
 
-    // fetch blog categories list from DB on first page loading
-    useEffect(() => {
-        loadBlogCategories();
-    }, []);
-
-    const loadBlogCategories = async () => {
-        try {
-            const { data } = await axios.get("/blog/category/list");
-            setBlogCategories(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
     // fetch blog list from DB on first page loading
     useEffect(() => {
         if (!categoryFilter) {
@@ -64,7 +50,6 @@ export default function BlogView() {
         }
     }, []);
 
-    // previous code
     const loadBlogPosts = async () => {
         try {
             const { data } = await axios.get(`/blog/list`);

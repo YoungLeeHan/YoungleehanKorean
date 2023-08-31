@@ -7,50 +7,26 @@ import { Select } from "antd";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useScrollToTop from "./../../hooks/useScrollToTop";
+import useLevelCategory from "./../../hooks/useLevelCategory";
+import useAgeCategory from "./../../hooks/useAgeCategory";
 
 const { Option } = Select;
 
 export default function AdminProductCreate() {
     // hooks
+    useScrollToTop();
     const [auth, setAuth] = useAuth();
     const navigate = useNavigate();
-    useScrollToTop();
+    const { levelCategories } = useLevelCategory();
+    const { ageCategories } = useAgeCategory();
 
     // states
     const [category, setCategory] = useState("");
-    const [categories, setCategories] = useState([]);
     const [ageCategory, setAgeCategory] = useState("");
-    const [ageCategories, setAgeCategories] = useState([]);
-    const [images, setImages] = useState("");
+    const [images, setImages] = useState([]);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
-
-    useEffect(() => {
-        loadCategories();
-    }, []);
-
-    const loadCategories = async () => {
-        try {
-            const { data } = await axios.get("/categories");
-            setCategories(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
-
-    useEffect(() => {
-        loadAgeCategories();
-    }, []);
-
-    const loadAgeCategories = async () => {
-        try {
-            const { data } = await axios.get("/ageCategories");
-            setAgeCategories(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -67,6 +43,7 @@ export default function AdminProductCreate() {
             if (data?.error) {
                 toast.error(data.error);
             } else {
+                console.log(data);
                 toast.success(`"${data.title}" is created`);
                 navigate("/dashboard/admin/products");
             }
@@ -93,27 +70,38 @@ export default function AdminProductCreate() {
                             Create a new product
                         </div>
                         <div>
-                            {images && (
-                                <div className="text-center">
-                                    <img
-                                        src={URL.createObjectURL(images)}
-                                        alt="product images"
-                                        className="img img-responsive"
-                                        height="200px"
-                                    />
-                                </div>
-                            )}
+                            {images &&
+                                images.map((image) => (
+                                    <div className="text-center">
+                                        <img
+                                            src={URL.createObjectURL(image)}
+                                            alt="product images"
+                                            className="img img-responsive"
+                                            height="200px"
+                                            key={image.name}
+                                        />
+                                    </div>
+                                ))}
 
                             <div className="pt-2">
                                 <label className="btn btn-outline-secondary col-12 mb-3">
-                                    {images ? images.name : "Upload images"}
+                                    {images.length > 0
+                                        ? `${images.length} images selected`
+                                        : "Upload images"}
                                     <input
                                         type="file"
                                         name="images"
                                         accept="image/*"
-                                        onChange={(e) =>
-                                            setImages(e.target.files[0])
-                                        }
+                                        multiple
+                                        onChange={(e) => {
+                                            if (e.target.files.length > 5) {
+                                                alert(
+                                                    "You can only select up to 5 images."
+                                                );
+                                            } else {
+                                                setImages([...e.target.files]);
+                                            }
+                                        }}
                                         hidden
                                     />
                                 </label>
@@ -151,7 +139,7 @@ export default function AdminProductCreate() {
                                 placeholder="Choose category"
                                 onChange={(value) => setCategory(value)}
                             >
-                                {categories?.map((category) => (
+                                {levelCategories?.map((category) => (
                                     <Option
                                         key={category._id}
                                         value={category._id}

@@ -10,6 +10,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Select } from "antd";
 import { editorModules, editorFormats } from "../../constants/constant";
 import useScrollToTop from "./../../hooks/useScrollToTop";
+import useBlogCategory from "./../../hooks/useBlogCategory";
 
 const { Option } = Select;
 
@@ -19,33 +20,19 @@ export default function BlogUpdate() {
     const navigate = useNavigate();
     const params = useParams();
     useScrollToTop();
+    const { blogCategories } = useBlogCategory();
 
     // states
-    const [categories, setCategories] = useState([]);
     const [title, setTitle] = useState("");
     const [value, setValue] = useState("");
     const [category, setCategory] = useState("");
     const [images, setImages] = useState("");
     const [id, setId] = useState("");
 
-    // fetch blog category list from DB
-    useEffect(() => {
-        loadBlogCategories();
-    }, []);
-
     // fetch blog  list from DB
     useEffect(() => {
         loadBlog();
     }, []);
-
-    const loadBlogCategories = async () => {
-        try {
-            const { data } = await axios.get("/blog/categories");
-            setCategories(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
 
     const loadBlog = async () => {
         try {
@@ -174,7 +161,7 @@ export default function BlogUpdate() {
                                 onChange={(value) => setCategory(value)}
                                 value={category}
                             >
-                                {categories?.map((category) => (
+                                {blogCategories?.map((category) => (
                                     <Option
                                         key={category._id}
                                         value={category._id}

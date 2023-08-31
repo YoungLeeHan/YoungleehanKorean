@@ -1,30 +1,19 @@
 // 👻 Developed by DanBi Choi on Aug 24th, 2023.
 // -----------------------------------------------------
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TitleCard from "../cards/TitleCard";
-import axios from "axios";
 import BlogPostCardVertical from "../cards/BlogPostCardVertical";
 import Loading from "./Loading";
+import useBlogList from "../../hooks/useBlogList";
 
 export default function BlogVerticalSummary() {
+    //hooks
+    const blogList = useBlogList("/blog/list?limit=4", () =>
+        setIsBlogListLoading(false)
+    );
+
     //states
-    const [blogList, setBlogList] = useState([]);
     const [isBlogListLoading, setIsBlogListLoading] = useState(true);
-
-    useEffect(() => {
-        loadBlogPosts();
-    }, []);
-
-    const loadBlogPosts = async () => {
-        setIsBlogListLoading(true);
-        try {
-            const { data } = await axios.get(`/blog/list?limit=4`);
-            setBlogList(data);
-        } catch (err) {
-            console.log(err);
-        }
-        setIsBlogListLoading(false);
-    };
 
     return (
         <section
