@@ -1,4 +1,6 @@
 import Product from "../models/product.js";
+import pdfFile from "../models/pdfFile.js";
+import fs from "fs";
 import slugify from "slugify";
 import { validateProduct } from "../helpers/validateProduct.js";
 
@@ -15,11 +17,6 @@ export const create = async (req, res) => {
             slug: slugify(productData.title),
             imagePath: uploadedImagePath,
         });
-
-        // if (productData.images) {
-        //     product.images.data = fs.readFileSync(productData.images.path);
-        //     product.images.contentType = productData.images.type;
-        // }
 
         await product.save();
         res.json(product);
@@ -195,6 +192,20 @@ export const productsSearch = async (req, res) => {
             .populate("ageCategory")
             .sort({ createdAt: -1 });
         res.json(results);
+    } catch (err) {
+        console.log(err);
+    }
+};
+
+export const savePdf = async (req, res) => {
+    try {
+        const uploadedPdfFile = req.file;
+        const ylhPdfFile = new ylhPdfFile({
+            name: uploadedPdfFile.originalname,
+            location: uploadedPdfFile.location,
+        });
+        await ylhPdfFile.save();
+        res.json(ylhPdfFile);
     } catch (err) {
         console.log(err);
     }

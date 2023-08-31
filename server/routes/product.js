@@ -3,7 +3,7 @@ const router = express.Router();
 
 //middlewares
 import { requireSignin, isAdmin } from "../middlewares/auth.js";
-import { upload } from "../middlewares/filehelper.js";
+import { upload, uploadPDF } from "../middlewares/filehelper.js";
 
 //controllers
 import {
@@ -18,13 +18,22 @@ import {
     listProducts,
     productsSearch,
     relatedProducts,
+    savePdf,
 } from "../controllers/product.js";
+
+router.post(
+    "/uploadPdf",
+    requireSignin,
+    isAdmin,
+    uploadPDF("downloads").single("pdfFile"),
+    savePdf
+);
 
 router.post(
     "/product",
     requireSignin,
     isAdmin,
-    upload.array("productImages", 5),
+    upload("productImages").array("productImages", { multiple: true }),
     create
 );
 router.get("/products", list);
@@ -35,7 +44,7 @@ router.put(
     "/product/:productId",
     requireSignin,
     isAdmin,
-    upload.array("productImages", 5),
+    upload("productImages").array("productImages", 5),
     update
 );
 router.post("/filtered-products", filteredProducts);
