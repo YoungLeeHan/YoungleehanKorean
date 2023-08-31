@@ -198,8 +198,9 @@ export const productsSearch = async (req, res) => {
 export const savePdf = async (req, res) => {
   try {
     const uploadedPdfFile = req.file;
-    const ylhPdfFile = new pdfFile({
+    const ylhPdfFile = new ylhPdfFile({
       name: uploadedPdfFile.originalname,
+      location: uploadedPdfFile.location,
     });
     await ylhPdfFile.save();
     res.json(ylhPdfFile);
