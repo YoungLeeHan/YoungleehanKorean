@@ -20,12 +20,24 @@ import {
     relatedProducts,
 } from "../controllers/product.js";
 
-router.post("/product", requireSignin, isAdmin, upload.array("productImages", 5), create);
+router.post(
+    "/product",
+    requireSignin,
+    isAdmin,
+    upload.array("productImages", 5),
+    create
+);
 router.get("/products", list);
 router.get("/product/:slug", read);
 router.get("/product/images/:productId", images);
 router.delete("/product/:productId", requireSignin, isAdmin, remove);
-router.put("/product/:productId", requireSignin, isAdmin, upload.array("productImages", 5), update);
+router.put(
+    "/product/:productId",
+    requireSignin,
+    isAdmin,
+    upload.array("productImages", 5),
+    update
+);
 router.post("/filtered-products", filteredProducts);
 router.get("/products-count", productsCount);
 router.get("/list-products/:page", listProducts);

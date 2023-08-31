@@ -7,7 +7,6 @@ export const create = async (req, res) => {
         const productData = validateProduct(req, res);
         const filedata = req.files;
 
-
         const uploadedImagePath = filedata.map((data) => data.location);
 
         // create product
@@ -87,6 +86,8 @@ export const remove = async (req, res) => {
 export const update = async (req, res) => {
     try {
         const productData = validateProduct(req, res);
+        const filedata = req.files;
+
         const uploadedImagePath = filedata.map((data) => data.location);
 
         // update product

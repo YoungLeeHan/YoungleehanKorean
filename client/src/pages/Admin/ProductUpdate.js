@@ -22,7 +22,8 @@ export default function AdminProductUpdate() {
     const { ageCategories } = useAgeCategory();
 
     // states
-    const [images, setimages] = useState("");
+    const [images, setImages] = useState([]);
+    const [newImages, setNewImages] = useState([]);
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
@@ -42,6 +43,7 @@ export default function AdminProductUpdate() {
             setPrice(data.price);
             setCategory(data.category);
             setAgeCategory(data.ageCategory);
+            setImages(data.imagePath);
             setId(data._id);
         } catch (err) {
             console.log(err);
@@ -49,11 +51,14 @@ export default function AdminProductUpdate() {
     };
 
     const handleSubmit = async (e) => {
-        // console.log(typeof category);
         e.preventDefault();
         try {
             const productData = new FormData();
-            if (images) productData.append("images", images);
+            if (newImages.length > 0) {
+                for (const newImage of newImages) {
+                    productData.append("productImages", newImage);
+                }
+            }
             productData.append("title", title);
             productData.append("description", description);
             productData.append("price", price);
@@ -113,39 +118,56 @@ export default function AdminProductUpdate() {
                         <div className="p-3 mt-2 mb-2 h4 bg-light">
                             Modify Product Details
                         </div>
-
-                        {images ? (
+                        {/* Show original images */}
+                        {images.length > 0 && newImages.length === 0 && (
                             <div className="text-center">
-                                <img
-                                    src={URL.createObjectURL(images)}
-                                    alt="product images"
-                                    className="img img-responsive"
-                                    height="200px"
-                                />
+                                {images.map((image, i) => (
+                                    <img
+                                        key={i}
+                                        src={image}
+                                        alt="product"
+                                        className="img img-responsive"
+                                        height="200px"
+                                    />
+                                ))}
                             </div>
-                        ) : (
+                        )}
+                        {/* Show newly selected images */}
+                        {newImages.length > 0 && (
                             <div className="text-center">
-                                <img
-                                    src={`${
-                                        process.env.REACT_APP_API
-                                    }/product/images/${id}?${new Date().getTime()}`}
-                                    alt="product images"
-                                    className="img img-responsive"
-                                    height="200px"
-                                />
+                                {newImages.map((newImage) => (
+                                    <img
+                                        src={URL.createObjectURL(newImage)}
+                                        alt="product images"
+                                        className="img img-responsive"
+                                        height="200px"
+                                    />
+                                ))}
                             </div>
                         )}
 
                         <div className="pt-2">
                             <label className="btn btn-outline-secondary col-12 mb-3">
-                                {images ? images.title : "Upload images"}
+                                {images.length > 0 &&
+                                    newImages.length === 0 &&
+                                    "Click to upload new images"}
+                                {newImages.length > 0 &&
+                                    `${newImages.length} new images selected`}
+
                                 <input
                                     type="file"
                                     name="images"
                                     accept="image/*"
-                                    onChange={(e) =>
-                                        setimages(e.target.files[0])
-                                    }
+                                    multiple
+                                    onChange={(e) => {
+                                        if (e.target.files.length > 5) {
+                                            alert(
+                                                "You can only select up to 5 images."
+                                            );
+                                        } else {
+                                            setNewImages([...e.target.files]);
+                                        }
+                                    }}
                                     hidden
                                 />
                             </label>

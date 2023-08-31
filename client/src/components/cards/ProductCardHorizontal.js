@@ -28,10 +28,7 @@ export default function ProductCardHorizontal({ product, modify = false }) {
     return (
         <div className="card-container">
             <div className="img" onClick={handleLinkClick}>
-                <img
-                    src={`${process.env.REACT_APP_API}/product/images/${product._id}`}
-                    alt={product.title}
-                />
+                <img src={product?.imagePath[0]} alt={product.title} />
             </div>
             <div className="text d-flex flex-column justify-content-between align-items-start">
                 <h2>{product?.category?.name}</h2>
