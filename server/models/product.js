@@ -5,7 +5,7 @@ const productSchema = new mongoose.Schema(
   {
     title: { type: String, trim: true, required: true, maxlength: 160 },
     slug: { type: String, lowercase: true },
-    pdfPath: { type: String },
+    ylhPdfFile: { type: ObjectId, ref: "ylhPdfFile" },
     imagePath: [{ type: String }],
     category: { type: ObjectId, ref: "Category", required: true },
     ageCategory: { type: ObjectId, ref: "ageCategory", required: true },
