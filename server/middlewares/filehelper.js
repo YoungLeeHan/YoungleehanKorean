@@ -4,7 +4,7 @@ import multer from "multer";
 import multerS3 from "multer-s3";
 import aws from "aws-sdk";
 import ylhPdfFile from "../models/ylhPdfFile.js";
-import fs from "fs";
+import { v4 as uuidv4 } from "uuid";
 
 const s3 = new aws.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -73,16 +73,19 @@ const downloadPdf = async (req, res) => {
   try {
     const { fileId } = req.params;
     const foundPdf = await ylhPdfFile.findById(fileId).select("name");
+    const fileName = uuidv4();
     const path = foundPdf.location;
-    console.log(path);
 
     s3.getObject({
       Bucket: process.env.AWS_S3_BUCKET_NAME,
       Key: foundPdf.name,
     })
       .createReadStream()
-      .pipe(res);
-    res.download(path);
+      .on("error", (err) => {
+        console.log(err);
+        res.status(500).json({ error: "Internal server error" });
+      })
+      .pipe(res.attachment(fileName));
   } catch (err) {
     console.log(err);
   }
