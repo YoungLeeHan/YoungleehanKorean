@@ -3,6 +3,8 @@
 import multer from "multer";
 import multerS3 from "multer-s3";
 import aws from "aws-sdk";
+import ylhPdfFile from "../models/ylhPdfFile.js";
+import fs from "fs";
 
 const s3 = new aws.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -38,7 +40,7 @@ const upload = (folder) =>
       },
     }),
     fileFilter: filefilter,
-    limits: { fileSize: 2000000 },
+    limits: { fileSize: 2097152 },
   });
 
 const pdfFilter = (req, file, cb) => {
@@ -67,4 +69,23 @@ const uploadPDF = (folder) =>
     fileFilter: pdfFilter,
   });
 
-export { upload, uploadPDF };
+const downloadPdf = async (req, res) => {
+  try {
+    const { fileId } = req.params;
+    const foundPdf = await ylhPdfFile.findById(fileId).select("name");
+    const path = foundPdf.location;
+    console.log(path);
+
+    s3.getObject({
+      Bucket: process.env.AWS_S3_BUCKET_NAME,
+      Key: foundPdf.name,
+    })
+      .createReadStream()
+      .pipe(res);
+    res.download(path);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export { upload, uploadPDF, downloadPdf };
