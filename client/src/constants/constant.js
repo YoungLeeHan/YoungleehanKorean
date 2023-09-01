@@ -12,8 +12,10 @@ import parentsSVG from "../assets/images/Home/customer_parents.svg";
 import teacherSVG from "../assets/images/Home/customer_teacher.svg";
 
 export const mobileWidth = 767;
-
 export const desktopWidth = 1023;
+export const colorPurple = "#7b1fa2";
+export const colorYellow = "#ffbf35";
+export const colorGray = "#706866";
 
 export const userMenuData = [
     { _id: 0, name: "My Order", link: "user/orders", icon: AiOutlineShopping },

@@ -14,6 +14,7 @@ import ModalInfo from "./../common/ModalInfo";
 import { HiPencilAlt } from "react-icons/hi";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { colorPurple } from "../../constants/constant";
 
 export default function BlogCommentCard({ comment, postId, loadBlogComments }) {
     //hooks
@@ -88,7 +89,7 @@ export default function BlogCommentCard({ comment, postId, loadBlogComments }) {
                 >
                     <div className="d-flex flex-row">
                         <AiOutlineUser
-                            fill="#7b1fa2"
+                            fill={colorPurple}
                             style={{ margin: "3px 10px 0 0" }}
                         />
                         <h4>
@@ -124,7 +125,7 @@ export default function BlogCommentCard({ comment, postId, loadBlogComments }) {
                 </div>
                 <h5>
                     <MdOutlineDateRange
-                        fill="#7b1fa2"
+                        fill={colorPurple}
                         style={{ margin: "0 10px 3px 0" }}
                     />
                     {moment(comment?.createdAt).format(
@@ -150,12 +151,12 @@ export default function BlogCommentCard({ comment, postId, loadBlogComments }) {
                                       border: "1px solid #ffbf35",
                                   }
                                 : {
-                                      border: "1px solid #7b1fa2",
+                                      border: `1px solid ${colorPurple}`,
                                   }),
                         }}
                     >
                         <BiLike
-                            fill={comment?.isLiked ? "#ffbf35" : "#7b1fa2"}
+                            fill={comment?.isLiked ? "#ffbf35" : colorPurple}
                             className={comment?.isLiked ? "" : "bold-icon"}
                             style={{ margin: "0 10px 3px 0" }}
                         />

@@ -5,6 +5,7 @@ import Jumbotron from "../../components/cards/Jumbotron";
 import useScrollToTop from "../../hooks/useScrollToTop";
 import ImageGallery from "../../components/products/ImageGallery";
 import ProductReviews from "../../components/products/ProductReviews";
+import Loading from "./../../components/routes/Loading";
 
 const getProduct = (id) => axios.get(`/product/${id}`);
 
@@ -70,7 +71,7 @@ export default function SingleProductView() {
             >
                 {isLoading && (
                     <div className="d-flex justify-content-center mt-5">
-                        Loading...
+                        <Loading />
                     </div>
                 )}
                 {isError && (

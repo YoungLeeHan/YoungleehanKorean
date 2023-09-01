@@ -23,10 +23,10 @@ export default function ProductCardVertical({ item, download = false }) {
         addToCart(item);
     };
 
-    const handleDownload = (e) => {
-        e.preventDefault();
-        toast.error("Download feature is under construction.");
-    };
+    // const handleDownload = (e) => {
+    //     e.preventDefault();
+    //     toast.error("Download feature is under construction.");
+    // };
 
     const handleWriteReview = (e) => {
         e.preventDefault();
@@ -127,9 +127,13 @@ export default function ProductCardVertical({ item, download = false }) {
                         >
                             Write a review
                         </h5>
+                        {/* <a
+                            href={item?.ylhPdfFile.location}
+                            download="newfileName"
+                        > */}
                         <button
                             className="btn btn-primary"
-                            onClick={handleDownload}
+                            // onClick={handleDownload}
                             style={{
                                 fontSize: "13px",
                                 fontWeight: "500",
@@ -139,6 +143,7 @@ export default function ProductCardVertical({ item, download = false }) {
                         >
                             Download
                         </button>
+                        {/* </a> */}
                     </>
                 )}
             </div>
