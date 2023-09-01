@@ -15,7 +15,6 @@ import { HiPencilAlt } from "react-icons/hi";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { colorPurple } from "../../constants/constant";
-import { colorPurple } from "../../constants/constant";
 
 export default function BlogCommentCard({ comment, postId, loadBlogComments }) {
   //hooks
