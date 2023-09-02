@@ -5,15 +5,16 @@ const numberToStringFloat = (number) => {
   return number.toString().includes(".") ? number.toString() : number.toString() + ".0";
 }
 
+
 const ReviewItem = ({ review }) => {
   return (
     <div className="mb-3">
       <div className="d-flex">
-        <img src={review.user.profileUrl} alt={review.user.name} style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
+        <img src={review.user.profileUrl} alt={review.user.firstName} style={{ width: "50px", height: "50px", borderRadius: "50%", backgroundColor: 'lightgray' }} />
         <div className="d-flex flex-column flex-grow-1 ms-3">
           <div className="d-flex flex-row justify-content-between">
             <div className={styles.userName}>
-              {review.user.name}
+              {review.user.firstName}
               <br />
               <span >{(new Date(review.createdAt)).toLocaleString()}</span>
             </div>
@@ -21,7 +22,7 @@ const ReviewItem = ({ review }) => {
             <AiFillStar style={{ fill: "#ffbf35" }} />
             {numberToStringFloat(review.rating)}</h5>
           </div>
-          <p className={styles.content}>{review.comment}</p>
+          <p className={styles.content}>{review.review}</p>
         </div>
       </div>
     </div>

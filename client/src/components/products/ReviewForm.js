@@ -4,10 +4,11 @@ const ReviewForm = ({ onSubmit }) => {
   const [rating, setRating] = useState(0)
   const [name, setName] = useState('')
   const [comment, setComment] = useState('')
+  const [images, setImages] = useState([])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    onSubmit({ rating, name, comment })
+    onSubmit({ rating, name, comment, images })
   }
   return (
     <div className="card">
@@ -44,6 +45,17 @@ const ReviewForm = ({ onSubmit }) => {
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           ></textarea>
+        </div>
+        <div className="form-group">
+          <label htmlFor="image">Image</label>
+          <input
+            type="file"
+            className="form-control"
+            onChange={(e) => setImages(Array.from(e.target.files))}
+            multiple
+            // value={images}
+            id="image"
+          />
         </div>
 
         <button className='btn btn-outline-primary mt-3' type='button' onClick={handleSubmit}>Submit Review</button>

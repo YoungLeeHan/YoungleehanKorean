@@ -108,7 +108,7 @@ export default function SingleProductView() {
                 <div className="d-flex flex-column"></div>
               )}
               {currentTab === ReviewsTabLabel && (
-                <ProductReviews id={params.slug} />
+                <ProductReviews id={product._id} />
               )}
             </div>
             <div className={"d-flex flex-column"} style={{ width: "440px" }}>
