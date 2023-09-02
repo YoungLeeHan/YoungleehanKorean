@@ -20,14 +20,14 @@ const ProductReviews = ({ id }) => {
 
   const onSubmit = (data) => {
     const formData = new FormData();
-    formData.append('reviewImages', data.images);
+    formData.append('images', data.images);
     formData.append('review', data.comment);
     formData.append('productId', id);
     formData.append('rating', data.rating);
 
     axios.post(`/review`, formData, {
       headers: {
-        "Content-Type": "multipart/form-data",
+        "content-type": "multipart/form-data",
       },
     }).then(() => {
       // reload 되는게 번거롭다면 (지금은 리뷰 등록되고 업데이트 된 최신 리뷰 리스트를 불러오기 위함)
@@ -43,7 +43,7 @@ const ProductReviews = ({ id }) => {
       <div className="d-flex flex-column">
         <h5 className="mb-3">Recent Reviews</h5>
         {reviews.map((review) => (
-          <ReviewItem key={review.id} review={review} />
+          <ReviewItem key={review._id} review={review} />
         ))}
       </div>
       <ReviewForm onSubmit={onSubmit} />
