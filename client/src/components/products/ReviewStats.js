@@ -1,9 +1,14 @@
 import styles from './ReviewStats.module.scss';
 
+const ratingPercent = (count, total) => `${count / total * 100}%`
 const ReviewStats = ({reviews}) => {
   const totalReviews = reviews.length;
   const totalRating = reviews.reduce((acc, review) => acc + review.rating, 0);
-  const averageRating = totalRating / totalReviews;
+  const averageRating = (totalRating / totalReviews).toFixed(1);
+  let rates = [0, 0, 0, 0, 0, 0]
+  reviews.forEach(({rating}) => {
+    rates[rating] += 1
+  })
 
   return (
     <div className="d-flex align-items-center mt-5 mb-4">
@@ -18,7 +23,7 @@ const ReviewStats = ({reviews}) => {
             <div
               className="progress-bar bg-success"
               role="progressbar"
-              style={{ width: "25%" }}
+              style={{ width: ratingPercent(rates[5], totalReviews) }}
               aria-valuenow="25"
               aria-valuemin="0"
               aria-valuemax="100"
@@ -28,7 +33,7 @@ const ReviewStats = ({reviews}) => {
             <div
               className="progress-bar bg-success"
               role="progressbar"
-              style={{ width: "25%" }}
+              style={{ width: ratingPercent(rates[4], totalReviews) }}
               aria-valuenow="25"
               aria-valuemin="0"
               aria-valuemax="100"
@@ -38,7 +43,7 @@ const ReviewStats = ({reviews}) => {
             <div
               className="progress-bar bg-success"
               role="progressbar"
-              style={{ width: "25%" }}
+              style={{ width: ratingPercent(rates[3], totalReviews) }}
               aria-valuenow="25"
               aria-valuemin="0"
               aria-valuemax="100"
@@ -48,7 +53,7 @@ const ReviewStats = ({reviews}) => {
             <div
               className="progress-bar bg-success"
               role="progressbar"
-              style={{ width: "25%" }}
+              style={{ width: ratingPercent(rates[2], totalReviews) }}
               aria-valuenow="25"
               aria-valuemin="0"
               aria-valuemax="100"
@@ -58,7 +63,7 @@ const ReviewStats = ({reviews}) => {
             <div
               className="progress-bar bg-success"
               role="progressbar"
-              style={{ width: "25%" }}
+              style={{ width: ratingPercent(rates[1], totalReviews) }}
               aria-valuenow="25"
               aria-valuemin="0"
               aria-valuemax="100"

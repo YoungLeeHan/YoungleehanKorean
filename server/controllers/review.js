@@ -6,7 +6,7 @@ export const reviewCreate = async (req, res) => {
     const user = req.user;
     const { review, productId, rating } = req.body;
     const filedata = req.files;
-
+    console.log( req.body, req.files)
     try {
         const uploadedImagePath = filedata.map((data) => data.location);
         const newReview = await Review.create({
