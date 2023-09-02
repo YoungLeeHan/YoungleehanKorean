@@ -25,7 +25,11 @@ const ProductReviews = ({ id }) => {
     formData.append('productId', id);
     formData.append('rating', data.rating);
 
-    axios.post(`/review`, formData).then(() => {
+    axios.post(`/review`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    }).then(() => {
       // reload 되는게 번거롭다면 (지금은 리뷰 등록되고 업데이트 된 최신 리뷰 리스트를 불러오기 위함)
       // 1. post 요청의 응답으로 새 review list를 서버에서 내려주고 setReviews 하면 됩니다.
       // 2. 혹은 서버에서 내려줄 수 없다면 then 에서 (여기에서) getReviews 를 한번 더 요청하고 setReviews 하면 됩니다.
