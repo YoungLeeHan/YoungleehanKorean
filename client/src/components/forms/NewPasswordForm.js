@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { colorPurple } from "../../constants/constant";
 
 export default function NewPasswordForm() {
     // state
@@ -78,7 +79,7 @@ export default function NewPasswordForm() {
                     <li>
                         <h4
                             style={{
-                                color: "#7b1fa2",
+                                color: colorPurple,
                                 textAlign: "start",
                                 fontSize: "14px",
                                 fontWeight: "500",

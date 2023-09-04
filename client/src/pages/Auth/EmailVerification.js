@@ -4,7 +4,7 @@ import { useParams, Link } from "react-router-dom";
 import PageNotFound from "../PageNotFound";
 import axios from "axios";
 import useWindowWidth from "../../hooks/useWindowWidth";
-import { mobileWidth } from "../../constants/constant";
+import { mobileWidth, maxWidth, colorPurple } from "../../constants/constant";
 import { toast } from "react-hot-toast";
 import useScrollToTop from "../../hooks/useScrollToTop";
 import Loading from "../../components/common/Loading";
@@ -50,7 +50,7 @@ export default function EmailVerification() {
                         directory={"Email verification"}
                     />
                     <div
-                        style={{ maxWidth: "1170px", minHeight: "400px" }}
+                        style={{ maxWidth: maxWidth, minHeight: "400px" }}
                         className="container-fluid d-flex flex-column justify-content-center align-items-center"
                     >
                         <h3
@@ -63,7 +63,7 @@ export default function EmailVerification() {
                         </h3>
                         <Link
                             to="/login"
-                            style={{ color: "#7b1fa2", marginTop: "30px" }}
+                            style={{ color: colorPurple, marginTop: "30px" }}
                         >
                             <button
                                 className="btn btn-primary"

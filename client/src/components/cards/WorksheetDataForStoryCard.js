@@ -1,6 +1,6 @@
 // 👻 Developed by DanBi Choi on Aug 28th, 2023.
 // -----------------------------------------------------
-import { mobileWidth } from "../../constants/constant";
+import { mobileWidth, colorGray } from "../../constants/constant";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { useState, useEffect } from "react";
 
@@ -52,7 +52,7 @@ export default function WorksheetDataForStoryCard({ data }) {
                             style={{
                                 fontSize:
                                     windowWidth < mobileWidth ? "14px" : "16px",
-                                color: "#706866",
+                                color: colorGray,
                             }}
                         >
                             {data.msg}
@@ -76,7 +76,7 @@ export default function WorksheetDataForStoryCard({ data }) {
                         <p
                             style={{
                                 fontSize: "16px",
-                                color: "#706866",
+                                color: colorGray,
                             }}
                         >
                             {data.msg}

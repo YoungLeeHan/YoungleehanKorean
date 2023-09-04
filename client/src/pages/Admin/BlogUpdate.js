@@ -8,7 +8,11 @@ import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { Select } from "antd";
-import { editorModules, editorFormats } from "../../constants/constant";
+import {
+    editorModules,
+    editorFormats,
+    maxWidth,
+} from "../../constants/constant";
 import useScrollToTop from "./../../hooks/useScrollToTop";
 import useBlogCategory from "./../../hooks/useBlogCategory";
 
@@ -98,7 +102,7 @@ export default function BlogUpdate() {
                 directory={"Admin Dashboard"}
                 subDirectory={"Create Blog Post"}
             />
-            <div style={{ maxWidth: "1170px" }} className="container-fluid">
+            <div style={{ maxWidth: maxWidth }} className="container-fluid">
                 <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
                         <DashboardMenu id={6} menutype={"admin"} />

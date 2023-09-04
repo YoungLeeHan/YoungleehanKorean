@@ -1,7 +1,13 @@
 // 👻 Developed by DanBi Choi on July 19th, 2023.
 // -----------------------------------------------------
 
-import { mobileWidth } from "./../../constants/constant";
+import {
+    mobileWidth,
+    colorYellow,
+    colorGray,
+    bgColorBeige,
+    maxWidth,
+} from "./../../constants/constant";
 import useWindowWidth from "./../../hooks/useWindowWidth";
 
 export default function Jumbotron({
@@ -13,22 +19,22 @@ export default function Jumbotron({
     const windowWidth = useWindowWidth();
 
     const highlightedStyle = {
-        color: "#ffbf35",
+        color: colorYellow,
         fontSize: windowWidth < mobileWidth ? "14px" : "16px",
         fontWeight: "400",
     };
     const defaultStyle = {
-        color: "#706866",
+        color: colorGray,
         fontSize: windowWidth < mobileWidth ? "14px" : "16px",
         fontWeight: "400",
     };
 
     return (
         <>
-            <div style={{ width: "100vw", backgroundColor: "#f6f4ee" }}>
+            <div style={{ width: "100vw", backgroundColor: bgColorBeige }}>
                 <div
                     style={{
-                        maxWidth: "1170px",
+                        maxWidth: maxWidth,
                         margin: "auto",
                         padding: "0 10px 0 10px",
                     }}

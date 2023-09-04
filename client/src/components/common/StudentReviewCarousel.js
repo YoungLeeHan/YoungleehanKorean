@@ -4,6 +4,7 @@ import Slider from "react-slick";
 import {
     studentReviewForTeacher,
     sliderSettingWithDots,
+    colorPurple,
 } from "./../../constants/constant";
 import TitleCard from "../cards/TitleCard";
 import StudentReviewForCreatorCard from "../cards/StudentReviewForCreatorCard";
@@ -28,8 +29,8 @@ export default function StudentReviewCarousel() {
                 style={{
                     width: "90%",
                     margin: "auto",
-                    borderTop: "3px solid #7b1fa2",
-                    borderBottom: "3px solid #7b1fa2",
+                    borderTop: `3px solid ${colorPurple}`,
+                    borderBottom: `3px solid ${colorPurple}`,
                 }}
             >
                 {studentReviewForTeacher.map((data) => (

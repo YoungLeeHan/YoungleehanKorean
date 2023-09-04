@@ -11,11 +11,12 @@ import axios from "axios";
 import { Col, Row, Checkbox, ConfigProvider, Slider } from "antd";
 import ProductCardHorizontal from "../../components/cards/ProductCardHorizontal";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
-import { mobileWidth } from "../../constants/constant";
+import { mobileWidth, colorPurple, colorGray } from "../../constants/constant";
 import Loading from "../../components/common/Loading";
 import SearchUI from "../../components/common/SearchUI";
 import useLevelCategory from "../../hooks/useLevelCategory";
 import useAgeCategory from "../../hooks/useAgeCategory";
+import { maxWidth } from "../../constants/constant";
 
 export default function ProductsView() {
     // hooks
@@ -173,7 +174,7 @@ export default function ProductsView() {
         <>
             <Jumbotron title={"Korean Learning Materials"} directory={"Shop"} />
             <div
-                style={{ maxWidth: "1170px" }}
+                style={{ maxWidth: maxWidth }}
                 className="container-fluid d-flex flex-column align-items-center"
             >
                 <div className="shop-productsView-box container-fluid">
@@ -202,9 +203,9 @@ export default function ProductsView() {
                                     <ConfigProvider
                                         theme={{
                                             token: {
-                                                colorPrimary: "#7b1fa2",
+                                                colorPrimary: colorPurple,
                                                 lineHeight: "2",
-                                                colorPrimaryBorder: "#7b1fa2",
+                                                colorPrimaryBorder: colorPurple,
                                             },
                                         }}
                                     >
@@ -338,7 +339,7 @@ export default function ProductsView() {
                                             <span
                                                 style={{
                                                     padding: "0 20px 0 39px",
-                                                    color: "#706866",
+                                                    color: colorGray,
                                                 }}
                                             >
                                                 Sort by

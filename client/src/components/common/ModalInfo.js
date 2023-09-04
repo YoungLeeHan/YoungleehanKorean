@@ -4,9 +4,10 @@
 import { Modal, ConfigProvider } from "antd";
 import { BsInfoCircleFill } from "react-icons/bs";
 import useWindowWidth from "../../hooks/useWindowWidth";
+import { colorYellow } from "../../constants/constant";
 
 export default function ModalInfo({
-    color = "#ffbf35",
+    color = colorYellow,
     isModalOpen,
     handleOk,
     handleCancel,

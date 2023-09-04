@@ -1,6 +1,7 @@
 // 👻 Developed by DanBi Choi on July 19th, 2023.
 // -----------------------------------------------------
 import { Link } from "react-router-dom";
+import { bgColorBeige, maxWidth } from "../../constants/constant";
 
 export default function LandingView() {
     return (
@@ -8,11 +9,11 @@ export default function LandingView() {
             className="landing-view"
             style={{
                 width: "100vw",
-                backgroundColor: "#f6f4ee",
+                backgroundColor: bgColorBeige,
             }}
         >
             <div
-                style={{ margin: "auto", maxWidth: "1170px" }}
+                style={{ margin: "auto", maxWidth: maxWidth }}
                 className="container-fluid"
             >
                 <div className="row">

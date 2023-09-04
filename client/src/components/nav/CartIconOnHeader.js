@@ -6,6 +6,7 @@ import { Badge } from "antd";
 import { NavLink } from "react-router-dom";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { useCartQuantity } from "../../context/cartQuantity";
+import { colorPurple } from "../../constants/constant";
 
 export default function CartIconOnHeader() {
     // hooks
@@ -23,7 +24,7 @@ export default function CartIconOnHeader() {
                 <Badge
                     count={cartTotal}
                     size="small"
-                    color="#7b1fa2"
+                    color={colorPurple}
                     showZero="true"
                     overflowCount={10}
                     offset={[-5, 5]}

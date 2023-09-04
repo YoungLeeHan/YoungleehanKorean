@@ -3,10 +3,8 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { mobileWidth } from "../../constants/constant";
+import { mobileWidth, colorPurple, colorGray } from "../../constants/constant";
 import useWindowWidth from "./../../hooks/useWindowWidth";
-
-const mainColor = "#7b1fa2";
 
 export default function CustomerTypesCard({ data }) {
     //hooks
@@ -72,7 +70,7 @@ export default function CustomerTypesCard({ data }) {
                     className="d-flex flex-column justify-content-between align-items-center text-center"
                     style={{
                         height: "280px",
-                        border: `1px solid ${mainColor}`,
+                        border: `1px solid ${colorPurple}`,
                         borderRadius: "10px",
                         padding: "25px",
                     }}
@@ -85,7 +83,7 @@ export default function CustomerTypesCard({ data }) {
                         />
                         <h3
                             style={{
-                                color: mainColor,
+                                color: colorPurple,
                                 fontWeight: "600",
                                 marginLeft: "10px",
                             }}
@@ -94,7 +92,7 @@ export default function CustomerTypesCard({ data }) {
                         </h3>
                     </div>
                     <h4 style={{ fontSize: "16px" }}>"{data?.msg}"</h4>
-                    <p style={{ fontSize: "12px", color: "#706866" }}>
+                    <p style={{ fontSize: "12px", color: colorGray }}>
                         {data?.subMsg}
                     </p>
                     <Link to={data?.link}>
@@ -105,7 +103,7 @@ export default function CustomerTypesCard({ data }) {
                                 borderRadius: "10px",
                                 fontWeight: "400",
                                 padding: "10px 20px",
-                                backgroundColor: mainColor,
+                                backgroundColor: colorPurple,
                             }}
                         >
                             View Story

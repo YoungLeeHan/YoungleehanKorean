@@ -6,6 +6,7 @@ import DashboardMenu from "../../components/nav/DashboardMenu";
 import BlogPostCardHorizontal from "./../../components/cards/BlogPostCardHorizontal";
 import useScrollToTop from "./../../hooks/useScrollToTop";
 import useBlogList from "../../hooks/useBlogList";
+import { maxWidth } from "../../constants/constant";
 
 export default function BlogList() {
     // hooks
@@ -20,7 +21,7 @@ export default function BlogList() {
                 directory={"Admin Dashboard"}
                 subDirectory={"Blog Posts"}
             />
-            <div style={{ maxWidth: "1170px" }} className="container-fluid">
+            <div style={{ maxWidth: maxWidth }} className="container-fluid">
                 <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
                         <DashboardMenu id={7} menutype={"admin"} />

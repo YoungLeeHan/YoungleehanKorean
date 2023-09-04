@@ -9,6 +9,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useScrollToTop from "./../../hooks/useScrollToTop";
 import useLevelCategory from "./../../hooks/useLevelCategory";
 import useAgeCategory from "./../../hooks/useAgeCategory";
+import { maxWidth } from "../../constants/constant";
 
 const { Option } = Select;
 
@@ -114,7 +115,7 @@ export default function AdminProductUpdate() {
                 subDirectory={"Modify Product Details"}
             />
 
-            <div style={{ maxWidth: "1170px" }} className="container-fluid">
+            <div style={{ maxWidth: maxWidth }} className="container-fluid">
                 <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
                         <DashboardMenu id={3} menutype={"admin"} />

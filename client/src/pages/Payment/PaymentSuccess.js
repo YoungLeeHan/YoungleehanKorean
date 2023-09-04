@@ -7,7 +7,12 @@ import SuccessSVG from "../../assets/images/Checkout/PaymentSuccess.svg";
 import { useAuth } from "../../context/auth";
 import { useEffect } from "react";
 import useWindowWidth from "./../../hooks/useWindowWidth";
-import { mobileWidth } from "../../constants/constant";
+import {
+    mobileWidth,
+    colorPurple,
+    colorGray,
+    maxWidth,
+} from "../../constants/constant";
 
 export default function PaymentSuccess() {
     useScrollToTop();
@@ -27,7 +32,7 @@ export default function PaymentSuccess() {
         <>
             <Jumbotron title={"Checkout"} directory={"Checkout Result"} />
             <div
-                style={{ maxWidth: "1170px", minHeight: "750px" }}
+                style={{ maxWidth: maxWidth, minHeight: "750px" }}
                 className="container-fluid d-flex flex-column align-items-center"
             >
                 <div
@@ -39,7 +44,7 @@ export default function PaymentSuccess() {
                         style={{
                             fontSize:
                                 windowWidth < mobileWidth ? "20px" : "32px",
-                            color: "#7B1FA2",
+                            color: colorPurple,
                             fontWeight: "600",
                             margin: "0",
                         }}
@@ -50,7 +55,7 @@ export default function PaymentSuccess() {
                     <h3
                         style={{
                             margin: "25px 0",
-                            color: "#706866",
+                            color: colorGray,
                             fontSize:
                                 windowWidth < mobileWidth ? "14px" : "20px",
                         }}

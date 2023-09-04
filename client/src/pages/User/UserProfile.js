@@ -15,6 +15,7 @@ import {
     countryList,
     usStatesList,
     mobileWidth,
+    maxWidth,
 } from "../../constants/constant";
 import ModalInfo from "../../components/common/ModalInfo";
 import useScrollToTop from "../../hooks/useScrollToTop";
@@ -143,7 +144,7 @@ export default function UserProfile() {
                 subDirectory={"Profile"}
             />
             <div
-                style={{ maxWidth: "1170px", minHeight: "400px" }}
+                style={{ maxWidth: maxWidth, minHeight: "400px" }}
                 className="container-fluid"
             >
                 <div className="row" style={{ margin: "75px 0" }}>

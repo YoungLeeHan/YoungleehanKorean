@@ -3,7 +3,7 @@
 import { Rate } from "antd";
 import { useEffect, useState } from "react";
 import useWindowWidth from "../../hooks/useWindowWidth";
-import { mobileWidth } from "../../constants/constant";
+import { mobileWidth, colorGray } from "../../constants/constant";
 
 export default function StudentReviewCard({ data }) {
     //hooks
@@ -59,7 +59,7 @@ export default function StudentReviewCard({ data }) {
                 </h3>
                 <p
                     style={{
-                        color: "#706866",
+                        color: colorGray,
                         fontSize: "14px",
                         lineHeight: "165%",
                         margin: "18px 0 ",

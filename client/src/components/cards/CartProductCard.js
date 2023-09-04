@@ -4,6 +4,7 @@
 import { TiDelete } from "react-icons/ti";
 import { BiSolidUpArrow, BiSolidDownArrow } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { colorYellow } from "../../constants/constant";
 
 export default function CartProductCard({
     item,
@@ -65,7 +66,7 @@ export default function CartProductCard({
                         handleDelete(item._id);
                     }}
                 >
-                    <TiDelete fill="#ffbf35" size={20} />
+                    <TiDelete fill={colorYellow} size={20} />
                 </button>
             </td>
         </tr>

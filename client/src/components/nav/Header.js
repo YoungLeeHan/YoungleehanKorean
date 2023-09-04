@@ -14,11 +14,15 @@ import UserBtns from "./UserBtns";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useNavOverlay } from "../../context/navOverlay";
 import { toast } from "react-hot-toast";
-import { desktopWidth } from "../../constants/constant";
+import {
+    testerWelcomeText,
+    maxWidth,
+    desktopWidth,
+    colorYellow,
+} from "../../constants/constant";
 import yellowtagSVG from "../../assets/images/Common/yellowtag.svg";
 import { Modal, ConfigProvider } from "antd";
 import { useState } from "react";
-import { testerWelcomeText } from "../../constants/constant";
 
 export default function Header() {
     //hooks
@@ -50,7 +54,7 @@ export default function Header() {
             <div className="nav-box sticky-top">
                 <div
                     className="container d-flex flex-row justify-content-between align-items-center"
-                    style={{ maxWidth: "1170px", width: "100%" }}
+                    style={{ maxWidth: maxWidth, width: "100%" }}
                 >
                     <Link to="/">
                         <div className="header-logo-box d-flex flex-row justify-content-between align-items-center">
@@ -175,9 +179,9 @@ export default function Header() {
                 <ConfigProvider
                     theme={{
                         token: {
-                            colorPrimary: "#ffbf35",
+                            colorPrimary: colorYellow,
                             lineHeight: "2",
-                            colorPrimaryBorder: "#ffbf35",
+                            colorPrimaryBorder: colorYellow,
                         },
                     }}
                 >
