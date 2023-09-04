@@ -9,7 +9,6 @@ import ReviewStats from "./ReviewStats";
 import ReviewForm from "./ReviewForm";
 
 const getReviews = (id) => axios.get("/review/" + id);
-const getReviews = (id) => axios.get("/review/" + id);
 
 const ProductReviews = ({ id }) => {
   const navigate = useNavigate();
