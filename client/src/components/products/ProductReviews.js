@@ -1,10 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ReviewItem from "./ReviewItem";
 import ReviewStats from "./ReviewStats";
 import ReviewForm from "./ReviewForm";
 
+const getReviews = (id) => axios.get("/review/" + id);
 const getReviews = (id) => axios.get("/review/" + id);
 
 const ProductReviews = ({ id }) => {

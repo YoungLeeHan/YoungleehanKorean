@@ -4,6 +4,7 @@ import Jumbotron from "../../components/cards/Jumbotron";
 import AccountControlBox from "../../components/cards/AccountControlBox";
 import NewPasswordForm from "../../components/forms/NewPasswordForm";
 import useScrollToTop from "../../hooks/useScrollToTop";
+import { maxWidth } from "../../constants/constant";
 
 export default function NewPassword() {
     useScrollToTop();
@@ -11,7 +12,7 @@ export default function NewPassword() {
         <>
             <Jumbotron title={"New Password"} directory={"New Password"} />
             <div
-                style={{ maxWidth: "1170px" }}
+                style={{ maxWidth: maxWidth }}
                 className="container-fluid d-flex flex-column align-items-center"
             >
                 <AccountControlBox

@@ -1,5 +1,6 @@
 import styles from "./ReviewItem.module.scss";
 import { AiFillStar } from "react-icons/ai";
+import { colorYellow } from "../../constants/constant";
 
 const numberToStringFloat = (number) => {
   return number.toString().includes(".")

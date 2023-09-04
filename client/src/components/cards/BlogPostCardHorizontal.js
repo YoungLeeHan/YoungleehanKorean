@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { MdOutlineDateRange } from "react-icons/md";
 import moment from "moment";
 import useWindowWidth from "../../hooks/useWindowWidth";
-import { mobileWidth } from "../../constants/constant";
+import { mobileWidth, colorPurple } from "../../constants/constant";
 
 export default function BlogPostCardHorizontal({ post, modify = false }) {
     moment.locale("en");
@@ -73,7 +73,7 @@ export default function BlogPostCardHorizontal({ post, modify = false }) {
                                 windowWidth < mobileWidth ? "11px" : "14px",
                         }}
                     >
-                        <MdOutlineDateRange fill="#7b1fa2" />{" "}
+                        <MdOutlineDateRange fill={colorPurple} />{" "}
                         {moment(post?.createdAt).format("MMMM DD YYYY")}
                     </p>
                 </div>

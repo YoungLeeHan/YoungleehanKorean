@@ -1,4 +1,9 @@
-import { mobileWidth } from "../../constants/constant";
+import {
+    mobileWidth,
+    colorPurple,
+    colorYellow,
+    colorGray,
+} from "../../constants/constant";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 export default function TitleCard({
@@ -23,7 +28,7 @@ export default function TitleCard({
                 <div
                     style={{
                         padding: "2px",
-                        borderBottom: "3px solid #ffbf35",
+                        borderBottom: `3px solid ${colorYellow}`,
                         marginBottom: "12px",
                     }}
                 >
@@ -32,7 +37,7 @@ export default function TitleCard({
                             fontWeight: "500",
                             fontSize:
                                 windowWidth < mobileWidth ? "18px" : "20px",
-                            borderBottom: "3px solid #ffbf35",
+                            borderBottom: `3px solid ${colorYellow}`,
                         }}
                     >
                         #{sectionTitle}
@@ -49,7 +54,7 @@ export default function TitleCard({
                 {mainTitle1}{" "}
                 <span
                     style={{
-                        color: "#7b1fa2",
+                        color: colorPurple,
                         fontWeight: "600",
                         fontSize: windowWidth < mobileWidth ? "28px" : "32px",
                         marginBottom: "10px",
@@ -61,7 +66,7 @@ export default function TitleCard({
             </h1>
             <p
                 style={{
-                    color: "#706866",
+                    color: colorGray,
                     fontSize: windowWidth < mobileWidth ? "14px" : "16px",
                     margin: "10px 0 40px 0",
                     lineHeight: "160%",

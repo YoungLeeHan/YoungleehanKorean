@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
 import DashboardMenu from "../../components/nav/DashboardMenu";
@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import useScrollToTop from "./../../hooks/useScrollToTop";
 import useLevelCategory from "./../../hooks/useLevelCategory";
 import useAgeCategory from "./../../hooks/useAgeCategory";
+import { maxWidth } from "../../constants/constant";
 
 const { Option } = Select;
 
@@ -61,7 +62,7 @@ export default function AdminProductCreate() {
                 directory={"Admin Dashboard"}
                 subDirectory={"Create Product"}
             />
-            <div style={{ maxWidth: "1170px" }} className="container-fluid">
+            <div style={{ maxWidth: maxWidth }} className="container-fluid">
                 <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
                         <DashboardMenu id={3} menutype={"admin"} />

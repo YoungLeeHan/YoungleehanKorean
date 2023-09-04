@@ -8,7 +8,7 @@ import useScrollToTop from "../../hooks/useScrollToTop";
 import { useAuth } from "../../context/auth";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { maxWidth } from "../../constants/constant";
 
 export default function Login() {
     useScrollToTop();
@@ -28,7 +28,7 @@ export default function Login() {
         <>
             <Jumbotron title={"Log in"} directory={"Log in"} />
             <div
-                style={{ maxWidth: "1170px" }}
+                style={{ maxWidth: maxWidth }}
                 className="container-fluid d-flex flex-column align-items-center"
             >
                 <AccountControlBox

@@ -10,6 +10,7 @@ import WorksheetDataForStoryCard from "../components/cards/WorksheetDataForStory
 import {
     storyboxStudentData,
     worksheetTextDataForOurStory,
+    maxWidth,
 } from "./../constants/constant";
 const { image, title, description } = storyboxStudentData;
 
@@ -25,7 +26,7 @@ export default function Ourstory() {
                 subDirectory={"Our Story"}
             />
             <div
-                style={{ maxWidth: "1170px" }}
+                style={{ maxWidth: maxWidth }}
                 className="container-fluid creatorStory d-flex flex-column align-items-center"
             >
                 <TitleCard

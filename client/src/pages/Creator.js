@@ -9,7 +9,7 @@ import yellowBadge from "../assets/images/Creator/yellowBadge.svg";
 import AboutBadge from "../components/cards/AboutBadge";
 import useWindowWidth from "../hooks/useWindowWidth";
 import catImg from "./../assets/images/Creator/cat_square.jpg";
-import { mobileWidth } from "../constants/constant";
+import { mobileWidth, maxWidth } from "../constants/constant";
 import BlogVerticalSummary from "../components/common/BlogVerticalSummary";
 import StudentReviewCarousel from "../components/common/StudentReviewCarousel";
 
@@ -26,7 +26,7 @@ export default function Creator() {
                 subDirectory={"Creator"}
             />
             <div
-                style={{ maxWidth: "1170px" }}
+                style={{ maxWidth: maxWidth }}
                 className="container-fluid d-flex flex-column align-items-center"
             >
                 <div className="about-box row d-flex flex-row justify-content-between">

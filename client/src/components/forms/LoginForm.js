@@ -11,6 +11,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";
 import ModalInfo from "../common/ModalInfo";
+import { colorPurple } from "../../constants/constant";
 
 export default function LoginForm() {
   // state

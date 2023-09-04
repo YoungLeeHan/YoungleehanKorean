@@ -1,7 +1,7 @@
 // 👻 Developed by DanBi Choi on Aug 27th, 2023.
 // -----------------------------------------------------
 import noOrderImg from "../../assets/images/UserProfile/noOrder.svg";
-import { mobileWidth } from "../../constants/constant";
+import { mobileWidth, colorPurple, colorGray } from "../../constants/constant";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { useNavigate } from "react-router-dom";
 
@@ -22,7 +22,7 @@ export default function NoOrderDisplay() {
             />
             <h1
                 style={{
-                    color: "#7B1FA2",
+                    color: colorPurple,
                     fontSize: windowWidth < mobileWidth ? "20px" : "32px",
                     fontWeight: "600",
                     margin: "20px 0 20px 0",
@@ -32,7 +32,7 @@ export default function NoOrderDisplay() {
             </h1>
             <p
                 style={{
-                    color: "#706866",
+                    color: colorGray,
                     fontSize: windowWidth < mobileWidth ? "14px" : "20px",
                     maxWidth: "505px",
                     marginBottom: "20px",

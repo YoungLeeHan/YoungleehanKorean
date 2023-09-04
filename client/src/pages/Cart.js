@@ -13,6 +13,7 @@ import CartProductCard from "./../components/cards/CartProductCard";
 import ModalInfo from "../components/common/ModalInfo";
 import CartTotalBox from "../components/cards/CartTotalBox";
 import NoOrderDisplay from "../components/common/NoOrderDisplay";
+import { maxWidth } from "../constants/constant";
 
 export default function Cart() {
     useScrollToTop();
@@ -75,7 +76,7 @@ export default function Cart() {
         <>
             <Jumbotron title={"Cart"} directory={"Cart"} />
             <div
-                style={{ maxWidth: "1170px" }}
+                style={{ maxWidth: maxWidth }}
                 className="container-fluid d-flex flex-column align-items-center"
             >
                 <div className="cart-box container-fluid">
