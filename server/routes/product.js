@@ -10,7 +10,6 @@ import {
   create,
   list,
   read,
-  images,
   remove,
   update,
   filteredProducts,
@@ -38,7 +37,6 @@ router.post(
 );
 router.get("/products", list);
 router.get("/product/:slug", read);
-router.get("/product/images/:productId", images);
 router.delete("/product/:productId", requireSignin, isAdmin, remove);
 router.put(
   "/product/:productId",
