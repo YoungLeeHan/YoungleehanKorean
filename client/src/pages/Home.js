@@ -9,7 +9,7 @@ import Reviews from "../components/home/Reviews";
 import BlogVerticalSummary from "../components/common/BlogVerticalSummary";
 import ShopVerticalSummary from "../components/common/ShopVerticalSummary";
 import useWindowWidth from "../hooks/useWindowWidth";
-import { mobileWidth } from "../constants/constant";
+import { mobileWidth, bgColorBeige, maxWidth } from "../constants/constant";
 
 export default function Home() {
     //hook
@@ -17,7 +17,7 @@ export default function Home() {
 
     return (
         <div
-            style={{ maxWidth: "1170px" }}
+            style={{ maxWidth: maxWidth }}
             className="container-fluid d-flex flex-column align-items-center"
         >
             <LandingView />
@@ -29,7 +29,7 @@ export default function Home() {
                 <div
                     style={{
                         width: "100vw",
-                        backgroundColor: "#f6f4ee",
+                        backgroundColor: bgColorBeige,
                         height: "300px",
                         position: "absolute",
                         top: "3150px",

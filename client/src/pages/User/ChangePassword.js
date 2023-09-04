@@ -10,7 +10,7 @@ import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import useWindowWidth from "./../../hooks/useWindowWidth";
 import ProfileInput from "../../components/cards/ProfileInput";
-import { mobileWidth } from "./../../constants/constant";
+import { mobileWidth, colorPurple, maxWidth } from "./../../constants/constant";
 import useScrollToTop from "../../hooks/useScrollToTop";
 
 export default function ChangePassword() {
@@ -85,7 +85,7 @@ export default function ChangePassword() {
                 subDirectory={"Change password"}
             />
             <div
-                style={{ maxWidth: "1170px", minHeight: "400px" }}
+                style={{ maxWidth: maxWidth, minHeight: "400px" }}
                 className="container-fluid"
             >
                 <div className="row" style={{ margin: "75px 0" }}>
@@ -152,7 +152,7 @@ export default function ChangePassword() {
                                 <li>
                                     <h4
                                         style={{
-                                            color: "#7b1fa2",
+                                            color: colorPurple,
                                             textAlign: "start",
                                             fontSize: "14px",
                                             fontWeight: "500",

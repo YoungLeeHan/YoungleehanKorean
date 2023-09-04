@@ -1,10 +1,11 @@
 // 👻 Developed by DanBi Choi on July 25th, 2023.
 // -----------------------------------------------------
+import "../styles/pages/Contact.scss";
 import Jumbotron from "../components/cards/Jumbotron";
 import useScrollToTop from "../hooks/useScrollToTop";
 import { useForm, ValidationError } from "@formspree/react";
 import { Link } from "react-router-dom";
-import "../styles/pages/Contact.scss";
+import { colorPurple, maxWidth } from "../constants/constant";
 
 export default function Contact() {
     useScrollToTop();
@@ -29,7 +30,7 @@ export default function Contact() {
                     to={"/"}
                     className="pointer"
                     style={{
-                        color: "#7b1fa2",
+                        color: colorPurple,
                         textDecoration: "underline",
                         fontSize: "16px",
                     }}
@@ -44,7 +45,7 @@ export default function Contact() {
         <>
             <Jumbotron title={"Contact"} directory={"Contact  "} />
             <div
-                style={{ maxWidth: "1170px" }}
+                style={{ maxWidth: maxWidth }}
                 className="container-fluid d-flex flex-column align-items-center"
             >
                 <div className="contact-box container-fluid">

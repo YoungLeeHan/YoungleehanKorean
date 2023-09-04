@@ -5,12 +5,16 @@ import "react-quill/dist/quill.snow.css";
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
 import DashboardMenu from "../../components/nav/DashboardMenu";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Select } from "antd";
-import { editorModules, editorFormats } from "../../constants/constant";
+import {
+    editorModules,
+    editorFormats,
+    maxWidth,
+} from "../../constants/constant";
 import useScrollToTop from "./../../hooks/useScrollToTop";
 import useBlogCategory from "./../../hooks/useBlogCategory";
 
@@ -68,7 +72,7 @@ export default function BlogCreate() {
                 directory={"Admin Dashboard"}
                 subDirectory={"Create Blog Post"}
             />
-            <div style={{ maxWidth: "1170px" }} className="container-fluid">
+            <div style={{ maxWidth: maxWidth }} className="container-fluid">
                 <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
                         <DashboardMenu id={6} menutype={"admin"} />

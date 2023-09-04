@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { colorPurple } from "../../constants/constant";
 
 export default function VerificationForm() {
     // state
@@ -57,7 +58,7 @@ export default function VerificationForm() {
                             <span>
                                 <Link
                                     to="/register"
-                                    style={{ color: "#7b1fa2" }}
+                                    style={{ color: colorPurple }}
                                 >
                                     Resend
                                 </Link>

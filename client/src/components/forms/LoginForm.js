@@ -11,6 +11,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useAuth } from "../../context/auth";
 import ModalInfo from "../common/ModalInfo";
+import { colorPurple } from "../../constants/constant";
 
 export default function LoginForm() {
     // state
@@ -101,7 +102,7 @@ export default function LoginForm() {
                             <Link
                                 to="/forgotpassword"
                                 style={{
-                                    color: "#7b1fa2",
+                                    color: colorPurple,
                                     fontWeight: "500",
                                     fontSize: "14px",
                                 }}
@@ -151,7 +152,7 @@ export default function LoginForm() {
                             <span>
                                 <Link
                                     to="/register"
-                                    style={{ color: "#7b1fa2" }}
+                                    style={{ color: colorPurple }}
                                 >
                                     Create an account
                                 </Link>

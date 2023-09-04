@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import useWindowWidth from "../../hooks/useWindowWidth";
-import { mobileWidth } from "../../constants/constant";
+import { mobileWidth, colorPurple, colorGray } from "../../constants/constant";
 import { BiLinkExternal } from "react-icons/bi";
 
 export default function BlogPostCardVertical({ post }) {
@@ -61,7 +61,7 @@ export default function BlogPostCardVertical({ post }) {
             <h5
                 style={{
                     fontSize: "14px",
-                    color: "#706866",
+                    color: colorGray,
                     lineHeight: "160%",
                     margin: "10px 0 17px 0",
                 }}
@@ -80,12 +80,12 @@ export default function BlogPostCardVertical({ post }) {
                     fontSize: "15px",
                     fontWeight: "500",
                     lineHeight: "160%",
-                    color: "#7b1fa2",
+                    color: colorPurple,
                     backgroundColor: "transparent",
                     border: "none",
                 }}
             >
-                Read post <BiLinkExternal fill="#7b1fa2" />
+                Read post <BiLinkExternal fill={colorPurple} />
             </button>
         </div>
     );

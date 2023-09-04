@@ -5,7 +5,7 @@ import ErrorImage from "../assets/images/Else/404.svg";
 import { Link } from "react-router-dom";
 import useScrollToTop from "../hooks/useScrollToTop";
 import useWindowWidth from "../hooks/useWindowWidth";
-import { mobileWidth } from "../constants/constant";
+import { mobileWidth, colorPurple } from "../constants/constant";
 
 export default function PageNotFound() {
     //hooks
@@ -28,7 +28,7 @@ export default function PageNotFound() {
                     style={{
                         fontSize: windowWidth < mobileWidth ? "20px" : "32px",
                         fontWeight: "600",
-                        color: "#7B1FA2",
+                        color: colorPurple,
                         textAlign: "center",
                         marginBottom: "25px",
                     }}

@@ -7,6 +7,7 @@ import { IoClose } from "react-icons/io5";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { useNavOverlay } from "../../context/navOverlay";
 import { useAuth } from "../../context/auth";
+import { colorGray } from "../../constants/constant";
 
 export default function NavOverlay({ handleLogout }) {
     //hooks
@@ -17,7 +18,7 @@ export default function NavOverlay({ handleLogout }) {
         <div className="NavOverlay-box d-flex flex-column justify-content-between align-items-center">
             <IoClose
                 size="40px"
-                fill="#706866"
+                fill={colorGray}
                 style={{
                     padding: "5px",
                     margin: "5px",

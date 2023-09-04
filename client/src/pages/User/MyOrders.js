@@ -10,6 +10,7 @@ import MyOrderCard from "../../components/cards/MyOrderCard";
 import useScrollToTop from "../../hooks/useScrollToTop";
 import NoOrderDisplay from "../../components/common/NoOrderDisplay";
 import Loading from "../../components/common/Loading";
+import { maxWidth } from "../../constants/constant";
 
 export default function MyOrders() {
     //hooks
@@ -51,7 +52,7 @@ export default function MyOrders() {
                 subDirectory={"My Order"}
             />
             <div
-                style={{ maxWidth: "1170px", minHeight: "400px" }}
+                style={{ maxWidth: maxWidth, minHeight: "400px" }}
                 className="container-fluid"
             >
                 <div className="row" style={{ margin: "75px 0" }}>

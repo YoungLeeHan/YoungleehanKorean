@@ -12,6 +12,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import BlogCommentForm from "../../components/forms/BlogCommentForm";
 import BlogCommentCard from "../../components/cards/BlogCommentCard";
 import Loading from "../../components/common/Loading";
+import { colorPurple, maxWidth } from "../../constants/constant";
 
 export default function SingleBlogView() {
     useScrollToTop();
@@ -63,7 +64,7 @@ export default function SingleBlogView() {
                 subDirectory={post?.title}
             />
             <div
-                style={{ maxWidth: "1170px" }}
+                style={{ maxWidth: maxWidth }}
                 className="container-fluid d-flex flex-column align-items-center"
             >
                 <div className="row">
@@ -83,9 +84,10 @@ export default function SingleBlogView() {
                         <div className="post-info">
                             <h1>{post?.title}</h1>
                             <h3>
-                                <AiOutlineUser fill="#7b1fa2" /> By YoungHyun
+                                <AiOutlineUser fill={colorPurple} /> By
+                                YoungHyun
                                 <MdOutlineDateRange
-                                    fill="#7b1fa2"
+                                    fill={colorPurple}
                                     style={{ marginLeft: "15px" }}
                                 />{" "}
                                 {moment(post?.createdAt).format("MMMM DD YYYY")}

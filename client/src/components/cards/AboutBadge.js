@@ -1,6 +1,6 @@
 // 👻 Developed by DanBi Choi on Aug 15th, 2023.
 // -----------------------------------------------------
-import { mobileWidth } from "../../constants/constant";
+import { mobileWidth, colorGray } from "../../constants/constant";
 import useWindowWidth from "../../hooks/useWindowWidth";
 
 export default function AboutBadge({ badgeType, text, numberText }) {
@@ -24,7 +24,7 @@ export default function AboutBadge({ badgeType, text, numberText }) {
                 <h3
                     style={{
                         fontSize: windowWidth < mobileWidth ? "14px" : "16px",
-                        color: "#706866",
+                        color: colorGray,
                     }}
                 >
                     {text}
