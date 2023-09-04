@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { colorPurple } from "../../constants/constant";
 
 export default function ForgotPasswordForm() {
     // state
@@ -58,7 +59,7 @@ export default function ForgotPasswordForm() {
                             <Link
                                 to="/login"
                                 style={{
-                                    color: "#7b1fa2",
+                                    color: { colorPurple },
                                     fontWeight: "500",
                                     fontSize: "14px",
                                 }}

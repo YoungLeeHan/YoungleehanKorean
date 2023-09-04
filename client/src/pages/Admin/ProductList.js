@@ -6,6 +6,7 @@ import DashboardMenu from "../../components/nav/DashboardMenu";
 import ProductCardHorizontal from "./../../components/cards/ProductCardHorizontal";
 import useScrollToTop from "./../../hooks/useScrollToTop";
 import useProductList from "../../hooks/useProductList";
+import { maxWidth } from "../../constants/constant";
 
 export default function ProductList() {
     // hooks
@@ -20,7 +21,7 @@ export default function ProductList() {
                 directory={"Admin Dashboard"}
                 subDirectory={"View Products"}
             />
-            <div style={{ maxWidth: "1170px" }} className="container-fluid">
+            <div style={{ maxWidth: maxWidth }} className="container-fluid">
                 <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
                         <DashboardMenu id={4} menutype={"admin"} />

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
 import DashboardMenu from "../../components/nav/DashboardMenu";
@@ -8,6 +8,7 @@ import CategoryForm from "../../components/forms/CategoryForm";
 import { Modal } from "antd";
 import useScrollToTop from "./../../hooks/useScrollToTop";
 import useLevelCategory from "../../hooks/useLevelCategory";
+import { maxWidth } from "../../constants/constant";
 
 export default function ProductCategory() {
     // hooks
@@ -84,7 +85,7 @@ export default function ProductCategory() {
                 directory={"Admin Dashboard"}
                 subDirectory={"Product Category Management"}
             />
-            <div style={{ maxWidth: "1170px" }} className="container-fluid">
+            <div style={{ maxWidth: maxWidth }} className="container-fluid">
                 <div className="row" style={{ margin: "75px 0" }}>
                     <div className="col-md-3">
                         <DashboardMenu id={1} menutype={"admin"} />

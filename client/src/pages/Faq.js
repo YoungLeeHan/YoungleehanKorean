@@ -4,6 +4,7 @@ import Jumbotron from "../components/cards/Jumbotron";
 import useScrollToTop from "../hooks/useScrollToTop";
 import TitleCard from "../components/cards/TitleCard";
 import AccordionDisplay from "../components/common/AccordionDisplay";
+import { maxWidth } from "../constants/constant";
 
 export default function Faq() {
     //hooks
@@ -13,7 +14,7 @@ export default function Faq() {
         <>
             <Jumbotron title={"FAQ"} directory={"FAQ"} />
             <div
-                style={{ maxWidth: "1170px", minHeight: "500px" }}
+                style={{ maxWidth: maxWidth, minHeight: "500px" }}
                 className="container-fluid"
             >
                 <div className="row" style={{ marginBottom: "75px" }}>

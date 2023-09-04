@@ -5,6 +5,7 @@ import Jumbotron from "../../components/cards/Jumbotron";
 import AccountControlBox from "../../components/cards/AccountControlBox";
 import ForgotPasswordForm from "../../components/forms/ForgotPasswordForm";
 import useScrollToTop from "../../hooks/useScrollToTop";
+import { maxWidth } from "../../constants/constant";
 
 export default function ForgotPassword() {
     useScrollToTop();
@@ -15,7 +16,7 @@ export default function ForgotPassword() {
                 directory={"Forgot Password"}
             />
             <div
-                style={{ maxWidth: "1170px" }}
+                style={{ maxWidth: maxWidth }}
                 className="container-fluid d-flex flex-column align-items-center"
             >
                 <AccountControlBox

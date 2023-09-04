@@ -6,8 +6,11 @@ import {
     worksheetTextData,
     faqDataColumn1,
     faqDataColumn2,
+    mobileWidth,
+    colorGray,
+    bgColorGray,
+    bgColorWhite,
 } from "../../constants/constant";
-import { mobileWidth } from "../../constants/constant";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { useState } from "react";
 
@@ -39,7 +42,7 @@ const getItems = (panelStyle, windowWidth, type) => {
                 <p
                     style={{
                         paddingLeft: "20px",
-                        color: "#706866",
+                        color: colorGray,
                         fontSize: windowWidth < mobileWidth ? "13px" : "15px",
                         lineHeight: "160%",
                     }}
@@ -73,7 +76,7 @@ export default function AccordionDisplay({ type }) {
     const panelStyle = {
         padding: "5px 20px",
         marginBottom: 5,
-        background: "#F4F5F6",
+        background: bgColorGray,
         borderRadius: "10px",
         border: "none",
         fontSize: "16",
@@ -89,14 +92,14 @@ export default function AccordionDisplay({ type }) {
                 onChange={handlePanelChange}
                 expandIconPosition={"end"}
                 style={{
-                    background: "#fcfcfc",
+                    background: bgColorWhite,
                     height: "auto",
                 }}
                 expandIcon={({ isActive }) =>
                     isActive ? (
-                        <FaMinus fill="#706866" />
+                        <FaMinus fill={colorGray} />
                     ) : (
-                        <FaPlus fill="#706866" />
+                        <FaPlus fill={colorGray} />
                     )
                 }
             />

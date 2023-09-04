@@ -1,5 +1,6 @@
 // 👻 Developed by DanBi Choi on Aug 15th, 2023.
 // -----------------------------------------------------
+import { colorPurple } from "../../constants/constant";
 
 export default function DashboardSideBarMenu({
     menu,
@@ -11,7 +12,7 @@ export default function DashboardSideBarMenu({
     return (
         <button
             style={{
-                backgroundColor: isActive ? "#7b1fa2" : "#F8F8F8",
+                backgroundColor: isActive ? colorPurple : "#F8F8F8",
                 color: isActive ? "#FFF" : "#1A2E35",
                 borderRadius: "5px",
                 padding: "10px",

@@ -5,7 +5,12 @@ import useScrollToTop from "../../hooks/useScrollToTop";
 import { Link } from "react-router-dom";
 import FailSVG from "../../assets/images/Checkout/PaymentFail.svg";
 import useWindowWidth from "./../../hooks/useWindowWidth";
-import { mobileWidth } from "../../constants/constant";
+import {
+    mobileWidth,
+    colorPurple,
+    colorGray,
+    maxWidth,
+} from "../../constants/constant";
 
 export default function PaymentFail() {
     //hooks
@@ -16,7 +21,7 @@ export default function PaymentFail() {
         <>
             <Jumbotron title={"Checkout"} directory={"Checkout Result"} />
             <div
-                style={{ maxWidth: "1170px", minHeight: "750px" }}
+                style={{ maxWidth: maxWidth, minHeight: "750px" }}
                 className="container-fluid d-flex flex-column align-items-center"
             >
                 <div
@@ -28,7 +33,7 @@ export default function PaymentFail() {
                         style={{
                             fontSize:
                                 windowWidth < mobileWidth ? "20px" : "32px",
-                            color: "#7B1FA2",
+                            color: colorPurple,
                             fontWeight: "600",
                             margin: "0",
                         }}
@@ -39,7 +44,7 @@ export default function PaymentFail() {
                     <h3
                         style={{
                             margin: "25px 0",
-                            color: "#706866",
+                            color: colorGray,
                             fontSize:
                                 windowWidth < mobileWidth ? "14px" : "20px",
                         }}

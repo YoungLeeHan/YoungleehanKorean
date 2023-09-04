@@ -10,6 +10,7 @@ import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import ModalInfo from "../common/ModalInfo";
+import { colorPurple } from "../../constants/constant";
 
 export default function RegisterForm() {
     // state
@@ -141,7 +142,7 @@ export default function RegisterForm() {
                     <li>
                         <h4
                             style={{
-                                color: "#7b1fa2",
+                                color: colorPurple,
                                 textAlign: "start",
                                 fontSize: "14px",
                                 fontWeight: "500",
@@ -183,7 +184,10 @@ export default function RegisterForm() {
                         <h4>
                             Already have an account?{" "}
                             <span>
-                                <Link to="/login" style={{ color: "#7b1fa2" }}>
+                                <Link
+                                    to="/login"
+                                    style={{ color: colorPurple }}
+                                >
                                     Log in
                                 </Link>
                             </span>

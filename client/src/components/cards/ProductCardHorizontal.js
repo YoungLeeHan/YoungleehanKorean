@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import useAddToCart from "../../hooks/useAddToCart";
-import { mobileWidth } from "../../constants/constant";
+import { mobileWidth, colorYellow } from "../../constants/constant";
 
 export default function ProductCardHorizontal({ product, modify = false }) {
     // hooks
@@ -67,7 +67,7 @@ export default function ProductCardHorizontal({ product, modify = false }) {
                                     : "No Rating"}
                             </h6>
                             <h6>
-                                <AiFillStar style={{ fill: "#ffbf35" }} />
+                                <AiFillStar style={{ fill: colorYellow }} />
                             </h6>
                             <h6>
                                 (

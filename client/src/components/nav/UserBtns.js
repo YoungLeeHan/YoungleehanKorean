@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import { useNavOverlay } from "../../context/navOverlay";
 import { useAuth } from "../../context/auth";
-import { desktopWidth } from "../../constants/constant";
+import { desktopWidth, colorPurple } from "../../constants/constant";
 
 export default function UserBtns({ userType, handleLogout }) {
     //hooks
@@ -44,9 +44,9 @@ export default function UserBtns({ userType, handleLogout }) {
                         style={
                             windowWidth < desktopWidth
                                 ? {
-                                      border: "1px solid #7b1fa2",
+                                      border: `1px solid ${colorPurple}`,
                                       width: "115px",
-                                      color: "#7b1fa2",
+                                      color: colorPurple,
                                   }
                                 : null
                         }

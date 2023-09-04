@@ -12,7 +12,7 @@ import { Col, Row, Checkbox, ConfigProvider } from "antd";
 import BlogPostCardHorizontal from "../../components/cards/BlogPostCardHorizontal";
 import useWindowWidth from "../../hooks/useWindowWidth";
 import ResponsiveShowFilter from "../../components/common/ResponsiveShowFilter";
-import { mobileWidth } from "../../constants/constant";
+import { mobileWidth, colorPurple, maxWidth } from "../../constants/constant";
 import Loading from "../../components/common/Loading";
 import SearchUI from "../../components/common/SearchUI";
 import useBlogCategory from "../../hooks/useBlogCategory";
@@ -109,7 +109,7 @@ export default function BlogView() {
         <>
             <Jumbotron title={"Blog"} directory={"Blog"} />
             <div
-                style={{ maxWidth: "1170px" }}
+                style={{ maxWidth: maxWidth }}
                 className="container-fluid d-flex flex-column align-items-center"
             >
                 <div className="shop-productsView-box container-fluid">
@@ -137,9 +137,9 @@ export default function BlogView() {
                                     <ConfigProvider
                                         theme={{
                                             token: {
-                                                colorPrimary: "#7b1fa2",
+                                                colorPrimary: colorPurple,
                                                 lineHeight: "2",
-                                                colorPrimaryBorder: "#7b1fa2",
+                                                colorPrimaryBorder: colorPurple,
                                             },
                                         }}
                                     >

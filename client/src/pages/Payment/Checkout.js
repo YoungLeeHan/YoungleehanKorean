@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import CartTotalBox from "../../components/cards/CartTotalBox";
 import useScrollToTop from "../../hooks/useScrollToTop";
+import { maxWidth } from "../../constants/constant";
 
 export default function Checkout() {
     // hooks
@@ -28,7 +29,7 @@ export default function Checkout() {
                 directory={"Cart"}
                 subDirectory={"Checkout"}
             />
-            <div style={{ maxWidth: "1170px" }} className="container-fluid">
+            <div style={{ maxWidth: maxWidth }} className="container-fluid">
                 <div>
                     <div className="row" style={{ margin: "75px 0" }}>
                         <div className="col-md-6">

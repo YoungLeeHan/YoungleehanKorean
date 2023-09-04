@@ -2,6 +2,7 @@ import { useAuth } from "../../context/auth";
 import Jumbotron from "../../components/cards/Jumbotron";
 import DashboardMenu from "../../components/nav/DashboardMenu";
 import useScrollToTop from "./../../hooks/useScrollToTop";
+import { maxWidth } from "../../constants/constant";
 
 export default function AdminDashboard() {
     //hooks
@@ -15,7 +16,7 @@ export default function AdminDashboard() {
                 directory={"Admin Dashboard"}
             />
             <div
-                style={{ maxWidth: "1170px", minHeight: "500px" }}
+                style={{ maxWidth: maxWidth, minHeight: "500px" }}
                 className="container-fluid"
             >
                 <div className="row" style={{ margin: "75px 0" }}>
