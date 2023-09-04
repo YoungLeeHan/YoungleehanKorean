@@ -1,6 +1,5 @@
 import Product from "../models/product.js";
 import ylhPdfFile from "../models/ylhPdfFile.js";
-import fs from "fs";
 import slugify from "slugify";
 import { validateProduct } from "../helpers/validateProduct.js";
 
@@ -49,21 +48,6 @@ export const read = async (req, res) => {
       .populate("category")
       .populate("ageCategory");
     res.json(product);
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-// Have to Remove!
-export const images = async (req, res) => {
-  try {
-    const product = await Product.findById(req.params.productId).select(
-      "images"
-    );
-    if (product.images.data) {
-      res.set("Content-Type", product.images.contentType);
-      return res.send(product.images.data);
-    }
   } catch (err) {
     console.log(err);
   }
