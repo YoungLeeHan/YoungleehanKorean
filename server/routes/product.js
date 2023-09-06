@@ -32,7 +32,7 @@ router.post(
   "/product",
   requireSignin,
   isAdmin,
-  upload("productImages").array("productImages", { multiple: true }),
+  upload("productImages").array("productImages", 5),
   create
 );
 router.get("/products", list);
