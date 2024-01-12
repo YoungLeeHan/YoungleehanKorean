@@ -1,0 +1,33 @@
+.imageGallery {
+    width: 100%;
+    max-width: 620px;
+    margin-bottom: 30px;
+}
+
+.selectedImage img {
+    width: 100%;
+    max-width: 620px;
+    height: auto;
+    max-height: 450px;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+.imageThumbnails img {
+    width: 19%;
+    height: auto;
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: cover;
+    margin-right: 1%;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.imageThumbnails img.active,
+.imageThumbnails img:hover {
+    opacity: 1;
+}
