@@ -123,7 +123,7 @@ export default function SingleProductView() {
                                 <button
                                     className='btn btn-primary d-flex flex-row mt-3 justify-center'
                                     style={{
-                                        width: '190px',
+                                        width: '200px',
                                         gap: '1rem',
                                     }}
                                     onClick={handleAddToCart}
