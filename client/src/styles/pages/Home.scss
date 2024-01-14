@@ -1,7 +1,7 @@
 // 👻 Developed by DanBi Choi on July 19th, 2023.
 // -----------------------------------------------------
 
-@import "../App.scss";
+@import '../App.scss';
 
 .landing-view {
     padding: 150px 0 100px 0;
@@ -10,8 +10,23 @@
         padding: 50px 0 50px 0;
     }
 
-    .col-md-7 {
+    .hero {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .hero-welcome-text {
+        opacity: 0;
+        animation: fadeInUp 1.5s ease forwards;
+
+        @include tablet {
+            width: 50vw;
+        }
         @include mobile-center;
+        @include mobile {
+            margin: auto;
+        }
     }
 
     h1 {
@@ -34,6 +49,7 @@
             font-size: $mobile-font-medium;
         }
     }
+
     h5 {
         font-size: $desktop-font-medium;
         color: $color-purple;
@@ -45,20 +61,90 @@
         }
     }
 
-    img {
-        width: 450px;
-        height: 450px;
-        border-radius: 50%;
-        object-fit: cover;
-        transition: ease-in-out 0.5s;
-        @include tablet {
-            width: 350px;
-            height: 350px;
-        }
+    .hero-image-container {
+        position: relative;
+        width: 50vw;
+        max-width: 500px;
+
         @include mobile {
-            width: 300px;
-            height: 300px;
+            display: none;
         }
+    }
+
+    .hero-img {
+        width: 65%;
+        height: auto;
+        border-radius: 20px;
+        border: 1px solid rgba($color-gray, 0.2);
+        object-fit: cover;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        transition: transform 0.5s ease-in-out;
+        opacity: 0;
+        position: absolute;
+
+        &:nth-child(1) {
+            top: 20vh;
+            right: 0;
+            z-index: 3;
+            transform: scale(0.95);
+            animation: fadeIn2 1.5s forwards;
+
+            @include tablet {
+                top: 20vh;
+                right: 0;
+            }
+
+            &:hover {
+                transform: scale(1.05);
+            }
+        }
+
+        &:nth-child(2) {
+            top: 0;
+            right: 0;
+            z-index: 2;
+            transform: scale(1);
+            animation: fadeIn 1.5s forwards;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        top: 5%;
+        right: 5%;
+    }
+    to {
+        top: 0;
+        right: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn2 {
+    from {
+        top: 15vh;
+        left: 5%;
+    }
+    to {
+        top: 20vh;
+        left: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
