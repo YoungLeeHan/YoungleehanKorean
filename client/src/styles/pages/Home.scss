@@ -1,7 +1,7 @@
 // 👻 Developed by DanBi Choi on July 19th, 2023.
 // -----------------------------------------------------
 
-@import '../App.scss';
+@import "../App.scss";
 
 .landing-view {
     padding: 150px 0 100px 0;
@@ -244,6 +244,13 @@
     }
 }
 
+.review-card-col {
+    transition: transform 0.5s ease-in-out;
+    &:hover {
+        transform: translateY(-15px);
+    }
+}
+
 .worksheet {
     .worksheet-box {
         .col-md-6 {
@@ -257,5 +264,16 @@
             object-fit: cover;
             border-radius: 10px;
         }
+    }
+}
+
+.customerTypes {
+    .slick-slider {
+        padding: 0;
+    }
+
+    .slick-next::before,
+    .slick-prev::before {
+        color: $background-color-beige;
     }
 }

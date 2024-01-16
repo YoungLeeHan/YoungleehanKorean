@@ -8,7 +8,7 @@ import purpleBadge from "../assets/images/Creator/purpleBadge.svg";
 import yellowBadge from "../assets/images/Creator/yellowBadge.svg";
 import AboutBadge from "../components/cards/AboutBadge";
 import useWindowWidth from "../hooks/useWindowWidth";
-import catImg from "./../assets/images/Creator/cat_square.jpg";
+import teacherImg from "../assets/images/Creator/teacherpic.png";
 import { mobileWidth, maxWidth } from "../constants/constant";
 import BlogVerticalSummary from "../components/common/BlogVerticalSummary";
 import StudentReviewCarousel from "../components/common/StudentReviewCarousel";
@@ -32,7 +32,7 @@ export default function Creator() {
                 <div className="about-box row d-flex flex-row justify-content-between">
                     <div className="col-md-4 d-flex flex-column justify-content-center align-items-center">
                         <div className="img-box">
-                            <img src={catImg} alt="Founder" />
+                            <img src={teacherImg} alt="Founder" />
                         </div>
                     </div>
                     <div className="col-md-8 d-flex flex-column justify-content-between text-start">

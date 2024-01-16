@@ -85,8 +85,8 @@ export default function Header() {
                             <div className="dropdown">
                                 <div>
                                     <a
-                                        href=""
-                                        className="dropdown-toggle"
+                                        href="/"
+                                        className="dropdown-toggle btn"
                                         data-bs-toggle="dropdown"
                                         style={{
                                             fontSize: "16px",
@@ -110,15 +110,15 @@ export default function Header() {
                                             </NavLink>
                                         </li>
                                         <li className="nav-item">
-                                            <a
+                                            <button
                                                 onClick={handleLogout}
-                                                className="nav-link"
+                                                className="nav-link btn"
                                                 style={{
                                                     cursor: "pointer",
                                                 }}
                                             >
                                                 Log Out
-                                            </a>
+                                            </button>
                                         </li>
                                     </ul>
                                 </div>

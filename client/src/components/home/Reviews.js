@@ -1,7 +1,6 @@
 // 👻 Developed by DanBi Choi on Aug 24th, 2023.
 // 👻 Developed by DanBi Choi on Aug 28th, 2023. (slider feature added for mobile viewers)
 // -----------------------------------------------------
-import { Link } from "react-router-dom";
 import TitleCard from "../cards/TitleCard";
 import {
     studentReviewsData,
@@ -44,7 +43,10 @@ export default function Reviews() {
                     </Slider>
                 ) : (
                     studentReviewsData?.map((data) => (
-                        <div className="col-md-4" key={data._id}>
+                        <div
+                            className="col-md-4 review-card-col"
+                            key={data._id}
+                        >
                             <StudentReviewCard data={data} />
                         </div>
                     ))
