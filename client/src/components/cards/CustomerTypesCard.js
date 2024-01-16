@@ -3,7 +3,12 @@
 
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { mobileWidth, colorPurple, colorGray } from "../../constants/constant";
+import {
+    mobileWidth,
+    colorPurple,
+    colorGray,
+    bgColorBeige,
+} from "../../constants/constant";
 import useWindowWidth from "./../../hooks/useWindowWidth";
 
 export default function CustomerTypesCard({ data }) {
@@ -70,9 +75,9 @@ export default function CustomerTypesCard({ data }) {
                     className="d-flex flex-column justify-content-between align-items-center text-center"
                     style={{
                         height: "280px",
-                        border: `1px solid ${colorPurple}`,
                         borderRadius: "10px",
-                        padding: "25px",
+                        padding: "20px",
+                        backgroundColor: bgColorBeige,
                     }}
                 >
                     <div className="d-flex flex-row justify-content-between align-items-center">

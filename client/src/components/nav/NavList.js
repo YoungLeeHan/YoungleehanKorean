@@ -34,7 +34,7 @@ export default function NavList() {
         >
             {linkData.map((data, i) => (
                 <li className="nav-item" key={i}>
-                    <div
+                    <button
                         className="nav-link"
                         onClick={(e) => {
                             e.preventDefault();
@@ -43,7 +43,7 @@ export default function NavList() {
                         }}
                     >
                         {data.name}
-                    </div>
+                    </button>
                 </li>
             ))}
         </ul>

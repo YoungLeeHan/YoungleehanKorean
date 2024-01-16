@@ -30,7 +30,7 @@ export default function OurCustomers() {
                     <Slider
                         {...sliderSettingWithoutDots}
                         style={{
-                            width: "90%",
+                            width: "94%",
                             margin: "auto",
                         }}
                     >
