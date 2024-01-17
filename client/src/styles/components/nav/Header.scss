@@ -101,7 +101,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 999;
 }
 
 .notice {
@@ -113,4 +113,12 @@
     img {
         width: 100px;
     }
+}
+
+.ant-modal-mask {
+    z-index: 5000 !important;
+}
+
+.ant-modal-wrap {
+    z-index: 5000 !important;
 }
