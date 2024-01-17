@@ -3,6 +3,7 @@
 // -----------------------------------------------------
 
 import "../../styles/components/nav/Header.scss";
+import { useState } from "react";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import logoIMG from "../../assets/images/Common/logo.svg";
@@ -14,15 +15,9 @@ import UserBtns from "./UserBtns";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { useNavOverlay } from "../../context/navOverlay";
 import { toast } from "react-hot-toast";
-import {
-    testerWelcomeText,
-    maxWidth,
-    desktopWidth,
-    colorYellow,
-} from "../../constants/constant";
-import yellowtagSVG from "../../assets/images/Common/yellowtag.svg";
-import { Modal, ConfigProvider } from "antd";
-import { useState } from "react";
+import { maxWidth, desktopWidth } from "../../constants/constant";
+import TesterModal from "./TesterModal";
+import TesterButton from "./TesterButton";
 
 export default function Header() {
     //hooks
@@ -41,13 +36,6 @@ export default function Header() {
         toast.success("Bye 👋");
         navigate("/");
     };
-
-    //modal controllers
-    const handleTesterModal = () => {
-        setIsModalOpen(true);
-    };
-    const handleOk = () => setIsModalOpen(false);
-    const handleCancel = () => setIsModalOpen(false);
 
     return (
         <>
@@ -164,53 +152,14 @@ export default function Header() {
                     )}
                 </div>
                 {!auth?.user && (
-                    <div
-                        className="notice"
-                        onClick={handleTesterModal}
-                        style={{
-                            cursor: "pointer",
-                            transform: `translateX(150px)`,
-                            transition: "transform 1.5s ease-in-out",
-                        }}
-                    >
-                        <img src={yellowtagSVG} alt="User Notice" />
-                    </div>
+                    <>
+                        <TesterButton setIsModalOpen={setIsModalOpen} />
+                        <TesterModal
+                            isModalOpen={isModalOpen}
+                            setIsModalOpen={setIsModalOpen}
+                        />
+                    </>
                 )}
-                <ConfigProvider
-                    theme={{
-                        token: {
-                            colorPrimary: colorYellow,
-                            lineHeight: "2",
-                            colorPrimaryBorder: colorYellow,
-                        },
-                    }}
-                >
-                    <Modal
-                        centered
-                        open={isModalOpen}
-                        onOk={handleOk}
-                        onCancel={handleCancel}
-                        width={windowWidth > 600 ? 600 : "100vw"}
-                        okText="Ok"
-                    >
-                        <div
-                            className="d-flex flex-column justify-content-between align-items-start"
-                            style={{ padding: "40px 0 30px 0" }}
-                        >
-                            <div
-                                style={{
-                                    marginBottom: "20px",
-                                    fontSize:
-                                        windowWidth > 500 ? "16px" : "14px",
-                                    lineHeight: "160%",
-                                }}
-                                dangerouslySetInnerHTML={{
-                                    __html: testerWelcomeText,
-                                }}
-                            ></div>
-                        </div>
-                    </Modal>
-                </ConfigProvider>
             </div>
         </>
     );
