@@ -3,7 +3,6 @@
 // -----------------------------------------------------
 
 import "../../styles/components/nav/Header.scss";
-import { useState } from "react";
 import { NavLink, useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../../context/auth";
 import logoIMG from "../../assets/images/Common/logo.svg";
@@ -16,8 +15,8 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { useNavOverlay } from "../../context/navOverlay";
 import { toast } from "react-hot-toast";
 import { maxWidth, desktopWidth } from "../../constants/constant";
-import TesterModal from "./TesterModal";
-import TesterButton from "./TesterButton";
+// import TesterModal from "./TesterModal";
+// import TesterButton from "./TesterButton";
 
 export default function Header() {
     //hooks
@@ -27,7 +26,7 @@ export default function Header() {
     const [isNavOverlay, setIsNavOverlay] = useNavOverlay();
 
     //states
-    const [isModalOpen, setIsModalOpen] = useState(false);
+    // const [isModalOpen, setIsModalOpen] = useState(false);
 
     //logout
     const handleLogout = () => {
@@ -151,7 +150,7 @@ export default function Header() {
                         <NavOverlay handleLogout={handleLogout} />
                     )}
                 </div>
-                {!auth?.user && (
+                {/* {!auth?.user && (
                     <>
                         <TesterButton setIsModalOpen={setIsModalOpen} />
                         <TesterModal
@@ -159,7 +158,7 @@ export default function Header() {
                             setIsModalOpen={setIsModalOpen}
                         />
                     </>
-                )}
+                )} */}
             </div>
         </>
     );
