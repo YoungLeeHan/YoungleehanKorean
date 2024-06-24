@@ -7,81 +7,81 @@ import crypto from "crypto";
 dotenv.config();
 
 export const generateVerificationToken = async (user) => {
-    const token = await new Token({
-        userId: user._id,
-        token: crypto.randomBytes(32).toString("hex"),
-    }).save();
+  const token = await new Token({
+    userId: user._id,
+    token: crypto.randomBytes(32).toString("hex"),
+  }).save();
 
-    return token;
+  return token;
 };
 
 export const sendVerificationEmail = async (user, token) => {
-    try {
-        const smtpTransport = nodemailer.createTransport({
-            service: process.env.NODE_MAILER_SERVICE,
-            auth: {
-                user: process.env.NODE_MAILER_ID,
-                pass: process.env.NODE_MAILER_PASSWORD,
-            },
-            tls: {
-                rejectUnauthorized: false,
-            },
-        });
+  try {
+    const smtpTransport = nodemailer.createTransport({
+      service: process.env.NODE_MAILER_SERVICE,
+      auth: {
+        user: process.env.NODE_MAILER_ID,
+        pass: process.env.NODE_MAILER_PASSWORD,
+      },
+      tls: {
+        rejectUnauthorized: false,
+      },
+    });
 
-        const verificationUrl = `http://localhost:3000/${user.id}/verify/${token.token}`;
+    const verificationUrl = `https://youngleehankorean.com/${user.id}/verify/${token.token}`;
 
-        const mailOptions = {
-            from: process.env.NODE_MAILER_ID,
-            to: user.email,
-            subject: "Verify Your Email Address",
-            html: `
+    const mailOptions = {
+      from: process.env.NODE_MAILER_ID,
+      to: user.email,
+      subject: "Verify Your Email Address",
+      html: `
         <p>Click the following link to verify your email address:</p>
         <a href="${verificationUrl}">${verificationUrl}</a>
 		    <p>The link will expire in 10 minutes.</p>
       `,
-        };
+    };
 
-        smtpTransport.sendMail(mailOptions, function (err, res) {
-            if (err) {
-                console.log(err);
-                res.status(500).json({ message: "Failed to send email" });
-            } else {
-                res.status(200).json({ message: "Email sent successfully" });
-            }
-            smtpTransport.close();
-        });
-    } catch (err) {
+    smtpTransport.sendMail(mailOptions, function (err, res) {
+      if (err) {
         console.log(err);
-        res.status(500).json({ message: "Internal server error" });
-    }
+        res.status(500).json({ message: "Failed to send email" });
+      } else {
+        res.status(200).json({ message: "Email sent successfully" });
+      }
+      smtpTransport.close();
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
 export const verifyEmail = async (req, res) => {
-    try {
-        const user = await User.findOne({ _id: req.params.id });
+  try {
+    const user = await User.findOne({ _id: req.params.id });
 
-        const token = await Token.findOne({
-            userId: user._id,
-            token: req.params.token,
-        });
+    const token = await Token.findOne({
+      userId: user._id,
+      token: req.params.token,
+    });
 
-        if (!user)
-            return res.json({
-                error: "No such user",
-            });
+    if (!user)
+      return res.json({
+        error: "No such user",
+      });
 
-        if (!token)
-            return res.json({
-                error: "No token for the user",
-            });
+    if (!token)
+      return res.json({
+        error: "No token for the user",
+      });
 
-        await User.updateOne({ _id: user._id }, { $set: { verified: true } });
+    await User.updateOne({ _id: user._id }, { $set: { verified: true } });
 
-        res.json({ result: "ok" });
-    } catch (err) {
-        console.log(err);
-        res.status(500).send({
-            message: "Verification failed. Internal Server Error",
-        });
-    }
+    res.json({ result: "ok" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      message: "Verification failed. Internal Server Error",
+    });
+  }
 };
