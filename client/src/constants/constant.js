@@ -10,6 +10,7 @@ import { BsClipboard } from "react-icons/bs";
 import learnerSVG from "../assets/images/Home/customer_learner.svg";
 import parentsSVG from "../assets/images/Home/customer_parents.svg";
 import teacherSVG from "../assets/images/Home/customer_teacher.svg";
+import teacherImg from "../assets/images/Creator/teacherpic.png";
 
 export const mobileWidth = 767;
 export const desktopWidth = 1023;
@@ -33,8 +34,7 @@ export const userMenuData = [
 ];
 
 export const storyboxCreatorData = {
-  image:
-    "https://images.unsplash.com/photo-1475823678248-624fc6f85785?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  image: teacherImg,
   title: `Why aren’t there more exercises?`,
   description:
     "While teaching Korean, I was often frustrated by the amount of exercises for each grammar point in the textbooks. I would search the web for worksheets to give my students the extra practice they needed to master a grammar point. However, that was still not enough, so I decided to create on my own.",
