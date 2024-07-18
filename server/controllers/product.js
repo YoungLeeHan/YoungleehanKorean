@@ -2,8 +2,7 @@ import Product from "../models/product.js";
 import ylhPdfFile from "../models/ylhPdfFile.js";
 import slugify from "slugify";
 import { validateProduct } from "../helpers/validateProduct.js";
-import AWS from 'aws-sdk';
-
+import AWS from "aws-sdk";
 
 const s3 = new AWS.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -11,14 +10,12 @@ const s3 = new AWS.S3({
   region: process.env.AWS_REGION,
 });
 
-
 export const create = async (req, res) => {
   try {
     const productData = validateProduct(req, res);
     const filedata = req.files;
 
     const uploadedImagePath = filedata.map((data) => data.location);
-
 
     // create product
     const product = new Product({
@@ -56,13 +53,13 @@ export const read = async (req, res) => {
     const product = await Product.findOne({ slug: req.params.slug })
       .select("-images")
       .populate("category")
-      .populate("ageCategory");
+      .populate("ageCategory")
+      .populate("ylhPdfFile");
     res.json(product);
   } catch (err) {
     console.log(err);
   }
 };
-
 
 export const remove = async (req, res) => {
   try {
@@ -70,30 +67,30 @@ export const remove = async (req, res) => {
 
     // Check if product has images
     if (!product.imagePath || product.imagePath.length === 0) {
-      return res.status(404).json({ error: 'Product not found or does not have images' });
+      return res
+        .status(404)
+        .json({ error: "Product not found or does not have images" });
     }
 
     // Remove images from S3
     const imagesToDelete = product.imagePath;
     for (const imageUrl of imagesToDelete) {
-      const fileName = imageUrl.split('/').pop(); // Extract the file name from the URL
+      const fileName = imageUrl.split("/").pop();
       const params = {
         Bucket: process.env.AWS_S3_BUCKET_NAME,
-        Key: `productImages/${fileName}`, // Adjust the S3 path as needed
+        Key: `productImages/${fileName}`,
       };
-
       // Delete the file from S3
       await s3.deleteObject(params).promise();
     }
-
     res.json(product);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Failed to delete product and associated images' });
+    res
+      .status(500)
+      .json({ error: "Failed to delete product and associated images" });
   }
 };
-
-
 
 export const update = async (req, res) => {
   try {
@@ -213,7 +210,6 @@ export const savePdf = async (req, res) => {
     const uploadedPdfFile = req.file;
     const generatedFile = new ylhPdfFile({
       name: uploadedPdfFile.key,
-      location: uploadedPdfFile.location,
     });
     await generatedFile.save();
     res.json(generatedFile);
