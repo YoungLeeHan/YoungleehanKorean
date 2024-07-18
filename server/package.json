@@ -1,6 +1,9 @@
 {
     "dependencies": {
-        "aws-sdk": "^2.1448.0",
+        "@aws-sdk/client-s3": "^3.606.0",
+        "@aws-sdk/credential-providers": "^3.606.0",
+        "@aws-sdk/s3-request-presigner": "^3.606.0",
+        "aws-sdk": "^2.1651.0",
         "bcrypt": "^5.1.0",
         "body-parser": "^1.20.2",
         "braintree": "^3.16.0",
