@@ -8,9 +8,6 @@ const ylhPdfFileSchema = new mongoose.Schema({
   name: {
     type: String,
   },
-  location: {
-    type: String,
-  },
 });
 
 export default mongoose.model("ylhPdfFile", ylhPdfFileSchema);
